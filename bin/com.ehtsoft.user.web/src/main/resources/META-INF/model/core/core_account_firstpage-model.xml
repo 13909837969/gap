@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_ACCOUNT_FIRSTPAGE" label="账户首页配置表">
+    <column field="ACCOUNTID" type="uuid" length="36" label="帐户ID"/>
+    <column field="MENUID" type="uuid" length="36" label="功能菜单ID"/>
+    <primary name="PK_CORE_ACCOUNT_FIRSTPAGE" field="ACCOUNTID"/>
+  </table>
+</model>

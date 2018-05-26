@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_PXQKDJB_IMG" label="培训情况登记图片表">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true"/>
+    <column field="data" type="binary" label="头像数据"/>
+    <column field="mimetype" type="string" length="20" label="图像类型" remark="图片类型如：image/png"/>
+    <column field="PXQKID" type="uuid" length="36" label="培训情况ID" required="true" remark="人员ID"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_PXQKDJB_IMG" field="IMGID"/>
+  </table>
+</model>

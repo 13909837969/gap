@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="FLYZ_SARY_XGRY" label="涉案人员的相关人员信息">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="AJID" type="string" length="36" label="案件ID" remark="FLYZ_SARY.ID"/>
+    <column field="CSRQ" type="string" length="20" label="出生日期" remark="以YYYY-MM-DD格式"/>
+    <column field="GJ" type="string" length="10" label="国籍" remark="SYS051 见GB/T 2659-2000"/>
+    <column field="ZSDZMX" type="string" length="100" label="住所地址明细"/>
+    <column field="ZSDZXZQH" type="string" length="20" label="住所地址行政区划"/>
+    <column field="JKZK" type="string" length="10" label="健康状况" remark="SYS125 见 GB/T 226.1-2003"/>
+    <column field="ZJHM" type="string" length="50" label="证件号码"/>
+    <column field="ZJLX" type="string" length="10" label="证件类别" remark="见10.8"/>
+    <column field="HYZK" type="string" length="10" label="婚姻状况" remark="见 GB/T 2261.2-2003"/>
+    <column field="XM" type="string" length="50" label="姓名"/>
+    <column field="MZ" type="string" length="10" label="民族" remark="见GB/T 3304-1991"/>
+    <column field="HJSZDDZMX" type="string" length="100" label="户籍所在地地址明细"/>
+    <column field="HJSZDXZQH" type="string" length="20" label="户籍所在地行政区划"/>
+    <column field="XB" type="string" length="10" label="性别" remark="见GB/T 2261.1-2003"/>
+    <column field="SFLB" type="string" length="10" label="身份类别" remark="SYS126  见10.9"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_FLYZ_SARY_XGRY" field="ID"/>
+  </table>
+</model>

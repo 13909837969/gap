@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apps>
+	<!-- 司法业务及监管系统初始化 -->
+	<role rolecode="SFIR" flag="1" rolename="系统初始化角色（admin）" frule="PSA">
+		<app appcode="INI01" />
+	</role>
+	<app appcode="INI01" appname="应用初始化" reqaddress="_self" project="supervise" frule="PSA" remark="司法业务及监管系统初始化">
+		<children>
+			<menu menucode="INI01" menuname="初始化管理" icon="menu_csh">
+				<children>
+					<menu menucode="INI0101" menuname="系统参数设置"
+						actionuri="module/sps/formParameter.jsp" icon="" />
+					<menu menucode="INI0102" menuname="区域边界设置"
+						actionuri="module/sqjz/listBoundary.jsp" icon="" />
+					<menu menucode="INI0103" menuname="题库管理"
+						actionuri="module/sqjz/listQuestion.jsp" icon="" />
+					<menu menucode="INI0104" menuname="数据字典设置"
+						actionuri="module/sps/listDictionary.jsp" icon="" />
+					<menu menucode="INI0105" menuname="Excel导入工具"
+						actionuri="module/sps/listImpExcel.jsp" icon="" />
+					<menu menucode="INI0106" menuname="禁止区域设置"
+						actionuri="module/sqjz/listJzryjrjqsz.jsp" />
+					<menu menucode="INI0110" menuname="数据模型管理"
+						actionuri="module/sps/listManual.jsp" icon="window-func-icon21" />
+				</children>
+			</menu>
+			
+			<menu menucode="INI02" menuname="系统运维" icon="menu_csh">
+				<children>
+					<menu menucode="INI0201" menuname="矫正人员信息管理"
+						actionuri="module/ywgl/listYwglJzryxx.jsp" icon="" />
+				</children>
+			</menu>
+		</children>
+	</app>
+</apps>

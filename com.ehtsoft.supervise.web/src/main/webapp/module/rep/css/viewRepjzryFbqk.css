@@ -1,0 +1,225 @@
+*{
+	margin:0px;
+	padding:0px;
+	font-family:"微软雅黑";
+	font-size:16px;
+}
+html,body{
+	position:relative;
+}
+#sqjzry-cent{
+	width:100%;
+	height:100%;
+	background:#f1f1f1;
+	margin:0 auto;
+	}
+
+#sqjzry-cent-title{
+	height:20%;	
+}
+#sqjzry-biati{
+	color:#175eec;
+	text-align:center;
+	font-size:20px;
+	padding-top:15px;
+	}
+.quy-button-row{
+	width:100%;
+	margin-top:20px;
+}
+#quy-inputa{
+	padding-left:45px;
+	}
+#quy-inputa span{
+	color:#666;
+	}
+#quy-button input{
+	border: 1px solid #ccc;
+	border-radius:3px;
+	text-align:center;
+	color:#128ef6;
+	}
+#quy-inputb span{
+	color:#666;
+	}
+#quy-inputc{
+	float:left;
+	}
+#quy-inputc span{
+	color:#666;
+	float:left;
+	line-height: 30px;
+	}
+#quy-buttonnoe-cx-button{
+	background:#588cef;
+	width:60px;
+	height:30px;
+	color:#fff;
+	}
+/*图表开始*/
+#jzry-shujfx-tub{
+	width:100%;
+	height:80%;
+	margin:0 auto;
+	}
+#jzry-zhuzt{
+	height:45%;
+	margin-top:10px;
+	background:#fff;
+	box-shadow:0px 0px 5px #ccc;
+}
+#jzry-xbfb-xingbfb{
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+}
+#jzry-xbfb-xingbfb1{	
+	position:absolute;
+	top:5px;
+	left:10px;
+	right:10px;
+	bottom:0px;
+}
+#jzry-zhuzt-nlfenb{
+	padding-top:10px;
+	padding-left:20px;
+	font-size:18px;
+	color:#333;
+}
+#jzry-bingt{
+	height:45%;
+	background:#fff;
+	margin-top:10px;
+	box-shadow:0px 0px 5px #ccc;
+}
+#jzry-bing-xbfb{
+	padding-top:10px;
+	padding-left:20px;
+	font-size:18px;
+	color:#333;
+}
+#jzry-dz{
+	height:45%;
+	background:#fff;
+	margin-top:10px;
+	box-shadow:0px 0px 5px #ccc;
+}
+#jzry-dz-ryfenbqk{
+	padding-top:10px;
+	padding-left:20px;
+	font-size:18px;
+	color:#333;	
+}
+#jzry-whcd{
+	height:45%;
+	background:#fff;
+	margin-top:10px;
+	box-shadow:0px 0px 5px #ccc;
+}
+#jzry-quan-whcd{
+	padding-top:10px;
+	padding-left:20px;
+	font-size:18px;
+	color:#333;
+}
+#containerdz{
+	position:absolute;
+	top:35px;
+	left:50px;
+	right:50px;
+	bottom:20px;
+}
+/* #ltrhao-body-search-div{
+	width: 460px;
+    height: 360px;
+    background-color: #fff;
+    z-index:99999;
+    position: absolute;
+    top: 120px;
+    left: 50px;
+	border:0px;
+	border-radius:0px;
+	box-shadow:0px 0px 0px #fff;
+	}	
+	 */
+	
+	/*隐藏区域的div  的 样式*/
+#hidenDivBtn{
+	position: absolute; 
+	right:10px;
+	top:20px;
+	}	
+#spssjfx-hidenDiv{
+	width: 460px;
+    height: 360px;
+    background-color: #fff;
+    z-index:99999;
+    position: absolute;
+    top:105px;
+    left: 40px;
+    box-shadow:1px 0px 3px #ccc;  
+	}
+#spsSqjz-hidenDiv-div1{
+	height:35px;
+	border-bottom:1px solid #E0E0E0;
+	}
+#spsSqjz-hidenDiv-div11{
+	margin-left:10px;
+	margin-top:16px;
+	font-weight:bold;
+	}
+#spsSqjz-hidenDiv-qc{
+	font-size: 14px;
+    color: #ffffff;
+    background-color:#fb8c00;
+    position: absolute;
+    right: 85px;
+    top: 358px;
+}
+#spsSqjz-hidenDiv-qd{
+	font-size: 14px;
+    color: #ffffff;
+    background-color:#246af6;
+    position: absolute;
+    right: 20px;
+    top: 358px;
+}
+#spsSqjz-hidenDivSS{
+	height:300px;
+	overflow:auto;
+	}
+#spsSqjz-hidenDivBtn{
+	position: absolute; 
+	right:10px;
+	top:20px;
+	}
+.btn-info{
+	background:#175eec;
+	border:0px;
+	border-radius:5px;
+	}
+.btn-info:hover{
+	background:#3273f5;
+	border:0px;
+	border-radius:5px;
+	}
+.hidden-div-ul{
+	font-size:14px;
+	font-weight:bold;
+	list-style: none;
+	cursor:pointer;
+	}
+
+/*小三角写法*/
+.spssjfx-indicate{
+	width:10px;
+	height:10px;
+	position:absolute;
+	top:-20px;
+	left:50px;
+	border-style:solid;
+	border-width:10px;
+	border-color:transparent transparent #fff transparent;
+}

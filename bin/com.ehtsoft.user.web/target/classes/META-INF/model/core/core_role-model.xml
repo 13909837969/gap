@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_ROLE" label="角色设置表">
+    <column field="SYSID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="ROLECODE" type="string" length="20" label="角色编码" required="true"/>
+    <column field="ROLENAME" type="string" length="20" label="角色名称" required="true"/>
+    <column field="FRULE" type="string" length="4" label="账户角色" remark="账户角色（PSA 平台系统用户管理员  OSA 机构用户管理员）"/>
+    <column field="FLAG" type="integer" length="1" label="开启禁用" remark="开启禁用(1，开启  0，禁用)"/>
+    <column field="ORGID" type="uuid" length="36" label="组织机构ID"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" required="true" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" required="true" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_CORE_ROLE" field="SYSID"/>
+    <unique name="UK_CORE_ROLE_ROLECODE" field="ROLECODE"/>
+  </table>
+</model>

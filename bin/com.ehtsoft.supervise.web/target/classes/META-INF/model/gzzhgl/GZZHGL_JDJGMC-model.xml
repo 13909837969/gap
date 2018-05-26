@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="GZZHGL_JDJGMC" label="鉴定机构名称">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="JGMC" type="string" length="100" label="鉴定机构名称"/>
+    <column field="XKZH" type="string" length="20" label="许可证号"/>
+    <column field="XYDM" type="string" length="20" label="统一社会信用代码"/>
+    <column field="SCHZDJRQ" type="string" length="20" label="首次获准登记日期"/>
+    <column field="YXQKSSJ" type="string" length="20" label="机构有效开始时间"/>
+    <column field="YXQJSSJ" type="string" length="20" label="机构有效截止时间"/>
+    <column field="YWFW" type="string" length="600" label="业务范围"/>
+    <column field="BZJG" type="string" length="100" label="颁证机关"/>
+    <column field="BZRQ" type="string" length="20" label="颁证日期"/>
+    <column field="DJGLBMDM" type="string" length="20" label="登记管理部门机构代码"/>
+    <column field="DJGLBM" type="string" length="100" label="登记管理部门"/>
+    <column field="JGZCZS" type="string" length="100" label="机构注册住所"/>
+    <column field="DZYX" type="string" length="50" label="电子邮箱"/>
+    <column field="LXDH" type="string" length="50" label="联系电话"/>
+    <column field="CZ" type="string" length="50" label="传真"/>
+    <column field="JGXZ" type="string" length="20" label="机构性质"/>
+    <column field="FRDBXM" type="string" length="50" label="法人代表姓名"/>
+    <column field="FRDBXB" type="string" length="2" label="法人代表性别"/>
+    <column field="FZRXM" type="string" length="50" label="机构负责人姓名"/>
+    <column field="FZRXB" type="string" length="2" label="机构负责人性别"/>
+    <column field="LXR" type="string" length="50" label="联系人"/>
+    <column field="JGJJ" type="string" length="600" label="机构简介"/>
+    <column field="ZPLJ" type="string" length="100" label="机构照片路径"/>
+    <column field="JD" type="string" length="20" label="经度"/>
+    <column field="WD" type="string" length="20" label="纬度"/>
+    <column field="ZT" type="string" length="2" defaultValue="1" label="状态" remark="（01:正常 02:暂停 03:注销 04:吊销）"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_GZZHGL_JDJGMC" field="ID"/>
+  </table>
+</model>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="ANZBJ_AZBJRYFXXXCJB" label="安置帮教人员服刑信息采集表">
+    <column field="AZBJRYFXXXCJB01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="AZBJRYBH" type="string" length="20" label="安置帮教人员编号" remark="编码见 6.3"/>
+    <column field="SFJXTQSF" type="string" length="2" label="是否减刑提前释放" remark="自填"/>
+    <column field="JXTQSFYY" type="string" length="200" label="减刑提前释放原因" remark="自填"/>
+    <column field="ZM" type="string" length="200" label="罪名" remark="自填，内容取自刑法"/>
+    <column field="XQSQJZ" type="string" length="50" label="刑期|社区矫正期" remark="编码见 6.12"/>
+    <column field="XDS" type="string" length="50" label="吸毒史" remark="编码见 6.14"/>
+    <column field="SFLF" type="string" length="2" label="是否累犯" remark="编码见 6.13"/>
+    <column field="FJX" type="string" length="2" label="附加刑" remark="编码见 6.11"/>
+    <column field="SFCJZYJNPX" type="string" length="2" label="是否参加职业技能培训" remark="编码见 6.18"/>
+    <column field="SFHDZYJNZF" type="string" length="2" label="是否获得职业技能证书" remark="编码见 6.19"/>
+    <column field="SFXLJK" type="string" length="2" label="是否心理健康" remark="编码见 6.18"/>
+    <column field="JTLXQK" type="string" length="50" label="家庭联系情况" remark="编码见 6.10"/>
+    <column field="SFSWRY" type="string" length="2" label="是否三无人员" remark="编码见 6.21"/>
+    <column field="WXXPG" type="string" length="50" label="危险性评估" remark="编码见 6.16"/>
+    <column field="GZBX" type="string" length="50" label="改造表现" remark="编码见 6.17"/>
+    <column field="RZTD" type="string" length="50" label="认罪态度" remark="编码见 6.15"/>
+    <column field="TSQKBZJBJJY" type="string" length="500" label="服刑期间特殊情况备注及帮教建议" remark="自填"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_ANZBJ_AZBJRYFXXXCJB" field="AZBJRYFXXXCJB01"/>
+  </table>
+</model>

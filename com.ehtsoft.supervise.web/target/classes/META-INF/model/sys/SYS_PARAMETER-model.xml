@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_PARAMETER" label="系统参数设置表" base="true">
+    <column field="F_ID" type="string" length="30" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_DESP" type="string" length="400" label="参数描述"/>
+    <column field="F_ENABLE" type="string" length="2" label="参数控制状态" remark="针对开关方式的参数，该值保存的时候   1 是   0 否"/>
+    <column field="F_VALUE" type="string" length="800" label="参数值"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" required="true" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" required="true" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_SYS_PARAMETER" field="F_ID"/>
+    <remark><![CDATA[KEY_SYSTEM_001:轨迹采集频率设置（秒数),默认 3 秒 （android）
+KEY_SYSTEM_002:停留时间阀值设置（分钟），默认 2 分钟
+KEY_SYSTEM_003:停留范围半径（米），默认 40 米
+KEY_SYSTEM_004:定位位置误差范围(去重复点范围)。默认 4 米（android）
+KEY_SYSTEM_005:停留时间计算调度周期，默认 600秒
+KEY_SYSTEM_006:报警时间设置（如关机多长时间报警）
+KEY_SYSTEM_007:报到期限设置（天）
+KEY_SYSTEM_008:登记报到初始化推送信息
+KEY_SYSTEM_009:异常轨迹距离限制（米）
+KEY_SYSTEM_010:禁入区域报警时间设置（分），默认30分
+KEY_SYSTEM_011:重复报警间隔（分）
+KEY_SYSTEM_012:报警拖延处理时间阀值（分）
+KEY_SYSTEM_013:网易视频云URL
+KEY_SYSTEM_014:网易视频云App Key
+KEY_SYSTEM_015:网易视频云App Secret]]></remark>
+  </table>
+</model>

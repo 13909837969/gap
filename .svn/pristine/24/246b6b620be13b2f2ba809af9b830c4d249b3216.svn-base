@@ -1,0 +1,89 @@
+@CHARSET "UTF-8";
+.ltrhao-bar{
+ background-color: #f9f9f9;
+}
+.ltrhao-table{
+	margin-bottom:0px;
+}
+.ltrhao-pagebar{
+	border-bottom: 1px solid #ddd;
+	border-left:1px solid #ddd;
+	border-right:1px solid #ddd;
+}
+.ltrhao-toolbar{
+    padding: 3px 2px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.ltrhao-pagination {
+    display: inline-block;
+    padding-left: 0;
+    border-radius: 4px;
+    text-align: right;
+    margin:3px;
+}
+.ltrhao-pagination>li{
+	display: inline-block;
+	color:#444;
+}
+.ltrhao-pagination>li>a{
+ 	display: inline;
+ 	border:1px solid transparent;
+	padding:4px 6px;
+	margin:0px;
+	cursor: pointer;
+	color:#444;
+}
+.ltrhao-pagination>li>input{
+	border:1px solid #aaa;
+	border-radius: 4px;
+	height:24px;
+}
+.ltrhao-pagination>li>a:hover{
+	border:1px solid #aaa;
+	border-radius: 4px;
+}
+.ltrhao-table>tbody>tr.active>td{
+	background: #e5f3f2;
+}
+.panel{
+	margin-bottom:2px;
+}
+/**/
+.ltrhao-calendar {
+	border: 1px solid #D0D0D0;
+	margin: 3px auto;
+	text-align: center;
+}
+.ltrhao-calendar>thead td{
+	border: 1px solid #D0D0D0;
+	width: 80px;
+	height: 20px;
+}
+.ltrhao-calendar>tbody tr td {
+	border: 1px solid #D0D0D0;
+	width: 80px;
+	height: 80px;
+}
+.ltrhao-calendar caption{
+	font-size:14pt;
+}
+.ltrhao-calendar .not-current-month{
+	color:#999;
+}
+.ltrhao-calendar .current-date{
+	background:#ddddfe;
+}
+.ltrhao-calendar .selected-date{
+	background:#f1f1fc;
+}
+.ltrhao-calendar #ltrhao-calendar-prev{
+	cursor:pointer;
+}
+.ltrhao-calendar #ltrhao-calendar-next{
+	cursor:pointer;
+}
+.ltrhao-calendar #ltrhao-calendar-body td:HOVER{
+background:#f1f1fc;
+}

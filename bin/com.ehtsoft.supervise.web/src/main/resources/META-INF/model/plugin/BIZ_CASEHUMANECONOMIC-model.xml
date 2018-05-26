@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="BIZ_CASEHUMANECONOMIC" label="擎天-案件申请人经济状况表">
+    <column field="PKID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="HASCAR" type="integer" length="1" label="是否有汽车"/>
+    <column field="HASHOUSE" type="integer" length="1" label="是否有房产"/>
+    <column field="HOUSEAREA" type="double" length="10" precision="2" label="房产面积（平方米）"/>
+    <column field="HOUSECOUNT" type="integer" length="2" label="房产套数"/>
+    <column field="HUMANID" type="string" length="40" label="受援人id"/>
+    <column field="INCOMEAVG" type="double" length="12" precision="2" label="家庭人均收入"/>
+    <column field="INCOMETOTAL" type="double" length="12" precision="2" label="总收入"/>
+    <column field="MONEY" type="double" length="12" precision="2" label="现金存款等资产"/>
+    <column field="OPINIONDATE" type="string" length="20" label="证明日期"/>
+    <column field="OPINIONDEPT" type="string" length="50" label="证明单位"/>
+    <column field="PAYMENT" type="string" length="1000" label="重大支出"/>
+    <primary name="PK_BIZ_CASEHUMANECONOMIC" field="PKID"/>
+  </table>
+</model>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="BIZ_CASEHUMAN" label="擎天-涉案人员表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="DEPTID" type="string" length="50" label="处理机构代码"/>
+    <column field="BIRTHDATE" type="string" length="20" label="出生日期"/>
+    <column field="CASEID" type="string" length="40" label="案件id"/>
+    <column field="COUNTRY" type="string" length="10" label="国籍"/>
+    <column field="CULTURE" type="string" length="10" label="文化程度"/>
+    <column field="EMAIL" type="string" length="50" label="电子邮件"/>
+    <column field="FAMILYADDRESS" type="string" length="200" label="住所地址"/>
+    <column field="FAMILYREGIONCODE" type="string" length="6" label="住所地址行政区划"/>
+    <column field="HEALTH" type="string" length="10" label="健康状况"/>
+    <column field="HUMANTYPE" type="string" length="10" label="人员信息类别:"/>
+    <column field="IDENTITYCARDNUMBER" type="string" length="50" label="证件号"/>
+    <column field="IDENTITYCARDTYPE" type="string" length="10" label="证件类别"/>
+    <column field="JOB" type="string" length="10" label="职业"/>
+    <column field="MARITALSTATUS" type="string" length="10" label="婚姻状况"/>
+    <column field="NAME" type="string" length="50" label="姓名"/>
+    <column field="NATION" type="string" length="10" label="民族"/>
+    <column field="ORIGINADDRESS" type="string" length="200" label="户籍所在地地址"/>
+    <column field="ORIGINREGIONCODE" type="string" length="6" label="户籍所在地行政区划"/>
+    <column field="PERSONCOUNT" type="integer" label="同案人数"/>
+    <column field="PHONENUMBER" type="string" length="100" label="联系电话"/>
+    <column field="SEX" type="string" length="10" label="性别"/>
+    <column field="WORKUNITOREMPLOYEE" type="string" length="100" label="工作单位或雇主"/>
+    <primary name="PK_BIZ_CASEHUMAN" field="ID"/>
+  </table>
+</model>

@@ -1,0 +1,4 @@
+1.scp-war.sh 
+  是将新版本 /opt/.war 文件远程拷贝到 远程服务器对应的 /opt/文件夹
+2.exec-deploy-user.sh 是远程调用每个服务的 server/deploy-user.sh 命令，将原有的 user.war 包备份，同时把新的包部署到 tomcat 中
+3.exec-deploy-supervise.sh 是远程调用每个服务的 server/deploy-supervise.sh 命令， 将原有的 supervise.war 包备份，同时把新的包部署到 tomcat 中

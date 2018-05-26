@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<accounts>
+    <account accountid="admin" password="admin-app" flag="1" frule="PSA">
+        <role rolecode="PSA01" rolename="平台管理员"/>
+    </account>
+</accounts>

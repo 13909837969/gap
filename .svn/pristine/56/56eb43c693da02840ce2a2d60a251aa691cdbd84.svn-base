@@ -1,0 +1,57 @@
+package com.ehtsoft.supervise.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.ehtsoft.common.services.SSOService;
+import com.ehtsoft.fw.core.db.MongoClient;
+import com.ehtsoft.fw.core.db.SQLAdapter;
+import com.ehtsoft.fw.core.db.SqlDbClient;
+import com.ehtsoft.fw.core.db.SqlDbFilter;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.services.AbstractService;
+import com.ehtsoft.fw.core.sso.User;
+
+/**
+ * 社区矫正--业务监管--工作监管Service
+ * @author zhuzj
+ *
+ */
+@Service("SqjzYwjgService")
+public class SqjzYwjgService extends AbstractService{
+	
+
+	@Resource(name = "sqlDbClient")
+	private SqlDbClient dbClient;
+	
+	@Resource(name = "SSOService")
+	private SSOService service;
+	
+	@Resource(name = "SqjzYwjgSjbbService")
+	private SqjzYwjgSjbbService sqjzSjbbService;
+	
+	//根据父id查询下一级的所有报表信息
+	public List<BasicMap<String, Object>> findAllData(String parentid){
+		String str = "select jgmc, " + 
+				"sum(cast(zcsqjzrs as int)) as zcsqjzrs,sum(cast(jzxz as int)) as jzxz,sum(cast(bkfz as int)) as bkfz, " + 
+				"sum(cast(ksgl as int)) as ksgl,sum(cast(ptgl as int)) as ptgl,sum(cast(yggl as int)) as yggl, " + 
+				"sum(cast(bdwg as int)) as bdwg,sum(cast(tggl as int)) as tggl,sum(cast(zzjzjy as int)) as zzjzjy, " + 
+				"sum(cast(gbthjy as int)) as gbthjy,sum(cast(jxxlfd as int)) as jxxlfd,sum(cast(zzsqfw as int)) as zzsqfw, " + 
+				"sum(cast(jx as int)) as jx,sum(cast(jg as int)) as jg,sum(cast(zacf as int)) as zacf, " + 
+				"sum(cast(sjzz as int)) as sjzz,sum(cast(zfz as int)) as zfz,sum(cast(jswt as int)) as jswt, " + 
+				"sum(cast(wcpg as int)) as wcpg,sum(cast(cx as int)) as cx,sum(cast(zzgzry as int)) as zzgzry, " + 
+				"sum(cast(zzshgzz as int)) as zzshgzz,sum(cast(shzyz as int)) as shzyz,sum(cast(yjljyjd as int)) as yjljyjd, " + 
+				"sum(cast(jyjdyjl as int)) as jyjdyjl,sum(cast(yjlsqfwjd as int)) as yjlsqfwjd,sum(cast(yjlsqjzzx as int)) as yjlsqjzzx  " + 
+				"from rep_gzjgxxcjb where parentid = '"+parentid+"' " + 
+				"group by jgmc " + 
+				"order by jgmc desc ";
+		SQLAdapter sql = new SQLAdapter(str);
+		List<BasicMap<String, Object>> list = dbClient.find(sql);
+		return list;
+		
+	}
+}

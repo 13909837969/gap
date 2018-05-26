@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<project 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>com.ehtsoft.supervise.web</artifactId>
+  <packaging>war</packaging>
+  <name>com.ehtsoft.supervise.web</name>
+  
+  <parent>
+    <groupId>com.ehtsoft</groupId>
+    <artifactId>gap</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  <dependencies>
+  	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+	</dependency>
+	<dependency>
+	      <groupId>org.apache.taglibs</groupId>
+	      <artifactId>taglibs-standard-spec</artifactId>
+    </dependency>
+    <dependency>
+	      <groupId>org.apache.taglibs</groupId>
+	      <artifactId>taglibs-standard-impl</artifactId>
+    </dependency>
+  	<dependency>
+	    <groupId>commons-el</groupId>
+	    <artifactId>commons-el</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+	</dependency>
+	<!-- spring framework -->
+	<dependency>
+	  	<groupId>org.springframework</groupId>
+	  	<artifactId>spring-websocket</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework.data</groupId>
+	    <artifactId>spring-data-redis</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>redis.clients</groupId>
+	    <artifactId>jedis</artifactId>
+	</dependency>
+	
+	<dependency>
+	    <groupId>javax.mail</groupId>
+	    <artifactId>mail</artifactId>
+	</dependency>
+	<dependency>
+		  <groupId>org.aspectj</groupId>
+		  <artifactId>aspectjweaver</artifactId>
+	</dependency>
+	<!-- driver -->
+	<!-- 
+	<dependency>
+		<groupId>org.mongodb</groupId>
+		<artifactId>mongo-java-driver</artifactId>
+	</dependency>
+	-->
+	<dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>com.alibaba</groupId>
+	    <artifactId>druid</artifactId>
+	</dependency>
+	<!-- 
+	<dependency>
+		<groupId>net.sourceforge.jtds</groupId>
+		<artifactId>jtds</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.oracle</groupId>
+		<artifactId>ojdbc6</artifactId>
+	</dependency>
+	-->
+	<!-- cxf -->
+	<dependency>
+		<groupId>org.apache.cxf</groupId>
+		<artifactId>cxf-rt-frontend-jaxws</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.cxf</groupId>
+		<artifactId>cxf-rt-transports-http</artifactId>
+	</dependency>
+	<!-- ActiveMQ -->
+	<!-- 
+	<dependency>
+		<groupId>org.apache.activemq</groupId>
+		<artifactId>activemq-spring</artifactId>
+	</dependency>
+	<dependency>
+	  <groupId>org.apache.activemq</groupId>
+	  <artifactId>activemq-core</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.activemq</groupId>
+		<artifactId>activemq-web</artifactId>
+	</dependency>
+	-->
+	<!-- poi Excel 操作 -->
+	<dependency>
+		  <groupId>org.apache.poi</groupId>
+		  <artifactId>poi</artifactId>
+	</dependency>
+	<dependency>
+		  <groupId>org.apache.poi</groupId>
+		  <artifactId>poi-ooxml</artifactId>
+	</dependency>
+	<dependency>
+		  <groupId>org.apache.poi</groupId>
+		  <artifactId>poi-ooxml-schemas</artifactId>
+	</dependency>
+	<dependency>
+		  <groupId>org.apache.xmlbeans</groupId>
+		  <artifactId>xmlbeans</artifactId>
+	</dependency>
+	<!-- \\ poi excel -->
+	<!-- jasperReports -->
+	<dependency>
+	    <groupId>net.sf.jasperreports</groupId>
+	    <artifactId>jasperreports</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>org.codehaus.groovy</groupId>
+	    <artifactId>groovy-all</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>com.lowagie</groupId>
+	    <artifactId>itext</artifactId>
+	</dependency>
+	<dependency>
+	   <groupId>com.lowagie</groupId>
+	   <artifactId>itextasian</artifactId>
+	</dependency>
+	<!-- \\jasperReports -->
+	<!-- qrcode jasperReports use -->
+	<dependency>
+	    <groupId>com.google.zxing</groupId>
+	    <artifactId>core</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>com.google.zxing</groupId>
+	    <artifactId>javase</artifactId>
+	</dependency>
+	<!-- com.ehtsoft -->
+	<dependency>
+		<groupId>com.ehtsoft</groupId>
+		<artifactId>com.ehtsoft.fw.json</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.ehtsoft</groupId>
+		<artifactId>com.ehtsoft.fw.core</artifactId>
+	</dependency>
+   </dependencies>
+	<build>
+		<finalName>supervise</finalName>
+	</build>
+</project>

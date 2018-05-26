@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="REP_STAY_TIME" label="停留时间信息报表">
+    <column field="F_SID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_AID" type="uuid" length="36" label="用户ID" required="true"/>
+    <column field="F_TIME" type="long" defaultValue="0" label="停留时间" remark="定时间单位：秒"/>
+    <column field="F_AREA" type="string" length="100" label="位置范围" remark="位置1，位置2，位置3"/>
+    <column field="F_LAT" type="double" length="16" precision="12" label="纬度" required="true"/>
+    <column field="F_LNG" type="double" length="16" precision="12" label="经度" required="true"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_REP_STAY_TIME" field="F_SID"/>
+    <remark><![CDATA[mongodb:
+location: {type: "Point",coordinates: [-73.856077, 40.848447]}]]></remark>
+  </table>
+</model>

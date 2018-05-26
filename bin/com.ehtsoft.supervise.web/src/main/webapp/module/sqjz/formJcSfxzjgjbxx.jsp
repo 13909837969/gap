@@ -1,0 +1,100 @@
+<%@ page pageEncoding="utf-8" contentType="text/html;charset=utf-8"%>
+<html>
+<head>
+<title>司法工作单位基本信息</title>
+<jsp:include page="../ltrhao-common.jsp"></jsp:include>
+<script type="text/javascript" src="${localCtx}/json/JcSfxzjgjbxxService.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var form = new Eht.Form({
+			selector : '#sqjz_JcSfxzjgjbxx_form',
+			autolayout:true,
+			formCol:2
+		});
+		
+		//连接Service
+	 var service = new JcSfxzjgjbxxService();
+		var query = {};
+		query["xm"]= $("#").val();
+		service.findOrgid(form.getData(),{"paginate":""},new Eht.Responder({
+			success:function(data){
+ 				$("#jgbm").val(data.rows[0].jgbm);
+				$("#jgmc").val(data.rows[0].jgmc);
+				$("#jgjc").val(data.rows[0].jgjc);
+				$("#ywmc").val(data.rows[0].ywmc);
+				$("#jgdm").val(data.rows[0].jgdm);
+				$("#fzr").val(data.rows[0].fzr);
+				$("#lxdh").val(data.rows[0].lxdh);
+				$("#dz").val(data.rows[0].dz); 
+				$("#czhm").val(data.rows[0].czhm); 
+			}
+		}));
+/* 		tableView.clickRow(function(query){
+			console.log(query);
+			$('#modification').attr("disabled",false); 
+			$("#modification").click(function(data){
+				form.fill(query);
+			});
+		}); */
+		
+		
+	
+	//保存
+		$('#btn-primary').click(function(){
+			if(form.validate()){
+				service.update(form.getData(),new Eht.Responder({
+					success:function(data){
+						window.location.reload();  new Eht.Tips().show();
+					}
+				}));
+			}
+		});
+	
+	});
+</script>
+<style>
+#sqjz_fromKhxx #tableaaa {
+	z-index: 999;
+	width: 80%;
+	height: 300px;
+	background-color: #FFFFFF;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 140px;
+	bottom: 0;
+	right: 0;
+	overflow-y: auto;
+	overflow-x: auto;
+}
+</style>
+</head>
+<body>
+	<div id="JcSfxzjgjbxxService">
+<!-- 表单头保存按钮 -->
+	<div id="JcSfxzjgjbxxService_from">
+		<div class="panel panel-default">
+			<div class="panel-heading ltrhao-toolbar" style="padding-left: 20px;">
+				<fieldset id="querypanel">
+					   <button type="button" class="btn btn-primary" id="btn-primary" style="margin-left: 200px";>保存</button>
+				</fieldset>
+			</div>
+		</div>
+		<div id="sqjz_JcSfxzjgjbxx_form">
+			<div class="row"><h3 style="margin-left:300px">司法所基本信息</h3></div>
+			<input name="jgbm" type="text" label="机构编码" id="jgbm" placeholder="机构编码" disabled>
+			<input name="jgmc" type="text" label="机构名称" id="jgmc" placeholder="机构名称" disabled>
+			<input id="ywmc" name="ywmc" type="text" label="英文名称"  placeholder="英文名称"  valid="{required:true,ENname:true  }"  maxlength="30"> 
+			<input name="jgdm" type="text"  id="jgdm" label="机构代码"placeholder="机构代码" valid="{required:true}" >
+			<input id="jglb" name="jglb" type="text" label="机构类别"  placeholder="机构类别" code="sys004" valid="{required:true}">
+			<input name="fzr" type="text"  id="fzr" label="负责人"placeholder="负责人" valid="{required:true,onlyChinese:true}" maxlength="10">
+			<input id="lxdh" name="lxdh" type="text" label="联系电话"  placeholder="联系电话" valid="{mobile:true ,required:true}" maxlength="12">
+			<input name="jglscj" type="text"  id="jgscj" label="机构隶属层级"placeholder="机构隶属层级" code="sys005" valid="{required:true}Q">
+			<input id="jgxzjb" name="jgxzjb" type="text" label="机构行政类别"  placeholder="机构行政类别" code="sys006" valid="{required:true}">
+			<input name="dz"  id="dz" type="text"  label="地址"  placeholder="地址" valid="{required:true}" maxlength="30">
+			<input name="czhm"  id="czhm" type="text"  label="传真号码"  placeholder="传真号码" valid="{required:true,faxtell:true  }" maxlength="30"    >
+			<textarea  name="jgjc" type="text"  id="jgjc" label="机构简称"placeholder="机构简称" valid="{required:true}" style="resize: none;" maxlength="100" row="2"></textarea>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="BIZ_AIDCASEAPPLYITEMTYPE" label="擎天-案件案由表">
+    <column field="PKID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="CASEAPPLYITEMCODE" type="string" length="10" label="案由编码"/>
+    <column field="CASEAPPLYITEMNAME" type="string" length="100" label="案由名称"/>
+    <column field="CASEID" type="string" length="40" label="案件id"/>
+    <primary name="PK_BIZ_AIDCASEAPPLYITEMTYPE" field="PKID"/>
+  </table>
+</model>

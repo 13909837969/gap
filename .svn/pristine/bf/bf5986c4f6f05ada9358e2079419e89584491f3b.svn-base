@@ -1,0 +1,194 @@
+package com.ehtsoft.supervise.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.ehtsoft.common.services.SFCodeService;
+import com.ehtsoft.common.services.SSOService;
+import com.ehtsoft.fw.core.db.InsertOperation;
+import com.ehtsoft.fw.core.db.RowDataListener;
+import com.ehtsoft.fw.core.db.SQLAdapter;
+import com.ehtsoft.fw.core.db.SaveOperation;
+import com.ehtsoft.fw.core.db.SqlDbClient;
+import com.ehtsoft.fw.core.db.SqlDbFilter;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.dto.Paginate;
+import com.ehtsoft.fw.core.dto.ResultList;
+import com.ehtsoft.fw.core.services.AbstractService;
+import com.ehtsoft.fw.core.sso.User;
+import com.ehtsoft.fw.utils.DateUtil;
+import com.ehtsoft.fw.utils.NumberUtil;
+import com.ehtsoft.fw.utils.StringUtil;
+import com.ehtsoft.fw.utils.Util;
+import com.ehtsoft.im.api.ImConst;
+import com.ehtsoft.supervise.api.SupConst;
+import com.ehtsoft.supervise.utils.ParameterUtil;
+@Service("XfzxService")
+public class XfzxService extends AbstractService{
+	
+	@Resource(name = "sqlDbClient")
+	private SqlDbClient dbClient;
+	
+	@Resource(name="SSOService")
+	private SSOService service;
+	
+	@Resource(name="SFCodeService")
+	private SFCodeService sfCodeService;
+	/**
+	 * 档案管理页面展示的矫正人员的基本信息
+	 * @param query
+	 * @param paginate
+	 * @return
+	 */
+	public ResultList<BasicMap<String, Object>> findXfAll(BasicMap<String, Object> query, Paginate paginate){
+		User user = service.getUser();
+		ResultList<BasicMap<String, Object>> list = new ResultList<>();
+		if(user!=null){
+			SqlDbFilter filter = toSqlFilter(query);
+			String sql = "select a.id,a.SQJZRYBH,a.xm,a.cym,a.xb,a.mz,a.sfzh,a.csrq,a.grlxdh,a.jglx,a.bdqk,a.sfcj,b.* "
+					+ "from JZ_JZRYJBXX a left join JZ_XFZXXXB b on a.id=b.f_aid";
+					
+			SQLAdapter sqlAdapter = new SQLAdapter(sql);
+			filter.in("a.orgid", user.getOrgidSet());
+			sqlAdapter.setFilter(filter);
+			list =  dbClient.find(sqlAdapter, paginate);
+		}
+		return list;
+	}
+	
+	
+	
+	
+	/**
+	 *刑罚执行信息查询 
+	 * @param id
+	 * @return
+	 * @author yanyubo
+	 */
+	
+	public BasicMap<String,Object> findXfzx(String id){
+		BasicMap<String,Object> map = new BasicMap<>();
+		String sql = "select xm,sqjzrybh,cym,sfzh,mz,xb,csrq from jz_jzryjbxx where id='"+id+"'";
+		SQLAdapter adapter = new SQLAdapter(sql);
+		BasicMap<String,Object> xfzx=dbClient.findOne(sql);
+		BasicMap<String,Object> jcjz=new BasicMap<>();
+		xfzx.put("csrq",DateUtil.format(xfzx.get("csrq"), "yyyy-MM-dd"));
+		xfzx.putAll(dbClient.findOne(SupConst.Collections.JZ_JZRYJBXX_JZ,new SqlDbFilter().eq("id", id)));
+		xfzx.putAll(dbClient.findOne("JZ_XFZXXXB",new SqlDbFilter().eq("f_aid",id )));
+		if(!("".equals(xfzx.get("sqjzryjsrq")))) {
+			xfzx.put("sqjzryjsrq",DateUtil.format(xfzx.get("sqjzryjsrq"), "yyyy-MM-dd"));
+		}
+		jcjz.putAll(dbClient.findOne(SupConst.Collections.JZ_JZJCXXCJB,new SqlDbFilter().eq("id", id)));
+		map.put("xfzx", xfzx);
+		map.put("jcjz", jcjz);
+		return map;
+	}
+	
+	/**
+	 * 刑罚执行信息新增或修改(4个页签)
+	 * @author yanyubo
+	 */
+	public void saveXfzx(final BasicMap<String, Object> dataxfzx,
+					 final BasicMap<String,Object> datajcjz,
+			         List<BasicMap<String,Object>> datayzqk,
+			         List<BasicMap<String,Object>> datajcxx){
+		User user = service.getUser();
+		String getid = (String) dataxfzx.get("id");
+		if(dataxfzx != null){
+			dataxfzx.put("id", getid);
+			dbClient.save(SupConst.Collections.JZ_JZRYJBXX_JZ,dataxfzx);
+		}
+		dbClient.save("JZ_XFZXXXB",dataxfzx,new InsertOperation() {
+			@Override
+			public void insertBefore(BasicMap<String, Object> data) {
+				data.put("f_aid", getid);
+			}
+
+			@Override
+			public void insertAfter(BasicMap<String, Object> data) {
+				
+			}
+		});
+		if(datajcjz != null){
+			datajcjz.put("id", getid);
+			dbClient.save(SupConst.Collections.JZ_JZJCXXCJB,datajcjz);
+		}
+		dbClient.remove(SupConst.Collections.JZ_YZHZZYGQKXXCJB,  new SqlDbFilter().eq("aid", getid));
+		dbClient.remove(SupConst.Collections.JZ_SQJZRYJCXXCJB,  new SqlDbFilter().eq("f_aid", getid));
+		if(datayzqk!=null) {
+			dbClient.save(SupConst.Collections.JZ_YZHZZYGQKXXCJB,datayzqk,new InsertOperation() {
+				@Override
+				public void insertBefore(BasicMap<String, Object> data) {
+					data.put("aid", getid);
+				}
+	
+				@Override
+				public void insertAfter(BasicMap<String, Object> data) {
+					
+				}
+			});
+		}
+		if(datajcxx!=null) {
+			dbClient.save(SupConst.Collections.JZ_SQJZRYJCXXCJB,datajcxx,new InsertOperation() {
+				@Override
+				public void insertBefore(BasicMap<String, Object> data) {
+					data.put("f_aid", getid);
+				}
+	
+				@Override
+				public void insertAfter(BasicMap<String, Object> data) {
+					
+				}
+			});
+		}
+		
+	}
+	
+	/**
+	 * 根据矫正人员id查询矫正人员奖惩信息
+	 * @param id
+	 * @author yanyubo
+	 */
+	public List<BasicMap<String,Object>>  findjcxx(String id){
+		List<BasicMap<String,Object>> list = new ArrayList<>();
+		if(Util.isNotEmpty(id)){
+			SqlDbFilter filter = new SqlDbFilter();
+			String sql = "select * from JZ_SQJZRYJCXXCJB";
+			filter.eq("f_aid", id);
+			SQLAdapter adapter = new SQLAdapter(sql);
+			adapter.setFilter(filter);
+			list = dbClient.find(adapter,new RowDataListener() {
+				@Override
+				public void processData(BasicMap<String, Object> rowData) {
+					rowData.put("jcxj",DateUtil.format(rowData.get("jcsj"),"yyyy-MM-dd"));
+					
+				}
+			});
+		}
+		return list;
+	}
+	/**
+	 * 根据矫正人员id查询矫正人员余罪情况
+	 * @param id
+	 * @author yanyubo
+	 */
+	public List<BasicMap<String,Object>>  findyzqk(String id){
+		List<BasicMap<String,Object>> list = new ArrayList<>();
+		if(Util.isNotEmpty(id)){
+			SqlDbFilter filter = new SqlDbFilter();
+			String sql = "select * from JZ_YZHZZYGQKXXCJB";
+			filter.eq("aid", id);
+			SQLAdapter adapter = new SQLAdapter(sql);
+			adapter.setFilter(filter);
+			list = dbClient.find(adapter);
+		}
+		return list;
+	}
+	
+	
+	
+}

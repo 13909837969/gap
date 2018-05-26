@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="json/UserinfoService.js"></script>
+<title>post test</title>
+</head>
+<body>
+<style>
+input,textarea{
+  width:80%;
+}
+</style>
+<form action="" method="post" target="iframe" id="form">
+	url:<input type="text" value="http://localhost:8080/supervise/json" id="url"/>
+	<br>
+	service:<input name="service" value="BAABService"/>
+	<br/>
+	method:<input name="method" value="findGroupList"/>
+	<br>
+	arguments:
+	<textarea name="arguments" cols="50" rows="5">
+		['',null]
+	</textarea>
+	<br>
+	signature:
+	<input name="signature" value=""/>
+	<input type="button" value="submit" onclick="submitclick(event)" id="submitbtn"/>
+</form>
+<iframe name="iframe" style="width: 100%;height: 503px;"></iframe>
+<script type="text/javascript">
+
+function submitclick(){
+	var form = document.getElementById("form");
+	var url = document.getElementById("url");
+	debugger;
+	form.action = url.value;
+	form.submit();
+}
+</script>
+</body>
+</html>

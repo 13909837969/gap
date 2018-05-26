@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="REP_GZJGXXCJB" label="社区矫正工作监管信息采集表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="parentid" type="uuid" length="36" label="父级机构"/>
+    <column field="jgmc" type="string" length="60" label="机构名称"/>
+    <column field="zcsqjzrs" type="string" length="10" defaultValue="0" label="在册社区矫正人数"/>
+    <column field="jzxz" type="string" length="10" defaultValue="0" label="矫正小组"/>
+    <column field="bkfz" type="string" length="10" defaultValue="0" label="帮困扶助"/>
+    <column field="ksgl" type="string" length="10" defaultValue="0" label="宽松管理"/>
+    <column field="ptgl" type="string" length="10" defaultValue="0" label="普通管理"/>
+    <column field="yggl" type="string" length="10" defaultValue="0" label="严格管理"/>
+    <column field="bdwg" type="string" length="10" defaultValue="0" label="报到违规"/>
+    <column field="tggl" type="string" length="10" defaultValue="0" label="脱管情况"/>
+    <column field="zzjzjy" type="string" length="10" defaultValue="0" label="组织集中教育"/>
+    <column field="gbthjy" type="string" length="10" defaultValue="0" label="个别谈话教育"/>
+    <column field="jxxlfd" type="string" length="10" defaultValue="0" label="进行心理辅导"/>
+    <column field="zzsqfw" type="string" length="10" defaultValue="0" label="组织社区服务"/>
+    <column field="jx" type="string" length="10" defaultValue="0" label="减刑"/>
+    <column field="jg" type="string" length="10" defaultValue="0" label="警告"/>
+    <column field="zacf" type="string" length="10" defaultValue="0" label="治安处罚"/>
+    <column field="sjzz" type="string" length="10" defaultValue="0" label="收监执行"/>
+    <column field="zfz" type="string" length="10" defaultValue="0" label="再犯罪"/>
+    <column field="jswt" type="string" length="10" defaultValue="0" label="接受委托"/>
+    <column field="wcpg" type="string" length="10" defaultValue="0" label="完成评估"/>
+    <column field="cx" type="string" length="10" defaultValue="0" label="采信"/>
+    <column field="zzgzry" type="string" length="10" defaultValue="0" label="专职工作人员"/>
+    <column field="zzshgzz" type="string" length="10" defaultValue="0" label="专职社会工作者"/>
+    <column field="shzyz" type="string" length="10" defaultValue="0" label="社会志愿者"/>
+    <column field="yjljyjd" type="string" length="10" defaultValue="0" label="已建立就业基地"/>
+    <column field="jyjdyjl" type="string" length="10" defaultValue="0" label="已建立教育基地"/>
+    <column field="yjlsqfwjd" type="string" length="10" defaultValue="0" label="已建立社区服务基地"/>
+    <column field="yjlsqjzzx" type="string" length="10" defaultValue="0" label="已建立社区矫正中心"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_REP_GZJGXXCJB" field="ID"/>
+    <remark><![CDATA[社区服刑人员和治安处罚为一对多的关系
+需上级审批]]></remark>
+  </table>
+</model>

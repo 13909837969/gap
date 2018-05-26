@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="ANZBJ_GZJL_IMG" label="工作记录采集表-图片附件信息">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true" remark="矫正人员ID"/>
+    <column field="data" type="binary" label="头像数据"/>
+    <column field="mimetype" type="string" length="20" label="图像类型" remark="图片类型如：image/png"/>
+    <column field="GZJLBID" type="uuid" length="36" label="工作记录表ID"/>
+    <primary name="PK_ANZBJ_GZJL_IMG" field="IMGID"/>
+    <remark><![CDATA[remark]]></remark>
+  </table>
+</model>

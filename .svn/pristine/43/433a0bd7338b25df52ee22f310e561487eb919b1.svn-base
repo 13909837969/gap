@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apps>
+
+	<!-- 社区矫正管系统角色 -->
+	<role rolecode="JZR1" flag="1" rolename="司法所社区矫正所有功能" frule="OBM">
+		<app appcode="JZ" appname="社区矫正系统"/>
+		<!-- 排除下面的功能 -->
+		<exclude>
+			<menu menucode="JZ0101" menuname="调查评估委托管理"/>
+			<menu menucode="JZ0103" menuname="评估结果管理"/>
+		</exclude>
+	</role>
+	
+	<!-- 旗县司法局业务应用角色 -->
+	<role rolecode="JZR2" flag="1" rolename="旗县司法局业务所有功能" frule="OBM" remark="旗县司法局端用用">
+		<menu menucode="JZ01" menuname="调查评估管理"/>
+		<menu menucode="JZ0101" menuname="调查评估委托管理"/>
+		<menu menucode="JZ0103" menuname="评估结果管理"/>
+		
+		<menu menucode="JZ02" menuname="矫正档案管理"/>
+		<menu menucode="JZ0201" menuname="服刑人员生物信息采集"/>
+		<menu menucode="JZ0202" menuname="社区服刑人员档案管理"/>
+		
+		<menu menucode="JZ99" menuname="审批管理"/>
+		<menu menucode="JZ9901" menuname="业务审批管理"/>
+	</role>
+	
+	<!-- 盟市司法局业务应用角色 -->
+	<role rolecode="JZR3" flag="1" rolename="盟市司法局业务所有功能" frule="OBM" remark="盟市旗县司法局端用用">
+		<menu menucode="JZ05"  menuname="基础信息管理"/>
+		<menu menucode="JZ0501" menuname="电子围栏管理"/>
+		<menu menucode="JZ0502" menuname="机构信息管理"/>
+		<menu menucode="JZ050203" menuname="基层法律服务所管理"/>
+		<menu menucode="JZ050204" menuname="基层法律服务工作者管理"/>
+	</role>
+
+	<app appcode="JZ" appname="社区矫正系统" reqaddress="_self" project="supervise"
+		frule="OSA" remark="">
+		<children>
+			<!-- 司法局功能 -->
+			<menu menucode="JZ01" menuname="调查评估管理" actionuri="" icon="menu_zhfw">
+				<children>
+					<menu menucode="JZ0101" menuname="调查评估委托管理"
+						actionuri="module/sqjz/dcpg/listDcpg_sfj.jsp"
+						icon="" remark="司法局端"/>
+					<menu menucode="JZ0102" menuname="调查评估管理"
+						actionuri="module/sqjz/dcpg/listDcpg_sfs.jsp"
+						icon="" remark="司法所使用"/>
+					<menu menucode="JZ0103" menuname="评估结果管理"
+						actionuri="module/sqjz/dcpg/listPgjg_sfj.jsp"
+						icon="" remark="司法局端"/>
+				</children>
+			</menu>
+			<!-- 盟市功能 -->
+			<menu menucode="JZ02" menuname="矫正档案管理" actionuri="" icon="menu_zhfw">
+				<children>
+					<menu menucode="JZ0201" menuname="服刑人员生物信息采集"
+						actionuri="module/sqjz/listRyYzxxcj.jsp"
+						icon="" />
+					<menu menucode="JZ0202" menuname="社区服刑人员档案管理"
+						actionuri="module/sqjz/Jzxj_djjs.jsp"
+						icon="" />
+					<!-- <menu menucode="JZ0203" menuname="服刑人员管理级别管理" actionuri="" icon="" /> -->
+				</children>
+			</menu>
+			<!-- 司法所功能 -->
+			<menu menucode="JZ03" menuname="信息上报管理" actionuri="" icon="menu_gzyj">
+				<children>
+					<menu menucode="JZ0301" menuname="警告信息管理" 
+						actionuri="module/azbj/listJgxxcjb.jsp" 
+						icon="" />
+					<menu menucode="JZ0302" menuname="治安处罚管理" 
+						actionuri="module/azbj/listTqzacfxxcjb.jsp" 
+						icon="" />
+					<menu menucode="JZ0303" menuname="核实取证管理" 
+						actionuri="module/sqjz/listHsqzxxcjb.jsp" 
+						icon="" />
+					<menu menucode="JZ0304" menuname="提请撤销缓刑管理" 
+						actionuri="module/azbj/formTqcxhxxxcjb.jsp" 
+						icon="" />
+					<menu menucode="JZ0305" menuname="提请收监执行管理" 
+						actionuri="module/azbj/formTqsjzxxxcjb.jsp" 
+						icon="" />
+					<menu menucode="JZ0306" menuname="提请收监执行" 
+						actionuri="module/sqjz/formTqsjzxxxcjb.jsp" 
+						icon="" />
+					<menu menucode="JZ0307" menuname="提请撤销缓刑" 
+						actionuri="module/sqjz/formTqcxhxxxcjb.jsp" 
+						icon="" />
+					<menu menucode="JZ0308" menuname="提请减刑" 
+						actionuri="module/sqjz/listTqjxxxcjb.jsp" 
+						icon="" />
+				</children>
+			</menu>
+			<!--日常工作、违规、违法  -->
+			<menu menucode="JZ04" menuname="奖罚信息管理" actionuri="" icon="menu_gzyj">
+				<children>
+					<menu menucode="JZ0401" menuname="社区服刑人员违规管理" 
+						actionuri="module/sqjz/listJzWggl.jsp" 
+						icon="" />
+					<menu menucode="JZ0402" menuname="社区服刑人员奖惩管理" 
+						actionuri="module/sqjz/ListJzJCglxxb.jsp" 
+						icon="" />
+				</children>
+			</menu>
+			<!--基础信息管理  -->
+			<menu menucode="JZ05" menuname="基础信息管理">
+				<children>
+					<!-- <menu menucode="JZ0501" menuname="电子围栏管理" actionuri="module/sqjz/listBoundary.jsp"/> -->
+					<menu menucode="JZ0502" menuname="机构信息管理">
+						<children>
+							<menu menucode="JZ050201" menuname="司法所基本信息维护" actionuri="module/sqjz/formJcSfxzjgjbxx.jsp"/>
+							<menu menucode="JZ050202" menuname="司法所工作人员维护" actionuri="module/sqjz/listJcSfxzJggzryjbxx.jsp"/>
+							<!-- 司法局端维护 -->                                              
+							<menu menucode="JZ050203" menuname="基层法律服务所管理" actionuri="module/sqjz/viewSqJcflfw.jsp"/>
+							<menu menucode="JZ050204" menuname="基层法律服务工作者管理" actionuri="module/sqjz/listFlfwgzz.jsp"/>
+							
+							<menu menucode="JZ050205" menuname="调解委员会信息管理" actionuri="module/rmtj_twh/listRmtjWyhjbxx.jsp"/>
+							<menu menucode="JZ050206" menuname="调解委员会人员信息" actionuri="module/rmtj_twh/listRmtjTjyjbxx.jsp"/>
+							
+							<menu menucode="JZ050207" menuname="社会工作信息管理" actionuri="module/sqjz/listShgzzxx.jsp"/>
+							<menu menucode="JZ050208" menuname="志愿者信息管理" actionuri="module/sqjz/listShzyzxxcjb.jsp"/>
+							
+						</children>
+					</menu>
+					<menu menucode="JZ0503" menuname="禁止区域设置" actionuri="module/sqjz/listJzryjrjqsz.jsp" />
+				</children>
+			</menu>
+			<!-- 日常工作、考核管理 -->
+			<menu menucode="JZ06" menuname="考核管理" actionuri="" icon="menu_gzyj">
+				<children>
+					<menu menucode="JZ0601" menuname="考核信息" actionuri="module/sqjz/listKhgl.jsp"
+					icon="" />
+				</children>
+			</menu>
+			<!-- 日常工作、日常教育 -->
+			<menu menucode="JZ07" menuname="日常教育" actionuri="" icon="menu_gzyj">
+				<children>
+					<menu menucode="JZ0701" menuname="集中教育情况" 
+					actionuri="module/sqjz/listJzjyqk.jsp"
+					icon="" />
+					<menu menucode="JZ0702" menuname="个别教育情况" 
+					actionuri="module/sqjz/listGbjyqk.jsp"
+					icon="" />
+					<menu menucode="JZ0703" menuname="集中服务情况" 
+					actionuri="module/sqjz/listSqfwJzfwqk.jsp"
+					icon="" />
+				</children>
+			</menu>
+			<!-- 监督管理 -->
+			<menu menucode="JZ08" menuname="监督管理" actionuri="" icon="menu_gzyj">
+				<children>
+					<menu menucode="JZ0801" menuname="定期报告管理" 
+					actionuri="module/sqjz/listJdglDqbgqk.jsp"
+					icon="" />
+					<menu menucode="JZ0802" menuname="走访检查管理" 
+					actionuri="module/sqjz/listJdglZfjcqk.jsp"
+					icon="" />
+					<menu menucode="JZ0803" menuname="帮扶信息管理" 
+					actionuri="module/sqjz/listBfxx.jsp"
+					icon="" />
+					<menu menucode="JZ0804" menuname="集中服务情况" 
+					actionuri="module/sqjz/listSqfwJzfwqk.jsp"
+					icon="" />
+					<menu menucode="JZ0805" menuname="分散服务情况" 
+					actionuri="module/sqjz/listSqfwFsfwqk.jsp"
+					icon="" />
+					<menu menucode="JZ0807" menuname="社区服刑人员状态" 
+					actionuri="module/sqjz/listSqjzryzt.jsp"
+					icon="" />
+					
+				</children>
+			</menu>
+			<!-- 日常工作、签到管理 -->
+			<menu menucode="JZ09" menuname="签到管理" actionuri="" icon="menu_gzyj">
+				<children>
+					<menu menucode="JZ0901" menuname="签到信息查询" 
+					actionuri="module/sqjz/listQdgl.jsp"
+					icon="" />
+				</children>
+			</menu>
+			<!-- 解除矫正、终止管理 -->
+			<menu menucode="JZ10" menuname="解除矫正、终止管理" actionuri="" icon="menu_gzyj">
+				<children>
+					<menu menucode="JZ1001" menuname="服刑人员矫正解除" 
+						actionuri="module/sqjz/listRyJzjcxx.jsp" 
+						icon="" />
+					<menu menucode="JZ1002" menuname="刑期变动管理" 
+						actionuri="module/sqjz/listXqbd.jsp" 
+						icon="" />
+					<menu menucode="JZ1003" menuname="余罪在罪管理" 
+						actionuri="module/sqjz/listYzzzcjb.jsp" 
+						icon="" />
+					<menu menucode="JZ1004" menuname="再犯罪信息采集" 
+						actionuri="module/sqjz/listzfz.jsp" 
+						icon="" />
+				</children>
+			</menu>
+			<!-- 报警管理 -->
+			<menu menucode="JZ11" menuname="报警管理" actionuri="" icon="menu_gzyj">
+				<children>
+					<menu menucode="JZ1101" menuname="报警信息处理" 
+					actionuri="module/sqjz/formBjxxb.jsp"
+					icon="" />
+					<menu menucode="JZ1102" menuname="报警管理" 
+					actionuri="module/sqjz/listBjgl.jsp"
+					icon="" />
+					<menu menucode="JZ1103" menuname="边界设置" 
+					actionuri="module/sqjz/listBoundary.jsp"
+					icon="" />
+					<menu menucode="JZ1104" menuname="轨迹" 
+					actionuri="module/sqjz/listBoundary.jsp"
+					icon="" />
+				</children>
+			</menu>
+			<!-- 业务管理 -->
+			<menu menucode="JZ12" menuname="业务管理" actionuri="" icon="menu_gzyj">
+				<children>
+				<menu menucode="JZ1201" menuname="矫正小组工作人员信息的动态管理" actionuri="module/sqjz/listJzJzxz.jsp"/>
+				</children>
+			</menu>
+			<!-- 业务监管 -->
+			<menu menucode="JZ13" menuname="业务监管" actionuri="" icon="menu_gzyj">
+				<children>
+				<menu menucode="JZ1301" menuname="社区矫正工作状况监管" actionuri="module/sqjz/Sqjz_gzjg.jsp"/>
+				<menu menucode="JZ1302" menuname="矫正人员日常报告情况监管" actionuri="module/sps/listJdglDqbgqkTest.jsp"/>
+				<menu menucode="JZ1303" menuname="矫正人员社区服务情况监管" actionuri="module/sqjz/listSqfwJzfwqk.jsp"/>
+				<menu menucode="JZ1304" menuname="矫正人员落实帮扶情况监管" actionuri="module/sqjz/listBfxx.jsp"/>
+				<menu menucode="JZ1305" menuname="矫正人员违法违规情况监管" actionuri="module/sqjz/listjzwggl.jsp"/>
+				</children>
+			</menu>
+			<!-- 司法所、旗县、盟市、司法厅功能 -->
+			<menu menucode="JZ99" menuname="审批管理" actionuri="" icon="menu_gzyj">
+				<children>
+					<menu menucode="JZ9901" menuname="业务审批管理" 
+					actionuri="module/audit/listAuditService.jsp"
+					icon="" />
+				</children>
+			</menu>
+			<!--矫正衔接  -->
+			<menu menucode="JZ98" menuname="矫正衔接" actionuri="" icon="menu_gzyj">
+				<children>
+					<menu menucode="JZ9801" menuname="矫正衔接" 
+					actionuri=""
+					icon="" />
+				</children>
+			</menu>
+		</children>
+	</app>
+</apps>

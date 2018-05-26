@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="RMTJ_JWHJBXX" label="人民调解委员会基本情况信息集">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="TWHBM" type="string" length="36" label="调委会编码" remark="编码集详见 9.1"/>
+    <column field="TWHMC" type="string" length="300" label="调委会名称" remark="自填"/>
+    <column field="TWHZP" type="string" length="50" label="调委会照片" remark="详见 8.15"/>
+    <column field="TWHLX" type="string" length="8" label="调委会类型" remark="编码集详见 9.2"/>
+    <column field="HZTWHLX" type="string" length="8" label="行专调委会类型" remark="编码集详见 9.3"/>
+    <column field="ZZTJYRS" type="string" length="3" label="专职调解员人数" remark="系统生成"/>
+    <column field="JZTJYRS" type="string" length="3" label="兼职调解员人数" remark="系统生成"/>
+    <column field="LXDH" type="string" length="300" label="联系电话" remark="自填，格式为固话“区号-号码”"/>
+    <column field="CZHM" type="string" length="300" label="传真号码" remark="自填，格式为固话“区号-号码”"/>
+    <column field="LXDZ" type="string" length="300" label="联系地址" remark="自填"/>
+    <column field="YZBM" type="string" length="6" label="邮政编码" remark="自填"/>
+    <column field="DZYX" type="string" length="300" label="电子邮箱" remark="自填"/>
+    <column field="FZR" type="string" length="300" label="负责人" remark="自填"/>
+    <column field="CLRQ" type="string" length="10" label="成立日期" remark="自填"/>
+    <column field="XXCJRQ" type="string" length="10" label="信息采集日期" remark="系统生成"/>
+    <column field="SUQY" type="string" length="300" label="所属区域" remark="自填"/>
+    <column field="LAT" type="double" length="16" precision="12" label="纬度"/>
+    <column field="LNG" type="double" length="16" precision="12" label="经度"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_RMTJ_JWHJBXX" field="ID"/>
+  </table>
+</model>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="FLYZ_FLYZJGB" label="法律援助机构表">
+    <column field="ID" type="uuid" length="50" label="主键" required="true" remark="系统自动生成"/>
+    <column field="FLYZJGLSH" type="string" length="20" label="法律援助机构流水号" remark="见10.1"/>
+    <column field="BMFZR" type="string" length="50" label="部门负责人"/>
+    <column field="BMMC" type="string" length="50" label="部门名称"/>
+    <column field="JGXZ" type="string" length="50" label="机构性质"/>
+    <column field="XZQY" type="string" length="20" label="行政区域"/>
+    <column field="JGDZ" type="string" length="100" label="机构地址"/>
+    <column field="CLSJ" type="string" length="30" label="成立时间"/>
+    <column field="JGLX" type="string" length="10" label="机构类型" remark="机构类型1管理2法援3社会发育那组织4志愿者组织"/>
+    <column field="BZS" type="string" length="10" label="编制数"/>
+    <column field="LXFS" type="string" length="50" label="联系方式"/>
+    <column field="BGMJ" type="string" length="10" label="办公面积"/>
+    <column field="JDSMJ" type="string" length="10" label="接待室面积"/>
+    <column field="BGSJJDMJ" type="string" length="10" label="办公室兼接待面积"/>
+    <column field="LAT" type="double" length="16" precision="12" label="纬度"/>
+    <column field="LNG" type="double" length="16" precision="12" label="经度"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_FLYZ_FLYZJGB" field="ID"/>
+  </table>
+</model>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="IM_USERINFO_IMG" label="用户头像信息">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true" remark="IMGID = F_AID"/>
+    <column field="data" type="binary" label="头像数据"/>
+    <column field="mimetype" type="string" length="20" label="图像类型" remark="图片类型如：image/png"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_USERINFO_IMG" field="IMGID"/>
+  </table>
+</model>

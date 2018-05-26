@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- 优先级从高到低分别是 OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL -->
+        <!-- 单词解释： Match：匹配 DENY：拒绝 Mismatch：不匹配 ACCEPT：接受 -->
+        <!-- DENY，日志将立即被抛弃不再经过其他过滤器； NEUTRAL，有序列表里的下个过滤器过接着处理日志； ACCEPT，日志会被立即处理，不再经过剩余过滤器。 -->
+        <!--输出日志的格式
+         %d{yyyy-MM-dd HH:mm:ss, SSS} : 日志生产时间
+         %p : 日志输出格式
+         %t : 输出线程
+         %c : logger的名称 
+         %m : 日志内容，即 logger.info("message") 
+         %n : 换行符 
+         %C : Java类名
+         %L : 日志输出所在行数 
+         %M : 日志输出所在方法名 
+         hostName : 本地机器名 
+         hostAddress : 本地ip地址 
+ -->
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">  
+   <!-- 控制台输出 -->
+   <appender name="myConsole" class="org.apache.log4j.ConsoleAppender">     
+       <layout class="org.apache.log4j.PatternLayout">     
+           <param name="ConversionPattern"        
+               value="[%d{yyyy-MM-dd HH:mm:ss,SSS\} %-5p] [%t] %c(%L) - %m%n" />     
+        </layout>     
+
+        <!--过滤器设置输出的级别     -->
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">     
+            <param name="levelMin" value="DEBUG" />     
+            <param name="levelMax" value="ERROR" />     
+            <param name="AcceptOnMatch" value="false" />
+        </filter>
+ 
+       <filter class="org.apache.log4j.varia.StringMatchFilter">
+	        <param name="StringToMatch" value="framework" />  
+	        <param name="AcceptOnMatch" value="false" />  
+	    </filter>
+       <filter class="org.apache.log4j.varia.StringMatchFilter">
+	        <param name="StringToMatch" value="apache" />  
+	        <param name="AcceptOnMatch" value="false" />  
+	    </filter>
+
+        <!-- 只打印 上面过滤器中的内容 
+        <filter class="org.apache.log4j.varia.DenyAllFilter" />   
+        -->
+    </appender>   
+    
+    <!-- 文件大小到达指定尺寸的时候产生一个新的文件 -->
+    <appender name="debugFile" class="org.apache.log4j.RollingFileAppender">        
+        <param name="File" value="/Users/wangbao/logs/ehtsoft/com.ehtsoft.proxy.srv-debug.log" /><!-- 设置日志输出文件名 -->     
+        <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->     
+        <param name="Append" value="false" />     
+        <param name="MaxFileSize" value="300000"/>
+        <param name="MaxBackupIndex" value="10" />     
+        <layout class="org.apache.log4j.PatternLayout">     
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS\} %-5p] [%t] %c - %m%n" />     
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="DEBUG" />     
+            <param name="levelMax" value="DEBUG" />
+            <param name="AcceptOnMatch" value="false" />     
+		</filter>
+		
+        <filter class="org.apache.log4j.varia.StringMatchFilter">
+	        <param name="StringToMatch" value="framework" />  
+	        <param name="AcceptOnMatch" value="false" />  
+	    </filter>
+        <filter class="org.apache.log4j.varia.StringMatchFilter">
+	        <param name="StringToMatch" value="apache" />  
+	        <param name="AcceptOnMatch" value="false" />  
+	    </filter>
+    </appender>
+    
+    <!-- 文件大小到达指定尺寸的时候产生一个新的文件 -->
+    <appender name="infoFile" class="org.apache.log4j.RollingFileAppender">        
+        <param name="File" value="/Users/wangbao/logs/ehtsoft/com.ehtsoft.proxy.srv-info.log" /><!-- 设置日志输出文件名 -->     
+        <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->     
+        <param name="Append" value="false" />     
+        <param name="MaxFileSize" value="300000"/>
+        <param name="MaxBackupIndex" value="10" />     
+        <layout class="org.apache.log4j.PatternLayout">     
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS\} %-5p] [%t] %c - %m%n" />     
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="INFO" />     
+            <param name="levelMax" value="INFO" />
+            <param name="AcceptOnMatch" value="false" />     
+		</filter>  
+		<filter class="org.apache.log4j.varia.StringMatchFilter">
+	        <param name="StringToMatch" value="framework" />  
+	        <param name="AcceptOnMatch" value="false" />  
+	    </filter>
+        <filter class="org.apache.log4j.varia.StringMatchFilter">
+	        <param name="StringToMatch" value="apache" />  
+	        <param name="AcceptOnMatch" value="false" />  
+	    </filter>  
+    </appender>
+      
+     <!-- 文件大小到达指定尺寸的时候产生一个新的文件 -->
+    <appender name="errorFile" class="org.apache.log4j.RollingFileAppender">        
+        <param name="File" value="/Users/wangbao/logs/ehtsoft/com.ehtsoft.proxy.srv-error.log" /><!-- 设置日志输出文件名 -->     
+        <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->     
+        <param name="Append" value="false" />     
+        <param name="MaxFileSize" value="300000"/>
+        <param name="MaxBackupIndex" value="10" />     
+        <layout class="org.apache.log4j.PatternLayout">     
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS\} %-5p] [%t] %c - %m%n" />     
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="ERROR" />     
+            <param name="levelMax" value="FATAL" />
+            <param name="AcceptOnMatch" value="true" />     
+		</filter>    
+    </appender> 
+    
+
+    <!-- 
+    <appender name="myFile" class="org.apache.log4j.RollingFileAppender">        
+        <param name="File" value="/Users/wangbao/logs/ehtsoft/com.ehtsoft.proxy.srv-output.log" />      
+        <param name="Append" value="false" />     
+        <param name="MaxFileSize" value="300000"/>
+        <param name="MaxBackupIndex" value="10" />     
+        <layout class="org.apache.log4j.PatternLayout">     
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS\} %-5p] [%t] %c{2\} - %m%n" />     
+        </layout>  
+    </appender>    
+    -->
+     <!-- 每天产生一个日志文件 -->
+    <appender name="activexAppender" class="org.apache.log4j.DailyRollingFileAppender">     
+        <param name="File" value="/Users/wangbao/logs/ehtsoft/com.ehtsoft.proxy.srv-daily.log" />       
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />       
+        <layout class="org.apache.log4j.PatternLayout">     
+         <param name="ConversionPattern"       
+            value="[%d{yyyy-MM-dd HH:mm:ss,SSS\} %-5p] [%t] %c{2\} - %m%n" />     
+        </layout>       
+    </appender>
+     
+    <!-- 根logger的设置-->     
+    <root>
+    	<!-- DEBUG -->
+        <priority value ="DEBUG"/>     
+        <appender-ref ref="myConsole"/>
+        <appender-ref ref="debugFile"/>
+        <appender-ref ref="infoFile"/>     
+        <appender-ref ref="errorFile"/>
+    </root>     
+</log4j:configuration>    

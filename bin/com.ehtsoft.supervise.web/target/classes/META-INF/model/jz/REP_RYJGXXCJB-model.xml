@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="REP_RYJGXXCJB" label="社区矫正人员监管信息采集表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="parentid" type="uuid" length="36" label="父级机构"/>
+    <column field="jgmc" type="string" length="60" label="机构名称"/>
+    <column field="zcsqjzrs" type="string" length="10" defaultValue="0" label="在册社区矫正人数"/>
+    <column field="byzj" type="string" length="10" defaultValue="0" label="本月增加"/>
+    <column field="qmjc" type="string" length="10" defaultValue="0" label="期满解除"/>
+    <column field="cxhc" type="string" length="10" defaultValue="0" label="撤销缓刑"/>
+    <column field="cxjs" type="string" length="10" defaultValue="0" label="撤销假释"/>
+    <column field="jdsj" type="string" length="10" defaultValue="0" label="对暂予监外执行罪犯决定收监执行"/>
+    <column field="sjzxqt" type="string" length="10" defaultValue="0" label="收监执行其他"/>
+    <column field="zcsw" type="string" length="10" defaultValue="0" label="正常死亡"/>
+    <column field="fzcsw" type="string" length="10" defaultValue="0" label="非正常死亡"/>
+    <column field="swqt" type="string" length="10" defaultValue="0" label="死亡其他"/>
+    <column field="nan" type="string" length="10" defaultValue="0" label="男性"/>
+    <column field="nv" type="string" length="10" defaultValue="0" label="女性"/>
+    <column field="wcn" type="string" length="10" defaultValue="0" label="未满十八周岁"/>
+    <column field="cntwo" type="string" length="10" defaultValue="0" label="十八至四十五周岁"/>
+    <column field="cnthree" type="string" length="10" defaultValue="0" label="四十六至六十周岁"/>
+    <column field="cnold" type="string" length="10" defaultValue="0" label="六十一周岁以上"/>
+    <column field="bshj" type="string" length="10" defaultValue="0" label="本省户籍"/>
+    <column field="wshj" type="string" length="10" defaultValue="0" label="外省户籍"/>
+    <column field="gatj" type="string" length="10" defaultValue="0" label="港澳台籍"/>
+    <column field="wgj" type="string" length="10" defaultValue="0" label="外国及无国籍"/>
+    <column field="xxjyx" type="string" length="10" defaultValue="0" label="小学及以下"/>
+    <column field="czxl" type="string" length="10" defaultValue="0" label="初中"/>
+    <column field="gzxl" type="string" length="10" defaultValue="0" label="高中"/>
+    <column field="dzjys" type="string" length="10" defaultValue="0" label="大专以上"/>
+    <column field="wh" type="string" length="10" defaultValue="0" label="未婚"/>
+    <column field="yh" type="string" length="10" defaultValue="0" label="已婚"/>
+    <column field="so" type="string" length="10" defaultValue="0" label="丧偶"/>
+    <column field="ly" type="string" length="10" defaultValue="0" label="离异"/>
+    <column field="zh" type="string" length="10" defaultValue="0" label="未知"/>
+    <column field="hz" type="string" length="10" defaultValue="0" label="汉族"/>
+    <column field="shmz" type="string" length="10" defaultValue="0" label="少数名族"/>
+    <column field="jx" type="string" length="10" defaultValue="0" label="就学"/>
+    <column field="jy" type="string" length="10" defaultValue="0" label="就业"/>
+    <column field="wy" type="string" length="10" defaultValue="0" label="无业"/>
+    <column field="xiaoqx" type="string" length="10" defaultValue="0" label="三到六个月"/>
+    <column field="zhongqx" type="string" length="10" defaultValue="0" label="六个月到一年"/>
+    <column field="xzqx" type="string" length="10" defaultValue="0" label="一到二年"/>
+    <column field="daqx" type="string" length="10" defaultValue="0" label="二到三年"/>
+    <column field="gz" type="string" length="10" defaultValue="0" label="管制"/>
+    <column field="hx" type="string" length="10" defaultValue="0" label="缓刑"/>
+    <column field="js" type="string" length="10" defaultValue="0" label="假释"/>
+    <column field="zyjwzx" type="string" length="10" defaultValue="0" label="暂予监外执行"/>
+    <column field="bdzzql" type="string" length="10" defaultValue="0" label="剥夺政治权利"/>
+    <column field="whgjaq" type="string" length="10" defaultValue="0" label="危害国家安全"/>
+    <column field="whggaq" type="string" length="10" defaultValue="0" label="危害公共安全"/>
+    <column field="phjjzx" type="string" length="10" defaultValue="0" label="破坏经济秩序"/>
+    <column field="qfgmrsql" type="string" length="10" defaultValue="0" label="侵犯公民人身权利"/>
+    <column field="qfcc" type="string" length="10" defaultValue="0" label="侵犯财产"/>
+    <column field="fhshglzx" type="string" length="10" defaultValue="0" label="妨害社会管理秩序"/>
+    <column field="twsh" type="string" length="10" defaultValue="0" label="贪污受贿"/>
+    <column field="dz" type="string" length="10" defaultValue="0" label="渎职"/>
+    <column field="qt" type="string" length="10" defaultValue="0" label="其他"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_REP_RYJGXXCJB" field="ID"/>
+    <remark><![CDATA[社区矫正--业务监管使用]]></remark>
+  </table>
+</model>

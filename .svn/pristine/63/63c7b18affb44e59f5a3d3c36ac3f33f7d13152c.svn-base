@@ -1,0 +1,79 @@
+package com.ehtsoft.rmtj.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.ehtsoft.fw.core.db.SQLAdapter;
+import com.ehtsoft.fw.core.db.SqlDbClient;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.dto.Paginate;
+import com.ehtsoft.fw.core.services.AbstractService;
+
+@Service("RmtjzlNewService")
+public class RmtjzlNewService extends AbstractService {
+
+	@Resource(name="sqlDbClient")
+	SqlDbClient dbClient;
+	
+	/*
+	--调解结果 
+	select tjjg,count(1) from rmtj_tjajxx group by tjjg
+	
+	--人民调解委员会基本情况信息集
+	select * from RMTJ_JWHJBXX
+
+	--人民调解员基本情况信息集
+	select * from RMTJ_TJYJBXX
+
+	--涉及金额
+	select sum(SAJE) from rmtj_tjajxx*/
+	
+	
+	//履行情况
+	public List<BasicMap<String,Object>> find_lxqk(){
+		String sqlstr = "select * from view_rmtj_tjajxx_lxqk";
+		SQLAdapter sql = new SQLAdapter(sqlstr);
+		return dbClient.find(sql);
+	}
+	
+	//案件来源
+	public List<BasicMap<String,Object>> find_ajly(){
+		String sqlstr = "select b.f_name ajly,count(1) as cnt from rmtj_tjajxx a inner join "
+				+ "sys_dictionary b on a.ajly = b.f_code where b.f_typecode = 'SYS111' "
+				+ "group by b.f_name,b.f_code order by b.f_code asc";
+		SQLAdapter sql = new SQLAdapter(sqlstr);
+		return dbClient.find(sql);
+	}
+	
+	//实时监控  地图
+	public List<BasicMap<String,Object>> find_ssjk(){
+		return null;
+	}
+	
+	//案件难易
+	public List<BasicMap<String,Object>> find_ajny(){
+		String sqlstr = "select * from view_rmtj_tjajxx_ajny";
+		SQLAdapter sql = new SQLAdapter(sqlstr);
+		return dbClient.find(sql);
+	}
+	
+	//案件纠纷情况
+	public List<BasicMap<String,Object>> find_ajjf(){
+		String sqlstr = "select b.f_name jflx,count(1) as cnt from rmtj_tjajxx a "
+				+ "inner join sys_dictionary b on a.jflb = b.f_code "
+				+ "where b.f_typecode = 'SYS104' group by b.f_name,b.f_code order by b.f_code asc";
+		SQLAdapter sql = new SQLAdapter(sqlstr);
+		return dbClient.find(sql);
+	}
+	
+	//调解结果
+	public List<BasicMap<String,Object>> find_tjjg(){
+		String sqlstr = "select * from view_rmtj_tjajxx_tjjg";
+		SQLAdapter sql = new SQLAdapter(sqlstr);
+		return dbClient.find(sql);
+	}
+}

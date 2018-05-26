@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apps>
+  <app appcode="PSA" appname="系统应用集成" reqaddress="_self" project="_self" frule="PSA" remark="PSA(Platform Supper Admin) 平台管理员应用功能 PSA应用功能">
+    <children>
+      <menu menucode="PSA01" menuname="系统管理" sort="1" icon="window-func-icon21">
+        <children>
+          <menu menucode="PSA0101" menuname="应用配置管理" actionuri="module/medical/listApplication.jsp" sort="2" icon="window-func-icon31"/>
+          <menu menucode="PSA0102" menuname="PSA用户" actionuri="module/medical/listPsaOrganization.jsp" sort="3"/>
+          <menu menucode="PSA0103" menuname="系统用户管理" actionuri="module/medical/listOrganization.jsp" sort="4" icon="window-func-icon23"/>
+          <menu menucode="PSA0104" menuname="功能菜单管理" actionuri="module/medical/listMenu.jsp" sort="5" icon="window-func-icon15"/>
+          <menu menucode="PSA0105" menuname="功能角色管理" actionuri="module/medical/listPsaRole.jsp" sort="6" icon="window-func-icon11"/>
+          <menu menucode="PSA0106" menuname="权限授权管理" actionuri="module/medical/listPsaPermission.jsp" sort="7"/>
+          <menu menucode="PSA0107" menuname="场景信息管理" actionuri="module/medical/listScene.jsp" sort="8"/>
+          <menu menucode="PSA0108" menuname="数据库差异分析" actionuri="module/dbdatameta.jsp" sort="9"/>
+        </children>
+      </menu>
+    </children>
+  </app>
+  <app appcode="OSA" appname="系统权限管理" reqaddress="_self" project="_self" frule="OSA" remark="OSA (Organization Supper Admin)机构管理员应用功能  OSA应用功能">
+    <children>
+      <menu menucode="OSA01" menuname="系统管理" sort="8" icon="window-func-icon21">
+        <children>
+          <menu menucode="OSA0101" menuname="机构用户管理" actionuri="module/enterprise/listOsaOrganization.jsp" sort="4"/>
+          <menu menucode="OSA0102" menuname="功能角色管理" actionuri="module/medical/listOsaRole.jsp" sort="3" icon="window-func-icon11"/>
+          <menu menucode="OSA0103" menuname="用户权限管理" actionuri="module/medical/listOsaPermission.jsp" sort="1"/>
+          <menu menucode="OSA0104" menuname="登录首页设置" actionuri="module/medical/listOsaFirsetPage.jsp" sort="2"/>
+        </children>
+      </menu>
+    </children>
+  </app>
+</apps>

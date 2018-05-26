@@ -1,0 +1,163 @@
+package com.ehtsoft.supervise.services;
+
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.ehtsoft.common.services.SSOService;
+import com.ehtsoft.fw.core.db.RowDataListener;
+import com.ehtsoft.fw.core.db.SQLAdapter;
+import com.ehtsoft.fw.core.db.SqlDbClient;
+import com.ehtsoft.fw.core.db.SqlDbFilter;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.dto.Paginate;
+import com.ehtsoft.fw.core.dto.ResultList;
+import com.ehtsoft.fw.core.services.AbstractService;
+import com.ehtsoft.fw.core.sso.User;
+import com.ehtsoft.fw.utils.DateUtil;
+import com.ehtsoft.fw.utils.NumberUtil;
+import com.ehtsoft.fw.utils.StringUtil;
+
+@Service("TzglService")
+public class TzglService extends AbstractService{
+
+	@Resource(name="sqlDbClient")
+	SqlDbClient dbClient;
+	
+	@Resource(name="SSOService")
+	private SSOService service;
+	/**
+	 * 查看通知信息
+	 * @param query
+	 * @param paginate
+	 * @return
+	 * [
+	 * 	{
+	 * 		f_id:群公告ID
+	 * 		f_gid:群ID
+	 * 		f_content:公告内容
+	 * 		f_type:公告类型
+	 * 		cdate:创建时间
+	 * 		count:通知人数
+	 * 	}
+	 * ]
+	 */
+	public ResultList<BasicMap<String,Object>> findNotice(BasicMap<String, Object> query,Paginate paginate){
+		ResultList<BasicMap<String,Object>> resultList = new ResultList<>();
+		User user = service.getUser();
+		if(user!=null){
+			String sqlstr = "select a.f_id,a.f_gid,a.f_content,a.f_type,a.cdate,a.cts,count(f_aid) as count from IM_GROUP_AFFICHE a "
+					+ " left join IM_GROUP_USER b on a.f_gid = b.f_gid "
+					+ " where a.f_content like '%"+StringUtil.toEmptyString(query.get("f_content"))+"%' and b.f_type != 2 and a.F_TYPE <> 3 and a.F_TYPE <> 4"
+					+ " group by  a.f_id,a.f_gid,a.f_content,a.f_type,a.cdate,a.cts order by a.cts desc";
+			SQLAdapter sqlAdapter = new SQLAdapter(sqlstr);
+			resultList = dbClient.find(sqlAdapter, paginate,new RowDataListener() {
+				@Override
+				public void processData(BasicMap<String, Object> rowData) {
+					if(NumberUtil.toInt(rowData.get("f_type"))==3){
+						rowData.put("f_type", "群公告");
+					}else if (NumberUtil.toInt(rowData.get("f_type"))==4) {
+						rowData.put("f_type", "注册通知");
+					}else if (NumberUtil.toInt(rowData.get("f_type"))==5) {
+						rowData.put("f_type", "教育通知");
+					}else if (NumberUtil.toInt(rowData.get("f_type"))==6) {
+						rowData.put("f_type", "服务通知");
+					}
+					rowData.put("cts", DateUtil.format(rowData.get("cts"), "yyyy年MM月dd日"));
+					String sqlstr = "select count(f_id) as count ,f_status from JZ_TZNRGLB where f_gaid='"+StringUtil.toEmptyString(rowData.get("f_id"))+"' group by f_status";
+					SQLAdapter adapter = new SQLAdapter(sqlstr);
+					List<BasicMap<String, Object>> result = dbClient.find(adapter);
+					for(BasicMap<String, Object> i:result){
+						if(NumberUtil.toInt(i.get("f_status"))==0){
+							rowData.put("noReceive", i.get("count"));
+						}else if(NumberUtil.toInt(i.get("f_status"))==1){
+							rowData.put("received", i.get("count"));
+						}
+					}
+				}
+			});
+		}
+		return resultList;
+	}
+	
+	/**
+	 * 查询当前通知回应情况
+	 * @param query
+	 * @param paginate
+	 * @return
+	 * [
+	 * 	{
+	 * 		f_status:响应状态
+	 * 		id:矫正人员ID
+	 * 		xm:矫正人员姓名
+	 * 		csrq:出生日期
+	 * 		grlxdh:根联系电话
+	 * 	}
+	 * ]
+	 */
+	public ResultList<BasicMap<String, Object>> findReceiveSituation(BasicMap<String,Object> query,Paginate paginate){
+		ResultList<BasicMap<String, Object>> resultList = new ResultList<>();
+		String sqlstr = "select a.f_status,b.id,b.xm,b.csrq,b.grlxdh,b.online from JZ_TZNRGLB a inner join jz_jzryjbxx b on a.f_aid = b.id";
+		SqlDbFilter sqlDbFilter = new SqlDbFilter();
+		SQLAdapter sqlAdapter = new SQLAdapter(sqlstr);
+		sqlDbFilter.eq("a.f_gaid", StringUtil.toEmptyString(query.get("f_id")));
+		if (query.get("f_status")!=null&&!"".equals(query.get("f_status"))) {
+			sqlDbFilter.eq("a.f_status", StringUtil.toString(query.get("f_status")));
+		}
+		sqlAdapter.setFilter(sqlDbFilter);
+		resultList = dbClient.find(sqlAdapter, paginate, new RowDataListener() {
+			@Override
+			public void processData(BasicMap<String, Object> rowData) {
+				// TODO Auto-generated method stub
+				rowData.put("csrq", DateUtil.getAge(StringUtil.toString(rowData.get("csrq"))));
+			}
+		});
+		return resultList;
+	}
+	
+	/**
+	 * 查询矫正人员收到通知情况
+	 * @param query
+	 * @param paginate
+	 * @return
+	 * [
+	 * 	{
+	 * 		f_status:通知接收情况
+	 * 		f_content:通知内容
+	 * 	}
+	 * ]
+	 */
+	public ResultList<BasicMap<String,Object>> findPersonNotice(BasicMap<String, Object> query,Paginate paginate){
+		ResultList<BasicMap<String,Object>> resultList = new ResultList<>();
+		String sqlstr = "select a.f_id,a.f_status,b.f_content from JZ_TZNRGLB a left join IM_GROUP_AFFICHE b on a.f_gaid = b.f_id";
+		SqlDbFilter sqlDbFilter = toSqlFilter(query);
+		SQLAdapter sqlAdapter = new SQLAdapter(sqlstr);
+		sqlAdapter.setFilter(sqlDbFilter);
+		resultList = dbClient.find(sqlAdapter, paginate);
+		return resultList;
+	}
+	
+	/**
+	 * 更新通知接受状态
+	 * @param f_id
+	 */
+	public void updateNoticeStatus(String f_id){
+		dbClient.updateSql("update JZ_TZNRGLB set F_STATUS = 1 where f_id = ?", f_id);
+	}
+	
+	/**
+	 * 查询当前矫正人员收到的未处理的通知个数
+	 * @param f_aid
+	 * @return
+	 */
+	public BasicMap<String, Object> findNoticeCount(String f_aid){
+		BasicMap<String, Object> data = new BasicMap<>();
+		String sqlstr = "select count(1) as count from JZ_TZNRGLB where F_STATUS = '0' and F_AID = '"+f_aid+"'";
+		SQLAdapter sqlAdapter = new SQLAdapter(sqlstr);
+		data = dbClient.findFirstData(sqlAdapter);
+		return data;
+	}
+}

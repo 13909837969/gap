@@ -1,0 +1,308 @@
+<%@ page pageEncoding="utf-8" contentType="text/html;charset=utf-8"%>
+<html>
+<head>
+<title>集中服务情况</title>
+<jsp:include page="../ltrhao-common.jsp"></jsp:include>
+<script type="text/javascript" src="${localCtx}/json/SqfwService.js"></script>
+<script type="text/javascript">
+$(function() {
+	var form = new Eht.Form({
+		selector : "#sqjz_listSqfwJzfwqk"
+	});
+	var tableView = new Eht.TableView({
+		selector : "#sqjz_listSqfwJzfwqk #tableview",
+	});
+	var service = new SqfwService();
+	
+	var querySearch={}
+	//查询按钮事件
+	$("#sqjz_listSqfwJzfwqk #querybtn").click(function() {
+		querySearch["jlr[like]"] = $("#sqjz_listSqfwJzfwqk #jl").val();
+		querySearch["fwbt[like]"] = $("#sqjz_listSqfwJzfwqk #title").val();
+		tableView.refresh();
+	});
+	tableView.loadData(function(page,res) {
+		service.findFocusService(querySearch,page,res);
+	});
+	//单击一行获取该行信息
+	var json = {};
+	tableView.clickRow(function(data) {
+		json = data;
+	});
+	//提示框div初始状态为隐藏
+	$('#sqjz_listSqfwJzfwqk #hideDiv').hide();
+	$('#sqjz_listSqfwJzfwqk #hideScDiv').hide();
+	//关闭按钮
+	$('#sqjz_listSqfwJzfwqk #guanbibtn').click(function(){
+		$('#sqjz_listSqfwJzfwqk #hideDiv').hide();
+	});
+	
+	//取消按钮
+	$('#sqjz_listSqfwJzfwqk #quxiaobtn').click(function(){
+		$('#sqjz_listSqfwJzfwqk #hideDiv').hide();
+		tableView.refresh();
+	})
+	$('#sqjz_listSqfwJzfwqk #quxiaobtn1').click(function(){
+		$("#sqjz_listSqfwJzfwqk #hideScDiv").hide();
+		tableView.refresh();
+	})
+	//关闭按钮事件 清除未选择的数据
+	$('#sqjz_listSqfwJzfwqk #close').click(function(){
+		json={};
+		tableView.refresh();
+	});
+	//关闭按钮事件 清除未选择的数据
+	$('#sqjz_listSqfwJzfwqk #xxx').click(function(){
+		json={};
+		tableView.refresh();
+	});
+	/*增加一条信息  */
+	$("#sqjz_listSqfwJzfwqk #addbtn").click(function(){
+		$("#modal-body").show(function(){
+			$(".form_date_time").datetimepicker({
+				format: 'yyyy-mm-dd hh:ii', 
+				language:  'zh-CN',
+				autoclose: true,
+		        weekStart: 1,
+		        todayBtn:  1,
+				autoclose: 1,
+				minView: 0,
+				forceParse: 0	
+			});
+			$(".calendar_time").unbind('click').bind('click',function(){
+				$(this).parent().find(".form_date_time").datetimepicker("show");
+			});
+			
+			$('#sqjz_listSqfwJzfwqk #btn-primary').unbind('click').bind('click',function(){
+				if(form.validate()){
+				service.saveFocusService(form.getData(),new Eht.Responder({
+					success:function(data){
+						$('#sqjz_listSqfwJzfwqk #myModal').modal('hide');
+						tableView.refresh();
+					}
+				}));
+				}
+			})
+		})
+		$("#myModal").modal({
+			backdrop : 'static',
+			keyboard : false
+		}); 
+		form.clear();
+	});
+	/*修改一条信息  */
+	$("#sqjz_listSqfwJzfwqk #updatebtn").click(function() {
+		if(json.id==null){
+			$('#sqjz_listSqfwJzfwqk #hideDiv').show();
+		}else{
+			$("#modal-body").show(function(){
+				$('#sqjz_listSqfwJzfwqk #hideDiv').hide();
+				var form = new Eht.Form({selector:"#sqjz_listSqfwJzfwqk #modal-body-div"});
+				form.fill(json);
+				json = {};
+				$('#sqjz_listSqfwJzfwqk #btn-primary').unbind('click').bind('click',function(){
+					service.saveFocusService(form.getData(),new Eht.Responder({
+						success:function(data){
+							$('#sqjz_listSqfwJzfwqk #myModal').modal('hide');
+							tableView.refresh();
+						}
+					}))
+				})
+			})
+			$("#myModal").modal({
+				backdrop : 'static',
+				keyboard : false
+			});
+		};
+	});
+	/* 删除信息 */
+	$("#sqjz_listSqfwJzfwqk #deletebtn").click(function() {
+		var array = tableView.getSelectedData();
+		if(array.length==0){
+			$('#sqjz_listSqfwJzfwqk #hideDiv').show();
+		}else{
+			$('#sqjz_listSqfwJzfwqk #hideScDiv').show();
+			$('#sqjz_listSqfwJzfwqk #hideDiv').hide();
+				//确定按钮
+			$('#sqjz_listSqfwJzfwqk #shanchubtn').unbind('click').bind('click',function(){
+				$('#sqjz_listSqfwJzfwqk #hideScDiv').hide();
+					var id = json.id;
+					service.deleteFocusService(id,new Eht.Responder({
+						success:function(){
+							tableView.refresh();
+							
+						}
+					}));
+				})
+		}
+	});
+	//社区服务内容
+	var textareaName = "#sqjz_listSqfwJzfwqk #floor";//备注输入框id
+	var spanName = "#sqjz_listSqfwJzfwqk #count";//计数span的id
+	$(textareaName).click(function(){
+		countChar(textareaName,spanName);
+	});
+	$(textareaName).keyup(function(){
+		countChar(textareaName,spanName);
+	});
+	$(textareaName).keydown(function(){
+		countChar(textareaName,spanName);
+	});
+	function countChar(textareaName,spanName){ 
+	   if($(textareaName).val() != ""){
+			$(spanName).text("已输入：" + $(textareaName).val().length + "/250");			
+			if($(textareaName).val().length>0){
+					$(spanName).css("color","#3F51B5");
+			};
+			if($(textareaName).val().length>240){
+					$(spanName).css("color","#FF0000");
+				};
+		}else{
+			$(spanName).text("已输入：0/250");
+		}
+	};
+	//社区服务活动总结
+	var textareaName2 = "#sqjz_listSqfwJzfwqk #floor2";//备注输入框id
+	var spanName2 = "#sqjz_listSqfwJzfwqk #count2";//计数span的id
+	$(textareaName2).click(function(){
+		countChar(textareaName2,spanName2);
+	});
+	$(textareaName2).keyup(function(){
+		countChar(textareaName2,spanName2);
+	});
+	$(textareaName2).keydown(function(){
+		countChar(textareaName2,spanName2);
+	});
+	function countChar(textareaName2,spanName2){ 
+	   if($(textareaName2).val() != ""){
+			$(spanName2).text("已输入：" + $(textareaName2).val().length + "/250");			
+			if($(textareaName2).val().length>0){
+					$(spanName2).css("color","#3F51B5");
+			};
+			if($(textareaName2).val().length>240){
+					$(spanName2).css("color","#FF0000");
+				};
+		}else{
+			$(spanName2).text("已输入：0/250");
+		}
+	};
+})
+
+</script>
+</head>
+<body>
+<div id="sqjz_listSqfwJzfwqk">
+		<div class="panel panel-default">
+			<div class="panel-heading ltrhao-toolbar" style="padding-left: 20px;">
+				<fieldset id="querypanel">
+					记录人: <input id="jl" type="text" name="jlr" placeholder="请输入记录人" class="btn btn-default"/> 
+					服务标题: <input id="title" type="text" name="fwbt" placeholder="请输入服务标题" class="btn btn-default"/> 
+					<input class="btn btn-default" type="button" id="querybtn" value="查询">
+					<input id="addbtn" class="btn btn-default" type="button" value="新增">
+					<input id="updatebtn" class="btn btn-default" type="button" value="修改"> 
+					<input id="deletebtn" class="btn btn-default" type="button" value="删除">
+				</fieldset>
+			</div>
+			<div class="alert alert-warning alert-dismissible" role="alert" id="hideDiv" style="text-align:center;font-size:17px">
+				    <strong>警告!</strong> 请先选择一条信息！
+				    <input id="quxiaobtn" class="btn btn-default" type="button" value="取消" >
+				</div>	
+				<div class="alert alert-warning alert-dismissible" role="alert" id="hideScDiv" style="text-align:center;font-size:17px">
+				    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				    <strong>警告!</strong> 确定删除？
+				    <input id="shanchubtn" class="btn btn-default" type="button" value="确定" >
+				    <input id="quxiaobtn1" class="btn btn-default" type="button" value="取消" >
+				</div>	
+			<div class="panel-body">
+				<div id="tableview" class="table-responsive">
+					<div field='op' label="选择" checkbox="true"></div>
+					<div field="fwbt" label="服务标题"></div>
+					<div field="sqfwkssj" label="社区服务开始时间"></div>
+					<div field="sqfwjssj" label="社区服务结束时间"></div>
+					<div field="ydrs" label="应到人数"></div>
+					<div field="sdrs" label="实到人数"></div>
+					<div field="sqfwsc" label="社区服务时长"></div>
+					<div field="jlr" label="记录人"></div>
+				</div>
+			</div>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog ">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="false" id="xxx">×</button>
+						<h4 class="modal-title" id="myModalLabel">集中服务情况</h4>
+					</div>
+					<div class="modal-body" id="modal-body" style="height: 400px; overflow: auto">
+						<div id="modal-body-div">
+							<div class="row form-group">
+								<label for="firstname" class="col-sm-2 control-label" >服务标题</label>
+								<div class="col-sm-10 col-padding15">
+									<input name="fwbt" type="text" class="form-control" id="firstname" placeholder="服务标题" valid="{required:true}" maxlength="36" >
+								</div>
+							</div>
+							<div class="row form-group">
+								<label for="firstname" class="col-sm-2 control-label">社区服务开始时间</label>
+								<div class="col-sm-10 col-padding15">
+									<input id="time" name="sqfwkssj" type="text" class="form_date_time form-control" data-date-format="yyyy-MM-dd" placeholder="社区服务开始时间" maxlength="30"  valid="{required:true,date:true}">
+								</div>
+							</div>
+							<div class="row form-group">
+								<label for="firstname" class="col-sm-2 control-label">社区服务结束时间</label>
+								<div class="col-sm-10 col-padding15">
+									<input id="time" name="sqfwjssj" type="text" class="form_date_time form-control" data-date-format="yyyy-MM-dd" placeholder="社区服务结束时间" maxlength="30"  valid="{required:true,date:true}">
+								</div>
+							</div>
+							<div class="row form-group">
+								<label for="firstname" class="col-sm-2 control-label">应到人数</label>
+								<div class="col-sm-10 col-padding15">
+									<input name="ydrs" type="text" class="form-control"id="firstname" placeholder="应到人数" maxlength="2" valid="{required:true, int:true}">
+								</div>
+							</div>
+							<div class="row form-group">
+								<label for="firstname" class="col-sm-2 control-label">实到人数</label>
+								<div class="col-sm-10 col-padding15">
+									<input name="sdrs" type="text" class="form-control"id="firstname" placeholder="实到人数"  maxlength="2"  valid="{required:true, int:true}">
+								</div>
+							</div>
+							<div class="row form-group">
+								<label for="firstname" class="col-sm-2 control-label">社区服务时长</label>
+								<div class="col-sm-10 col-padding15" >
+									<input name="sqfwsc" type="text" class="form-control" id="firstname" placeholder="社区服务时长" maxlength="2" valid="{required:true,date:true}">
+								</div>
+							</div>
+							<div class="row form-group">
+								<label for="firstname" class="col-sm-2 control-label">记录人</label>
+								<div class="col-sm-10 col-padding15">
+									<input name="jlr" type="text" class="form-control" id="firstname" placeholder="记录人" maxlength="20" valid="{required:true}>
+								</div>
+							</div>
+							<div class="row form-group">
+								<label for="firstname" class="col-sm-2 control-label">社区服务内容</label>
+								<div class="col-sm-10 col-padding15">
+									<textarea class="form-control" rows="8" name="sqfwnr" id="floor" type="text" maxlength="250" valid="{required:true}></textarea>
+									<span id="count" style="margin-left:320px;color:#3F51B5" ></span>
+								</div>
+							</div>
+							<div class="row form-group">
+								<label for="firstname" class="col-sm-2 control-label">社区服务活动总结</label>
+								<div class="col-sm-10 col-padding15">
+									<textarea class="form-control" rows="8" name="sqfwhdzj" id="floor2" type="text" maxlength="250" valid="{required:true}></textarea>
+									<span id="count2" style="margin-left:320px;color:#3F51B5"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="close">关闭</button>
+						<button type="button" class="btn btn-primary" id="btn-primary">提交</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task-4.3.xsd
+	">
+    
+	<bean id="DownLoadService" class="com.ehtsoft.supervise.services.DownLoadService"/>
+
+	<!-- 内蒙民政信息共享统一接口 -->
+	<bean id="MzdbService"  class="com.ehtsoft.supervise.api.services.MzdbService">
+		<property name="url" value="http://10.16.63.113:7001/prepose/webservice/wsRsService?wsdl"/>
+		<property name="name" value="getMzcx1010ByXml"/>
+		<property name="namespace" value="http://ws.webservice.preponse.hoslic.cn/"/>
+	</bean>
+	
+	
+	    <!-- 
+    seconds      0~59
+    minutes      0~59
+    hours        0~23
+    day-of-month 0~31 
+    month        0~11 or JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC
+    day-of-week  1~7  or SUN,MON,TUE,WEB,THU,FRI,SAT
+    /表示开始时刻与间隔时段
+    ?仅用于day-of-month 和 day-of-week  表示不指定特定值
+    L仅用于day-of-month 和 day-of-week  表示该月的最后一天 L单独用于day-of-week 表示周六，否则表示一个月最后一个星期几，5L 或者 THUL表示该月最后一个星期四
+    W仅用于day-of-month，表示离指定日期最近一个工作日，例如 day-of-month 赋值为 10W 表示该月离 10号最近一个工作日
+    #仅用于day-of-week 表示该月第 x 个星期几,例如 day-of-week 值 为 5#2 或者  THU#2 表示该月第二个星期4
+    eg:
+    seconds minutes hours day-of-month month day-of-week year
+      0/5 * * * * *  每格 5 秒执行一次
+      0 0/5 * * * *  每隔5分钟执行一次
+      0 1 1 ? * ?  每天凌晨1点1分开始执行   
+     -->
+   <task:scheduler id="myScheduler" pool-size="10"/>
+   <task:scheduled-tasks scheduler="myScheduler">  
+       <!-- 每天凌晨 2:10 清除无效的图片数据   -->
+       <task:scheduled ref="ScheduleService" method="removeInvalidData" cron="0 10 2 ? * ?"/>
+       <task:scheduled ref="UPdateService" method="updateGzjgsjbb" cron="0 0 0 ? * ?"/>
+   </task:scheduled-tasks> 
+    
+   <!-- 清除无效数据（图片）服务 -->
+   <bean id="ScheduleService" class="com.ehtsoft.common.services.ScheduleService"/>
+   <bean id="UPdateService" class="com.ehtsoft.common.services.UPdateService"/>
+</beans>

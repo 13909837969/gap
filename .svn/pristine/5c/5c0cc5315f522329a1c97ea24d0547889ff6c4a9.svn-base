@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_ORGANIZATION_ROLE" label="组织角色关联表">
+    <column field="ORGID" type="uuid" length="36" label="组织机构id"/>
+    <column field="ROLEID" type="uuid" length="36" label="角色id"/>
+    <foreign name="FK_CORE_ORGANIZATION_ROLE_ORGID" field="ORGID" reference="CORE_ORGANIZATION" referField="SYSID"/>
+    <foreign name="FK_CORE_ORGANIZATION_ROLE_ROLEID" field="ROLEID" reference="CORE_ROLE" referField="SYSID"/>
+  </table>
+</model>

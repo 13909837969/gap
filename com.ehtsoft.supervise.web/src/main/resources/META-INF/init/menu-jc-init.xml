@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apps>
+	<!-- 决策平台 -->
+	<role rolecode="JCR" flag="1" rolename="决策平台所有功能" frule="OBM">
+		<app appcode="JC" />
+	</role>
+	<app appcode="JC" appname="决策应用平台" reqaddress="_self" project="supervise"
+		frule="OSA" remark="">
+		<children>
+			<menu menucode="JC01" menuname="六位一体" actionuri="module/firstPage.htm"
+				icon="menu_lwyt" />
+			<menu menucode="JC02" menuname="决策总览" actionuri="module/rep/nnn_viewJCZLDSJ.jsp"
+				icon="menu_jczl" />
+			<menu menucode="JC03" menuname="社区矫正" actionuri="module/rep/viewRepSqjz.jsp"
+				icon="menu_jyzz" />
+			<menu menucode="JC04" menuname="人民调解" actionuri="module/sps/spsRmtj.jsp"
+				icon="menu_tzgg" />
+			<menu menucode="JC05" menuname="法律援助" actionuri="module/flyz/viewflyzSy.jsp"
+				icon="menu_flyz" />
+			<menu menucode="JC06" menuname="法治宣传" actionuri=""
+				icon="menu_fzxc" />
+			<menu menucode="JC07" menuname="法律服务" actionuri=""
+				icon="menu_flfw"/>
+			<menu menucode="JC08" menuname="安置帮教" actionuri="module/sps/spsAzbj.jsp"
+				icon="menu_azbj" />
+			<menu menucode="JC09" menuname="公证管理" actionuri=""
+				icon="menu_gzgl" />
+			<menu menucode="JC10" menuname="律师业务" actionuri="http://10.12.1.61/workbench.jsp#!/member/business:lms.NormalLawyer@ext-search-index"
+				icon="menu_lsgl" />
+			<menu menucode="JC11" menuname="司法鉴定" actionuri="http://10.12.1.25/WebReport/ReportServer?formlet=sjh2%2Ftogether.frm"
+				icon="menu_sfjd" />
+			<menu menucode="JC12" menuname="定位监控" actionuri="module/sqjz/rpDwjk.jsp"
+				icon="menu_dwjk" />
+			<menu menucode="JC13" menuname="预警分析" actionuri=""
+				icon="menu_ypfx" />
+			<menu menucode="JC99" menuname="辅助决策" actionuri="module/sqjz/view_sqlz_fzfx.jsp"
+				icon="menu_fzjc" />
+		</children>
+	</app>
+</apps>

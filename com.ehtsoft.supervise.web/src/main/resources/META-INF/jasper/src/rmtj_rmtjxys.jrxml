@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rmtjxys(zx)" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7e3726cf-73e7-4200-a77a-44cb69004afb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ltData"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<import value="com.ehtsoft.fw.utils.*"/>
+	<parameter name="id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+A.*,
+B.XM,B.XB,B.NL,B.DHHM,B.JTZZ,
+C.JSSS,C.DCXY,C.LXFS,C.JLR,
+D.f_name
+FROM RMTJ_DCJZ A 
+LEFT JOIN  RMTJ_TJAJSQR B ON B.TJAJXXID = A.ID
+LEFT JOIN  RMTJ_XYS C ON C.ID =  A.ID
+LEFT JOIN sys_dictionary D ON D.f_typecode = 'SYS000'  AND B.XB=D.f_code
+where  A.ID=$P{id}]]>
+	</queryString>
+	<field name="id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+	</field>
+	<field name="jm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jm"/>
+	</field>
+	<field name="jh" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jh"/>
+	</field>
+	<field name="tjy" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tjy"/>
+	</field>
+	<field name="tjrq" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tjrq"/>
+	</field>
+	<field name="ljr" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ljr"/>
+	</field>
+	<field name="ljrq" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ljrq"/>
+	</field>
+	<field name="bgqx" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bgqx"/>
+	</field>
+	<field name="ajly" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ajly"/>
+	</field>
+	<field name="cts" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="cts"/>
+	</field>
+	<field name="uts" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="uts"/>
+	</field>
+	<field name="cdate" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="cdate"/>
+	</field>
+	<field name="udate" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="udate"/>
+	</field>
+	<field name="cuid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cuid"/>
+	</field>
+	<field name="uuid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="uuid"/>
+	</field>
+	<field name="caid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="caid"/>
+	</field>
+	<field name="uaid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="uaid"/>
+	</field>
+	<field name="orgid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="orgid"/>
+	</field>
+	<field name="remark" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="remark"/>
+	</field>
+	<field name="jzsm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jzsm"/>
+	</field>
+	<field name="ljrqz" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="ljrqz"/>
+	</field>
+	<field name="shrqz" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="shrqz"/>
+	</field>
+	<field name="xm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xm"/>
+	</field>
+	<field name="xb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xb"/>
+	</field>
+	<field name="nl" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nl"/>
+	</field>
+	<field name="dhhm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dhhm"/>
+	</field>
+	<field name="jtzz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jtzz"/>
+	</field>
+	<field name="jsss" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jsss"/>
+	</field>
+	<field name="dcxy" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dcxy"/>
+	</field>
+	<field name="lxfs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="lxfs"/>
+	</field>
+	<field name="jlr" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jlr"/>
+	</field>
+	<field name="f_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="f_name"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="553" height="77" uuid="5ed0d737-8afe-464f-817f-a20832b71e51"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文仿宋" size="48"/>
+				</textElement>
+				<text><![CDATA[人民调解协议书]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="382" y="0" width="36" height="30" uuid="4ee06e44-3f51-4682-b7f8-d0816df55179"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[编号]]></text>
+			</staticText>
+			<line>
+				<reportElement x="418" y="30" width="136" height="1" uuid="536f8bdf-5cb6-42d1-9a7e-87cbb9901391"/>
+			</line>
+			<textField>
+				<reportElement x="420" y="0" width="133" height="30" uuid="c5b938b9-8657-4b0c-9af3-abb015ff3fcd"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jh}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<subreport>
+				<reportElement x="3" y="0" width="551" height="50" uuid="ecfbbbe2-be89-42ae-810d-3115b0ce36bb"/>
+				<subreportParameter name="aid">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["rmtj_rmtjxys_dsr.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="549">
+			<staticText>
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="28" y="-3" width="149" height="30" uuid="bd79eb20-8ef9-4b7b-b7d2-40252f1b7be3"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[纠纷主要事实,争议事项]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="179" y="26" width="374" height="1" uuid="f9882787-496b-4ff1-9b12-f35982569519"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="-1" y="59" width="554" height="1" uuid="b33794dc-5339-4701-a334-dc1f88dc4f07"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="35" y="61" width="174" height="30" uuid="59739699-05f3-47e6-bacc-de43f1468e10"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[经过调解,自愿达成如下协议]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="212" y="90" width="344" height="1" uuid="47c581bd-fa50-46ff-8a89-2273b15ec28c"/>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="-1" y="120" width="554" height="1" uuid="40c26d6d-faac-492a-b655-b0a77e666bd7"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="35" y="121" width="88" height="30" uuid="ba03a4b1-7259-4118-83d6-287331292dcf"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[履行方式,时限]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="222" y="121" width="71" height="30" uuid="c12a3ff7-a682-4c49-8d2e-49396bfa553e"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[本协议一式]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="322" y="120" width="231" height="30" uuid="f7c5c083-5e00-4365-9d68-cec8b354087c"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[份，当事人，人民调解委员各一份。]]></text>
+			</staticText>
+			<line>
+				<reportElement x="122" y="150" width="101" height="1" uuid="7dc040f4-f091-4489-840e-67d355970fba"/>
+			</line>
+			<line>
+				<reportElement x="293" y="150" width="28" height="1" uuid="538463ea-9774-499d-bee5-c335f098b8fd"/>
+			</line>
+			<staticText>
+				<reportElement x="35" y="150" width="174" height="30" uuid="5f38001b-884f-465f-80c0-f3c81975ff0e"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[当事人(签名盖章或按指印)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="203" y="179" width="105" height="1" uuid="b11b64e0-8709-4dd0-adc3-9a4357331856"/>
+			</line>
+			<staticText>
+				<reportElement x="35" y="182" width="174" height="30" uuid="876fc797-26f5-46f9-a74b-3d1a851b089c"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[当事人(签名盖章或按指印)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="203" y="211" width="105" height="1" uuid="3d6d195e-6c95-4250-a2f2-6cf4b5d9eef0"/>
+			</line>
+			<staticText>
+				<reportElement x="312" y="151" width="114" height="30" uuid="a2414178-75ab-4136-90a7-43ccc5f10d6a"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[人民调解员(签名)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="182" width="88" height="30" uuid="ad61f683-95d9-43e3-afc0-12ee4d91f992"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[记录人(签名)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="426" y="179" width="98" height="1" uuid="450f1d78-1e70-4823-860c-a34a08a12701"/>
+			</line>
+			<line>
+				<reportElement x="399" y="212" width="125" height="1" uuid="9312094a-d326-42a9-878e-b5335e3f753f"/>
+			</line>
+			<textField>
+				<reportElement x="180" y="0" width="373" height="26" uuid="db9d73a8-4b14-4511-833c-9e2dc91ed9fc"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{jsss}==null) ? " ":$F{jsss}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="61" width="344" height="29" uuid="494bf25b-cbc1-4c98-a48a-3180f5b39734"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{dcxy}==null) ? " ":$F{dcxy}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="120" width="99" height="30" uuid="e2fb7d4a-6d3e-4823-bb2a-cbbcc17d09ba"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{lxfs}==null) ? " ":$F{lxfs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="429" y="151" width="100" height="28" uuid="d883d2a1-91e9-441b-8212-d3b7b19320e4"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tjy}==null) ? " ":$F{tjy}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="183" width="124" height="28" uuid="21fe047a-91ef-4e08-b954-9948fb5631e9"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{jlr}==null) ? " ":$F{jlr}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="420" width="141" height="30" uuid="b0412c94-b0b7-4e0a-a3ff-1a6e41695332"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[(人民调解委员会印章)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="402" y="457" width="118" height="30" uuid="d7d9c413-ae92-4fc7-a289-f49c6a121ddd"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[DateUtil.format($F{cts},"yyyy年MM月dd日")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="392" y="488" width="111" height="1" uuid="cbce77dc-5ef5-4fb8-a71d-10cdefa4629f"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

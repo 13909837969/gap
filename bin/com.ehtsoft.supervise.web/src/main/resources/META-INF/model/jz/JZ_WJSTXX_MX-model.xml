@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_WJSTXX_MX" label="问卷试题信息明细记录表">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_STID" type="uuid" length="36" label="问卷试题信息记录"/>
+    <column field="F_TKID" type="uuid" length="36" label="问卷题库信息记录ID"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_WJSTXX_MX" field="F_ID"/>
+    <foreign name="FK_JZ_WJSTXX_MX_TKID" field="F_TKID" reference="JZ_WJTKXXB" referField="F_TKID"/>
+  </table>
+</model>

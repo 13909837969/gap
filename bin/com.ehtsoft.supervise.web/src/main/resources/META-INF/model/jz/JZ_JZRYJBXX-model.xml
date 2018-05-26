@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_JZRYJBXX" label="社区矫正人员基本信息">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="SQJZRYBH" type="string" length="20" label="社区矫正人员编号" required="true" remark="生成规则见SF0015-9.7"/>
+    <column field="XM" type="string" length="20" label="姓名" remark="自填"/>
+    <column field="CYM" type="string" length="20" label="曾用名" remark="自填"/>
+    <column field="XB" type="string" length="2" label="性别" remark="sys000"/>
+    <column field="MZ" type="string" length="20" label="民族" remark="SYS003"/>
+    <column field="SFZH" type="string" length="18" label="身份证号"/>
+    <column field="CSRQ" type="date" label="出生日期" remark="格式按照 GB/T 7408 中
+规定"/>
+    <column field="SFCN" type="string" length="2" label="是否成年" remark="sys001"/>
+    <column field="WCN" type="string" length="2" label="未成年" remark="SYS035"/>
+    <column field="JGLX" type="string" length="2" label="矫管类型" remark="SYS114"/>
+    <column field="WHCD" type="string" length="20" label="文化程度" remark="sys028"/>
+    <column field="HYZK" type="string" length="20" label="婚姻状况" remark="SYS030"/>
+    <column field="GRLXDH" type="string" length="18" label="个人联系电话(手机号)"/>
+    <column field="SFSWRY" type="string" length="2" label="是否三无人员" remark="sys001"/>
+    <column field="PQZY" type="string" length="50" label="捕前职业" remark="sys098"/>
+    <column field="JYJXQK" type="string" length="20" label="就业就学情况" remark="sys031"/>
+    <column field="XZZMM" type="string" length="20" label="现政治面貌" remark="sys091"/>
+    <column field="YZZMM" type="string" length="20" label="原政治面貌" remark="sys091"/>
+    <column field="SFBXGJZL" type="string" length="2" label="是否被宣告禁止令" remark="sys001"/>
+    <column field="WASBDQKSM" type="string" length="200" label="未按时报到情况说明"/>
+    <column field="YGZDW" type="string" length="100" label="原工作单位"/>
+    <column field="XGZDW" type="string" length="100" label="现工作单位"/>
+    <column field="DWLXDH" type="string" length="40" label="单位联系电话"/>
+    <column field="QTLXFS" type="string" length="100" label="其他联系方式" remark="其他联系的手机号或座机号码等"/>
+    <column field="JZJGBM" type="string" length="30" label="矫正机构编码" remark="司法局指派到司法所的时候更新改字段为司法所的编码"/>
+    <column field="JZJG" type="string" length="50" label="矫正机构"/>
+    <column field="SFCJ" type="integer" length="1" defaultValue="0" label="是否采集完成" remark="1 采集完成   0 未采集完成"/>
+    <column field="ONLINE" type="string" length="1" label="是否在线" remark="SYS001
+0:不在线   1:在线"/>
+    <column field="SFTK" type="string" length="2" label="是否脱管" remark="SYS001"/>
+    <column field="SFJLJZXZ" type="string" length="2" label="是否建立矫正小组" remark="SYS001"/>
+    <column field="BDQK" type="string" length="2" defaultValue="03" label="报到情况" remark="SYS016"/>
+    <column field="SFJS" type="string" length="1" defaultValue="0" label="司法所是否接受" remark="SYS001"/>
+    <column field="JCJZ" type="string" length="1" defaultValue="0" label="解除（终止）矫正标记" remark="1 解除社区矫正  
+2 监狱刑满释放  
+3 看守所刑满释放
+4 公安机关落实管控"/>
+    <column field="SFJID" type="uuid" length="36" label="司法局ID" remark="司法局ID,数据采集的司法局id（当前登录orgid)"/>
+    <column field="SFZP" type="string" length="1" defaultValue="0" label="是否转派到司法所" remark="1 转派到司法所"/>
+    <column field="LYDWLX" type="string" length="2" label="来源单位类型" remark="sys055"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)
+司法局指派到司法所的时候更新改字段为司法所的编码"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_JZRYJBXX" field="ID"/>
+  </table>
+</model>

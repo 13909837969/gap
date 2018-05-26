@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="FLYZ_AJB" label="案件表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="AJLSH" type="string" length="20" label="案件流水号" remark="02+6位行政区划+yyyyMM+d{4}"/>
+    <column field="ZXNR" type="string" length="2000" label="咨询内容"/>
+    <column field="TQZZYY" type="string" length="2000" label="提前终止原因"/>
+    <column field="YZFS" type="string" length="2" label="援助方式" remark="见10.2"/>
+    <column field="SLSJ" type="string" length="20" label="受理时间" remark="以YYYY-MM-DD格式"/>
+    <column field="AQMS" type="string" length="2000" label="案情描述"/>
+    <column field="FLZT" type="string" length="10" label="法律状态" remark="民事见10.15；刑事见10.13；行政见10.14"/>
+    <column field="FLZTZX" type="string" length="10" label="法律状态子项" remark="民事见10.15；刑事见10.13；行政见10.14"/>
+    <column field="FLDW" type="string" length="10" label="法律地位" remark="民事见10.15；刑事见10.13；行政见10.14"/>
+    <column field="AJMC" type="string" length="100" label="案件名称"/>
+    <column field="AJBH" type="string" length="20" label="案件编号"/>
+    <column field="AJLY" type="string" length="10" label="案件来源" remark="见10.10"/>
+    <column field="TZYY" type="string" length="10" label="通知原因" remark="见10.16"/>
+    <column field="BAJGLXR" type="string" length="20" label="办案机关联系人"/>
+    <column field="BAJGLXDH" type="string" length="20" label="办案机关联系人电话"/>
+    <column field="FDMSYGR" type="string" length="20" label="附带民宿原告人"/>
+    <column field="TZJGLX" type="string" length="10" label="通知机关类型" remark="见10.30"/>
+    <column field="TZJGMC" type="string" length="50" label="通知机关名称"/>
+    <column field="DJJGLSH" type="string" length="20" label="登记机构流水号" remark="关联9.20法律援助机构流水号"/>
+    <column field="BARYLSH" type="string" length="20" label="办案人员流水号" remark="关联9.19法律援助机构流水号"/>
+    <column field="AJZT" type="string" length="20" label="案件状态" remark="见10.28"/>
+    <column field="SXLX" type="string" length="10" label="事项类型" remark="见10.11"/>
+    <column field="SFSQTAJ" type="string" length="10" label="是否是群体案件" remark="0-非群体；1-群体"/>
+    <column field="QTAJSARS" type="string" length="20" label="群体案件涉案人数"/>
+    <column field="SFTYYYYZ" type="string" length="10" label="是否同意予以援助" remark="0-不同意；1-同意"/>
+    <column field="SCSJ" type="string" length="20" label="审查时间" remark="以YYYY-MM-DD格式"/>
+    <column field="AJLX" type="string" length="10" label="案件类型" remark="见10.29"/>
+    <column field="SCYJ" type="string" length="500" label="审查意见"/>
+    <column field="AJSJ" type="string" length="100" label="案件涉及"/>
+    <column field="AY" type="string" length="10" label="案由" remark="民事参考法（2011）42号，刑事参考SF 03001，行政案由见10.17"/>
+    <column field="AKNH" type="string" length="50" label="案件年号" remark="按照擎天内容扩展"/>
+    <column field="AJQH" type="string" length="20" label="案件期号" remark="按照擎天内容扩展"/>
+    <column field="SQZT" type="string" length="1" label="是否送法援申请" remark="按照擎天内容扩展"/>
+    <column field="CLJGBM" type="string" length="40" label="处理机构编码" remark="按照擎天内容扩展"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_FLYZ_AJB" field="ID"/>
+  </table>
+</model>

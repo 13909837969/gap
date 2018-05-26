@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="IM_FRIEND_REMARK" label="好友信息备注表">
+    <column field="F_AID0" type="uuid" length="36" label="用户信息ID" required="true" remark="IM_USERINFO.F_AID"/>
+    <column field="F_AID1" type="uuid" length="36" label="好友信息ID" required="true" remark="IM_USERINFO.F_AID"/>
+    <column field="F_NAME" type="string" length="50" label="好友备注名" remark="好友备注名"/>
+    <column field="F_TEL" type="string" length="20" label="好友电话"/>
+    <column field="F_EMAIL" type="string" length="40" label="好友Email"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_FRIEND_REMARK" field="F_AID0,F_AID1"/>
+  </table>
+</model>

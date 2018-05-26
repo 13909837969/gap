@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_ACCOUNT_MENU" label="账户菜单关联表">
+    <column field="ACCOUNTID" type="uuid" length="36" label="账户ID" required="true"/>
+    <column field="MENUID" type="uuid" length="36" label="功能菜单ID" required="true"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" required="true" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" required="true" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <unique name="UK_CORE_ACCOUNT_MENU_ACCOUNTID_MENUID" field="ACCOUNTID,MENUID"/>
+    <foreign name="FK_CORE_ACCOUNT_MENU_ACCOUNTID" field="ACCOUNTID" reference="CORE_ACCOUNT" referField="SYSID"/>
+    <foreign name="FK_CORE_ACCOUNT_MENU_MENUID" field="MENUID" reference="CORE_MENU" referField="SYSID"/>
+    <remark><![CDATA[用户申请功能菜单的时候保存到该表中，审核通过后，功能菜单即可使用
+ main-cool.jsp 使用]]></remark>
+  </table>
+</model>

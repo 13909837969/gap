@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="REP_RMTJAJJF" label="人民调解案件纠纷">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+     <column field="PARENTID" type="string" length="10" label="父级ID"/>
+    <column field="MSBM" type="string" length="10" label="盟市编码"/>
+    <column field="MSMC" type="string" length="120" label="盟市名称"/>
+    <column field="JFLX" type="string" length="10" label="纠纷类型" remark="SYS104"/>
+    <column field="SL" type="integer" length="8" label="数量"/>
+    <column field="ND" type="integer" length="4" label="年度"/>
+    <column field="JD" type="integer" length="2" label="季度"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_REP_RMTJAJJF" field="ID"/>
+  </table>
+</model>

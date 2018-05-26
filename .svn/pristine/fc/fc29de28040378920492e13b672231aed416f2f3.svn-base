@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apks>
+	<!-- 司法所工作版本 -->
+	<apk versionCode="1" versionName="1.0"
+		 filename="supervise-release_20170713.apk"
+		 url="http://110.16.70.41:38080/supervise-release.apk">
+	<![CDATA[		
+	    解决交流互动的功能bug问题
+		更新日期：2017-07-15 23:30
+		aaaa  bbbbbb
+	]]>
+	</apk>
+</apks>

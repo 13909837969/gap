@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<swaps url="http://59.196.11.40/ec/api/v1">
+	<header>
+		<appId>9cd161403b144ae79a3a90ec4fbd5465</appId>
+		<mac></mac>
+	</header>
+	<apis>
+		<!-- 律师事务所信息获取1 -->
+		<api url="/law/firms" method="GET" admOrgCode="150000">
+			<respBody ltTable="LSZHGL_LSSWSJBQKSJYQ" label="律师事务所基本情况数据要求">
+				<field fwField="name" ltField="ID" md5="true"/>
+				<field fwField="name" ltField="orgid" md5="true"/>
+				<field fwField="name" ltField="LSSWSMC" label="律师事务所名称"/>
+				<field fwField="englishName" ltField="YWMC" label="英文名称"/>
+				<field fwField="shortName" ltField="JC" label="简称"/>
+				<field fwField="creditCode" ltField="cID" label="统一社会信用代码"/>
+				
+				<field fwField="practiceCertNo" ltField="???" label="许可证号"/>
+				<field fwField="admOrgCode" ltField="???" label="主管机关机构代码"/>	
+					
+				<field fwField="address" ltField="ZSDZ" label="住所地址"/>
+				<field fwField="tel" ltField="LXDH" label="联系电话"/>
+				<field fwField="fax" ltField="CZ" label="传真"/>
+				<field fwField="url" ltField="DWWZ" label="网站"/>
+				<field fwField="partyOrgForm" ltField="ZZXS" label="组织形式"/>
+				<field fwField="buildDate" ltField="PZSLSJ" label="批准设立时间（yyyy-MM-dd）"/>
+				<field fwField="chargePerson" ltField="FZRID" label="负责人"/>
+				<field fwField="licenceDate" ltField="FZRQ" label="发证日期"/>		
+			</respBody>
+		</api> 
+		
+	<!-- 	律师信息获取2 -->	
+		
+		  <api url="/law/lawyers" method="GET" admOrgCode="150000">			
+			<respBody ltTable="LSZHGL_LSXXHQ" label="律师信息获取">
+				<field fwField="firmName" ltField="orgid" md5="true"/>
+				<field 	fwField="name"			ltField="XM"   		label="姓名"            	/>
+				<field 	fwField="firmName"		ltField="ZYJG"       label="执业机构  "     />
+				<field 	fwField="practiceNo"	ltField="ZYZH"       label="执业证号"         />
+				<field 	fwField="pinYin"		ltField="XMPY"       label="姓名拼音"         />
+				<field 	fwField="gender"		ltField="XB"         label="性别" code="SYS000"/>
+				<field 	fwField="certDate"		ltField="FZRQ"       label="发证日期"         />
+				<field 	fwField="qualCertType"	ltField="ZGZLB"      label="资格证类别"       />
+				<field 	fwField="qualCertNo"		ltField="ZGZH"       label="资格证号"     />
+				<field 	fwField="politicalStatus"	 ltField="ZZMM"       label="政治面貌"  code="SYS091"  />
+				<field 	fwField="nation"			ltField="MZ"         label="民族" code="SYS003" />
+				<field 	fwField="deducation"		ltField="ZGXL"       label="最高学历"  code="SYS093"   />
+				<field 	fwField="certNo"			ltField="ZJBH"       label="证件编号 "    />
+				<field 	fwField="address"			ltField="LXDZ"       label="联系地址"     />
+				<field 	fwField="zipCode"			ltField="LXDZYB"     label="联系地址邮编" />
+				<field 	fwField="tel"				ltField="LXDH"       label="联系电话"     />
+				<field  fwField="phone"				ltField="SJHM"       label="手机号码 "    />
+				<field 	fwField="email"				ltField="DZYX"       label="电子邮箱"   />
+				<field 	fwField="certPic"			ltField="ZJZP"       label="证件照片"     />
+				<field 	fwField="firstPracDate"		ltField="SCZYRQ"     label="首次执业日期" />
+				<field 	fwField="busSpecial "		ltField="???"      label="业务专长"       />
+				<field 	fwField="practiceType"		ltField="???"       label="执业类别"      />	  
+				<field 	fwField="vitae"				ltField="???"       label="个人简介"      /> 
+				<field 	fwField="isMengHan"			ltField="???"    label="是否蒙汉语兼通"   />
+				<field 	fwField="rank"				ltField="???"    label="专业技术职称"     />
+			</respBody>
+		</api>  
+	
+	
+		<!-- 公证 机构信息获取3 -->
+	
+		 <api url="/fair/orgs" method="GET" admOrgCode="150000">
+			<respBody ltTable="GZZHGL_GZJGXXB" label="公证机构信息表" >
+				<field fwField="code" ltField="GZJGXXB01" label="机构编码"/>
+				<field fwField="name" ltField="JGMC" label="名称"/>
+				
+				<field fwField="name" ltField="orgid" md5="true" label="机构id"/>
+				
+				<field fwField="shortName" ltField="JGJC" label="简称"/>
+				<field fwField="number" ltField="JGDM" label="代码"/>
+				<field fwField="practiceCertNo" ltField="ZYZH" label="执业证号"/>
+				<field fwField="isForeignNotarization" ltField="SFCBSWGZYW" label="是否承办涉外公证业务（1：是、0：否）"/>
+				<field fwField="startDate" ltField="JGSLSJ" label="机构设立时间"/>
+				<field fwField="practiceArea" ltField="ZYQY" label="执业区域"/>
+				<field fwField="liablePsnName" ltField="FZR" label="负责人"/>
+				<field fwField="certificationOrg" ltField="FZJG" label="发证机关"/>
+				<field fwField="certificationDate" ltField="FZSJ" label="发证时间（yyyy-MM-dd）"/>
+				
+				<field fwField="admOrgCode" ltField="???" label="主管机构代码"/>
+				<field fwField="tel" ltField="LXDH" label="联系电话"/>
+				<field fwField="fax" ltField="CZHM" label="传真"/>
+				<field fwField="email" ltField="DZYX" label="邮箱"/>
+				<field fwField="zipCode" ltField="YB" label="邮政编码"/>
+				<field fwField="address" ltField="DZ" label="地址"/>
+				<field fwField="url" ltField="GFWZ" label="官方网站"/>
+				<field fwField="description" ltField="" label="简介"/>
+				<field fwField="pic" ltField="" label="照片 http://59.196.11.40/路径"/>
+				<field fwField="division" ltField="" label="行政区划"/>
+				<field fwField="xcoord" ltField="" label="经度"/>
+				<field fwField="ycoord" ltField="" label="纬度"/>
+				<field fwField="status" ltField="" label="状态（01:正常,02:暂停,03:注销,04:吊销）"/>
+			</respBody>
+		</api>  
+		
+	<!-- 	公证人员信息获取4 -->
+	
+		<api url="/fair/persons" method="GET" admOrgCode="150000">
+			<respBody ltTable="GZZHGL_GZRYJBXX" label="公证人员基本信息">
+				<field fwField="name" ltField="XM" label="姓名"/>
+				<field fwField="pinYin" ltField="XMHYPY" label="拼音"/>
+				<field fwField="gender" ltField="XB" label="性别" code="SYS000"/>
+				<field fwField="nation" ltField="MZ" label="民族" code="SYS003"/>
+				<field fwField="certNo" ltField="ID" label="身份证号"/>
+				<field fwField="certNo" ltField="GMSFHM" label="身份证号"/>
+				<field fwField="politicalStatus" ltField="ZZMM" label="政治面貌" code="SYS091"/>
+				<field fwField="pic" ltField="ZP" label="照片 http://59.196.11.40/路径"/>
+				<field fwField="education" ltField="XL" label="学历" code="SYS093"/>
+				<field fwField="degree" ltField="XW" label="学位" code="SYS094"/>
+				<field fwField="orgName" ltField="SSJGBM" label="所属机构"/>
+				
+				<field fwField="orgName" ltField="orgid" md5="true" label="所属机构"/>
+				
+				<field fwField="rank" ltField="ZYZC" label="专业职称" code="SYS026"/>
+				
+				<field fwField="certificateNo" ltField="ZYZSBM" label="执业证书编码"/>
+				<field fwField="certificateDate" ltField="ZYZSBFSJ" label="执业证书颁发时间"/>
+				<field fwField="isForeignNotarization" ltField="SFQDSWGZZG" label="是否取得涉外公证资格"/>
+				<field fwField="foreignNotarizationDate" ltField="SWGZZGQDSJ" label="涉外公证资格取得时间"/>
+				<field fwField="qualCertNo" ltField="ZGZH" label="资格证号"/>
+				<field fwField="tel" ltField="LXDH" label="联系电话"/>
+				<field fwField="email" ltField="DZYX" label="邮箱"/>
+			</respBody>
+		</api>
+		
+		<!-- 鉴定机构信息获取5 -->
+		
+		<api url="/idt/orgs" method="GET" admOrgCode="150000">
+			<respBody ltTable="GZZHGL_JDJGMC" label="鉴定机构基本信息">
+				<field fwField="name"  ltField="JGMC" label="鉴定机构名称" />
+				<field fwField="name"  ltField="orgid" md5="true" label="机构id"/>
+				<field fwField="permitNo" 	 ltField="XKZH" label="许可证号" />
+				<field fwField="creditCode" 		 ltField="XYDM" label="统一社会信用代码" />
+				<field fwField="firstRegDate" 	 ltField="SCHZDJRQ" label="首次获准登记日期（yyyy-MM-dd）" />
+				<field fwField="orgStartDate" 	 ltField="YXQKSSJ" label="机构有效开始日期（yyyy-MM-dd）" />
+				<field fwField="orgEndDate" 		 ltField="YXQJSSJ" label="机构有效截止日期（yyyy-MM-dd）" />
+				<field fwField="businessRange"  ltField="YWFW" label="业务范围" />
+				<field fwField="certificationOrg" 	 ltField="BZJG" label="颁证机关" />
+				<field fwField="certificationDate"  ltField="BZRQ" label="颁证日期" />
+				<field fwField="admOrgCode" 	 ltField="DJGLBMDM"  label="登记管理部门机构代码" />
+				<field fwField="admOrgName" 		 ltField="DJGLBM" label="登记管理部门" />
+				<field fwField="registeredAddr" 		 ltField="DJGLBM" label="机构注册住所" />
+				<field fwField="email"  ltField="DZYX" label="电子邮箱" />
+				<field fwField="fax"  ltField="CZ" label="传真" />
+				<field fwField="contractPhone"  ltField="LXDH" label="联系电话" />
+				<field fwField="nature"  ltField="JGXZ" label="机构性质" code="SYS195"/>
+				<field fwField="legalPsnName"  ltField="FRDBXM" label="法人代表姓名" />
+				<field fwField="legalPsnGender"  ltField="FRDBXB" label="法人代表性别" code="SYS000"/>
+				<field fwField="liablePsnName"  ltField="FZRXM" label="负责人姓名" />
+				<field fwField="liablePsnGender"  ltField="FZRXB" label="负责人性别" code="SYS000"/>
+				<field fwField="contractPerson"  ltField="LXR" label="联系人" />
+				<field fwField="content"  ltField="JGJJ" label="机构简介" />
+				<field fwField="pic"  ltField="ZPLJ" label="照片" />
+				<field fwField="xcoord"  ltField="WD" label="纬度" />
+				<field fwField="ycoord"  ltField="JD" label="经度" />
+				<field fwField="status"  ltField="ZT" label="状态" />
+			</respBody>
+		</api> 
+		
+		<!--  鉴定人员基本信息6-->
+		
+		<api url="/idt/persons" method="GET" admOrgCode="150000">
+			<respBody ltTable="GZZHGL_JDRXX" label="鉴定人员基本信息">
+				<field fwField="name"  ltField="XM" label="鉴定人姓名" />
+				<field fwField="certNo" 	 ltField="SFZH" label="身份证号" />
+				<field fwField="practiceCertNo" 	 ltField="ZYZH" label="执业证号" />
+				<field fwField="gender" 	 ltField="XB" label="性别" code="SYS000"/>
+				<field fwField="nation" 	 ltField="MZ" label="民族" code="SYS003"/>
+				<field fwField="education" 		 ltField="XL" label="学历" code="SYS093"/>
+				
+				<field fwField="titleLevel" 		 ltField="ZC" label="职称" code="SYS026" />
+				
+				<field fwField="politicalStatus" 		 ltField="ZZMM" label="政治面貌" code="SYS091"/>
+				<field fwField="contractPhone" 		 ltField="LXDH" label="联系电话" />
+				<field fwField="email" 		 ltField="YX" label="邮箱" />
+				<field fwField="practiceCertStartdate" 		 ltField="YXKSSJ" label="执业证有效开始日期（yyyy-MM-dd）" />
+				<field fwField="practiceCertEnddate"  ltField="YXJSSJ" label="执业证有效截止日期（yyyy-MM-dd）" />
+				<field fwField="graduatedSchool" 	 ltField="BYYX" label="毕业院校" />
+				<field fwField="qualType"  ltField="ZYFS" label="执业方式（01:专职,02:兼职）" />
+				<field fwField="photo" 	 ltField="ZP"  label="照片" />
+				<field fwField="practiceRange" 		 ltField="ZYFW" label="执业范围" />
+				<field fwField="description"  ltField="JJ" label="简介" />
+				<field fwField="qualificationStatus"  ltField="ZYZT" label="执业状态" />
+				<field fwField="orgName"  ltField="SZJDJG" label="所在鉴定机构" />
+				
+				<field fwField="orgName"  ltField="orgid" md5="true" label="所在鉴定机构id" />
+				
+				<field fwField="orgAddress"  ltField="???" label="机构地址" />
+				
+				<field fwField="titleSeriesName"  ltField="???" label="专业技术职称" />
+			
+				<field fwField="position"  ltField="???" label="职务" />
+			</respBody>
+		</api> 
+		<!-- 人民调解委员会基本情况信息集 -->
+		<!-- 人民调解员基本情况信息集 -->
+	 <!-- <api url="/mdt/persons" method="get" admOrgCode="150000">
+			<respBody ltTable="RMTJ_TJYJBXX" label="人民调解委员会基本情况信息集">
+			    <field fwField="code"  ltField="TJYBM"  label="调解员编码" />
+			    <field fwField=""  ltField="TWHID"  label="调解委员会ID" />
+			    division 方维是所属行政区 
+			    <field fwField="division"  ltField="TWHBM"  label="调委会编码" />
+			    <field  fwField="" ltField="TJGZSBM"  label="调解工作室编码" />
+			    <field  fwField="name" ltField="XM"  label="姓名" />
+			    <field  fwField="gender" ltField="XB"  label="性别" />
+			    <field  fwField="certNo" ltField="SFZHM"  label="身份证号码" />
+			    <field  fwField="" ltField="CSNY"  label="出生年月" />
+			    <field  fwField="nation" ltField="MZ"  label="民族" />
+			    <field  fwField="education" ltField="XL"  label="学历" />
+			    <field  fwField="" ltField="SXZY"  label="所学专业" />
+			    <field  fwField="" ltField="SSDW"  label="所属单位" />
+			    <field  fwField="" ltField="JBQTSF"  label="兼备其他身份" />
+			    <field  fwField="position" ltField="TWHZW"  label="调委会职位" />
+			    <field fwField="practiceDate"  ltField="CSRMTJGZSNX"  label="从事人民调解工作年限" />
+			    <field fwField="isPrac"  ltField="ZJZ"  label="专兼职" />
+			    <field  fwField="" ltField="SFZFGMFW"  label="是否政府购买服务" />
+			    <field  fwField="" ltField="XGGZZSCB"  label="是否从事过相关方面工作或具有相关知识储备" />
+			    <field  fwField="" ltField="YGSWQK"  label="因公伤亡情况" />
+			    <field  fwField="tel" ltField="LXDH"  label="联系电话" />
+			    <field  fwField="" ltField="SJ"  label="手机" />
+			    <field  fwField="" ltField="DZYX"  label="电子邮箱" />
+			    <field  fwField="" ltField="CSFS"  label="产生方式" />
+			    <field  fwField="" ltField="ZZMM"  label="政治面貌" />
+			    <field  fwField="" ltField="HYZK"  label="婚姻状况" />
+			    <field  fwField="" ltField="SFZY"  label="身份职业" />
+			    <field  fwField="" ltField="ZGZC"  label="资格职称" />
+			    <field  fwField="" ltField="LXDZ"  label="联系地址" />
+			    <field  fwField="description" ltField="GRJJ"  label="个人简介" />
+			    <field  fwField="" ltField="del"   label="删除标记" />
+			    <field  fwField="" ltField="audit"  label="审核标记" />
+			    <field  fwField="" ltField="cts"  label="创建时间戳" />
+			    <field  fwField="" ltField="uts"  label="更新时间戳" />
+			    <field  fwField="" ltField="cdate"   label="创建日期" />
+			    <field  fwField="" ltField="udate"  label="更新日期" />
+			    <field  fwField="" ltField="cuid"  label="当前创建人员" />
+			    <field  fwField="" ltField="uuid"  label="当前更新人员" />
+			    <field  fwField="" ltField="caid"  label="当前创建账号" />
+			    <field  fwField="" ltField="uaid"  label="当前更新账号" />
+			    <field  fwField="" ltField="orgid"  label="当前机构" />
+			    <field  fwField="" ltField="remark"  label="备注"/>
+			    龙腾没有
+			    <field  fwField="pic" ltField="remark"  label="照片"/>
+			    方维没有
+			    <field  fwField="status" ltField="ZZMM"  label="政治面貌" />
+			 
+			    
+			</respBody>
+		</api> 
+		 -->
+	
+	</apis>
+</swaps>

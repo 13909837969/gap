@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <!--CORE_MESSAGE - 消息提醒记录表-->
+  <table name="CORE_MESSAGE" label="消息提醒记录表">
+    <column field="SYSID" type="uuid" length="36" label="代理主键" required="true"/>
+    <column field="FROM_USER" type="uuid" length="36" property="fromUser" label="发送的用户ID"/>
+    <column field="FROM_USERNAME" type="string" length="60" property="fromUsername" label="发送的用户名"/>
+    <column field="TO_USER" type="uuid" length="36" property="toUser" label="接受的用户ID"/>
+    <column field="TO_USERNAME" type="string" property="toUsername" length="20" label="接受的用户名"/>
+    <column field="TITLE" type="string" length="100" property="title" label="消息标题"/>
+    <column field="CONTENT" type="string" length="2000" property="content" label="消息内容"/>
+    <column field="FLAG" type="string" length="1" property="flag" label="读取消息标记，1 已读   0 未读 "/>
+    <column field="BILL_TYPE" type="string" length="20"  label="单据类型" property="billType" remark="单据类型标记（bill_type.flag)"/>
+    <column field="AUDIT_LEVEL" type="integer" label="审核权限的级别" property="auditLevel"/>
+    <column field="URL" type="string" length="100" label="消息打开的URL"/>
+    <column field="CTS" type="date" property="cts" label="消息发送的时间"/>
+    <primary name="PK_CORE_MESSAGE" field="SYSID"/>
+  </table>
+</model>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_COORDINATE" label="边界的坐标" base="true">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_BID" type="uuid" length="36" label="电子围栏ID" required="true"/>
+    <column field="F_LAT" type="double" length="16" precision="12" label="纬度" required="true"/>
+    <column field="F_LNG" type="double" length="16" precision="12" label="经度" required="true"/>
+    <column field="F_ORDER" type="integer" label="排序" required="true" remark="自增1"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_SYS_COORDINATE" field="F_ID"/>
+    <foreign name="FK_SYS_COORDINATE_BID" field="F_BID" reference="SYS_BOUNDARY" referField="F_BID"/>
+  </table>
+</model>

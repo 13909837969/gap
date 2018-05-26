@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_JZRYFLWS_IMG" label="矫正人员法律文书图像附件">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true" remark="矫正人员ID"/>
+    <column field="data" type="binary" label="头像数据"/>
+    <column field="mimetype" type="string" length="20" label="图像类型" remark="图片类型如：image/png"/>
+    <column field="F_AID" type="uuid" length="36" label="矫正人员ID"/>
+    <column field="WSLX" type="string" length="2" label="文书类型"/>
+    <primary name="PK_JZ_JZRYFLWS_IMG" field="IMGID"/>
+  </table>
+</model>

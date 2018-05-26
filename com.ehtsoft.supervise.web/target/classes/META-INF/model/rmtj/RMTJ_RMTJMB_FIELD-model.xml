@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="RMTJ_RMTJMB_FIELD" label="人民调解模板和元数据关联表">
+    <column field="F_MBID" type="uuid" length="36" label="模板ID" required="true" remark="系统自动生成"/>
+    <column field="F_FIELD_ID" type="uuid" length="36" label="模板字段ID" required="true"/>
+  </table>
+</model>

@@ -1,0 +1,132 @@
+package com.ehtsoft.azbj.services;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.ehtsoft.common.services.SFCodeService;
+import com.ehtsoft.common.services.SSOService;
+import com.ehtsoft.fw.core.db.InsertOperation;
+import com.ehtsoft.fw.core.db.SQLAdapter;
+import com.ehtsoft.fw.core.db.SqlDbClient;
+import com.ehtsoft.fw.core.db.SqlDbFilter;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.dto.Paginate;
+import com.ehtsoft.fw.core.dto.ResultList;
+import com.ehtsoft.fw.core.services.AbstractService;
+import com.ehtsoft.fw.core.sso.User;
+import com.ehtsoft.supervise.api.SupConst;
+
+/**
+ * 
+ * @author 宋占成
+ *
+ */
+@Service("AzbjRyxjSrevice")
+public class AzbjRyxjSrevice extends AbstractService {
+	@Resource(name = "sqlDbClient")
+	private SqlDbClient dbClient;
+
+	@Resource(name = "SFCodeService")
+	private SFCodeService sfService;
+
+	@Resource(name = "SSOService")
+	private SSOService service;
+
+	/**
+	 * 分页查询
+	 * 
+	 * @param query
+	 * @param paginate
+	 * @return
+	 */
+	public ResultList<BasicMap<String, Object>> findAll(BasicMap<String, Object> query, Paginate paginate) {
+		SqlDbFilter filter = toSqlFilter(query);
+		return dbClient.find(SupConst.Collections.ANZBJ_RYXJXXCJB, filter, paginate);
+	}
+
+	/**
+	 * 查询所有
+	 * 
+	 * @param query
+	 * @param paginate
+	 * @return
+	 */
+	public ResultList<BasicMap<String, Object>> findAzbjRyxjAll(BasicMap<String, Object> query, Paginate paginate) {
+		User user = service.getUser();
+		if (user != null) {
+			if (query.get("xjzt").equals("1")) {
+				String sqlstr = "SELECT A.*,B.ID,B.XM,B.XB,B.JZJG,B.SFSWRY FROM ANZBJ_RYXJXXCJB A LEFT JOIN JZ_JZRYJBXX B ON A.ID = B.ID";
+				SqlDbFilter filter = toSqlFilter(query);
+				filter.eq("a.orgid", user.getOrgid());
+				filter.eq("a.jcbj", "0");
+				SQLAdapter sql = new SQLAdapter(sqlstr);
+				sql.setFilter(filter);
+				return dbClient.find(sql, paginate);
+			} else {
+				String sqlstr = "SELECT A.ID xjid,A.XM,A.XB,A.JZJG,A.SFSWRY FROM JZ_JZRYJBXX A LEFT JOIN ANZBJ_RYXJXXCJB B ON A.id = B.ID ";
+				SqlDbFilter filter = toSqlFilter(query);
+				SQLAdapter sql = new SQLAdapter(sqlstr);
+				filter.addFieldRelation("B.ID IS NULL and A.jcjz='1'");
+				filter.eq("a.orgid", user.getOrgid());
+				sql.setFilter(filter);
+				ResultList<BasicMap<String, Object>> ss;
+				ss = dbClient.find(sql, paginate);
+				return ss;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * 查询未衔接
+	 * 
+	 * @param query
+	 * @param paginate
+	 * @return
+	 */
+	/**
+	 * 新增修改
+	 * 
+	 * @param data
+	 */
+	public void saveAzbj(BasicMap<String, Object> data) {
+		if (data.get("ID") == null) {
+			if (data.get("xjid") == "" || data.get("xjid").equals("")) {
+				dbClient.save(SupConst.Collections.JZ_JZRYJBXX, data, new InsertOperation() {
+					@Override
+					public void insertBefore(BasicMap<String, Object> data) {
+						String code = sfService.getCorrectCode();
+						data.put("SQJZRYBH", code);
+					}
+
+					@Override
+					public void updateBefore(BasicMap<String, Object> data) {
+						data.remove("SQJZRYBH");
+					}
+
+					@Override
+					public void insertAfter(BasicMap<String, Object> data) {
+
+					}
+				});
+			}
+			String ryid = (String) data.get("xjid");
+			data.put("id", ryid);
+			dbClient.save(SupConst.Collections.ANZBJ_RYXJXXCJB, data);
+		} else {
+			dbClient.save(SupConst.Collections.ANZBJ_RYXJXXCJB, data);
+		}
+
+		// dbClient.save(SupConst.Collections.ANZBJ_RYXJXXCJB, data);
+	}
+
+	/**
+	 * 刪除
+	 * 
+	 * @param data
+	 */
+	public void removeOne(BasicMap<String, Object> data) {
+		dbClient.remove(SupConst.Collections.ANZBJ_RYXJXXCJB, data);
+	}
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_ORGANIZATION" label="组织机构管理表">
+    <column field="SYSID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="PARENTID" type="uuid" length="36" label="父级ID"/>
+    <column field="INNERCODE" type="string" length="40" label="INNERCODE" remark="内部代码（级别代码）"/>
+    <column field="ORGCODE" type="string" length="30" label="机构编码" required="true"/>
+    <column field="ORGNAME" type="string" length="100" label="机构名称" required="true"/>
+    <column field="REGIONCODE" type="string" length="20" label="REGIONCODE" remark="行政区划编码，数据同 SYS_REGION,矫正系统中的（国家标准）"/>
+    <column field="FLAG" type="integer" length="1" defaultValue="1" label="开启/禁用" remark="开启/禁用(1，开启  0，禁用)"/>
+    <column field="LVL" type="integer" length="2" label="机构类型" remark="机构类型
+1、司法厅   2、市司法局  3、区司法局  4、司法所（司法行政机关）   5、法律服务机构"/>
+    <column field="LFT" type="integer" label="左排序"/>
+    <column field="RGT" type="integer" label="右排序"/>
+    <column field="GIS" type="string" length="2" label="地理信息标记" remark="地理信息标记(1 表示已经标记了地理位置)"/>
+    <column field="ACCID" type="string" length="20" label="管理员账号"/>
+    <column field="SCENEID" type="uuid" length="36" label="场景ID"/>
+    <column field="ACCPW" type="string" length="30" label="初始化密码" remark="登录后必须修改初始化密码，第一次分配账号的时候使用"/>
+    <column field="APPURL" type="string" length="100" label="应用URL" remark="机构应用的特殊情况"/>
+    <column field="PREFLAG" type="string" length="1" label="前置服务标记" remark="医院前置服务部署标志(1 部署)"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" required="true" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" required="true" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_CORE_ORGANIZATION" field="SYSID"/>
+    <unique name="UK_CORE_ORGANIZATION_ORGCODE" field="ORGCODE"/>
+  </table>
+</model>

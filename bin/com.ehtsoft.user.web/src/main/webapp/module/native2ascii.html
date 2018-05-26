@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+	<HEAD>
+		<TITLE>
+			New Document
+		</TITLE>
+		<META NAME="Generator" CONTENT="EditPlus">
+		<META NAME="Author" CONTENT="">
+		<META NAME="Keywords" CONTENT="">
+		<META NAME="Description" CONTENT="">
+		<script language="javascript">
+		
+function native2ascii() {
+	regexp = /[^\x00-\xff]/g;
+	n = " "+document.getElementById('native').value;
+	a = n;
+	while(m = regexp.exec(n)) {
+		a = a.split(m[0]).join(escape(m[0]).split('%u').join('\\u'));
+	}
+	var v=a.substring(1);
+	document.getElementById('ascii').value = v;
+}
+/*
+function native2ascii() {
+	regexp = /[^\x00-\xff]/g;
+	n = document.getElementById('native').value;
+	a = n;
+	while(m = regexp.exec(n)) {
+		a = a.split(m[0]).join(escape(m[0]).split('%u').join('\;&#'));
+	}
+	var v=a.substring(1)+";";
+	document.getElementById('ascii').value = v;
+}
+*/
+function ascii2native() {
+	//regexp = /[^\x00-\xff]/g;
+	a = document.getElementById('ascii').value;
+	n = a;
+	n = unescape(n.split('\\').join('%'));
+	document.getElementById('native').value = n;
+}
+</script>
+	</HEAD>
+	<BODY>
+		<textarea id="native" rows="10" cols="100"></textarea>
+		<p />
+			<input type="button" id="convert" value="convert" onclick="native2ascii()" />
+			<input type="button" id="back" value="back" onclick="ascii2native()" />
+			
+		<p />
+			<textarea id="ascii" rows="10" cols="100"></textarea>
+	</BODY>
+</HTML>

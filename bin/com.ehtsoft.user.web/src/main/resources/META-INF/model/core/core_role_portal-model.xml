@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_ROLE_PORTAL" label="角色Protal管理表">
+    <column field="ROLEID" type="uuid" length="36" label="角色ID"/>
+    <column field="PROTALID" type="uuid" length="36" label="ProtalId"/>
+    <foreign name="FK_CORE_ROLE_PORTAL_ROLEID" field="ROLEID" reference="CORE_ROLE" referField="SYSID"/>
+    <foreign name="FK_CORE_ROLE_PORTAL_PROTALID" field="PROTALID" reference="CORE_PORTAL" referField="SYSID"/>
+  </table>
+</model>

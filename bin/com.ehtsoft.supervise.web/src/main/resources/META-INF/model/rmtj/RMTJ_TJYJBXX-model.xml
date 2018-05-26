@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="RMTJ_TJYJBXX" label="人民调解员基本情况信息集">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="TJYBM" type="string" length="15" label="调解员编码" remark="编码集详见 9.14"/>
+    <column field="TWHID" type="uuid" length="36" label="调解委员会ID" remark="调解委员会基本信息ID"/>
+    <column field="TWHBM" type="string" length="16" label="调委会编码" remark="编码集详见 9.1"/>
+    <column field="TJGZSBM" type="string" length="14" label="调解工作室编码" remark="编码集详见 9.4"/>
+    <column field="XM" type="string" length="300" label="姓名" remark="自填"/>
+    <column field="XB" type="string" length="8" label="性别" remark="SYS000"/>
+    <column field="SFZHM" type="string" length="18" label="身份证号码" remark="自填"/>
+    <column field="CSNY" type="string" length="10" label="出生年月" remark="由身份证号码自动识别"/>
+    <column field="MZ" type="string" length="8" label="民族" remark="SYS003"/>
+    <column field="XL" type="string" length="8" label="学历" remark="SYS093"/>
+    <column field="SXZY" type="string" length="8" label="所学专业" remark="SYS095"/>
+    <column field="SSDW" type="string" length="300" label="所属单位" remark="自填"/>
+    <column field="JBQTSF" type="string" length="8" label="兼备其他身份" remark="SYS142"/>
+    <column field="TWHZW" type="string" length="8" label="调委会职位" remark="SYS141"/>
+    <column field="CSRMTJGZSNX" type="string" length="2" label="从事人民调解工作年限" remark="系统计算，由聘用开始时间计算"/>
+    <column field="ZJZ" type="string" length="8" label="专兼职" remark="SYS143"/>
+    <column field="SFZFGMFW" type="string" length="8" label="是否政府购买服务" remark="SYS001"/>
+    <column field="XGGZZSCB" type="string" length="8" label="是否从事过相关方面工作或具有相关知识储备" remark="SYS001"/>
+    <column field="YGSWQK" type="string" length="8" label="因公伤亡情况" remark="SYS144"/>
+    <column field="LXDH" type="string" length="300" label="联系电话" remark="自填，格式为固话“区号-号码”"/>
+    <column field="SJ" type="string" length="11" label="手机" remark="自填，格式为 11 位手机号"/>
+    <column field="DZYX" type="string" length="300" label="电子邮箱" remark="自填"/>
+    <column field="CSFS" type="string" length="8" label="产生方式" remark="SYS145"/>
+    <column field="ZZMM" type="string" length="8" label="政治面貌" remark="SYS091"/>
+    <column field="HYZK" type="string" length="8" label="婚姻状况" remark="SYS030"/>
+    <column field="SFZY" type="string" length="8" label="身份职业" remark="SYS146"/>
+    <column field="ZGZC" type="string" length="300" label="资格职称" remark="自填"/>
+    <column field="LXDZ" type="string" length="300" label="联系地址" remark="自填"/>
+    <column field="GRJJ" type="string" length="600" label="个人简介" remark="自填"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_RMTJ_TJYJBXX" field="ID"/>
+  </table>
+</model>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_ACCOUNT_ORGANIZATION" label="账户组织机构关联表">
+    <column field="ACCOUNTID" type="uuid" length="36" label="账户ID"/>
+    <column field="ORGID" type="uuid" length="36" label="组织机构ID"/>
+    <column field="DEFAULTORG" type="integer" length="1" label="默认组织机构" remark="默认组织机构(1默认)   0 非默认的组织机构"/>
+    <column field="FRULE" type="string" length="4" label="账户角色" remark="OSA 机构用户管理员"/>
+    <unique name="UK_ACCOUNT_ORG_AID_OID" field="ACCOUNTID,ORGID"/>
+    <foreign name="FK_ACCOUNT_ORG_ACCOUNTID" field="ACCOUNTID" reference="CORE_ACCOUNT" referField="SYSID"/>
+    <foreign name="FK_ACCOUNT_ORGANIZATION_ORGID" field="ORGID" reference="CORE_ORGANIZATION" referField="SYSID"/>
+  </table>
+</model>

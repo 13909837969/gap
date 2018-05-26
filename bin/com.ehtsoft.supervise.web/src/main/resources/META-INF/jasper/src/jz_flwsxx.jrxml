@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="jz_flwsxx" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="85938791-4a3d-4973-9219-9957f0e9d9e9">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ltData"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+A.*,
+B.SQJZJDJG,B.SQJZJDJGMC,B.JFZXRQ,B.YJZFJG,B.YJZFJGMC,
+C.ZXTZSWH,C.ZXTZSRQ,
+D.SFYQK,D.SFLF,D.QKLX,D.ZYFZSS
+FROM jz_jzryjbxx A
+LEFT JOIN JZ_JZRYJBXX_JZ B ON B.ID=A.ID
+LEFT JOIN JZ_JZRYJBXX_WS C ON C.ID=A.ID
+LEFT JOIN JZ_JZRYJBXX_FZ D ON D.ID=A.ID
+where  A.ID=$P{id}]]>
+	</queryString>
+	<field name="id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+	</field>
+	<field name="sqjzrybh" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sqjzrybh"/>
+	</field>
+	<field name="xm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xm"/>
+	</field>
+	<field name="cym" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cym"/>
+	</field>
+	<field name="xb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xb"/>
+	</field>
+	<field name="mz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mz"/>
+	</field>
+	<field name="sfzh" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfzh"/>
+	</field>
+	<field name="csrq" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="csrq"/>
+	</field>
+	<field name="sfcn" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfcn"/>
+	</field>
+	<field name="wcn" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="wcn"/>
+	</field>
+	<field name="jglx" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jglx"/>
+	</field>
+	<field name="whcd" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="whcd"/>
+	</field>
+	<field name="hyzk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="hyzk"/>
+	</field>
+	<field name="grlxdh" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="grlxdh"/>
+	</field>
+	<field name="sfswry" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfswry"/>
+	</field>
+	<field name="pqzy" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="pqzy"/>
+	</field>
+	<field name="jyjxqk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jyjxqk"/>
+	</field>
+	<field name="xzzmm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xzzmm"/>
+	</field>
+	<field name="yzzmm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="yzzmm"/>
+	</field>
+	<field name="sfbxgjzl" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfbxgjzl"/>
+	</field>
+	<field name="wasbdqksm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="wasbdqksm"/>
+	</field>
+	<field name="ygzdw" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ygzdw"/>
+	</field>
+	<field name="xgzdw" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xgzdw"/>
+	</field>
+	<field name="dwlxdh" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dwlxdh"/>
+	</field>
+	<field name="qtlxfs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="qtlxfs"/>
+	</field>
+	<field name="jzjgbm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jzjgbm"/>
+	</field>
+	<field name="jzjg" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jzjg"/>
+	</field>
+	<field name="sfcj" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="sfcj"/>
+	</field>
+	<field name="online" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="online"/>
+	</field>
+	<field name="sftk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sftk"/>
+	</field>
+	<field name="sfjljzxz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfjljzxz"/>
+	</field>
+	<field name="bdqk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bdqk"/>
+	</field>
+	<field name="sfjs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfjs"/>
+	</field>
+	<field name="jcjz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jcjz"/>
+	</field>
+	<field name="sfjid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfjid"/>
+	</field>
+	<field name="del" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="del"/>
+	</field>
+	<field name="audit" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="audit"/>
+	</field>
+	<field name="cts" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="cts"/>
+	</field>
+	<field name="uts" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="uts"/>
+	</field>
+	<field name="cdate" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="cdate"/>
+	</field>
+	<field name="udate" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="udate"/>
+	</field>
+	<field name="cuid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cuid"/>
+	</field>
+	<field name="uuid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="uuid"/>
+	</field>
+	<field name="caid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="caid"/>
+	</field>
+	<field name="uaid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="uaid"/>
+	</field>
+	<field name="orgid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="orgid"/>
+	</field>
+	<field name="remark" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="remark"/>
+	</field>
+	<field name="sfzp" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfzp"/>
+	</field>
+	<field name="lydwlx" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="lydwlx"/>
+	</field>
+	<field name="sqjzjdjg" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sqjzjdjg"/>
+	</field>
+	<field name="sqjzjdjgmc" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sqjzjdjgmc"/>
+	</field>
+	<field name="jfzxrq" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jfzxrq"/>
+	</field>
+	<field name="yjzfjg" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="yjzfjg"/>
+	</field>
+	<field name="yjzfjgmc" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="yjzfjgmc"/>
+	</field>
+	<field name="zxtzswh" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="zxtzswh"/>
+	</field>
+	<field name="zxtzsrq" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="zxtzsrq"/>
+	</field>
+	<field name="sfyqk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfyqk"/>
+	</field>
+	<field name="sflf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sflf"/>
+	</field>
+	<field name="qklx" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="qklx"/>
+	</field>
+	<field name="zyfzss" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="zyfzss"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="800" height="62" uuid="079093cc-ebe3-4dee-9c9a-a0387f1a5d43"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="45"/>
+				</textElement>
+				<text><![CDATA[法律文书信息]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="408" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="-1" width="180" height="40" uuid="0d0c84e0-3ce7-4cf1-a538-d250e08ba6cb"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="180" height="39" uuid="69d44154-274e-4cc6-b6d5-1240594ef5f0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[1*社区矫正决定机关]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="-1" width="190" height="40" uuid="ac9961fe-382c-4c84-bf18-4ca93d199e6f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="370" y="-1" width="220" height="40" uuid="c27140cf-2785-4010-a8e8-f568bafd47e9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="590" y="-1" width="210" height="40" uuid="59ba5bef-5fe5-44ad-9add-1cd22f9a2d8e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="370" y="0" width="220" height="39" uuid="5ad0d0d7-940e-4183-9d33-eff93814c74b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[2*社区矫正决定机关名称]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="39" width="180" height="40" uuid="1c8338d5-f4b0-46e7-8a81-8160e3747408"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="40" width="180" height="39" uuid="10b0edf6-7004-4c0e-b133-ac3e1b7da8ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[3*执行通知文书号]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="39" width="100" height="40" uuid="c86bd7fb-eae3-4b33-b97b-5ad8caf71c94"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="39" width="90" height="40" uuid="bfa1a812-b9fc-4ca6-8b23-f4ea940aab54"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="280" y="40" width="90" height="39" uuid="2c23e23b-58f7-4400-b14c-e7d4d4b3d258"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[4*执行通知书日期]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="370" y="39" width="430" height="40" uuid="9d626bb9-6a2f-4c53-a048-b9528507f6e5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="79" width="180" height="40" uuid="83e8a555-0211-4f73-85e2-fe32e5d3ff92"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="80" width="180" height="39" uuid="d240dcda-61d2-4c25-bec1-0f781c70e619"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[5*交付执行日期]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="79" width="100" height="40" uuid="bebb6866-fdd1-461a-8263-0a915a15f846"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="79" width="90" height="40" uuid="0ec1b1f4-348e-474e-8c2d-9aa1f875af8d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="280" y="80" width="90" height="39" uuid="c2df6e2d-c514-457e-8261-15eadd9ee1a8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[6*移交犯罪机关]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="370" y="79" width="430" height="40" uuid="4108af41-603b-4692-8416-129cc939eab6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="119" width="180" height="40" uuid="f572e2ef-c105-4a58-9a8e-5d218764e598"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="120" width="180" height="39" uuid="4654eb14-87aa-4228-80d7-7cd64efd863c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[7*移交犯罪机关名称]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="119" width="620" height="40" uuid="21ca6683-be2d-42d1-8c5b-bc6767d1297f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="159" width="180" height="40" uuid="e90dd1bd-6389-47b8-b963-42d147344c80"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="160" width="180" height="39" uuid="588cd3ae-f703-4f80-89c0-f7dfe72bac68"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[8*是否有前科]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="159" width="50" height="40" uuid="7006264a-4cda-40ee-ad18-1f9ea5207eb9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="230" y="159" width="50" height="40" uuid="752c5173-a035-4e32-b2a1-869b256c0df9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="230" y="160" width="50" height="39" uuid="9327defd-6de6-40fb-b73b-5a66ac378e99"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[9*是否累犯]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="370" y="159" width="220" height="40" uuid="4d1e7b8a-bae8-45c6-854e-1e1913f1cb1f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="590" y="159" width="210" height="40" uuid="1df5a5c1-0fb4-4a80-a528-939f5d829b5f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="370" y="160" width="220" height="39" uuid="f172e3cf-8235-4c49-a892-f7326cbe9a6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[10*前科类型]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="280" y="159" width="90" height="40" uuid="8bc67fb5-1811-4985-8047-ad2b4c222663"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="199" width="180" height="40" uuid="a55369d5-f4d8-4981-a1c5-eb281bb06785"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="200" width="179" height="39" uuid="ac17c456-e787-4d02-9658-d82432d8624f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[11*主要犯罪事实]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="199" width="620" height="40" uuid="f0b31963-4b53-4459-89f9-12ed1631fa17"/>
+			</rectangle>
+			<textField>
+				<reportElement x="180" y="0" width="190" height="39" uuid="404da277-7146-473c-8162-3d7e90a46edc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[ com.ehtsoft.fw.utils.StringUtil.toEmptyString($F{sqjzjdjg})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="590" y="0" width="210" height="39" uuid="64f2c8f4-3c27-4d7b-b5ec-84e11e32981d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{sqjzjdjgmc}==null) ? " ":$F{sqjzjdjgmc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="40" width="100" height="39" uuid="0a78d0e3-b8bb-4c01-b3d5-05ac7b72cd5f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{zxtzswh}==null) ? " ":$F{zxtzswh}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="80" width="100" height="39" uuid="55e79ef2-dd1e-4130-8064-6a20ae3785f1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{jfzxrq}==null) ? " ":$F{jfzxrq}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="120" width="620" height="39" uuid="26fc23e9-c95d-49c7-9eb4-c3a81f3ccd5e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{yjzfjgmc}==null) ? " ":$F{yjzfjgmc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="160" width="50" height="39" uuid="eec192e2-f73b-447c-afed-85bed7bbadb9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.ehtsoft.fw.utils.StringUtil.toEmptyString($F{sfyqk})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="160" width="90" height="39" uuid="956d254e-25ff-4ba1-bf74-cdc11783050b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.ehtsoft.fw.utils.StringUtil.toEmptyString($F{sflf})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="200" width="620" height="39" uuid="3029e24e-b382-4ad0-99c1-9796717f8ee7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{zyfzss}==null) ? " ":$F{zyfzss}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="40" width="430" height="39" uuid="2f35962e-c442-4df6-9096-d09bb5aa9d8a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{zxtzsrq}==null) ? " ":$F{zxtzsrq}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="80" width="430" height="39" uuid="50323572-c204-42ef-bc8b-6dc17118076b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.ehtsoft.fw.utils.StringUtil.toEmptyString($F{yjzfjg})
+]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="590" y="160" width="210" height="39" uuid="2c032bdd-e70b-4663-98e0-9ea0bc9a4a6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{qklx}==null) ? " ":$F{qklx}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

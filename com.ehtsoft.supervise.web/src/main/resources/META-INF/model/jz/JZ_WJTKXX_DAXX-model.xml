@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_WJTKXX_DAXX" label="问卷题库信息答案选项表">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_DAXX" type="string" length="10" label="选项" required="true" remark="选项，如 A B C 等"/>
+    <column field="F_DAXXMS" type="string" length="500" label="答案选项信息" required="true" remark="选项的信息内容"/>
+    <column field="F_TKID" type="uuid" length="36" label="问卷题库信息ID"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_WJTKXX_DAXX" field="F_ID"/>
+    <foreign name="FK_JZ_WJTKXX_DAXX_TKID" field="F_TKID" reference="JZ_WJTKXXB" referField="F_TKID"/>
+  </table>
+</model>

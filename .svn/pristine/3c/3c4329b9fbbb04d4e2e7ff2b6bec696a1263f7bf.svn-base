@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JC_SFXZJGGZRYJBXX" label="司法行政机关（单位）工作人员基本信息采集表"  skip="true">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="RYBM" type="string" length="20" label="人员编码" required="true" remark="编码见 9.5"/>
+    <column field="XM" type="string" length="50" label="姓名" required="true" remark="自填"/>
+    <column field="YWM" type="string" length="50" label="英文名" remark="自填"/>
+    <column field="XB" type="string" length="1" label="性别" remark="SYS000"/>
+    <column field="CSRQ" type="date" label="出生日期" remark="格式按照 GB/T 7408 中
+规定"/>
+    <column field="SFZH" type="string" length="18" label="身份证号" remark="自填"/>
+    <column field="MZ" type="string" length="2" label="民族" remark="SYS003"/>
+    <column field="ZZMM" type="string" length="2" label="政治面貌" remark="SYS091"/>
+    <column field="HYZK" type="string" length="2" label="婚姻状况" remark="SYS030"/>
+    <column field="BYYX" type="string" length="60" label="毕业院校" remark="自填"/>
+    <column field="XL" type="string" length="2" label="学历" remark="SYS093"/>
+    <column field="ZGXW" type="string" length="3" label="最高学位" remark="SYS094"/>
+    <column field="ZY" type="string" length="7" label="专业" remark="SYS095"/>
+    <column field="SSJG" type="string" length="16" label="所属机构" remark="编码见 9.1"/>
+    <column field="ZW" type="string" length="60" label="职务" remark="自填"/>
+    <column field="RYBZ" type="string" length="2" label="人员编制" remark="SYS007"/>
+    <column field="CJGZSJ" type="date" label="参加工作时间" remark="格式按照 GB/T 7408 中
+规定"/>
+    <column field="SJHM" type="string" length="20" label="手机号码" remark="自填"/>
+    <column field="LXDH" type="string" length="40" label="联系电话" remark="自填，格式为固话“区
+号-号码”或手机号码"/>
+    <column field="DZYX" type="string" length="100" label="电子邮箱" remark="自填"/>
+    <column field="ZZ" type="string" length="200" label="住址" remark="自填"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JC_SFXZJGGZRYJBXX" field="ID"/>
+  </table>
+</model>

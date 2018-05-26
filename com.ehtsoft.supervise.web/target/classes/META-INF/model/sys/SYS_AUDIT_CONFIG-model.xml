@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_AUDIT_CONFIG" label="单据的审批人及审批部门审批流程信息配置表">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true"/>
+    <column field="F_BILLID" type="string" length="40" label="审批单据ID" required="true"/>
+    <column field="F_APPROVER" type="uuid" length="36" label="审批人ID" remark="审批人ID"/>
+    <column field="F_LVL" type="integer" label="审批级别" required="true" remark="审批级别，从1 开始，数值越大，审批级别越高，同一个机构中的审批级别相等的时候，有一个审批通过，该级别就设置为通过"/>
+    <column field="F_TEAMID" type="uuid" length="36" label="协同工作组"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_SYS_AUDIT_CONFIG" field="F_ID"/>
+  </table>
+</model>

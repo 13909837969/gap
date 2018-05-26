@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_PORTAL_FUNCTION" label="Protal功能配置表">
+    <column field="PORTALID" type="uuid" length="36" label="ProtalID" remark="系统自动生成"/>
+    <column field="FUNCID" type="uuid" length="36" label="功能ID" remark="菜单ID(core_menu.sysid)"/>
+    <foreign name="FK_CORE_PORTAL_FUNCTION_PORTALID" field="PORTALID" reference="CORE_PORTAL" referField="SYSID"/>
+    <foreign name="FK_CORE_PORTAL_FUNCTION_FUNCID" field="FUNCID" reference="CORE_MENU" referField="SYSID"/>
+  </table>
+</model>

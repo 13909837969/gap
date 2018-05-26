@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_DCPGXX" label="调查评估信息采集表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="WTBH" type="string" length="20" label="委托编号" remark="由监狱单位编制委托编号"/>
+    <column field="NSYSQJZRYLX" type="string" length="2" label="拟适用社区矫正人员类型" remark="SYS008"/>
+    <column field="BGRXM" type="string" length="20" label="被告人（罪犯）姓名" remark="自填"/>
+    <column field="BGRSFZH" type="string" length="18" label="被告人（罪犯）身份证号" remark="见 GB/T 11643"/>
+    <column field="BGRXB" type="string" length="2" label="被告人（罪犯）性别" remark="SYS000"/>
+    <column field="BGRCSRQ" type="date" label="被告人（罪犯）出生日期" remark="yyyy-MM-dd"/>
+    <column field="BGRJZDDZ" type="string" length="50" label="被告人（罪犯）居住地地址" remark="自填"/>
+    <column field="BGRGZDW" type="string" length="50" label="被告人（罪犯）工作单位" remark="自填"/>
+    <column field="ZM" type="string" length="50" label="罪名" remark="SYS096"/>
+    <column field="YPXQ" type="string" length="10" label="原判刑期" remark="自填"/>
+    <column field="YPXQKSRQ" type="date" label="原判刑期开始日期" remark="yyyy-MM-dd"/>
+    <column field="YPXQJSRQ" type="date" label="原判刑期结束日期" remark="yyyy-MM-dd"/>
+    <column field="YPXF" type="string" length="2" label="原判刑罚" remark="SYS012"/>
+    <column field="FJX" type="string" length="2" label="附加刑" remark="SYS013"/>
+    <column field="PJJG" type="string" length="50" label="判决机关" remark="自填"/>
+    <column field="PJRQ" type="date" label="判决日期" remark="yyyy-MM-dd"/>
+    <column field="WTDW" type="string" length="50" label="委托单位" remark="自填"/>
+    <column field="WTDCS" type="clob" label="委托调查书"/>
+    <column field="SFSID" type="string" length="36"  label="司法所ID" remark="自填"/>
+     <column field="PGYJ" type="string" length="500"  label="评估意见" remark="自填"/>
+    <column field="WTRQ" type="string" length="20" label="委托日期" remark="yyyy-MM-dd"/>
+    <column field="DCPGZT" type="string"  length="2" defaultValue="01" label="调查评估状态" remark="sys205" />
+    <column field="WTJGLB" type="string" length="20" label="委托机构类别" remark="sys206"/>
+    <column field="BDCRXM" type="string" length="20" label="被调查人姓名" remark="自填"/>
+    <column field="YBGRGX" type="string" length="2" label="与被告人（罪犯）关系" remark="SYS097"/>
+    <column field="DCSX" type="string" length="500" label="调查事项" remark="自填"/>
+    <column field="DCSJ" type="timestamp" label="调查时间" remark="yyyy-MM-dd"/>
+    <column field="DCDD" type="string" length="50" label="调查地点" remark="自填"/>
+    <column field="NSYJZLB" type="string" length="2" label="拟适用矫正类别" remark="SYS017"/>
+    <column field="DCDWSFS" type="string" length="50" label="调查单位（司法所）" remark="自填"/>
+    <column field="DCDWXQJ" type="string" length="50" label="调查单位（县区局）" remark="自填"/>
+    <column field="DCR" type="string" length="50" label="调查人" remark="自填"/>
+    <column field="DCYJSHR" type="string" length="20" label="调查意见审核人" remark="自填"/>
+    <column field="DCPGYJS" type="clob" label="调查评估意见书"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_DCPGXX" field="ID"/>
+  </table>
+</model>

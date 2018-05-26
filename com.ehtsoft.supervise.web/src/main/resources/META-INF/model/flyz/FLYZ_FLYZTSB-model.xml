@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="FLYZ_FLYZTSB" label="法律援助投诉表">
+    <column field="FLYZTSB01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="FLYZTSLSH" type="string" length="20" label="法律援助投诉流水号" remark="见10.1"/>
+    <column field="TSRQ" type="string" length="20" label="投诉日期"/>
+    <column field="JGLSH" type="string" length="20" label="机构流水号" remark="关联9.20法律援助机构流水号"/>
+    <column field="TSRXM" type="string" length="20" label="投诉人姓名"/>
+    <column field="XB" type="string" length="10" label="性别" remark="见GB/T 2261.1-2003"/>
+    <column field="CSRQ" type="string" length="20" label="出生日期"/>
+    <column field="MZ" type="string" length="10" label="民族" remark="见GB/T 3304-1991"/>
+    <column field="SFZH" type="string" length="50" label="身份证号"/>
+    <column field="SZSD" type="string" length="10" label="住所地"/>
+    <column field="ZSXXDZ" type="string" length="100" label="住所详细地址"/>
+    <column field="LXDH" type="string" length="20" label="联系电话"/>
+    <column field="TSLX" type="string" length="10" label="投诉类型" remark="见10.24"/>
+    <column field="TSFS" type="string" length="10" label="投诉方式" remark="见10.23"/>
+    <column field="TSSX" type="string" length="10" label="投诉事项" remark="见10.25"/>
+    <column field="TSSSHLY" type="string" length="2000" label="投诉事实和理由"/>
+    <column field="SLZT" type="string" length="10" label="受理状态" remark="受理状态1受理2不受理"/>
+    <column field="BFHNTGD" type="string" length="20" label="不符合那条规定"/>
+    <column field="CLRLSH" type="string" length="20" label="处理人流水号" remark="关联9.19法律援助机构人员流水号"/>
+    <column field="CLJDQK" type="string" length="10" label="处理决定情况" remark="见10.26"/>
+    <column field="CLYJ" type="string" length="2000" label="处理意见"/>
+    <column field="BFCLJDQK" type="string" length="10" label="不服处理决定情况" remark="见10.27"/>
+    <column field="CLJG" type="string" length="2000" label="处理结果"/>
+    <column field="SCBZ" type="string" length="10" label="所处步骤" remark="所处步骤1：登记2：处理3：办结"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_FLYZ_FLYZTSB" field="FLYZTSB01"/>
+  </table>
+</model>

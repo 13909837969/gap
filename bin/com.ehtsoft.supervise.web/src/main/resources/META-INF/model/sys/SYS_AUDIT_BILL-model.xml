@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_AUDIT_BILL" label="审批单据配置表">
+    <column field="F_ID" type="string" length="40" label="主键" required="true" remark="单据唯一编码，建议才用表面作为单据的编码"/>
+    <column field="F_NAME" type="string" length="200" label="单据名称"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_SYS_AUDIT_BILL" field="F_ID"/>
+  </table>
+</model>

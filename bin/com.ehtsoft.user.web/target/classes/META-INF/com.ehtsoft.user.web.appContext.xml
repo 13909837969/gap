@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:cxf="http://cxf.apache.org/core" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+	http://www.springframework.org/schema/data/mongo 
+	http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd
+	http://cxf.apache.org/core
+    http://cxf.apache.org/schemas/core.xsd
+    http://cxf.apache.org/jaxws
+    http://cxf.apache.org/schemas/jaxws.xsd">
+    
+    <!--  cxf3.0及以上版本不需要再手工引入
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	-->
+	 
+	<context:component-scan base-package="com.ehtsoft.user.services"/> 
+	
+	<bean id="propertyConfigurer" class="com.ehtsoft.fw.core.config.DecryptPropertyPlaceholderConfigurer">
+		<property name="encryptProperty">
+			<value>deploy.mail*,deploy.sms*,deploy.video.*</value>
+		</property>
+	    <property name="location">
+	        <value>classpath:META-INF/deploy.properties</value>
+	    </property>
+	    <property name="fileEncoding" value="utf-8"/>
+	</bean>
+		
+	<bean id="ModelManualService" class="com.ehtsoft.fw.core.services.ModelManualService"/>
+		
+	<bean id="DbMetaDataService" class="com.ehtsoft.fw.core.services.DbMetaDataService">
+	    <property name="dbClient" ref="sqlDbClient"/>
+	</bean>
+	
+	<bean id="proxyService" class="com.ehtsoft.fw.core.webservice.ProxyWebServiceImpl">
+	    <property name="ssoClient" ref="SSO"/>
+	</bean>
+	<jaxws:endpoint implementor="#proxyService" address="/webservice"/>
+	
+	<!--   org.springframework.jdbc.datasource.DriverManagerDataSource -->
+	<bean id="DataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName">
+			<value>${deploy.db.driver}</value>
+		</property>
+		<property name="url">
+			<value>${deploy.db.url}</value>
+		</property>
+		<property name="username">
+			<value>${deploy.db.username}</value>
+		</property>
+		<property name="password">
+			<value>${deploy.db.password}</value>
+		</property>
+		<!-- 初始化时建立物理连接的个数,默认为 0 -->
+		<property name="initialSize">
+			<value>${deploy.db.initialSize}</value>
+		</property>
+		<!-- 最大连接池数量 -->
+		<property name="maxActive">
+			<value>${deploy.db.maxActive}</value>
+		</property>
+		<!-- 最小连接池数量 -->
+		<property name="minIdle">
+			<value>${deploy.db.minIdle}</value>
+		</property>
+	</bean>
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref bean="DataSource" />
+		</property>
+	</bean>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+	    <property name="dataSource">  
+	      <ref bean="DataSource"/>  
+	    </property>  
+	</bean>  
+	<!--  配置事务传播特性 -->
+	<tx:advice id="transAdvice" transaction-manager="transactionManager">
+	    <tx:attributes>
+	      <tx:method name="insert*" propagation="REQUIRED" rollback-for="com.ehtsoft.fw.core.context.AppException"/>
+	      <tx:method name="update*" propagation="REQUIRED" rollback-for="com.ehtsoft.fw.core.context.AppException"/>
+	      <tx:method name="modify*" propagation="REQUIRED" rollback-for="com.ehtsoft.fw.core.context.AppException"/>
+	      <tx:method name="save*" propagation="REQUIRED"   rollback-for="com.ehtsoft.fw.core.context.AppException"/>
+	      <tx:method name="remove*" propagation="REQUIRED" rollback-for="com.ehtsoft.fw.core.context.AppException"/>
+	      <tx:method name="init*" propagation="REQUIRED" rollback-for="com.ehtsoft.fw.core.context.AppException"/>
+	      <tx:method name="login*" propagation="REQUIRED" rollback-for="com.ehtsoft.fw.core.context.AppException"/>
+	      <tx:method name="logout*" propagation="REQUIRED" rollback-for="com.ehtsoft.fw.core.context.AppException"/>
+	      <tx:method name="upload*" propagation="REQUIRED" rollback-for="com.ehtsoft.fw.core.context.AppException"/>
+	      <tx:method name="subscribe*" propagation="REQUIRED" rollback-for="com.ehtsoft.fw.core.context.AppException"/>
+	    </tx:attributes>
+	</tx:advice>
+	<!--  配置参与事务的类 -->
+	<aop:config>
+		<aop:pointcut id="allServiceMethod" expression="execution(* com.ehtsoft.*.services.*Service.*(..))"/>
+		<aop:advisor pointcut-ref="allServiceMethod" advice-ref="transAdvice" />
+	</aop:config>
+	
+	<!-- ActiveMQ Config 启动  ActiveMQ 服务，端口采用默认端口（61616） -->
+ 	<!-- 
+ 	<bean id="broker" class="org.apache.activemq.xbean.BrokerFactoryBean">  
+        <property name="config" value="classpath:META-INF/com.ehtsoft.activemq.appContext.xml"/>  
+        <property name="start" value="true"></property>  
+    </bean>
+    -->
+    <!-- \\ -->
+	<bean id="SqlBasicService" class="com.ehtsoft.fw.core.services.SqlBasicService">
+		<property name="sqlDbClient" ref="sqlDbClient"/>
+	</bean>
+	<bean id="interceptorImpl" class="com.ehtsoft.user.utils.SqlDbInterceptorImpl"/>
+	<bean id="sqlDbClient" class="com.ehtsoft.fw.core.db.SqlDbClient">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+		<property name="interceptor" ref="interceptorImpl"/>
+	</bean>
+	<bean id="InitializeService" scope="singleton" init-method="initialize" class="com.ehtsoft.user.services.InitializeService"/>
+	
+	<!-- JS远程调用注册 -->
+	<bean id="LoginService" class="com.ehtsoft.user.services.LoginService" parent="SqlBasicService"/>
+	<bean id="ApplicationService" class="com.ehtsoft.user.services.ApplicationService" parent="SqlBasicService"/>
+	<bean id="OsaOrganizationService" class="com.ehtsoft.user.services.OsaOrganizationService" parent="SqlBasicService"/>
+	<bean id="PsaOrganizationService" class="com.ehtsoft.user.services.PsaOrganizationService"/>
+	<bean id="MenuService" class="com.ehtsoft.user.services.MenuService" parent="SqlBasicService"/>
+	<bean id="RoleService" class="com.ehtsoft.user.services.RoleService" parent="SqlBasicService"/>
+	<bean id="PermissionService" class="com.ehtsoft.user.services.PermissionService" parent="SqlBasicService"/>
+	<bean id="BillTypeService" class="com.ehtsoft.user.services.BillTypeService" parent="SqlBasicService"/>
+	<bean id="MessageService" class="com.ehtsoft.user.services.MessageService" parent="SqlBasicService"/>
+	<bean id="SceneService" class="com.ehtsoft.user.services.SceneService"/>
+	<bean id="FirstPageService" class="com.ehtsoft.user.services.FirstPageService"/>
+	<!-- 对外数据接口 -->
+	<bean id="PersonnelService" class="com.ehtsoft.user.services.PersonnelService"/>
+	<!-- 网络聊天 -->
+	<bean id="WebCommunicationService" class="com.ehtsoft.user.services.WebCommunicationService" parent="SqlBasicService"/>
+	<bean id="OrganizationService" class="com.ehtsoft.user.services.OrganizationService"/>
+	
+	<!-- 用戶同步服务接口  -->
+	<bean id="UserSynchronizeService" class="com.ehtsoft.user.services.UserSynchronizeService">
+		<property name="userSynchronize" ref="SuperviseUserSyncService"/>
+	</bean>
+	<!-- 机构数据同步服务 -->
+	<bean id="OrganizationSynchronizeService" class="com.ehtsoft.user.services.OrganizationSynchronizeService">
+		<property name="organizationSynchronize" ref="SuperviseOrgSyncService"></property>
+	</bean>
+	
+	
+	
+	<mongo:mongo-client id="mongo" host="${deploy.mgdb.host}" port="${deploy.mgdb.port}" 
+	credentials="${deploy.mgdb.username}:${deploy.mgdb.password}@${deploy.mgdb.dbname}">
+	</mongo:mongo-client>
+	
+	<mongo:db-factory id="mongoDbFactory" dbname="${deploy.mgdb.dbname}" mongo-ref="mongo" />
+	
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+	  <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+	</bean>
+	
+	<bean id="mongoClient" class="com.ehtsoft.fw.core.db.MongoClient">
+		<property name="mongoTemplate" ref="mongoTemplate"/>
+	</bean>
+</beans>

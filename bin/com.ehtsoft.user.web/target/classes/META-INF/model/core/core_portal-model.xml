@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_PORTAL" label="应用 Portal 配置表">
+    <column field="SYSID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="PROTALCODE" type="string" label="Protal编码"/>
+    <column field="PROTALNAME" type="string" label="Protal名称"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" required="true" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" required="true" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_CORE_PORTAL" field="SYSID"/>
+    <unique name="UK_CORE_PORTAL_PROTALCODE" field="PROTALCODE"/>
+  </table>
+</model>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_SHORTCUT" label="账号快捷菜单功能表（常用功能设置表）">
+    <column field="ACCOUNTID" type="uuid" length="36" label="账户ID"/>
+    <column field="MENUID" type="uuid" length="36" label="菜单ID"/>
+    <unique name="UK_SHORTCUT_ACCOUNT_MENUID" field="ACCOUNTID,MENUID"/>
+    <foreign name="FK_CORE_SHORTCUT_ACCOUNTID" field="ACCOUNTID" reference="CORE_ACCOUNT" referField="SYSID"/>
+    <foreign name="FK_CORE_SHORTCUT_MENUID" field="MENUID" reference="CORE_MENU" referField="SYSID"/>
+  </table>
+</model>

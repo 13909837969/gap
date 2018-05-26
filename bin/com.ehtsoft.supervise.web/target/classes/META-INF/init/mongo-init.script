@@ -1,0 +1,9 @@
+db.im_footprint.createIndex({location:"2dsphere"});
+db.im_footprint_source.createIndex({location:"2dsphere"});
+db.rep_stay_time.createIndex({location:"2dsphere"});
+
+db.sys_prohibit.createIndex({boundary:"2dsphere"});
+db.sys_boundary.createIndex({boundary:"2dsphere"});
+
+db.im_footprint_source.createIndex({"aid":1});
+db.im_footprint.createIndex({"aid":1});

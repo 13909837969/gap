@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_WJDTQKXX" label="问卷答题情况信息">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_AID" type="uuid" length="36" label="人员信息ID"/>
+    <column field="F_STID" type="uuid" length="36" label="问卷试题信息记录表ID"/>
+    <column field="F_TKID" type="uuid" length="36" label="问卷题库信息记录ID"/>
+    <column field="F_DTXX" type="string" length="10" label="答题选项" remark="JZ_WJTKXX_DAXX.F_DAXX"/>
+    <column field="F_DTXXMS" type="string" length="500" label="答题选项描述" remark="JZ_WJTKXX_DAXX.F_DAXXMS"/>
+    <column field="F_SFZQ" type="string" length="1" defaultValue="0" label="是否正确" remark="1 正确  2 错误"/>
+    <column field="F_JDXX" type="string" length="500" label="简答信息"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_WJDTQKXX" field="F_ID"/>
+  </table>
+</model>

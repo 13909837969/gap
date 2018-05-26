@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="FLYZ_JFSRSBB" label="经费收入上报表">
+    <column field="JFSRSBB01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="JFSRLSH" type="string" length="20" label="经费收入流水号" remark="见10.1"/>
+    <column field="RYJF" type="string" length="10" label="人员经费"/>
+    <column field="JBGYJF" type="string" length="10" label="基本公用经费"/>
+    <column field="TJCZBK" type="string" length="10" label="同级财政拨款"/>
+    <column field="ZYBZDFFLYZBAZKSJFLYZZXZJ" type="string" length="10" label="中央补助地方法律援助办案专款、省级法律援助专项资金"/>
+    <column field="ZYSJZFZXJFZDFLYZZJ" type="string" length="10" label="中央、省级政府专项经费中的法律援助资金"/>
+    <column field="ZYZXCPGYJFLYZXMZJ" type="string" length="10" label="中央专项彩票公益金法律援助项目资金"/>
+    <column field="SJFLYZZXZJFPJGS" type="string" length="10" label="省级法律援助专项资金分配机构数（省级填写）"/>
+    <column field="SJFLYZZXZJJE" type="string" length="10" label="省级法律援助专项资金金额（省级填写）"/>
+    <column field="SJNMGFLYZZXZJ" type="string" length="10" label="省级农民工法律援助专项资金（省级填写）"/>
+    <column field="ZYBZDFFLYZBAZKFPJGS" type="string" length="10" label="中央补助地方法律援助办案专款分配机构数（省级填写）"/>
+    <column field="ZYBZDFFLYZBAZKJE" type="string" length="10" label="中央补助地方法律援助办案专款金额（省级填写）"/>
+    <column field="SHJZ" type="string" length="10" label="社会捐助"/>
+    <column field="QT" type="string" length="10" label="其他"/>
+    <column field="SFQUXZQH" type="string" length="20" label="所属区域行政区划"/>
+    <column field="SSJD" type="string" length="2" label="所属阶段" remark="所属阶段1上班年2全年"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_FLYZ_JFSRSBB" field="JFSRSBB01"/>
+  </table>
+</model>

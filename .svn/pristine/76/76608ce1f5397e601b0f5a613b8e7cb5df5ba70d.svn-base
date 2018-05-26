@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="BIZ_CASEHUMANCROWDTYPE" label="擎天-申请人身份类别表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="CROWDTYPE" type="string" length="10" label="申请人身份类别" remark="1:残疾人2：老年人（60以上）3：未成年4：女性5：农民工6：农民7：少民族8：军人11：军属9：外国人或无国籍人10：其他"/>
+    <column field="HUMANID" type="string" length="40" label="受援人id"/>
+    <primary name="PK_BIZ_CASEHUMANCROWDTYPE" field="ID"/>
+  </table>
+</model>

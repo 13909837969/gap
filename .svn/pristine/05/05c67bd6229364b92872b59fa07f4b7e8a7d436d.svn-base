@@ -1,0 +1,830 @@
+<%@page import="java.util.UUID"%>
+<%@page import="com.ehtsoft.fw.utils.Util"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>调查评估-司法局</title>
+	<jsp:include page="../../ltrhao-common.jsp"></jsp:include>
+	<style>
+	.text-input{
+		text-align: center;
+	}
+	.btn-sm{
+		padding: 3px 5px;
+		font-size: 12px;
+		line-height: 1.5;
+		border-radius: 3px;
+	}
+	.ui-state-default{
+		text-align:center;
+	}
+	
+	#listDcpg_gzfpRight{
+	    right: 5px;
+	    top: 5px;
+	}
+	#sqjz_formDcpg_body .content{
+      width:450px;
+      margin:0 auto;
+      text-align:center;              	
+     }
+     #sqjz_formDcpg_body .content .left{
+     	text-align:left;
+     }
+     #sqjz_formDcpg_body .content .right{
+     	text-align:right;
+     }
+     .listDcpg_span{
+     	text-decoration:underline
+     
+     }
+     .false{
+     cursor: pointer;
+     text-decoration: underline;
+     	
+     }
+#title_jbxx table{
+	border-collapse:collapse;
+	width:100%;
+}
+ #title_jbxx td{
+	text-align:center;
+	width:100px;
+	font-weight: bold;
+}
+.input_2{
+	border:none;
+	width:130px;
+	text-align: center;
+	cursor: pointer;
+}
+
+#title_jbxx tr{
+	height:30px;
+}
+.input_1{
+	width:100%;
+	height:50px;
+	
+}
+#title_jbxx td>input{
+	border:none;
+	text-align: center;
+}
+#showModal table{
+	border-collapse:collapse;
+	width:100%;
+}
+ #showModal td{
+	text-align:center;
+	width:100px;
+	font-weight: bold;
+}
+
+
+#showModal tr{
+	height:30px;
+}
+
+#showModal td>input{
+	border:none;
+	text-align: center;
+}
+	</style>
+	<script type="text/javascript" src="${localCtx}/json/JzDcpgxxService.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+	
+	$(function(){
+		var service = new JzDcpgxxService();
+		//初始界面信息展示
+		var tableView = new Eht.TableView({selector:"#listDcpg_tableView"});
+		//点击分配工作后展示的界面
+		var tableViewGzfp = new Eht.TableView({selector:"#listDcpg_gzfpZsRight"});
+		//添加委托信息展示页面
+		var form = new Eht.Form({selector:"#title_jbxx"});
+		 var tableViewDiv = new Eht.TableView({
+			selector : "#title_jbxx #listJg",
+			paginate : null
+		});
+		 var showForm = new Eht.View({selector:"#showModal",
+				fieldname:"field"});
+		 
+		//
+		var formSh = new Eht.Form({selector:"#listDcpg_fieldset"});
+		var formDj = new Eht.Form({selector:"#listDcpg_dj",autolayout:true});
+		
+		$("#listDcpg #btnSelect").click(function(){
+			
+			tableView.refresh();
+		});
+		//初始状态页面显示
+		tableView.loadData(function(page,res){
+			service.findMore(formSh.getData(),page,res);
+			console.log(formSh.getData());
+		});
+		var query={};
+		tableView.clickRow(function(data){
+			query=data;
+			console.log(data);
+			
+		});
+		//转派机构下拉框
+		var querySearch={}
+		tableViewDiv.loadData(function(page, res) {
+					service.findOrgid(querySearch,res);
+		});
+		//日期组件
+		 $(".form_date").datetimepicker({
+		       format: "yyyy-mm-dd",
+		       autoclose: true,
+		       todayBtn: true,
+		       todayHighlight: true,
+		       showMeridian: true,
+		       pickerPosition: "bottom-left",
+		       language: 'zh-CN',//中文，需要引用zh-CN.js包
+		        startView: 2,//月视图
+		        minView: 2//日期时间选择器所能够提供的最精确的时间选择视图
+		});
+		//动态添加人员
+			var Jzry_json={};
+			service.findOrgid(Jzry_json,new Eht.Responder({
+				success:function(data){
+					console.log(data);
+					$("#jgmc").empty();
+					$("#jgmc").append('<option selected="selected"></option>');
+					for(var i=0;i<data.length;i++){
+						$("#jgmc").append("<option value="+data[i].id+">"+data[i].jgmc+ "</option>");
+					}
+					$("#jgmc").comboSelect();
+				}
+			}));
+		
+	
+		/* //查看附件按钮事件
+		tableView.transColumn("ckfj",function(data){
+				var button = $('<button  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看</button>');
+				button.unbind("click").bind("click",function(){
+					
+					//上传文件事件
+					if(data.id != null){
+ 							$("#listDcpg_fjxxIMG").attr("src","${localCtx}/image/RMIImageService?_table_name=JZ_WTSJLB_FJ&imgid="+data.id); 
+							 /* var osrc = "${localCtx}/image/RMIImageService?_table_name=JZ_WTSJLB_FJ&imgid=data.id&icon=per";
+							var src = $("#listDcpg_fjxxIMG").attr("osrc")+"&"+Math.random();
+							$("#listDcpg_fjxxIMG").attr("src",src);   
+							var callbackJzryjbxxImg=function(msg){
+							new Eht.Tips().show(msg);
+							return false;
+						}; 
+					}
+					$('#myModal_fjxx').modal({backdrop:'static'});
+					return false;
+				})
+				return button;
+			
+		}); */
+		
+		//操作按钮事件
+		tableView.transColumn("dcpgzt",function(data){
+			if(data.dcpgzt=='01'){
+				var span=$('<span style="color:red;">'+"待指派"+'</span>')
+				
+				return span;
+			}
+			if(data.dcpgzt=='03'){
+				var span=$('<span style="color:red;">'+"被退回"+'</span>')
+				
+				return span;
+			}
+		})
+		tableView.transColumn("cz",function(data){
+			
+			if(data.dcpgzt=='01'||data.dcpgzt=="03"){
+				
+				var	button =new Array($('<button  class="btn btn-default btn-sm "><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看</button>'),
+							$('<button  class="btn btn-default btn-sm" style="margin-left:10px;"><span class="glyphicon glyphicon-edit"></span>&nbsp;修改</button>'))
+					button[0].click(function(){
+						tableView.clickRow(function(data){
+							$("#id").val(data.id);
+							showForm.fill(data);
+							$("#zp").attr("src","${localCtx}/image/RMIImageService?_table_name=SYS_FACE_IMG&imgid="+data.id);
+						});
+						
+						$('#myModal_dj').modal({backdrop:'static'});
+					});
+					button[1].click(function(){
+						$("#modal_title").text("修改信息");
+						$("#queDing").show();
+						tableView.clickRow(function(data){
+							console.log(data);
+							$("#id").val(data.id);
+							form.fill(data);
+							$("#jzryjbxx_photo").attr("src","${localCtx}/image/RMIImageService?_table_name=SYS_FACE_IMG&imgid="+data.id+"&icon=per"); 
+							$("#jzryjbxx_photo").attr("osrc","${localCtx}/image/RMIImageService?_table_name=SYS_FACE_IMG&imgid="+data.id+"&icon=per") 
+							$("#jzryjbxxuploadForm").attr("action","${localCtx}/upload/RMIImageService?_table_name=SYS_FACE_IMG&imgid="+data.id);	
+							$("#listDcpg_wtsfj_uploadForm").attr("action","${localCtx}/upload/RMIImageService?_table_name=JZ_WTSJLB_FJ&id="+data.id);
+						});
+						
+						$('#myModal_tjwtxx').modal({backdrop:'static'});
+					}); 
+				
+				return button;
+			}else if(data.dcpgzt=='04'||data.dcpgzt=='05'||data.dcpgzt=='06'){
+				 var button =$('<button  class="btn btn-default btn-sm "><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看</button>');
+				button.click(function(){
+					tableView.clickRow(function(data){
+						$("#id").val(data.id);
+						showForm.fill(data);
+						
+						$("#zp").attr("src","${localCtx}/image/RMIImageService?_table_name=SYS_FACE_IMG&imgid="+data.id+"&icon=per");
+					});
+					
+					$('#myModal_dj').modal({backdrop:'static'});
+				});
+				return button;
+			}else{
+				var button =new Array($('<button  class="btn btn-default btn-sm "><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看</button>'),
+						$('<button  class="btn btn-default btn-sm" style="margin-left:10px;"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;撤回</button>'));
+				button[0].click(function(){
+					
+					tableView.clickRow(function(data){
+						$("#id").val(data.id);
+						showForm.fill(data);
+						$("#zp").attr("src","${localCtx}/image/RMIImageService?_table_name=SYS_FACE_IMG&imgid="+data.id+"&icon=per");
+					});
+					
+					$('#myModal_dj').modal({backdrop:'static'});
+				});
+				button[1].click(function(){
+					$("#hideDivCj").show();
+					/* new Eht.Confirm().show("您确定要撤回吗？"); */
+					/* $("#listDcpg #yes").unbind("click").bind("click",function(){
+						service.removeZp(query,new Eht.Responder({
+							success:function(){
+								
+				  				$("#listDcpg #hideDivCj").hide();
+				  				tableView.refresh();
+				  				new Eht.Tips().show();
+							}
+						}));
+					}) */
+				});
+				return button;
+			}
+		});
+		var callbackJzryjbxxImg=function(msg){
+			new Eht.Tips().show(msg);
+			var src = $("#jzryjbxx_photo").attr("osrc")+"&"+Math.random();
+			$("#jzryjbxx_photo").attr("src",src);
+			return false;
+		}; 
+		
+		//添加委托信息按钮事件
+		$("#listDcpg #btnAdd").click(function(){
+			form.clear();
+			$("#listDcpg_tjxx input").each(function(){
+				$(this).attr("readonly",false);
+			})
+			$("#bgrcsrq").attr("readonly",true);
+			$("#ypxq").attr("readonly",true);
+			var uuid = Eht.Utils.createUuid();
+			$("#back").hide();
+			$("#queDing").show();
+			$("#id").val(uuid);
+			$("#photo_remark").show();
+			$("#jzryjbxx_photo").attr("src","${localCtx}/image/RMIImageService?_table_name=SYS_FACE_IMG&imgid="+uuid+"&icon=per"); 
+			/*$("#jzryjbxx_photo").attr("osrc","${localCtx}/image/RMIImageService?_table_name=SYS_FACE_IMG&imgid="+uuid+"&icon=per")*/
+			$("#jzryjbxxuploadForm").attr("action","${localCtx}/upload/RMIImageService?_table_name=SYS_FACE_IMG&imgid="+uuid);	
+			$("#listDcpg_wtsfj_uploadForm").attr("action","${localCtx}/upload/RMIImageService?_table_name=JZ_WTSJLB_FJ&id="+uuid);
+			 
+			$('#myModal_tjwtxx').modal({backdrop:'static'});
+			
+		});
+		
+		
+		
+		 //添加委托信息单击保存按钮的时候
+		$("#listDcpg #queDing").click(function(){
+				
+				
+				service.saveOne(form.getData(),new Eht.Responder({
+					success:function(){
+						$('#myModal_tjwtxx').modal('hide');
+						tableView.refresh();
+						new Eht.Tips().show();
+					}
+				}))
+				
+			
+		});
+		$("#listDcpg #saveOne").click(function(){
+			
+			
+			service.saveZp(form.getData(),new Eht.Responder({
+				success:function(){
+					$('#myModal_tjwtxx').modal('hide');
+					tableView.refresh();
+					new Eht.Tips().show();
+				}
+			}))
+			
+		
+	});
+		$("#listDcpg #close").click(function(){
+			$('#myModal_tjwtxx').modal('hide');
+		})
+		
+		$("#listDcpg_wtsfj").change(function(){
+					$("#listDcpg_wtsfj_uploadForm").submit(); 
+			
+		})
+		
+		
+		//分配任务查询按钮事件
+		$("#listDcpg #btnQuery").click(function(){
+			json["jgmc[like]"] = $("#orgnameID").val();
+			tableViewGzfp.refresh();
+		})
+		
+		
+		tableViewGzfp.clickRow(function(data){
+			query.sfsid = data.id;
+			
+		});
+		$("#listDcpg #yes").unbind("click").bind("click",function(){
+			service.removeZp(query,new Eht.Responder({
+				success:function(){
+					
+	  				$("#listDcpg #hideDivCj").hide();
+	  				tableView.refresh();
+	  				new Eht.Tips().show();
+				}
+			}));
+		})
+		$("#listDcpg #quxiaobtnCj").click(function(){//单击取消按钮
+				$("#listDcpg #hideDivCj").hide();
+		});
+			
+		
+		$("#gb").click(function(){
+			$('#myModal_dj').modal('hide');
+		});
+		
+		//分配任务保存按钮事件
+		$("#listDcpg #save").click(function(data){
+			query.fpsj = $("#wtrq").val();
+			query.gzsm = $("#remark").val();
+			query.dcpgzt="02";
+			
+			service.saveJg(query,new Eht.Responder({
+				success:function(){
+					
+					$('#myModal_gzfp').modal('hide');
+					tableView.refresh();
+					
+				}
+			}))
+			
+		})
+		//出生日期生成
+		$("#listDcpg #bgrsfzh").change(function(){
+			var csrq = $("#listDcpg #bgrsfzh").val().substring(6,14);
+			var csrqyyyy = csrq.substring(0,4);
+			var csrqMM = csrq.substring(4,6);
+			var csrqdd = csrq.substring(6);
+			$("#listDcpg #bgrcsrq").val(csrqyyyy+"-"+csrqMM+"-"+csrqdd);
+		})
+		//原判刑期获取
+		$("#ypxqjsrq,#ypxqksrq").change(function(){
+		   var a = new Date($("#ypxqjsrq").val());
+	       var b = new Date($("#ypxqksrq").val());
+	  	   if(b>=a){
+	  		   new Eht.Alert().show("结束日期必须大于开始日期");
+	  		 $("#ypxqjsrq").val("")
+	  	   }else{
+		       a = a.valueOf();
+		       b = b.valueOf();
+		       var c = a - b;
+		       c = new Date(c);
+		       var d=c.getFullYear()
+			      if(c.getFullYear()-1970>0){
+			   	   	if(3<c.getFullYear()-1970<=5){
+			   	   		$("#yqtxqx input").val('04');
+			   	   	}else if(5<c.getFullYear()-1970<=7){
+			   	   		$("#yqtxqx input").val('03');
+			   	   	}else if(7<c.getFullYear()-1970<=10){
+			   	   		$("#yqtxqx input").val('02');
+			   	   	}else if(10<c.getFullYear()-1970<=25){
+			   	   		$("#yqtxqx input").val('01');
+			   	   	}
+				       	if(c.getMonth()!=0){
+				       		$("#ypxq").val(c.getFullYear()-1970 + '年' + (c.getMonth()) + '个月');
+				       	}else{
+				       		$("#ypxq").val(c.getFullYear()-1970 + '年');
+				       	}
+			      }else{
+			   	   $("#ypxq").val((c.getMonth()) + '个月');
+	      		  }
+	  	   }
+		
+	  	 })
+	
+		
+	})
+	//上传照片
+	function validate_img(ele){
+		      // 返回 KB，保留小数点后两位
+		      //alert((ele.files[0].size/(1024*1024)).toFixed(2));
+		     var file = ele.value;
+		     var width;
+		     var height;
+		     if(!/.(jpg|jpeg|JPG)$/.test(file)){
+		        new Eht.Alert().show("图片类型必须是.gif,jpeg,jpg,png,bmp中的一种");
+		            return false;
+		     }else{
+		    	 var filePic = ele.files[0];  
+		         var reader = new FileReader();  
+		         reader.onload = function (e) {  
+		             var data = e.target.result;  
+		             //加载图片获取图片真实宽度和高度  
+		             var image = new Image();  
+		             image.onload=function(){  
+		                 width = image.width;  
+		                 height = image.height;
+		                 if(width>295||height>413||(filePic.size).toFixed(2)>=102400){
+		                	 
+		                	 new Eht.Alert().show("请上传像素为295*413或者大小小于100KB的图片");
+		                	 return false;
+		                 }else{
+		                	 
+		            	     $("#photo_remark").hide();
+		            		 $("#jzryjbxxuploadForm").submit();
+		                 }
+		             };  
+		             image.src= data;  
+		         };  
+		         reader.readAsDataURL(filePic);
+		     }
+	}
+		
+	
+	</script>
+</head>
+<body>
+	
+   
+	<div class="panel panel-default" id="listDcpg">
+		<div class="panel-heading">
+			<fieldset id="listDcpg_fieldset" style="margin-top:10px;">
+				<label> 被调查人姓名：<input type="text" id="search-xm" name="bgrxm[like]"style="width:170px;height:28px;text-align:center;" placeholder="请输入姓名"/></label>
+				<label> 处理状态：<input type="text" id="search-zt"style="width:100px;height:28px;text-align:center;" name="dcpgzt[eq]" code="sys205" /></label>
+				<label>登记日期：<input type="text" class="form_date" name="ks_cdate"style="width:100px;height:28px;text-align:center;" readonly="readonly">至<input style="width:100px;height:28px;text-align:center;"type="text" class="form_date" name="js_cdate"readonly="readonly"></label>
+				
+				<input  id="btnSelect" type="button" class="btn btn-default btn-sm" value="查询">
+				<input  id="btnAdd" type="button" class="btn btn-default btn-sm" value="添加委托信息">
+			</fieldset>
+		</div>
+		<div class="alert alert-info alert-dissmissible" id="hideDivCj" role="alert" style="text-align:center;font-size:17px;display:none;">
+				<strong>提示</strong>您确定要撤回吗？
+				<input id="yes" class="btn btn-default" type="button" value="确定" >
+				<input id="quxiaobtnCj" class="btn btn-default" type="button" value="取消" >
+		</div>
+		<div class="panel-body" id="listDcpg_tableView" style="text-align:center;">
+			<div field="op" checkbox=true label="选择"></div>
+			<div field="bgrxm" label="姓名"></div>
+			<div field="bgrxb" label="性别" code="sys000"></div>
+			<div field="cdate" label="登记时间" ></div>
+			<div field="wtrq" label="指派日期"></div>
+			<div field="jgmc" label="指派机构" ></div>
+			<div field="wtjglb" label="委托机构类别" code="sys206"></div>
+			<div field="dcpgzt" label="状态" code="sys205"></div>
+			<!-- <div field="ckfj" label="查看附件"></div> -->
+			<div field="cz" label="操作"></div>
+			
+		</div>
+		
+			<!-- 添加委托信息(Modal) -->
+		<!-- 模态框 -->
+		<div class="modal fade" id="myModal_tjwtxx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" >
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="false">
+							&times;
+						</button>
+						<h4 class="modal-title" id="modal-title">新增调查评估</h4>
+					</div>
+					<div class="modal-body" id="listDcpg_tjxx" >
+					<div id="title_jbxx">
+						<span><input id="id" type="hidden" name="id" /></span>
+						<table border="1" cellspacing="0" id="table_view" align="center">
+							<tr>
+								<td>被告人</td>
+								<td colspan="1"><input name="bgrxm" type="text" class="input_1"valid="{requierd:true,onlyChinese : true}"></td>
+								<td>性别</td>
+								<td colspan="2">
+								<input  name="bgrxb" code="sys000"  radio="true" valid="{requierd:true}"/>
+								<!-- <input  name="xb" code="sys000"   valid="{requierd:true}"/> -->
+								</td>
+								<td rowspan="4">
+									<label for="jbxxfile" style="width:120px;height:140px;">
+										<img id="jzryjbxx_photo"  style="width:110px;height:140px;"/>
+										<span style="font-size: 1px;" id="photo_remark">照片格式：JPG 格式,分辨率 295*413，大小不超 100KB</span>
+										<form id="jzryjbxxuploadForm"  method="post" enctype="multipart/form-data" 
+											target="importFrame" style="margin:0px;padding:0px;">
+												<!-- 文件上传成功或失败的回调方法 -->
+											<input type="hidden" name="callback" fixedValue="true" value="callbackJzryjbxxImg" id="jzryjbxxhidden">
+											<input type="file" name="fname" id="jbxxfile" style="display:none;" onchange="Javascript:validate_img(this);">
+										</form>
+										<iframe name="importFrame" style="width:0;height:0;display:none;"></iframe>
+									</label>
+								</td>
+							</tr>
+							<tr>
+								<td>身份证号码</td>
+								<td colspan="2"><input id="bgrsfzh" name="bgrsfzh" type="text" class="input_1"valid="{requierd:true, cardNo:true}"></td>
+								<td >出生日期</td>
+								<td ><input id="bgrcsrq" name="bgrcsrq" type="text" class="input_1" ></td>
+							</tr>
+							<tr>
+								<td>居住地地址</td>
+								<td colspan="4"><input name="bgrjzddz" class="input_1" type="text"></td>
+							</tr>
+							<tr>
+								<td >罪名</td>
+								<td><input name="zm"  class="input_1" valid="{requierd:true,onlyChinese:true}"></td>
+								<td >工作单位</td>
+								<td colspan="2"><input name="bgrgzdw" class="input_1"></td>
+							</tr>
+							<tr>
+								<td>原判刑罚</td>
+								<td colspan="5">
+									<input radio="true" name="ypxf" type="text" code="sys012" getdis="true"valid="{requierd:true}"/>
+								</td>
+								<!-- <td >与被告人（罪犯）关系</td>
+								<td><input name="ybgrgx" type="text" code="sys097"></td> -->
+							</tr>
+							<tr>
+								<td>附加刑</td>
+								<td colspan="6">
+									<input getdis="true" mult="true"type="text" name="fjx" style="margin-left: 2px;" code="sys013"/>
+								</td>
+							</tr>
+							<tr>
+								<td >判决机关</td>
+								<td><input name="pjjg" type="text" class="input_1" style="height: 45px;"valid="{requierd:true}"></td>
+								<td >原判刑期起止日</td>
+								<td >
+									自<input type="text" name="ypxqksrq" id="ypxqksrq"  class="form_date" style="width: 75px;text-align: center;cursor: pointer;" readonly="readonly"getdis="true"valid="{requierd:true}"/>起&nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span><br/>
+									至<input type="text" name="ypxqjsrq" id="ypxqjsrq"  class="form_date" style="width: 75px;text-align: center;cursor: pointer;"readonly="readonly"getdis="true"valid="{requierd:true}"/>止&nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span>
+								</td>
+								<td>原判刑期</td>
+								<td><input getdis="true" name="ypxq" id="ypxq" type="text" class="input_1"style="height: 45px;" ></td>
+							</tr>
+							
+							<tr>
+								<td >判决日期</td>
+								<td colspan="1"><input name="pjrq" type="text" class="form_date input_2" readonly="readonly"valid="{requierd:true}"><span class="glyphicon glyphicon-list-alt"></span></td>
+								<td>委托机构类别</td>
+								<td colspan="3"><input type="text" name="wtjglb" code="sys206" radio="true"valid="{requierd:true}">
+							</tr>
+							<tr>
+								<td>委托日期</td>
+								<td colspan="2"><input type="text" name="wtrq" class="form_date input_2" readonly="readonly"valid="{requierd:true}"><span class="glyphicon glyphicon-list-alt"></span></td>
+								
+								<td >委托单位</td>
+								<td colspan="2"><input name="wtdw" type="text" class="input_1"valid="{requierd:true}"></td>
+							</tr>
+							<tr>
+								<td>指派机构</td>
+								<td colspan="5">
+									<select id="jgmc" name="sfsid" style="margin: 0px;width:100%;max-width: none;"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>委托调查书</td>
+								<td colspan="5">
+									<form id="listDcpg_wtsfj_uploadForm"  method="post" enctype="multipart/form-data" target="importFrame" style="margin:0px;padding:0px;">
+										<!-- 文件上传成功或失败的回调方法 -->
+										<input type="file"  accept="image/jpg,image/png,application/pdf,application/msword" name="fname" id="listDcpg_wtsfj" style="margin-left:50px;"valid="{requierd:true}">
+										<iframe id="attachment"  name="importFrame" style="width:0;height:0;display:none;"></iframe>
+									</form>
+								</td>
+							</tr>	
+							<!-- <tr>
+								<td>被调查人姓名</td>
+								<td colspan="2">
+								
+									<input getdis="true" name="bdcrxm"class="input_1" type="text"/>
+								</td>
+								<td>调查事项</td>
+								<td colspan="2">
+									<input getdis="true" name="dcsx"class="input_1" type="text"/>
+								</td>
+							</tr>
+							<tr>
+								<td >调查时间</td>
+								<td colspan="2"><input name="dcsj" type="text" class="form_date input_2" readonly="readonly"><span class="glyphicon glyphicon-list-alt"></span></td>
+								<td >调查地点 </td>
+								<td colspan="2"><input name="dcdd" type="text"class="input_1"></td>
+							</tr>
+							<tr>
+								<td >拟适用矫正类别</td>
+								<td colspan="5"><input name="nsyjzlb" radio="true" code="sys017" ></td>
+								
+							</tr>
+							<tr>
+								<td >调查人</td>
+								<td colspan="1"><input name="dcr" type="text"class="input_1" ></td>
+								<td >调查意见审核人 </td>
+								<td colspan="1"><input name="dcyjshr" type="text"class="input_1"></td>
+							</tr> 
+						
+							 <tr>
+								<td >调查单位（司法所） </td>
+								<td colspan="2"><input name="dcdwsfs"class="input_1" type="text"></td>
+								<td >调查单位（县区局） </td>
+								<td colspan="2"><input name="dcdwxqj"class="input_1" type="text"></td>
+							</tr> 
+							<tr>
+								<td>评估意见</td>
+								<td colspan="5">
+									<textarea rows="3" name="pgyj" style="width:100%;height:100%;border: none;resize: none;overflow: hidden;outline: none;padding: 0px;outline: none;
+									"></textarea>
+								</td>
+							</tr> -->
+							
+						</table>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button id="saveOne" type="button" class="btn btn-default" style="margin-right:30px;background-color: text-transform: ;">指派</button>
+						<button id="queDing" type="button" class="btn btn-default" style="margin-right:30px;background-color: text-transform: ;">保存</button>
+						<button id="close" type="button" class="btn btn-default" style="margin-right:30px;background-color: text-transform: ;">关闭</button>
+						<button id="back" type="button" class="btn btn-default" style="margin-right:30px;background-color: text-transform: ;">退回</button>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 查看附件(Modal) -->
+		<div class="modal fade" id="myModal_fjxx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title">附件信息</h4>
+					</div>
+					<div class="modal-body" id="listDcpg_fjxx" style="overflow:auto;height:450px">
+						<input type="hidden" name="callback" fixedValue="true" value="callbackJzryjbxxImg" >
+						<img id="listDcpg_fjxxIMG" > 
+					
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 单击弹出信息 -->
+		<div class="modal fade" id="myModal_dj" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" >委托信息</h4>
+					</div>
+					<div class="modal-body" style="overflow: auto;height:450px" id="showModal">
+					<table border="1" cellspacing="0" id="table_view" align="center">
+							<tr>
+								<td class="td1">被告人</td>
+								<td field="bgrxm" colspan="2"></td>
+								<td class="td1">性别</td>
+								<td><div field="bgrxb" code="SYS000"></div></td>
+								
+								<td rowspan="4" style="width:90px"><div>
+								<img id="zp" style="width:90px;height:120px"   alt="一寸免冠照片">
+								</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="td1">身份证号码</td>
+								<td colspan="2"><div field="bgrsfzh"></div></td>
+								<td class="td1">出生日期</td>
+								<td colspan="1"><div field="bgrcsrq"></div></td>
+							</tr>
+							<tr>
+								<td class="td2">居住地</td>
+								<td colspan="4"><div field="bgrjzddz"></div></td>
+							</tr>
+							
+							<tr>
+								<td class="td2">罪名</td>
+								<td colspan="1"><div field="zm"></div></td>
+								<td >工作单位</td>
+								<td colspan="2"><div field="bgrgzdw"></div></td>
+							</tr>
+							<tr>
+								<td>原判刑罚</td>
+								<td >
+									<div  field="ypxf"  code="sys012"></div>
+								</td>
+								<td>附加刑</td>
+								<td colspan="3">
+									<div  field="fjx" style="margin-left: 2px;" code="sys013"></div>
+								</td>
+							</tr>
+							<tr>
+								<td >判决机关</td>
+								<td><div field="pjjg" class="input_1" style="height: 45px;"></div></td>
+								<td >原判刑期起止日</td>
+								<td >
+									<div><span  field id="ypxqksrq" ></span><span field="ypxqjsrq"></span></div
+								</td>
+								<td>原判刑期</td>
+								<td><div  field="ypxq"  class="input_1"style="height: 45px;" ></div></td>
+							</tr>
+							<tr>
+								<td >判决日期</td>
+								<td colspan="2"><div field="pjrq"  class=" input_2" ></div></td>
+								<td>委托日期</td>
+								<td colspan="2"><div  field="wtrq" class=" input_2" ></div></td>
+								
+							</tr>
+								<tr>
+								<td>委托机构类别</td>
+								<td colspan="3"><div  field="wtjglb" code="sys206" ></div>
+								<td >委托单位</td>
+								<td colspan="1"><div field="wtdw"  class="input_1"></div></td>
+							</tr>
+							<tr>
+								<td>指派机构</td>
+								<td colspan="5">
+									<div field="jgmc" style="margin: 0px;"></div>
+									
+								</td>
+							</tr>
+							<tr>
+								<td>委托调查书</td>
+								<td colspan="5">
+									<a href="">委托调查书</a>
+								</td>
+							</tr>
+							<!-- <tr>
+								<td>被调查人姓名</td>
+								<td colspan="2">
+									<div  field="bdcrxm"class="input_1"></div>
+								</td>
+								<td>调查事项</td>
+								<td colspan="2">
+									<div  field="dcsx"class="input_1"></div>
+								</td>
+							</tr>
+							<tr>
+								<td >调查时间</td>
+								<td colspan="2"><div field="dcsj" class=" input_2" ></div></td>
+								<td >调查地点 </td>
+								<td colspan="2"><div field="dcdd"class="input_1"></div></td>
+							</tr>
+							<tr>
+								<td >拟适用矫正类别</td>
+								<td colspan="5"><div field="nsyjzlb"  code="sys017" ></div></td>
+								
+							</tr>
+							<tr>
+								<td >调查人</td>
+								<td colspan="1"><div fidld="dcr" class="input_1" ></div></td>
+								<td >调查意见审核人 </td>
+								<td colspan="1"><div field="dcyjshr" class="input_1"></div></td>
+								
+							</tr> 
+						
+							 <tr>
+								<td >调查单位（司法所） </td>
+								<td colspan="2"><div field="dcdwsfs"class="input_1" ></div></td>
+								<td >调查单位（县区局） </td>
+								<td colspan="2"><div field="dcdwxqj"class="input_1" ></div></td>
+							</tr> 
+							<tr>
+								<td>评估意见</td>
+								<td colspan="5">
+									<div  field="pgyj"  ></div>
+								</td>
+							</tr> -->
+							
+					</table>
+						
+					</div>
+					<div class="modal-footer">
+						<button id="gb" type="button" class="btn btn-default" style="margin-right:30px;background-color: text-transform: ;">关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	 <script src="Print.js"></script>
+</body>
+</html>

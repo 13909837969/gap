@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:cxf="http://cxf.apache.org/core" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+	http://www.springframework.org/schema/data/mongo 
+	http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd
+	http://cxf.apache.org/core
+    http://cxf.apache.org/schemas/core.xsd
+    http://cxf.apache.org/jaxws
+    http://cxf.apache.org/schemas/jaxws.xsd
+    ">
+    
+    <!-- cxf3.0及以上版本不需要再手工引入
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	 -->
+	 
+	<context:component-scan base-package="com.ehtsoft.*.services"/>
+	
+	<bean id="DbMetaDataService" class="com.ehtsoft.fw.core.services.DbMetaDataService">
+	    <property name="dbClient" ref="sqlDbClient"/>
+	</bean>
+	
+	<bean id="ModelManualService" class="com.ehtsoft.fw.core.services.ModelManualService"/>
+	
+	<bean id="SqlBasicService" class="com.ehtsoft.fw.core.services.SqlBasicService">
+		<property name="sqlDbClient" ref="sqlDbClient"/>
+	</bean>
+	
+	<bean id="MethodValidate" class="com.ehtsoft.fw.core.aop.MethodValidateInterceptor">
+	    <!-- Service 命名规范验证  -->
+	    <property name="methods" value="read*,judge*,calculate*,set*,put*,init*,login*,is*,reg*,image*,upload*,get*,change*,modify*,create*,execute*,find*,validate*,insert*,update*,save*,remove*,test*,send*,broadcast*,add*,delete*,apply*,audit*"/>
+	</bean>
+	
+	<!--  配置参与事务的类 -->
+	<aop:config>
+		<aop:pointcut id="methodValidate" expression="execution(* com.ehtsoft.*.services.*Service.*(..))"/>
+		<aop:advisor pointcut-ref="methodValidate" advice-ref="MethodValidate"/>
+	</aop:config>
+
+	<bean id="dictionaryUtil" class="com.ehtsoft.fw.utils.DictionaryUtil">
+		<property name="dictionary" ref="DictionaryService"></property>
+	</bean>
+</beans>

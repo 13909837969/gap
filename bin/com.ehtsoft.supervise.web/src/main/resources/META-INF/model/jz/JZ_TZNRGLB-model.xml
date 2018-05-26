@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_TZNRGLB" label="通知内容关联表">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_GAID" type="uuid" length="36" label="公告通知ID"/>
+    <column field="F_AID" type="uuid" length="36" label="人员ID" remark="矫正人员ID"/>
+    <column field="F_STATUS" type="string" length="1" defaultValue="0" label="消息接受状态" remark="0 未接受   1 已接受"/>
+    <primary name="PK_JZ_TZNRGLB" field="F_ID"/>
+  </table>
+</model>

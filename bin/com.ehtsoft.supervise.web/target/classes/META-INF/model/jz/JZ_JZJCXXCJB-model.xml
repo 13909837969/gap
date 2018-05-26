@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_JZJCXXCJB" label="矫正解除（终止）信息采集表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="矫正人员基本信息ID"/>
+    <column field="JJLX" type="string" length="20" label="矫正解除（终止）类型" remark="SYS018"/>
+    <column field="JJRQ" type="string" length="20" label="矫正解除（终止）日期" remark="格式按照 GB/T7408 中规定"/>
+    <column field="SJZXYY" type="string" length="20" label="收监执行原因" remark="SYS010"/>
+    <column field="SJZXLX" type="string" length="20" label="收监执行类型" remark="SYS011"/>
+    <column field="SJZXRQ" type="string" length="20" label="收监执行日期" remark="格式按照 GB/T7408 中规定"/>
+    <column field="SWSJ" type="string" length="20" label="死亡日期" remark="格式按照 GB/T7408 中规定"/>
+    <column field="SWYY" type="string" length="20" label="死亡原因" remark="SYS019"/>
+    <column field="JTSY" type="string" length="500" label="具体死因"/>
+    <column field="JZDBGRQ" type="string" length="20" label="居住地变更日期" remark="格式按照 GB/T7408 中规定"/>
+    <column field="XJZDDZ" type="string" length="100" label="新居住地地址"/>
+    <column field="JZQJBX" type="string" length="20" label="矫正期间表现" remark="SYS024"/>
+    <column field="RZTD" type="string" length="20" label="认罪态度" remark="SYS042"/>
+    <column field="SFCJZYJNPX" type="string" length="20" label="矫正期间是否参加职业技能培训" remark="0 否  1 是"/>
+    <column field="SFHDZYJNZS" type="string" length="20" label="矫正期间是否获得职业技能证书" remark="0 否  1 是"/>
+    <column field="JSTCJDJ" type="string" length="500" label="技术特长及等级"/>
+    <column field="WXXPG" type="string" length="20" label="危险性评估" remark="SYS043"/>
+    <column field="JTLXQK" type="string" length="20" label="家庭联系情况" remark="SYS044"/>
+    <column field="TSQKBZJBJJY" type="string" length="500" label="矫正期间特殊情况备注及帮教建议"/>
+    <column field="SFSJCR" type="string" length="36" label="司法所解除人" remark="默认当前登录人"/>
+    <column field="SFSJCSJ" type="string" length="20" label="司法所解除时间" remark="自填，格式yyyy-MM-dd hh:mm:ss"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_JZJCXXCJB" field="ID"/>
+  </table>
+</model>

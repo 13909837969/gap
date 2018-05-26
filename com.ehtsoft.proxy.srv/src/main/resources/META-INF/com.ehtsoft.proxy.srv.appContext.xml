@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+	http://www.springframework.org/schema/data/mongo 
+	http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd">
+    
+    <!--  cxf3.0及以上版本不需要再手工引入
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	-->
+	 
+	<context:component-scan base-package="com.ehtsoft.im.services"/>
+	
+	<bean id="propertyConfigurer" class="com.ehtsoft.fw.core.config.DecryptPropertyPlaceholderConfigurer">
+		<property name="encryptProperty">
+			<value>${deploy.encrypt.property}</value>
+		</property>
+	    <property name="location">
+	        <value>classpath:META-INF/deploy.properties</value>
+	    </property>
+	    <property name="fileEncoding" value="utf-8"/>
+	</bean>
+	
+	<!-- 短信平台 -->
+	<bean id="SMS" class="com.ehtsoft.im.services.SMSService">
+	    <property name="address" value="${deploy.sms.address}"/>
+	    <property name="uid" value="${deploy.sms.uid}"/>
+	    <property name="key" value="${deploy.sms.key}"/>
+	    <property name="enable" value="${deploy.mobile.sendsms.enable}"/>
+	</bean>
+	<bean id="Video" class="com.ehtsoft.im.services.VideoService">
+		<property name="regAddr" value="${deploy.video.regAddr}"/>
+		<property name="refreshAddr" value="${deploy.video.refreshAddr}"/>
+		<property name="key" value="${deploy.video.key}"/>
+		<property name="secret" value="${deploy.video.secret}"/>
+	</bean>
+	<bean id="WSService" class="com.ehtsoft.im.services.WebSocketService"/>
+<!-- 
+	<jaxws:endpoint implementor="#SMS" address="/smsservice"/>
+	<jaxws:endpoint implementor="#Video" address="/videoservice"/>
+	<jaxws:endpoint implementor="#WSService" address="/wsservice"/>
+-->	
+
+
+   <bean class="org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean">
+        <property name="maxTextMessageBufferSize" value="819200"/><!-- 8192 * 100  800K -->
+        <property name="maxBinaryMessageBufferSize" value="819200"/>
+    </bean>
+    
+	<bean id="handler" class="com.ehtsoft.im.websocket.ProxyWebSocketHandler"/>
+	<bean id="ProxyWebSocketInterceptor" class="com.ehtsoft.im.websocket.ProxyWebSocketInterceptor"></bean>
+	
+	<bean id="VideoSocketInterceptor" class="com.ehtsoft.im.websocket.VideoSocketInterceptor"/>
+	<!-- 发送视频通道 -->
+	<bean id="sentVideoHandler" class="com.ehtsoft.im.websocket.SentVideoSocketHandler"/>
+	<!-- 接受视频通道 -->
+	<bean id="receiveVideoHandler" class="com.ehtsoft.im.websocket.ReceiveVideoSocketHandler"/>
+
+	<bean id="VoiceSocketInterceptor" class="com.ehtsoft.im.websocket.VoiceSocketInterceptor"/>
+	<!-- 发送语音通道 -->
+	<bean id="sentVoiceHandler" class="com.ehtsoft.im.websocket.SentVoiceSocketHandler"/>
+	<!-- 接受语音通道 -->
+	<bean id="receiveVoiceHandler" class="com.ehtsoft.im.websocket.ReceiveVoiceSocketHandler"/>
+
+</beans>

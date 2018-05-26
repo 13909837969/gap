@@ -1,0 +1,11 @@
+/**
+ * 《权限授权管理》页面的css文件
+ * @author 杜杰
+ * @since 2014-04-02
+ */
+ 
+.SystemTop{height:80px;margin-bottom:10px;position:relative;}
+.SystemTopbody{line-height:89px;height:89px;overflow:hidden}
+.addbut{position:absolute;right:120px;}
+.savebut{position:absolute;right:20px;}
+.delbut{position:absolute;right:70px;}

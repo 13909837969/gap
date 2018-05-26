@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="FZXC_FLZSK" label="法律知识库">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="FLZSLXID" type="uuid" length="36" label="法律类型ID"/>
+    <column field="FLZSBT" type="string" length="200" label="知识标题"/>
+    <column field="FLZSNR" type="string" length="4000" label="法律知识内容"/>
+    <column field="remark" type="string" length="4000" label="备注"/>
+    <primary name="PK_FZXC_FLZSK" field="F_ID"/>
+  </table>
+</model>

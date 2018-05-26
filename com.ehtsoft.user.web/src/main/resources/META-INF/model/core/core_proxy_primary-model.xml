@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_PROXY_PRIMARY" label="数字类型代理主键配置表（用户自动生成系列号）">
+    <column field="TABLENAME" type="string" length="60" label="TABLENAME"/>
+    <column field="SYSID" type="long" label="SYSID"/>
+    <primary name="PK_CORE_PROXY_PRIMARY" field="TABLENAME"/>
+  </table>
+</model>

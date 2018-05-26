@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_AUDIT_CONDITION" label="审批流程条件配置表">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="SYS_AUDIT_CONFIG.F_ID"/>
+    <column field="F_CONDITION" type="string" length="400" label="条件" remark="请假天数 &gt; 7"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_SYS_AUDIT_CONDITION" field="F_ID"/>
+  </table>
+</model>

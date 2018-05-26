@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+	
+	<!-- 单点登录配置  -->
+	<bean id="SSO" class="com.ehtsoft.fw.core.sso.SingleSignOnClient" scope="singleton">
+	   <!-- 是否采用单点登录方式 -->
+		<property name="enable" value="${deploy.sso.enable}"/>
+		<!-- user 部署的webservice 地址 -->
+		<property name="address" value="${deploy.sso.address}"/>
+		<!-- 没有登录是转发到主登录页面配置 -->
+		<property name="url" value="${deploy.sso.url}"/>
+		<!-- 转发url时，排除转发的页面jsp -->
+		<property name="exclude" value="${deploy.sso.exclude}"/>
+		<!-- 通过url访问时，是否转发到当前url -->
+		<property name="forward" value="${deploy.sso.forward}"/>
+		<property name="nginxUrl" value="${deploy.sso.nginxUrl}"/>
+		<!-- 登录后主页是否显示 token 值 
+		<property name="showToken" value="${deploy.sso.token}"/>
+		-->
+		<!-- session 失效后，是否退出到登录页面，true 退出到登录页面，false 不退出到登录页面，系统会自动加载session会话
+		注：设置为  false 时，当系统退出后，没有关闭时，通过当前url可以访问界面,false 提高访问页面的速度
+		
+		<property name="sessionExpire" value="${deploy.sso.sessionExpire}"/>
+		-->
+		<property name="filter" value=".*module/dbdatameta.jsp"/>
+		<property name="mongoClient" ref="mongoClient"/>
+	</bean>
+</beans>

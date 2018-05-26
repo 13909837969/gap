@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="REP_JGJSJGHZ" label="机构建设机构汇总">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="JGLXBM" type="string" length="10" label="机构类型编码"/>
+    <column field="JGLXMC" type="string" length="20" label="机构类型名称" remark="律师事务所,基层法律服务所,司法鉴定机构,公证处,调委会"/>
+    <column field="GZRYLXMC" type="string" length="20" label="工作人员类型名称" remark="律师,基层法律工作者,司法鉴定工作者,公证员,调解员"/>
+    <column field="JGSL" type="integer" label="机构数量"/>
+    <column field="GZRYS" type="integer" label="工作人员数"/>
+    <column field="CITYID" type="string" length="6" label="盟市编码"/>
+    <column field="DISTRICTID" type="string" length="6" label="旗县编码"/>
+    <primary name="PK_REP_JGJSJGHZ" field="ID"/>
+    <remark><![CDATA[总览用]]></remark>
+  </table>
+</model>

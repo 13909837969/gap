@@ -1,0 +1,66 @@
+## 开发阶段服务器
+com.ehtsoft.compress.js=false
+################## 单点登录部署环境配置  ##################
+com.ehtsoft.fw.sso.enable=true
+com.ehtsoft.fw.sso.forward=true
+## true token 添加到 url 中显示，false 添加到 cookie 中  cookie 不跨越  
+com.ehtsoft.fw.sso.token=true
+com.ehtsoft.fw.sso.address=http://{self}:8080/user/services/webservice
+com.ehtsoft.fw.sso.url=http://{self}:8080/user
+com.ehtsoft.fw.sso.sessionExpire=false
+## 排除转发文件及url,多文件用“,” 分割
+com.ehtsoft.fw.sso.exclude=login.jsp
+
+
+################## 是否禁用短信发送  #####################
+com.ehtsoft.sms.disable=true
+################################################
+################## JMS 配置 #####################
+## app 及  前置服务等jms地址配置
+com.ehtsoft.jms.address=failover:(tcp://localhost:61616)
+com.ehtsoft.jms.username=appsys
+com.ehtsoft.jms.password=yiwei-app-@)!$
+
+## user web.xml 文件中的配置 ajax jms
+#com.ehtsoft.jms.user.addr=vm://localhost
+com.ehtsoft.jms.user.addr=failover:(tcp://localhost:61616)
+
+jms.amq.port=61616
+jms.amq.maximumConnections=1000
+jms.amq.maxFrameSize=104857600
+jms.amq.dataDirectory=
+##################################################
+
+
+################# user 项目数据库配置  ######################
+## com.ehtsoft.user.database 
+## 数据库类型  postgres,mysql,oracle,sqlserver (sqlserver2008+)
+com.ehtsoft.user.database=oracle
+com.ehtsoft.user.db.driver=oracle.jdbc.OracleDriver
+com.ehtsoft.user.db.url=jdbc:oracle:thin:@127.0.0.1:1521:orcl
+com.ehtsoft.user.db.username=jfl_core
+com.ehtsoft.user.db.password=jfl_core
+
+
+##################### 开发平台接口部分  #####################
+################## user 服务部署配置接口 ###################
+com.ehtsoft.user.address=http://localhost:8080/user/services/webservice
+com.ehtsoft.jfl.address=http://localhost:8080/jfl/services/webservice
+
+com.ehtsoft.user.url=http://localhost:8080/user/json
+com.ehtsoft.jfl.url=http://localhost:8080/jfl/json
+######################### 接口配置完成 ###################
+
+
+#################### 项目部分 #########################
+################# jfl项目数据库配置  ######################
+## 数据库类型  postgres,mysql,oracle,sqlserver (sqlserver2008+)
+com.ehtsoft.jfl.database=oracle
+com.ehtsoft.jfl.db.driver=oracle.jdbc.OracleDriver
+com.ehtsoft.jfl.db.url=jdbc:oracle:thin:@127.0.0.1:1521:orcl
+com.ehtsoft.jfl.db.username=jfl
+com.ehtsoft.jfl.db.password=jfl
+
+##应用日志配置
+log.dir=D:/Tmp/
+com.ehtsoft.web.log.priority=DEBUG

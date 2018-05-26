@@ -1,0 +1,162 @@
+
+a{
+	text-decoration:none;
+	color:#fff;
+	}
+a:link{
+	text-decoration:none;
+	color:#fff;
+}
+a:visited{
+	text-decoration:none;
+	color:#fff;
+}
+a:hover{
+	text-decoration:none;
+	color:#f5ce0c;
+}
+a:active{
+	text-decoration:none;
+	color:#fff;
+}
+a span{
+	text-decoration:none;
+	color:#fff;
+}
+a span:link{
+	text-decoration:none;
+	color:#fff;
+}
+a span:visited{
+	text-decoration:none;
+	color:#fff;
+}
+a span:hover{
+	text-decoration:none;
+	color:#f5ce0c;
+}
+a span:active{
+	text-decoration:none;
+	color:#fff;
+}
+
+
+/*隐藏区域 div的样式*/
+#spsflyz-hidenDiv{
+	width: 470px;
+    height: 360px;
+    background-color: #fff;
+    z-index:99999;
+    position: absolute;
+    top:84px;
+    left:43px;
+    box-shadow:1px 0px 3px #ccc;  
+	}
+#spsSqjz-hidenDiv-div1{
+	height:35px;
+	border-bottom:1px solid #E0E0E0;
+	}
+#spsSqjz-hidenDiv-div11{
+	margin-left:10px;
+	margin-top:16px;
+	font-weight:bold;
+	font-size:16px;
+	}
+#spsSqjz-hidenDivSS{
+	height:300px;
+	overflow:auto;
+	font-size:12px;
+	}
+#spsSqjz-hidenDiv-div1{
+	height:35px;
+	border-bottom:1px solid #E0E0E0;
+}
+#spsSqjz-hidenDivSS{
+	height:300px;
+	overflow:auto;
+}
+.hidden-div-li{
+	display:inline-block;
+	font-size:14px;
+	list-style: none;
+	font-weight:normal;
+	width:190px;
+}
+.hidden-div-ul{
+	font-size:16px;
+	font-weight:bold;
+	list-style: none;
+}
+.btn-info{
+	background:#0d9bff;
+	border:0px;
+	border-radius:5px;
+	}
+#spsSqjz-hidenDivBtn{
+	position: absolute;
+    right: 5px;
+    top: 22px;
+    font-size: 20px;
+    z-index:99999;
+}
+#spsSqjz-hidenDiv-qc{
+	font-size: 14px;
+    color: #ffffff;
+    background-color:#fb8c00;
+    position: absolute;
+    right: 85px;
+    top: 358px;
+}
+#spsSqjz-hidenDiv-qd{
+	font-size: 14px;
+    color: #ffffff;
+    background-color:#246af6;
+    position: absolute;
+    right: 20px;
+    top: 358px;
+}
+.btn-info:hover{
+	background:#3273f5;
+	border:0px;
+	border-radius:5px;
+	}
+.hidden-div-ul{
+	font-size:16px;
+	font-weight:bold;
+	list-style: none;
+	cursor:pointer;
+	}
+/*灏忎笁瑙掓牱寮�*/
+.spssjfx-indicate{
+	width:10px;
+	height:10px;
+	position:absolute;
+	top:-20px;
+	left:50px;
+	border-style:solid;
+	border-width:10px;
+	border-color:transparent transparent #fff transparent;
+}
+/*滚动条样式*/
+#spsSqjz-hidenDivSS{
+    overflow-x: hidden;
+    overflow-y: auto;
+    }
+#spsSqjz-hidenDivSS::-webkit-scrollbar {
+	width: 7px;    
+    height: 4px;
+    opacity:0.5;
+}
+#spsSqjz-hidenDivSS::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	/*-webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.2);*/
+    background:#a4cde5;
+    margin-right:2px;
+    
+}
+/* #spsSqjz-hidenDivSS::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius:10px;
+    background:#999;
+    margin-right:2px;
+} */

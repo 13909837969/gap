@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="REP_JZRYHDXXB" label="矫正人员活动信息表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_AID" type="uuid" length="36" label="矫正人员ID"/>
+    <column field="F_HDLX" type="string" length="2" label="活动类型" remark="1.停留
+2.人脸签到
+3.声纹签到
+4.指纹签到
+5.步数抽检
+6.心跳抽检
+7.越界报警
+8.进入特定区域
+9.步行
+10.骑车
+11.驾车"/>
+    <column field="F_HDLXMS" type="string" length="100" label="活动类型描述" remark="活动类型的描述信息，见活动类型"/>
+    <column field="F_HDJG" type="double" length="12" precision="3" label="活动结果" remark="停留时间（分），步数，声纹、人脸分数，心跳次数等数字信息"/>
+    <column field="F_HDJGMS" type="string" length="100" label="活动结果描述" remark="正常，成功，失败，越界警告，进入区域警告等文字描述信息"/>
+    <column field="F_YWID" type="uuid" length="36" label="活动业务ID" remark="报警或签到的时候记录报警及签到的ID等信息，可以为空（记录后，将来和签到失败的图像对应起来）"/>
+    <column field="F_LAT" type="double" length="16" precision="12" label="纬度" remark="活动的位置坐标"/>
+    <column field="F_LNG" type="double" length="16" precision="12" label="经度" remark="活动的位置坐标"/>
+    <column field="F_ADDR" type="string" length="150" label="位置" remark="活动的定位地址信息（如果没有地址则保存位置描述）"/>
+    <column field="ywcts" type="timestamp" label="业务时间" remark="业务时间"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_REP_JZRYHDXXB" field="ID"/>
+  </table>
+</model>

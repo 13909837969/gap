@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="REP_RMTJ_LXFX" label="人民调解类型分析">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="LXBM" type="string" length="10" label="调解类型编码"/>
+    <column field="LXMC" type="string" length="20" label="调解类型名称" remark="一般纠纷,重大纠纷,简单纠纷"/>
+    <column field="TJSL" type="integer" label="调解数量"/>
+    <column field="TJCGS" type="integer" label="调解成功数"/>
+    <column field="CITYID" type="string" length="6" label="盟市编码"/>
+    <column field="DISTRICTID" type="string" length="6" label="旗县编码"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" required="true" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_REP_RMTJ_LXFX" field="ID,udate"/>
+  </table>
+</model>

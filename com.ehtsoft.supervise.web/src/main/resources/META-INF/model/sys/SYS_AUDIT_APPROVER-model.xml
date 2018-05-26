@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_AUDIT_APPROVER" label="单据审批人流程信息记录表">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_APPLYID" type="uuid" length="36" label="单据申请记录ID" required="true"/>
+    <column field="F_APPROVER" type="uuid" length="36" label="审批人ID" remark="下一个审批人的ID,申请人申请的时候，记录审批人的ID"/>
+    <column field="F_LVL" type="integer" label="审批级别" remark="审批级别，从1 开始，数值越大，审批级别越高，同一个机构中的审批级别相等的时候，有一个审批通过，该级别就设置为通过"/>
+    <column field="orgid" type="uuid" length="36" label="审批机构" remark="下一个审批人的机构，不指定审批人，直接指定审批机构ID,该机构登录的人都可以审批"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过  2、不通过"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_SYS_AUDIT_APPROVER" field="F_ID"/>
+  </table>
+</model>

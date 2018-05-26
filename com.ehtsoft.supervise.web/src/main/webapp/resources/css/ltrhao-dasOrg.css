@@ -1,0 +1,177 @@
+/*Baidu Logo hide  */
+.anchorBL{display:none;}
+/*样式调整 */
+.title{
+	font-size:16px;
+}
+.bg-success{
+	text-align: center;
+	background-color:rgb(4, 39, 35);
+	color:#fff;
+	font-size:25px;
+}
+.bg-sqjz{
+	text-align: center;
+	background-color:#211715;
+	color:#fff;
+	font-size:25px;
+}
+.bg-sqgz{
+	text-align: center;
+	background-color:#142425;
+	color:#fff;
+	font-size:25px;
+}
+.bg-anbj{
+	text-align: center;
+	background-color:rgb(2, 17, 27);
+	color:#fff;
+	font-size:25px;
+}
+.bg-bfxx{
+	text-align: center;
+	background-color:#180821;
+	color:#fff;
+	font-size:25px;
+}
+.bg-jfqk{
+	text-align: center;
+	background-color:#2f0a1a;
+	color:#fff;
+	font-size:25px;
+}
+ .rangCity {
+			position:absolute;
+			top:2px;
+			right:15px;
+			height:530px;
+			width:670px;
+			background:#fff;
+			box-sizing: border-box;
+			border-radius: 2px;
+		    overflow: hidden;
+		    margin-bottom: 0px;
+		    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 1px;
+}
+		.borderCity{
+		   border-right:1px;
+		   border-top:0px;
+		   border-color:#E0E0E0;
+		   height:530px;
+		}
+		.pLeftAndRghit{
+		    padding-left: 5px;
+		    padding-right: 0px;
+		    margin-top: 4px;
+		}
+		.cityContent{
+		  padding:4px 0px 4px 0px;
+		}
+		.jzContent{
+		  padding:4px 0px 4px 0px;
+		}
+		.rmContent{
+		  padding:4px 0px 4px 0px;
+		}
+		.pLR2em{
+		    padding-left: 0px;
+		    padding-right: 0px;
+		}
+		.pLR2em{
+		    padding-left: 0px;
+		    padding-right: 0px;
+		}
+		.panel {
+		    margin-bottom: 0px;
+		    border-radius: 0px;
+		}
+		.panel-heading {
+            z-index:500px;
+		   /*  padding: 5px 0px; */
+		    text-align: center;
+		    border-bottom: 1px solid transparent;
+		    background-color: #C5CAE9;
+		    border-top-left-radius: 0px; 
+            border-top-right-radius: 0px; 
+		}
+		.panel-body {
+           padding: 5px 5px 0px 0px;
+        }
+        .panel-zhcount{
+            background: #1495ff;
+            color:#fff;
+            text-align: center;
+            margin-top: 4px;
+        }
+        .panel-jzcount{
+            background: #7E57C2;
+            color:#fff;
+            text-align: center;
+            margin-top: 4px;
+        }
+        .panel-rmcount{
+            background: #00ACC1;
+            color:#fff;
+            text-align: center;
+            margin-top: 4px;
+        }
+        .panel-azcount{
+            background: #689F38;
+            color:#fff;
+            text-align: center;
+            margin-top: 4px;
+        }
+        .active{
+          border:1
+        }
+        /*弹出窗口列表  */
+         .rangDitail {
+			position:absolute;
+			top:2px;
+			left:5px;
+			height:550px;
+			width:40%;
+			box-sizing: border-box;
+			border-radius: 2px;
+		    overflow: hidden;
+		    margin-bottom: 0px;
+		    box-shadow: 0px 2px 5px #ccc;
+           }
+       .ditail-body {
+         height:500px;
+        }
+      .city-name{
+     
+        margin-left: 10px;
+        margin-top: 5px;
+        font-size: 2rem;
+      }
+       .province-name{
+        box-sizing: border-box;
+	    line-height: 18px;
+	    height: 16px;
+	    display: inline-block;
+	    padding-left: 10px;
+	    font-size: 15px;;
+      }
+     .card {
+     		background:#333;
+     		/* background:#7a9bb0; */
+		    overflow: hidden;
+		    height: 230px;
+		    margin-bottom:20px;
+		    border:1px solid #666;
+      }
+      .card .card-title{
+         margin:5px 0px ;
+         text-align: center;
+         font-size:14px;
+       /* font-weight:bold;*/
+      }
+      .right-15 {
+      padding-right: -15px; 
+      }
+     .cityContent>p {
+        z-index:150;
+     }
+

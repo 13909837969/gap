@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="REP_AZBJ_RYLYHZ" label="安置帮教人员来源汇总">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="LYBM" type="string" length="10" label="安置帮教来源编码"/>
+    <column field="LYMC" type="string" length="20" label="安置帮教来源名称" remark="公安机关落实管控,监狱刑满释放,看守所刑满释放,解除社区矫正"/>
+    <column field="BJSL" type="integer" label="安置帮教人员数量"/>
+    <column field="CITYID" type="string" length="6" label="盟市编码"/>
+    <column field="DISTRICTID" type="string" length="6" label="旗县编码"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" required="true" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_REP_AZBJ_RYLYHZ" field="ID,udate"/>
+    <remark><![CDATA[总览表]]></remark>
+  </table>
+</model>

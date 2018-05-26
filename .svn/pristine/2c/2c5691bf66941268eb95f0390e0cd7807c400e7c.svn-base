@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_DICTIONARY_TYPE" label="数据字典类型表" base="true">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_TYPECODE" type="string" length="10" label="类型编码" required="true"/>
+    <column field="F_TYPENAME" type="string" length="40" label="类型名称" required="true"/>
+    <column field="F_TS" type="long" label="修改毫秒数" remark="当前毫秒数"/>
+    <column field="used" type="integer" defaultValue="0" label="数据是否被使用" remark="1、已经被使用  0、没有被使用  默认为 0
+在创建数据的时候，如果有其他表或业务使用了该条数据，将把该数据的该字段更新为 1"/>
+    <column field="del" type="integer" defaultValue="0" label="删除标记" remark="删除标记   1 删除   0 没有删除  默认为  0
+数据已经被使用，就不允许删除"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_SYS_DICTIONARY_TYPE" field="F_ID"/>
+    <unique name="UK_SYS_DICTIONARY_TYPE_TYPECODE" field="F_TYPECODE"/>
+    <unique name="UK_SYS_DICTIONARY_TYPE_TYPENAME" field="F_TYPENAME"/>
+  </table>
+</model>

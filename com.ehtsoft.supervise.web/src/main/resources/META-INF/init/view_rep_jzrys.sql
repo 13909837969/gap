@@ -1,0 +1,16 @@
+﻿
+create view view_rep_jzrys
+as
+ SELECT region.parentid AS city_code,
+    creg.region_name AS city_name,
+    region.regionid AS district_code,
+    region.region_name AS district_name,
+    jg.id AS orgid,
+    jg.jgmc AS orgname,
+    count(jzry.id) AS jzrys
+   FROM sys_region region
+     JOIN jc_sfxzjgjbxx jg ON region.regionid::text = jg.regionid::text
+     JOIN jz_jzryjbxx jzry ON jg.id = jzry.orgid
+     JOIN sys_region creg ON creg.regionid::text = region.parentid::text
+  GROUP BY creg.region_name, region.regionid, region.parentid, region.region_name, jg.id, jg.jgmc
+  ORDER BY jg.regionid;

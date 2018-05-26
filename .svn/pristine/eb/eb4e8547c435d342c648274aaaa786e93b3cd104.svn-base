@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="ANZBJ_GZJLCJB" label="工作记录采集表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="AID" type="uuid" length="36" label="帮教对象ID" remark="矫正人员ID"/>
+    <column field="XSBX" type="string" length="50" label="现实表现" remark="编码见 6.51"/>
+    <column field="GZQK" type="string" length="50" label="工作情况" remark="编码见 6.52"/>
+    <column field="JJZK" type="string" length="50" label="经济状况" remark="编码见 6.53"/>
+    <column field="JTQK" type="string" length="50" label="家庭情况" remark="编码见 6.54"/>
+    <column field="HDCS" type="string" length="50" label="活动场所" remark="编码见 6.55"/>
+    <column field="SHJW" type="string" length="50" label="社会交往" remark="编码见 6.56"/>
+    <column field="KNHWT" type="string" length="200" label="困难和问题" remark="自填"/>
+    <column field="ZRQMJ" type="string" length="50" label="责任区民警" remark="自填"/>
+    <column field="SJ" type="string" length="20" label="时间" remark="自填，格式按照 GB/T"/>
+    <column field="DD" type="string" length="200" label="地点" remark="自填"/>
+    <column field="QZ" type="binary" label="签字"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_ANZBJ_GZJLCJB" field="ID"/>
+  </table>
+</model>

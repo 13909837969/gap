@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="IM_USERINFO_FRIEND" label="好友信息表（关联表）">
+    <column field="F_AID0" type="uuid" length="36" label="用户信息ID" required="true" remark="IM_USERINFO.F_AID"/>
+    <column field="F_AID1" type="uuid" length="36" label="好友信息ID" required="true" remark="IM_USERINFO.F_AID"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_USERINFO_FRIEND" field="F_AID0,F_AID1"/>
+    <remark><![CDATA[1.当对方设置为添加好友需要验证的时候，对方验证通过后，才将数据保存到该表中
+2.如果对方没有设置添加好用验证时，添加好友的时候，直接保存到该表中]]></remark>
+  </table>
+</model>

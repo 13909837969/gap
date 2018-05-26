@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_WORKGROUP_PERSONNEL" label="组织机构人员分组表（人员和用户组关联表）">
+    <column field="GROUPID" type="uuid" length="36" label="工作组ID"/>
+    <column field="PERSONNELID" type="uuid" length="36" label="人员员工ID"/>
+    <foreign name="FK_CORE_WORKGROUP_PERSONNEL_GROUPID" field="GROUPID" reference="CORE_WORKGROUP" referField="SYSID"/>
+    <foreign name="FK_CORE_WORKGROUP_PERSONNEL_PERSONNELID" field="PERSONNELID" reference="CORE_PERSONNEL" referField="SYSID"/>
+  </table>
+</model>

@@ -1,0 +1,256 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<jsp:include page="../ltrhao-common.jsp"></jsp:include>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="${localCtx}/json/BddjService.js"></script>
+<title>报到登记</title>
+<style type="text/css">
+ .dagl_extend_func{
+				padding:0px 2px;
+			}
+			.dagl_extend_func .panel-body{
+				padding-top:8px;
+				padding-bottom:0px;
+			}
+			.dagl_extend_func .panel-heading{
+				padding:2px 2px;
+			}
+			.dagl_extend_func>.panel{
+			    bottom: 3px;
+			    position: absolute;
+			    top: 3px;
+			    left: 3px;
+			    right: 3px;
+			    overflow: auto;
+			}
+			.dagl_extend_func .form-group{  margin-bottom: 0px;}
+
+
+
+</style>
+<script type="text/javascript">
+	$(function(){
+		var service=new BddjService();
+		var tableView = new Eht.TableView({selector:"#listBddj_tableView"});
+		var form=new Eht.Form({selector:"#bddj_fieldset"})
+		/* 初始化加载数据 */
+		tableView.loadData(function(page,res){
+			service.findBdjj(form.getData(),page,res);
+		});
+		
+		/* 单击查询按钮触发事件 */
+		$("#bddj_fieldset #btnSelect").click(function(){
+			tableView.refresh();//再执行上次方法
+		});
+
+		/* ******************当单击某条数据时，将数据放入json内，以备点击【修改】按钮时调取数据*************************** */
+		var json={}
+		tableView.clickRow(function(data){
+			json=data;
+			
+		});
+		
+		tableView.transColumn("cz",function(data){
+			if(data.sfjs == "0"){
+				var button =new Array($('<button  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;登记</button>'),
+						$('<button  class="btn btn-default btn-sm" style="margin-left: 15px;"><span class="glyphicon glyphicon-briefcase" ></span>&nbsp;退回</button>'));
+				button[0].unbind("click").bind("click",function(){//委托书id
+					$("#dagl_list_btn_primary").show();
+					$("#close").hide();
+					$("#bdjj_title").text("人员登记");
+					$('#myModal_bddj').modal({backdrop:'static'});
+					$("#Sqjz_bddj #bddj_jbxx").load("${localCtx}/module/sqjz/form_bddj.jsp?load=load&id="+data.id);
+					
+					return false;
+				})
+				button[1].unbind("click").bind("click",function(){//委托书id
+					
+						json=data;
+					
+					$("#Sqjz_bddj #hideDivCj").show();
+				})
+				return button;
+			}else if(data.sfjs == "1"&& data.bdqk != "03"){
+				var button =$('<button  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;查看</button>')
+				button.unbind("click").bind("click",function(){
+					$("#dagl_list_btn_primary").hide();
+					$("#close").show();
+					$("#bdjj_title").text("查看详情");
+					$('#myModal_bddj').modal({backdrop:'static'});
+					$("#Sqjz_bddj #bddj_jbxx").load("${localCtx}/module/sqjz/view_bddj.jsp?load=load&id="+data.id);
+					
+					return false;
+				})
+				return button;
+			}else if( data.bdqk == "03" || data.bdqk == ""){
+				
+				var button =$('<button  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;报到</button>');
+				button.click(function(){
+					$("#dagl_list_btn_primary").show();
+					$("#close").hide();
+					$("#bdjj_title").text("人员报到");
+					$('#myModal').modal({backdrop:'static'});
+					$("#Sqjz_bddj #jbxx").load("${localCtx}/module/sqjz/form_bddj.jsp?load=load&id="+data.id);
+					
+				})
+				return button;
+			}
+			
+		});
+		
+		tableView.transColumn("bdsyts",function(data){
+			
+			console.log(data.sqjzryjsrq);
+			if(data.sqjzryjsrq!="" && data.sqjzryjsrq!=null){
+				var iDays=datedifference(data.sqjzryjsrq,new Date());
+				if(iDays<=10){
+					var button = $('<span>剩余'+(10-iDays)+'天</span>');
+				}else{
+					var button = $('<span style="color:red;">逾期'+(iDays-10)+'天</span>');
+				}
+				return button;
+				
+			}else{
+				var button = $('<span></span>');
+				return button;
+			}
+		
+		});
+		tableView.transColumn("sfjs",function(data){
+			if(data.sfjs=="0"){
+				return "待接收";
+			}
+			if(data.sfjs=="1"){
+				return "已接收";
+			}
+			
+		});
+		
+		$(".register").click(function(){
+			service.saveOne(json,new Eht.Responder({
+				success:function(){
+					$('#myModal_bddj').modal('hide');
+					tableView.refresh();
+				}
+			}));
+		})
+		
+		$("#baod").click(function(){
+			var iDays=datedifference(data.sqjzryjsrq,new Date());
+			if(iDays<10){
+				json.bdqk="01";
+			}else if(iDays>=10){
+				json.bdqk="02";
+			}
+			service.saveBd(json,new Eht.Responder({
+				success:function(){
+					$('#myModal_bddj').modal('hide');
+					tableView.refresh();
+				}
+			}));
+		})
+		
+		$("#yes").click(function(){
+				
+				service.removeBd(json.id,new Eht.Responder({
+					success : function() {
+						$("#Sqjz_bddj #hideDivCj").hide();
+						tableView.refresh();
+					}
+				}))
+		})
+		$("#Sqjz_bddj #quxiaobtnCj").click(function(){//单击取消按钮
+			$("#Sqjz_bddj #hideDivCj").hide();
+		});
+		$("#close").hide();
+		$("#close").click(function(){
+			 $(".modal-backdrop").remove();
+			$('#myModal_bddj').modal('hide');
+		})
+		
+		//两个时间相差天数 兼容firefox chrome
+	    function datedifference(sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式  
+	        var dateSpan,
+	            tempDate,
+	            iDays;
+	        sDate1 = Date.parse(sDate1);
+	        sDate2 = Date.parse(sDate2);
+	        dateSpan = sDate2 - sDate1;
+	        dateSpan = Math.abs(dateSpan);
+	        iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
+	        return iDays
+	    };
+	});
+</script>
+</head>
+<body>
+	<div class="panel panel-default" id="Sqjz_bddj">
+		<div class="panel-heading">
+			<fieldset id="bddj_fieldset" style="margin-top:10px;">
+				<label>姓名：<input type="text" id="search-xm" name="xm[like]" style="width:170px;height:28px;text-align:center;" placeholder="请输入姓名" autocomplete="off"/></label>
+				<label>矫正开始日期：<input type="text" id="search_ks" name="sqjzksrq" class="form_date" style="width:170px;height:28px;text-align:center;"readonly="readonly"/>至
+					<input type="text" id="search_js" name="sqjzjsrq" class="form_date" style="width:170px;height:28px;text-align:center;"readonly="readonly"/>
+				</label>
+				<input  id="btnSelect" type="button" class="btn btn-default btn-sm" value="查询">
+			</fieldset>
+		</div>
+		<div class="alert alert-info alert-dissmissible" id="hideDivCj" role="alert" style="text-align:center;font-size:17px;display:none;">
+				<strong>提示</strong> 材料即将退回，确认操作吗？
+				<input id="yes" class="btn btn-default" type="button" value="确定" >
+				<input id="quxiaobtnCj" class="btn btn-default" type="button" value="取消" >
+		</div>
+		<div class="panel-body" id="listBddj_tableView" style="text-align:center;">
+			<div field="op" checkbox=true label="选择"></div>
+			<div field="xm" label="姓名"></div>
+			<div field="xb" label="性别" code="sys000"></div>
+			<div field="sfjs" label="处理状态" code="sys001"></div>
+			<div field="sqjzryjsrq" label="应报到日期" ></div>
+			<div field="bdqk" label="报到情况" code="sys016"></div>
+			<div field="bdsyts" label="报道剩余天数"></div>
+			<div field="cz" label="操作"></div>
+		</div>
+		
+		<!-- 模态框 -->
+		<div class="modal fade" id="myModal_bddj">
+			<div class="modal-dialog modal-lg" >
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="false">
+							&times;
+						</button>
+						<h4 class="modal-title" id=bdjj_title>人员登记</h4>
+					</div>
+					<div class="modal-body" id="bddj_jbxx" style="height:510px;overflow-y:auto;overflow-x:hidden;">
+						
+					</div>
+					<div class="modal-footer">
+						<button id="dagl_list_btn_primary" type="button" class="btn btn-default register">登记</button>
+						<button id="close" type="button" class="btn btn-default" >关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 模态框 -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" >
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="false">
+							&times;
+						</button>
+						<h4 class="modal-title" id=title>人员登记</h4>
+					</div>
+					<div class="modal-body" id="jbxx" style="overflow: hidden;">
+						
+					</div>
+					<div class="modal-footer">
+						<button id="baod" type="button" class="btn btn-default">登记</button>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

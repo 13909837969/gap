@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="LSZHGL_LSXXHQ" label="律师信息获取">
+    <column field="ID" 	 	type="uuid"   length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="LSID" 	type="string" length="50" label="律师ID" remark="系统自动分配"/>
+    <column field="XM"	 	type="string" length="50" label="姓名" remark="自填"/>
+    <column field="ZTID" 	type="string" length="50" label="主体 ID" remark="系统自动分配"/>
+    <column field="ZYJG" 	type="string" length="50" label="执业机构" remark="自填"/>
+    <column field="ZYLB" 	type="string" length="50" label="执业类别" remark="自填"/>
+    <column field="ZYZH" 	type="string" length="50" label="执业证号" remark="自填"/>
+    <column field="XMPY" 	type="string" length="50" label="姓名拼音" remark="自填"/>
+    <column field="CSRQ" 	type="string" length="50" label="出生日期" remark="自填"/>
+    <column field="XB" 	 	type="string" length="10"  label="性别" remark="见国标 GB/T 2261.1"/>
+    <column field="CYM"  	type="string" length="50" label="曾用名" remark="自填"/>
+    <column field="SNSF" 	type="string" length="50" label="所内身份" remark="自填"/>
+    <column field="FZRQ" 	type="string" length="50" label="发证日期" remark="自填"/>
+    <column field="ZYZT" 	type="string" length="50" label="执业状态" remark="自填"/>
+    <column field="PZZT" 	type="string" length="50" label="派驻状态" remark="自填"/>
+    <column field="ZGZLB" 	type="string" length="50" label="资格证类别" remark="自填"/>
+    <column field="QDFS" 	type="string" length="50" label="取得方式" remark="自填"/>
+    <column field="ZGZH" 	type="string" length="50" label="资格证号" remark="自填"/>
+    <column field="ZGZQDSJ" type="string" length="50" label="资格证取得时间" remark="自填"/>
+    <column field="ZGZQDD" 	type="string" length="50" label="资格证取得地" remark="见国标 GB/T 2260"/>
+    <column field="ZZMM" 	type="string" length="50" label="政治面貌" remark="自填"/>
+    <column field="MZ" 		type="string" length="10" label="民族" remark="自填，见国标 GB/T 3304"/>
+    <column field="JG" 		type="string" length="50" label="籍贯" remark="见国标 GB/T 2260"/>
+    <column field="HJSZD" 	type="string" length="50" label="户籍所在地" remark="见国标 GB/T 2260"/>
+    <column field="BYYX" 	type="string" length="50" label="毕业院校" remark="自填"/>
+    <column field="ZGXL" 	type="string" length="20" label="最高学历" remark="自填，见国标 GB/T 4658"/>
+    <column field="ZGXW" 	type="string" length="20" label="最高学位" remark="自填，见国标 GB/T 6864"/>
+    <column field="ZJLB" 	type="string" length="50" label="证件类别" remark="自填"/>
+    <column field="ZJBH" 	type="string" length="50" label="证件编号" remark="自填"/>
+    <column field="LXDZ" 	type="string" length="50" label="联系地址" remark="自填"/>
+    <column field="LXDZYB"  type="string" length="50" label="联系地址邮编" remark="自填"/>
+    <column field="LXDH" 	type="string" length="18" label="联系电话" remark="自填，格式为固话“区号-号码”"/>
+    <column field="SJHM" 	type="string" length="18" label="手机号码" remark="自填，格式为 11 位手机号"/>
+    <column field="DZYX" 	type="string" length="50" label="电子邮箱" remark="自填"/>
+    <column field="ZJZP" 	type="string" length="100" label="证件照片" remark="自填"/>
+    <column field="SCZYRQ" 	type="string" length="50" label="首次执业日期" remark="自填"/>
+    <column field="SCZYD" 	type="string" length="50" label="首次执业地" remark="见国标 GB/T 2260"/>
+    <column field="KHNF" 	type="string" length="50" label="考核年份" remark="自填"/>
+    <column field="KHZT" 	type="string" length="50" label="考核状态" remark="自填"/>
+    <column field="RSDACFD" type="string" length="50" label="人事档案存放地" remark="见国标 GB/T 2260"/>
+    <column field="RSDACFJG" type="string" length="50" label="人事档案存放机构" remark="自填"/>
+    <column field="RSDABH" 	type="string" length="50" label="人事档案编号" remark="自填"/>
+    <column field="JZDW" 	type="string" length="50" label="兼职单位" remark="自填"/>
+    <column field="ZYFW" 	type="string" length="50" label="执业范围" remark="自填"/>
+    <column field="ZYDAQK"  type="string" length="100" label="执业档案情况" remark="自填"/>
+    <column field="LSLX" 	type="string" length="1"  label="律师类型" remark="0是社会律师，1是公司律师，2是公职律师，3是法律援助律师"/>
+    <column field="del" 	type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit"	type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" 	type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" 	type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" 	type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" 	type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" 	type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" 	type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_LSZHGL_LSXXHQ" field="ID"/>
+  </table>
+</model>

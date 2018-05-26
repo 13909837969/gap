@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="jz_jzxx(yz)" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="39ee74f9-8a4f-423e-9dc6-f9eb9595ead5">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="92" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="0" width="180" height="80" uuid="13f12a2a-b48f-4b8f-8135-521d33ac1020"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="180" height="80" uuid="f776a1c4-2426-43bb-aa22-d411d53946a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[6*余罪或再罪有关情况]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="181" y="0" width="50" height="40" uuid="d289f70c-4b2c-497c-891e-949263b3db96"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="481" y="0" width="99" height="40" uuid="5c58f972-ef77-40cd-b14a-a4c6ababb0e0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="371" y="0" width="110" height="40" uuid="44906d87-e103-4657-be41-6792c3f8e774"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="371" y="1" width="110" height="39" uuid="c6513fea-b93e-4027-bfd2-24b23a16c2c0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[审判情况]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="231" y="0" width="50" height="40" uuid="fc8d8a14-0922-4a01-a889-4b7a2e2a9a36"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="281" y="0" width="90" height="40" uuid="da9403de-2e6c-4647-bcce-e4ceea95708b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="232" y="0" width="49" height="40" uuid="dc9bc5a1-bc81-44a3-81e2-c2515860e0f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[侦察机关]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="1" width="90" height="39" uuid="b6b2d7c7-e5b5-4736-bb33-317dc87e761e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[被采取强制措施时间]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="580" y="0" width="220" height="40" uuid="dad2f98b-cc94-4110-94c0-d21cd7236c62"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="482" y="1" width="98" height="39" uuid="beca6a94-9bc8-4140-8311-f12cade8b5a3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[罪名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="0" width="220" height="39" uuid="39d2083b-8bcc-42da-b753-79bb9008474c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[刑期]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="481" y="40" width="99" height="40" uuid="aa7a5db5-0872-48ea-993a-1cb3d0c8adc0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="371" y="40" width="110" height="40" uuid="f28dd8f3-0023-4cef-b478-e5c8095c704c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="281" y="40" width="90" height="40" uuid="432cde8d-07fb-4ddc-96e2-07aad49141ee"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="580" y="40" width="220" height="40" uuid="daa4a9f7-3e51-4bbd-960e-9c6422155dcd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="180" y="0" width="50" height="40" uuid="dd097225-a77e-47f6-ab83-c38118c9ff3c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[所涉罪名]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="181" y="40" width="50" height="40" uuid="2809214f-8762-42e1-88ca-b681062d0eba"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="231" y="40" width="50" height="40" uuid="12e0dd07-5901-4851-8321-d706d4ff4525"/>
+			</rectangle>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

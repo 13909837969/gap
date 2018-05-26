@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="RMTJ_PCJFAJ_IMG" label="排查/调查图片">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="PCJLID" type="uuid" length="36" label="排查记录ID"/>
+    <column field="DATA" type="binary" label="图片数据"/>
+    <column field="mimetype" type="string" length="20" label="图像类型"/>
+    <column field="TPBS" type="string" length="2" label="图片标识" remark="1：调查记录图片 2：调查签字图片  3：被调查签字图片 4记录人签字图片"/>
+    <primary name="PK_RMTJ_PCJFAJ_IMG" field="IMGID"/>
+    <remark><![CDATA[remark]]></remark>
+  </table>
+</model>

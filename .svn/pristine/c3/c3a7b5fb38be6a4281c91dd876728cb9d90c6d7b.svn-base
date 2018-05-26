@@ -1,0 +1,81 @@
+<head>
+    <script src="resources/jquery/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function() {
+
+            // 浏览器上的websocket对象,用来和服务端通信.
+            var socket = null;
+
+            $("#login").click(
+                function() {
+                    var userName = $("#userName").val();
+                    if ($.trim(userName) == "") {
+                        return;
+                    }
+                    var host = location.host;
+                    // 创建websocket对象
+                     socket = new WebSocket(
+                        'ws://'+ host +'/supervise/ws?aid='
+                        + userName);
+                    registerEvent();
+                });
+
+            $("#logout").click(function() {
+                socket.close();
+            });
+
+            $("#send").click(function() {
+                socket.send($("#message").val() + Math.random());
+                /*
+                var blob = new Blob(['Hello World']);
+                var obj = {};
+                obj.blob = blob;
+                obj.name = "123";
+                socket.send(obj);
+                */
+            });
+
+            function registerEvent() {
+                socket.onopen = function(event) {
+                    $("#messagePanel").append(
+                        "<div>websocket open successfully.</div>");
+                }
+
+                socket.onmessage = function(event) {
+                    $("#messagePanel").append("<div>msg=" + event.data + "</div>");
+                    var img = document.getElementById("img");
+                    /*
+                    img.onload = function(e) {
+                      window.URL.revokeObjectURL(img.src); // 清除释放
+                    };
+                    */
+                    //img.src = window.URL.createObjectURL(event.data);
+                };
+
+                socket.onclose = function(event) {
+                    $("#messagePanel").append(
+                        "<div>websocket close successfully.</div>");
+                };
+            }
+
+        });
+    </script>
+    <style>
+        .card {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    userName:<input id="userName" value="" placeholder="input your name" />
+    <button id="login">login</button>
+    <button id="logout">logout</button>
+</div>
+<div class="card">
+    message:<input id="message" value="" placeholder="input your message" />
+    <button id="send">send</button>
+</div>
+<img id="img" style="width:100px;height:100px;"/>
+<div class="card" id="messagePanel"></div>
+</body>

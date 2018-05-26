@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="LSZHGL_LSSWSJBQKSJYQ" label="律师事务所基本情况数据要求">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_AID" type="string" length="36" label="律师事务所 ID" remark="系统自动分配"/>
+    <column field="LSSWSMC" type="string" length="50" label="律师事务所名称" remark="自填"/>
+    <column field="ZTID" type="string" length="36" label="主体 ID" remark="系统自动分配"/>
+    <column field="YWMC" type="string" length="50" label="英文名称" remark="自填"/>
+    <column field="PY" type="string" length="50" label="拼音" remark="系统根据全称、简称、曾用名自动生成全拼和简拼。"/>
+    <column field="JC" type="string" length="50" label="简称" remark="自填"/>
+    <column field="TYSHXYDM" type="string" length="18" label="统一社会信用代码" remark="自填，所发执照上的统一社会信用代码"/>
+    <column field="ZGJGID" type="string" length="36" label="主管机关" remark="自填"/>
+    <column field="ZSD" type="string" length="100" label="住所地" remark="见国标 GB/T 2260"/>
+    <column field="ZSDZ" type="string" length="100" label="住所地址" remark="自填"/>
+    <column field="ZSYB" type="string" length="6" label="住所邮编" remark="自填"/>
+    <column field="LXDH" type="string" length="18" label="联系电话" remark="自填"/>
+    <column field="CZ" type="string" length="40" label="传真" remark="自填"/>
+    <column field="DWWZ" type="string" length="50" label="单位网站" remark="自填"/>
+    <column field="DZYX" type="string" length="50" label="电子邮箱" remark="自填"/>
+    <column field="ZYZH" type="string" length="17" label="执业证号" remark="自填，所发执业证上编号"/>
+    <column field="ZZXS" type="string" length="50" label="组织形式" remark="自填"/>
+    <column field="DZZXS" type="string" length="50" label="党组织形式" remark="自填"/>
+    <column field="DZZMC" type="string" length="50" label="党组织名称" remark="自填"/>
+    <column field="ZFSXS" type="string" length="50" label="总分所形式" remark="自填"/>
+    <column field="PZSLSJ" type="string" length="20" label="批准设立时间" remark="自填"/>
+    <column field="PZWH" type="string" length="50" label="批准文号" remark="自填"/>
+    <column field="KHNF" type="string" length="20" label="考核年份" remark="自填"/>
+    <column field="KHZT" type="string" length="20" label="考核状态" remark="自填"/>
+    <column field="HHRID" type="string" length="36" label="合伙人" remark="自填"/>
+    <column field="FZRID" type="string" length="36" label="负责人" remark="自填"/>
+    <column field="FZRQ" type="string" length="20" label="发证日期" remark="自填"/>
+    <column field="FZJG" type="string" length="50" label="发证机关" remark="自填"/>
+    <column field="SLZC" type="string" length="50" label="设立资产" remark="自填"/>
+    <column field="LOGO" type="string" length="50" label="LOGO" remark="自填"/>
+    <column field="ZSID" type="string" length="36" label="总所 ID" remark="自填"/>
+    <column field="JGJJ" type="string" length="50" label="机构简介" remark="自填"/>
+    <column field="YWZC" type="string" length="50" label="业务专长" remark="自填"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_LSZHGL_LSSWSJBQKSJYQ" field="ID"/>
+  </table>
+</model>

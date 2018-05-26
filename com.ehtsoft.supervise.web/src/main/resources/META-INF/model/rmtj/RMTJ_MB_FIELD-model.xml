@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="RMTJ_MB_FIELD" label="人民调解模板元数据">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_field" type="string" length="20" label="字段编码" remark="xm"/>
+    <column field="F_label" type="string" length="100" label="名称" remark="姓名"/>
+    <column field="F_type" type="string" length="1" label="类型" remark="1 string ，2 double ， 3 date"/>
+    <column field="F_DICT" type="string" length="10" label="数据字典代码" remark="如果存在数据，采用 Spinner"/>
+    <column field="F_MULIT" type="string" length="1" defaultValue="0" label="是否多选" remark="1 多选  通过  F_DICT 生成选择的数据"/>
+    <column field="F_TEXTAREA" type="string" length="1" defaultValue="0" label="TextArea" remark="0 普通的EditText  1 TextArea（大的EditText 多行）"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_RMTJ_MB_FIELD" field="F_ID"/>
+  </table>
+</model>

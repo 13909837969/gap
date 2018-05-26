@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_ACCOUNT_ROLE" label="账户角色关联表">
+    <column field="ACCOUNTID" type="uuid" length="36" label="账户ID"/>
+    <column field="ROLEID" type="uuid" length="36" label="角色ID"/>
+    <foreign name="FK_ACCOUNT_ROLE_ACCOUNTID" field="ACCOUNTID" reference="CORE_ACCOUNT" referField="SYSID"/>
+    <foreign name="FK_ACCOUNT_ROLE_ROLEID" field="ROLEID" reference="CORE_ROLE" referField="SYSID"/>
+  </table>
+</model>

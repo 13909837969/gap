@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="jz_xfzxxx(tg)" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9af6d66d-1fa2-4739-9d4e-e8eeecf0b9e6">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="478" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="0" width="180" height="80" uuid="f3c634f9-7a6a-4796-9a47-2aeb773681a7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="180" height="80" uuid="9e4d6b02-d9a3-4f74-83e5-d76eb5a14983"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[29*是否脱管]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="181" y="0" width="50" height="80" uuid="9ca09150-c1f1-4cdd-ba32-5ba9e7017bda"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="481" y="0" width="99" height="40" uuid="054f7b00-cc39-4899-936b-565bba8631d8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="371" y="0" width="110" height="40" uuid="3bd65e18-a826-4f66-8285-d23477057fb8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="371" y="1" width="110" height="39" uuid="674f3531-60f6-4d3c-abd7-1870e32027d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[组织查找情况]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="231" y="0" width="50" height="80" uuid="2186f4e3-bfdf-4850-98b0-3bbf456e3ebb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="281" y="0" width="90" height="40" uuid="9d56351d-d277-4eb0-9876-eb5586790be8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="231" y="1" width="50" height="79" uuid="a32fd15c-a639-4c29-8332-4d71d085385d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[30*脱管情况]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="1" width="90" height="39" uuid="b46e0bc8-892b-4cf5-8e2e-377c01819a67"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[发现脱管时间]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="580" y="0" width="220" height="40" uuid="b608c57f-1614-4a5d-b2e6-f9a41d695c6e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="482" y="1" width="98" height="39" uuid="ec5afa11-5adc-4ef4-87c3-1cd264185eb3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[查找结果]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="0" width="220" height="39" uuid="67bb3d22-0a88-4405-86c7-c8b16fee66f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[提请收监建议日期]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="481" y="40" width="99" height="40" uuid="c5bfef5c-aa53-4dee-a7c8-856e15b9c575"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="371" y="40" width="110" height="40" uuid="0a81ce40-9ddd-4a99-851e-3e1bcfdc1db6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="281" y="40" width="90" height="40" uuid="94d59704-2824-40fe-970d-3bf988209c5a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="580" y="40" width="220" height="40" uuid="8358a254-3b9e-4784-9f97-2027e9365514"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="87" width="180" height="80" uuid="4cb8fa04-67ec-4f33-bfc8-b1d7747cec32"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="-1" y="87" width="180" height="80" uuid="e1c51535-d143-44ab-af19-5e8dfaf7926f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[31*奖惩情况]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="87" width="50" height="80" uuid="a48d8a2d-4243-4a72-b51d-82f9d6558f1e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="480" y="87" width="99" height="40" uuid="17377303-fef7-4d65-a20b-78dbad27a4e5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="230" y="87" width="50" height="80" uuid="76fe4f41-099f-48be-8958-f07e9570f4c9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="87" width="201" height="40" uuid="cbcddfdf-aad4-46f2-8d4a-182aab6a3c9a"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="230" y="88" width="50" height="79" uuid="2fe12890-1571-4991-aee4-f6b65f4ecd2b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[32*奖惩信息]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="88" width="199" height="39" uuid="d3e54afe-3429-4a38-af2b-f68e7a02d25e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[奖惩类别]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="579" y="87" width="220" height="40" uuid="86593eda-405c-40d1-8272-4178aa5b253a"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="481" y="88" width="98" height="39" uuid="3ad6d9c5-f266-46c2-9b6e-27618525b68b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[奖惩时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="579" y="87" width="220" height="39" uuid="55ec66b8-f957-4729-b41a-10632a751d17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[奖惩原因]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="480" y="127" width="99" height="40" uuid="d1d11f67-c8b4-44ab-a6b3-c3077c53e46b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="370" y="127" width="110" height="40" uuid="af0f1c8c-334e-4405-8d69-04fa0e56461f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="127" width="90" height="40" uuid="f39147c0-ded8-4753-b785-356c7b0102e1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="579" y="127" width="220" height="40" uuid="a0548dd9-c43a-4ad4-bc57-d7953ccd00f3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="180" width="180" height="40" uuid="ead93ef1-de5a-4a40-9b5b-a483564aa104"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="181" width="181" height="39" uuid="6cdce34b-4f32-4e50-9326-d6e1ba391151"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[32*备注]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="181" y="180" width="619" height="40" uuid="4afdff18-b351-4eaf-9020-b53a5b759a11"/>
+			</rectangle>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

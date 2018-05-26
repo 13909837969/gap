@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_JZRY_JRQY" label="矫正人员禁入区域关联表">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_AID" type="uuid" length="36" label="矫正人员ID"/>
+    <column field="F_JRLX" type="string" length="10" label="进入类型" remark="SYS101:禁止区域分类,SYS_PROHIBIT.type(mongodb)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_SYS_JZRY_JRQY" field="F_ID"/>
+  </table>
+</model>

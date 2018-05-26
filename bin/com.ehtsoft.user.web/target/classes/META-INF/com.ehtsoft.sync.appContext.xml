@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+    ">
+	
+	<bean id="supDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName">
+			<value>${deploy.db.supervise.driver}</value>
+		</property>
+		<property name="url">
+			<value>${deploy.db.supervise.url}</value>
+		</property>
+		<property name="username">
+			<value>${deploy.db.supervise.username}</value>
+		</property>
+		<property name="password">
+			<value>${deploy.db.supervise.password}</value>
+		</property>
+		<!-- 初始化时建立物理连接的个数,默认为 0 -->
+		<property name="initialSize">
+			<value>${deploy.db.initialSize}</value>
+		</property>
+		<!-- 最大连接池数量 -->
+		<property name="maxActive">
+			<value>${deploy.db.maxActive}</value>
+		</property>
+		<!-- 最小连接池数量 -->
+		<property name="minIdle">
+			<value>${deploy.db.minIdle}</value>
+		</property>
+	</bean>
+	<!-- 配置事务管理器 -->
+	<bean id="supTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref bean="supDataSource" />
+		</property>
+	</bean>
+	<bean id="supJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+	    <property name="dataSource">  
+	      <ref bean="supDataSource"/>  
+	    </property>  
+	</bean>  
+	<!--  配置事务传播特性 -->
+	<tx:advice id="supTransAdvice" transaction-manager="supTransactionManager">
+	    <tx:attributes>
+	      <tx:method name="synchronize" propagation="REQUIRED" rollback-for="com.ehtsoft.fw.core.context.AppException"/>
+	    </tx:attributes>
+	</tx:advice>
+	<!--  配置参与事务的类 -->
+	<aop:config>
+		<aop:pointcut id="supAllServiceMethod" expression="execution(* com.ehtsoft.user.plugin.services.*Service.*(..))"/>
+		<aop:advisor pointcut-ref="supAllServiceMethod" advice-ref="supTransAdvice" />
+	</aop:config>
+	
+	<bean id="supSqlDbClient" class="com.ehtsoft.fw.core.db.SqlDbClient">
+		<property name="jdbcTemplate" ref="supJdbcTemplate"/>
+	</bean>
+	<!-- user 用户数据同步到 supervise 的 sup_AAAB 表 -->
+	<bean id="SuperviseUserSyncService" class="com.ehtsoft.user.plugin.services.SuperviseUserSyncService"/>
+	<bean id="SuperviseOrgSyncService" class="com.ehtsoft.user.plugin.services.SuperviseOrgSyncService"/>
+</beans>

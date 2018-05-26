@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="IM_HIS_MESSAGE" label="发送及接受消息的历史记录">
+    <column field="F_MSGID" type="string" length="36" label="主键" required="true" remark="FROM + timeMillis md5 值 （getMessageId())"/>
+    <column field="F_FROM" type="uuid" length="36" label="发送者" required="true"/>
+    <column field="F_TO" type="uuid" length="36" label="接受者" required="true"/>
+    <column field="F_TYPE" type="integer" length="1" label="消息类型" remark="参照消息协议 IMProtocl.Type"/>
+    <column field="F_DURATION" type="integer" length="3" label="语音/视频消息时长"/>
+    <column field="F_CONTENT" type="binary" label="消息内容"/>
+    <column field="F_TIMEMILLIS" type="long" label="发送消息的时间" remark="客户端时间"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <primary name="PK_HIS_MESSAGE" field="F_MSGID"/>
+  </table>
+</model>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="RMTJ_TJAJXX" label="调解案件信息集">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="TJLX" type="string" length="2" label="调解类型" remark="1 口头调解   2 书面调解"/>
+    <column field="AJBM" type="string" length="22" label="案件编码" remark="编码集详见 9.24"/>
+    <column field="AH" type="string" length="50" label="案号" remark="自填"/>
+    <column field="TWHBM" type="string" length="36" label="调委会编码" remark="编码集详见 9.1"/>
+    <column field="TJGZSBM" type="string" length="14" label="调解工作室编码" remark="编码集详见 9.4"/>
+    <column field="TJYBM" type="string" length="360" label="调解员编码" remark="人民调解员基本情况信息集 ID"/>
+    <column field="SLRQ" type="string" length="10" label="受理日期" remark="自填"/>
+    <column field="JFLB" type="string" length="8" label="纠纷类别" remark="SYS104"/>
+    <column field="SQRBM" type="string" length="36" label="申请人编码" remark="UUID"/>
+    <column field="BSQRBM" type="string" length="36" label="被申请人编码" remark="UUID"/>
+    <column field="AJLY" type="string" length="8" label="案件来源" remark="SYS111"/>
+    <column field="AJNDJB" type="string" length="8" label="案件难度级别" remark="SYS112"/>
+    <column field="JFJYQK" type="string" length="600" label="纠纷简要情况" remark="自填"/>
+    <column field="AJYC" type="string" length="8" label="案件预测" remark="SYS105"/>
+    <column field="TJJG" type="string" length="8" label="调解结果" remark="SYS110"/>
+    <column field="XYNR" type="string" length="200" label="协议内容" remark="自填"/>
+    <column field="LXFS" type="string" length="8" label="履行方式" remark="SYS113"/>
+    <column field="SAJE" type="float" length="10" precision="2" label="涉案金额" remark="自填"/>
+    <column field="XYRQ" type="string" length="10" label="协议日期" remark="自填"/>
+    <column field="XYLXQK" type="string" length="8" label="协议履行情况" remark="SYS106"/>
+    <column field="TJRQ" type="string" length="20" label="调解日期" remark="yyyy-MM-dd"/>
+    <column field="TJDD" type="string" length="200" label="调解地点" remark="默认取当前位置"/>
+    <column field="SFMY" type="string" length="8" label="是否满意" remark="SYS001"/>
+    <column field="SJRS" type="integer" length="4" label="涉及人数"/>
+    <column field="SFSCFJ" type="string" length="1" defaultValue="0" label="是否上传附件" remark="1 照片  2 录像"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_RMTJ_TJAJXX" field="ID"/>
+  </table>
+</model>

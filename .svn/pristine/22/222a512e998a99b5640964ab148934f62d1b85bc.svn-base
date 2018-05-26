@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_BFXXCJB_IMG" label="帮扶信息采集表图片附件表">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true"/>
+    <column field="data" type="binary" label="头像数据"/>
+    <column field="mimetype" type="string" length="20" label="图像类型" remark="图片类型如：image/png"/>
+    <column field="BFID" type="uuid" length="36" label="帮扶信息采集表ID" required="true" remark="帮扶信息采集表ID"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_JZ_BFXXCJB_IMG" field="IMGID"/>
+  </table>
+</model>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_JZRYJBXX_SF" label="社区矫正人员基本信息-附加身份信息">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="JZ_JZRYJBXX.ID"/>
+    <column field="YWGATSFZ" type="string" length="2" label="有无港澳台身份证" remark="sys102"/>
+    <column field="GATSFZLX" type="string" length="20" label="港澳台身份证类型" remark="SYS046"/>
+    <column field="GATSFZHM" type="string" length="20" label="港澳台身份证号码"/>
+    <column field="YWHZ" type="string" length="2" label="有无护照" remark="sys102"/>
+    <column field="HZHM" type="string" length="20" label="护照号码"/>
+    <column field="HZBCZT" type="string" length="2" label="护照保存状态" remark="SYS045"/>
+    <column field="YWGATTXZ" type="string" length="2" label="有无港澳台通行证" remark="sys102"/>
+    <column field="GATTXZLX" type="string" length="2" label="港澳台通行证类型" remark="SYS047"/>
+    <column field="GATTXZHM" type="string" length="20" label="港澳台通行证号码"/>
+    <column field="GATTXZBCZT" type="string" length="2" label="港澳台通行证保存状态" remark="SYS045"/>
+    <column field="YWGAJMWLNDTXZ" type="string" length="2" label="有无港澳居民往来内地通
+行证" remark="sys102"/>
+    <column field="GAJMWLNDTXZ" type="string" length="20" label="港澳居民往来内地通行证
+号码"/>
+    <column field="GAJMWLNDTXZBCZT" type="string" length="2" label="港澳居民往来内地通行证
+保存状态" remark="SYS045"/>
+    <column field="YWTBZ" type="string" length="2" label="有无台胞证" remark="sys102"/>
+    <column field="TBZHM" type="string" length="20" label="台胞证号码"/>
+    <column field="TBZBCZT" type="string" length="2" label="台胞证保存状态" remark="SYS045"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_JZRYJBXX_SF" field="ID"/>
+  </table>
+</model>

@@ -1,0 +1,39 @@
+## 开发阶段服务器
+com.ehtsoft.compress.js=false
+################## 单点登录部署环境配置  ##################
+com.ehtsoft.fw.sso.enable=true
+com.ehtsoft.fw.sso.forward=true
+## true token 添加到 url 中显示，false 添加到 cookie 中  cookie 不跨越  
+com.ehtsoft.fw.sso.token=true
+com.ehtsoft.fw.sso.address=http://{self}:38080/user/services/webservice
+com.ehtsoft.fw.sso.url=http://{self}:38080/user
+com.ehtsoft.fw.sso.sessionExpire=false
+## 排除转发文件及url,多文件用“,” 分割
+com.ehtsoft.fw.sso.exclude=login.jsp
+
+################# user 项目数据库配置  ######################
+## com.ehtsoft.user.database 
+## 数据库类型  postgres,mysql,oracle,sqlserver (sqlserver2008+)
+com.ehtsoft.user.database=postgres
+com.ehtsoft.user.db.driver=org.postgresql.Driver
+com.ehtsoft.user.db.url=jdbc:postgresql://10.0.0.3:5432/csm_user
+com.ehtsoft.user.db.username=postgres
+com.ehtsoft.user.db.password=G6/aSeWhjrRes763zQASC5H+9CYU7aEVEhmyaSDVFOM0hRKlgCVrNOpvIS7cEkqhKN0sJc2/EARdrtuLkmoP4vekyRXKA6ExzrKH7GTYXtUdi515y/35Xgs92BreafmSbf/0zV0cG88k1Li25xgNqKpWM4YoplDkKOXwmlBsulQ=
+
+##################### 开发平台接口部分  #####################
+################## user 服务部署配置接口 ###################
+com.ehtsoft.user.address=http://localhost:8080/user/services/webservice
+com.ehtsoft.user.url=http://localhost:8080/user/json
+######################### 接口配置完成 ###################
+
+############ community 社区系统数据库配置  ############
+## 数据库类型  postgres,mysql,oracle,sqlserver (sqlserver2008+)
+com.ehtsoft.community.database=postgres
+com.ehtsoft.community.db.driver=org.postgresql.Driver
+com.ehtsoft.community.db.url=jdbc:postgresql://10.0.0.3:5432/community
+com.ehtsoft.community.db.username=postgres
+com.ehtsoft.community.db.password=G6/aSeWhjrRes763zQASC5H+9CYU7aEVEhmyaSDVFOM0hRKlgCVrNOpvIS7cEkqhKN0sJc2/EARdrtuLkmoP4vekyRXKA6ExzrKH7GTYXtUdi515y/35Xgs92BreafmSbf/0zV0cG88k1Li25xgNqKpWM4YoplDkKOXwmlBsulQ=
+
+##应用日志配置
+log.dir=F:/logs/
+com.ehtsoft.web.log.priority=DEBUG

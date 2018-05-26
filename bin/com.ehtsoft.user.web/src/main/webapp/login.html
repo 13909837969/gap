@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>内蒙古公共法律服务智能化一体平台</title>
+<link href="resources/login.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="resources/script/jquery/eht.rmi.json.js"></script>
+<script type="text/javascript" src="resources/script/jquery/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="resources/script/core/eht.ui.utils.js"></script>
+<script type="text/javascript" src="resources/script/core/eht.rmi.responder.js"></script>
+
+<link type="image/x-icon" href="favicon.png" rel="shortcut icon" />
+<script type="text/javascript" src="json/LoginService.js"></script>
+<script type="text/javascript">
+$(function(){
+	var ls = new LoginService();
+	ls.logout();
+	var forw = Eht.Utils.getParameter("forward");
+	if(forw!=null){
+		$("#forwardInput").val(forw);
+	}
+	$("#password").keydown(function(e){
+		if(e.keyCode==13){
+			$("#loginButton").click();
+		}
+	});
+	$("#loginButton").click(function(){
+		var data = {};
+		$("#loginform").find("input[name]").not("input[type='button']").each(
+				function(){
+					data[$(this).attr("name")]=$(this).val();
+				}
+		);
+		var resp = new Eht.Responder();
+		resp.success=function(data, textStatus, jqXHR){
+			//window.top.location.href="../supervise/main2.jsp";
+			 window.top.location.href = data.value;
+		};
+		resp.error=function(request, textStatus, error){
+			$("#loginerrorinfo").html(request.responseText);
+		};
+		ls.login(data,resp);
+		
+	});
+});
+</script>
+</head>
+<body>
+    <div class="login-warp">       
+        <!--登陆左侧内容-->
+        <div class="login-content-l">
+            <p>您好，欢迎使用</p>
+            <div id="login-content-biaoti"><img src="resources/images/login/sf/biaoti.png"/></div>
+            <!-- <h1>内蒙古公共法律服务智能化一体平台</h1> -->
+            <!-- 
+            <p class="font-15">
+            平台按照“岗位明确，流程清晰，标准规范，内容齐全”的原则，涵盖社区服刑人员各类基础信息以及社区矫正工作全流程环节；增强了全省社区矫正执法管理的规范化水平、业务协同水平及矫情分析能力，为推进全省社区矫正工作再上新台阶提供了信息化支撑和保障。
+            </p>
+            -->
+        </div>
+        <!--登陆右侧内容-->
+        <div class="login-content-r" id="loginform">
+            <img src="resources/images/login/sf/logo.png"/>
+            <div class="input-field">
+            	<input type="hidden" name="forward" id="forwardInput"/>
+                <input type="text" id="accountId" value="" autocomplete="off" name="accountid" placeholder="用户名" class="input-login"/>                
+            </div>
+            <div class="input-field">
+                <input type="password" id="password" value="" name="password" placeholder="密码" class="input-login"/>
+               <!--  <a>忘记密码？</a>  -->                    
+            </div>
+            <div id="loginerrorinfo" style="color:#f00;margin-top:5px;text-align: right;">&nbsp;</div>          
+            <div  class="btn-box">
+            	<!-- 
+            	<div class="info-box">
+                	系统在线总数:
+                    <span>10</span>
+						      人 
+                </div>
+				-->
+                <button class="btn" type="button" id="loginButton" style="margin-left:75px;">登 录</button>       
+            </div> 
+        </div>
+    </div>
+    
+	<style type="text/css">
+	input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+	    background-color: transparent !important;
+	    background-image: none !important;
+	    color: transparent !important;
+	}
+	</style>
+</body>
+</html>

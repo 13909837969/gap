@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="GZZHGL_DSRHMDXX" label="当事人黑名单信息">
+    <column field="DSRHMDXX01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="JGID" type="string" length="32" label="机构标识" remark="自填"/>
+    <column field="JGBM" type="string" length="18" label="机构编码" remark="自填"/>
+    <column field="JGMC" type="string" length="60" label="机构名称" remark="自填"/>
+    <column field="CHRQ" type="string" length="20" label="查获日期" remark="自填，格式按照 GB/T7408 中规定"/>
+    <column field="SXR" type="string" length="50" label="失信人" remark="自填"/>
+    <column field="SXRZJLX" type="string" length="50" label="失信人证件类型" remark="自填"/>
+    <column field="SXRZJHM" type="string" length="18" label="失信人证件号码" remark="自填"/>
+    <column field="JZLX" type="string" length="50" label="假证类型" remark="自填，格式按照 GB/T7408 中规定"/>
+    <column field="JZHM" type="string" length="50" label="假证号码" remark="自填"/>
+    <column field="QKSM" type="string" length="255" label="情况说明"/>
+    <column field="ZT" type="string" length="2" label="状态" remark="0：黑名单 1：白名单"/>
+    <column field="MCDX" type="string" length="50" label="冒充对象" remark="自填"/>
+    <column field="LX" type="string" length="2" label="类型" remark="自填"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_GZZHGL_DSRHMDXX" field="DSRHMDXX01"/>
+  </table>
+</model>

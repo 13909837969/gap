@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="GZZHGL_PXGZJBXX" label="培训工作基本信息">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="PXMC" type="string" length="100" label="培训名称" remark="自填"/>
+    <column field="PXFW_PROVINCE" type="string" length="11" label="培训省范围" remark="自填"/>
+    <column field="PXFW_CITY" type="string" length="11" label="培训市范围" remark="自填"/>
+    <column field="PXFW_DISTRICT" type="string" length="11" label="培训县范围" remark="自填"/>
+    <column field="GZYPX" type="string" length="4" label="是否公证员培训" remark="自填"/>
+    <column field="ZLPX" type="string" length="4" label="是否助理培训" remark="自填"/>
+    <column field="XZYYPX" type="string" length="4" label="是否行政人员培训" remark="自填"/>
+    <column field="QTRYPX" type="string" length="4" label="是否其他人员培训" remark="自填"/>
+    <column field="PXFS" type="string" length="10" label="培训方式" remark="XCSK 现场授课FZTL 分组讨论ALYT 案例研讨"/>
+    <column field="PXDD" type="string" length="255" label="培训地点" remark="自填"/>
+    <column field="PXND" type="string" length="32" label="培训年度" remark="自填，格式按照 GB/T7408 中规定"/>
+    <column field="PXJG" type="string" length="255" label="培训机构" remark="自填"/>
+    <column field="LX" type="string" length="20" label="类型" remark="自填"/>
+    <column field="PXZSC" type="string" length="5" label="培训总时长" remark="自填"/>
+    <column field="PXRQ" type="string" length="20" label="培训日期" remark="自填，格式按照 GB/T"/>
+    <column field="KSSJ" type="string" length="10" label="开始时间" remark="自填，格式按照 GB/T7408 中规定"/>
+    <column field="JSSJ" type="string" length="10" label="结束时间" remark="自填，格式按照 GB/T7408 中规定"/>
+    <column field="PXNR" type="string" length="255" label="培训内容" remark="自填"/>
+    <column field="XS" type="string" length="2" label="学时" remark="自填"/>
+    <column field="SKJS" type="string" length="50" label="授课教师" remark="自填"/>
+    <column field="XB" type="string" length="2" label="性别" remark="1 男 0 女"/>
+    <column field="SZDW" type="string" length="150" label="所在单位" remark="自填"/>
+    <column field="ZW" type="string" length="15" label="职务" remark="编码详见 9.8"/>
+    <column field="LXDH" type="string" length="20" label="联系电话" remark="自填"/>
+    <column field="JSQK" type="string" length="255" label="教师情况" remark="自填"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_GZZHGL_PXGZJBXX" field="ID"/>
+  </table>
+</model>

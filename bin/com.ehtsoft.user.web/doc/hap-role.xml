@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<roles>
+  <role flag="1" rolename="平台管理员" frule="PSA" rolecode="PSA01">
+    <menu menucode="PSA01" menuname="系统管理"/>
+    <menu menucode="PSA0101" menuname="应用配置管理"/>
+    <menu menucode="PSA0102" menuname="PSA用户"/>
+    <menu menucode="PSA0104" menuname="功能菜单管理"/>
+    <menu menucode="PSA0105" menuname="功能角色管理"/>
+  </role>
+  <role flag="1" rolename="APP应用管理员" frule="PSA" rolecode="PSA02">
+    <menu menucode="AP101" menuname="信息注册管理"/>
+    <menu menucode="AP10101" menuname="医疗机构信息注册"/>
+    <menu menucode="AP10102" menuname="银行信息管理"/>
+    <menu menucode="AP10103" menuname="基础数据字典维护"/>
+    <menu menucode="AP10104" menuname="科室字典表"/>
+    <menu menucode="AP10105" menuname="意见反馈"/>
+    <menu menucode="AP10106" menuname="医院支付宝信息管理"/>
+    <menu menucode="AP10107" menuname="科室主治疾病设置"/>
+    <menu menucode="AP10108" menuname="疾病信息介绍"/>
+  </role>
+  <role flag="1" rolename="平台机构管理员" frule="OSA" rolecode="OSA01">
+    <menu menucode="OSA01" menuname="系统管理"/>
+    <menu menucode="OSA0101" menuname="机构用户管理"/>
+    <menu menucode="OSA0102" menuname="功能角色管理"/>
+    <menu menucode="OSA0103" menuname="用户权限管理"/>
+  </role>
+  <role flag="1" rolename="APP机构管理员" frule="OSA" rolecode="OSA02">
+    <menu menucode="AP201" menuname="机构业务管理"/>
+    <menu menucode="AP20101" menuname="医疗机构信息维护"/>
+    <menu menucode="AP20102" menuname="医疗科室信息维护"/>
+    <menu menucode="AP20103" menuname="卫生人员信息维护"/>
+    <menu menucode="AP20104" menuname="检查检验结果" />
+    <menu menucode="AP20105" menuname="当天未结算明细信息"/>
+    <menu menucode="AP20106" menuname="医院专家排班表"/>
+    <menu menucode="AP20107" menuname="预约挂号"/>
+    <menu menucode="AP20108" menuname="医院挂好附加费用"/>
+    <menu menucode="AP20109" menuname="组织机构信息图片管理"/>
+    <menu menucode="AP20110" menuname="检查报告管理"/>
+    <menu menucode="AP20111" menuname="患者咨询回复"/>
+  </role>
+</roles>

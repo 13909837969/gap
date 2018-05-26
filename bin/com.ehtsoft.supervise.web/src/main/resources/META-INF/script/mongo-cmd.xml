@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfg-mongo-cmds>
+	<!-- 查询本次定位是否在以前的范围内(runCommand 计算停留时间用 - StayTimeService) -->
+	<mongo-cmd id="staytime-range-cmd01">
+		<![CDATA[
+		{
+		 geoNear:'rep_stay_time',
+		 near:{
+		 	type:'Point',
+		 	coordinates:[${lng},${lat}]
+		 },
+		 spherical:true,
+		 maxDistance:${distance},
+		 limit:1,
+		 query:{
+		 	aid:'${aid}',
+		 	cdate:${cdate}
+		 }
+		}
+		]]>
+	</mongo-cmd>
+	
+	<!-- 查询矫正人员一定时间内步数信息 -->
+	<mongo-cmd id="step-count">
+		<![CDATA[
+		[
+			{
+				$match:{
+					"aid":"${aid}",
+					"cts":{$gte:${time}}
+				}
+			},
+			{
+				$group:{
+					_id:"$aid",
+					step:{
+						$sum:"$step"
+					}
+				}
+			}
+		]
+		]]>
+	</mongo-cmd>
+	
+	<!-- 人员当前位置是否做规定范围内 sys_boundary BoundaryService-->
+	<mongo-cmd id="boundary-range-cmd01">
+		<![CDATA[
+    	{
+	        boundary:
+	        {
+	            $geoIntersects:
+	            {
+                	$geometry:{
+	                    "type" : "Point",
+	                    "coordinates" : [${lng},${lat}]
+                    }
+                }
+            },
+            code:"${code}"
+        }
+		]]>
+	</mongo-cmd>
+	
+	
+	<!-- 人员当前位置是否在特定区域-->
+	<mongo-cmd id="boundary-range-cmd02">
+		<![CDATA[
+    	{
+	        boundary:
+	        {
+	            $geoIntersects:
+	            {
+                	$geometry:{
+	                    "type" : "Point",
+	                    "coordinates" : [${lng},${lat}]
+                    }
+                }
+            },
+            type:{$in:[${code}]}
+        }
+		]]>
+	</mongo-cmd>
+	
+	<!-- 根据经纬度获取当前位置地址信息（省，市，区 信息）sys_boundary BoundaryService.findAddress -->
+	<mongo-cmd id="boundary-range-region">
+		<![CDATA[
+		{	
+			boundary:
+			{
+				$geoIntersects:
+				{
+					$geometry:{
+						"type":"Point",
+						"coordinates":[${lng},${lat}]
+					}
+				}
+			}
+		}
+		]]>
+	</mongo-cmd>
+	<!-- 
+	    IM_FOOTPRINT_SOURCE
+		获取一定时间段的（系统自动生成，默认 600秒）的总步数，速度，总距离，判断其状态（步行，坐车，停留及抖动）
+		有步数，速度低，距离及步数合理 - 步行 （10米范围求平均值）
+		少步数，速度高，距离转换步数远大于步数  - 开车或坐车 （10米范围求平均值）
+		少步速，速度特别小，距离累计值转换步数远大于步数  停留及抖动 （取平均数）
+		xxxx
+		有问题，重新计算，该查询 已经废弃掉，可以删除掉该脚本
+	-->
+	<mongo-cmd id="footprint-calculate-group">
+		<![CDATA[
+		 [
+		  {$match:{cts:{$lt:${systime}},flag:0}},
+		  {$group:{_id:"$aid",
+		  		  step:{$sum:"$step"},
+		   		 speed:{$avg:"$speed"},
+		      distance:{$sum:"$distance"},
+		         count:{$sum:1},
+		           lng:{$avg:{$arrayElemAt:["$location.coordinates",0]}},
+		           lat:{$avg:{$arrayElemAt:["$location.coordinates",1]}}
+		         }
+		   }
+		 ]
+		]]>
+	</mongo-cmd>
+	
+</cfg-mongo-cmds>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_PERSONNEL" label="组织机构人员信息表">
+    <column field="SYSID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="ORGID" type="uuid" length="36" label="组织机构ID" required="true"/>
+    <column field="CODING" type="string" length="20" label="编码" required="true"/>
+    <column field="HISCODE" type="string" length="30" label="医院系统内部编码"/>
+    <column field="NAME" type="string" length="20" label="姓名" required="true"/>
+    <column field="SEX" type="string" length="1" label="性别"/>
+    <column field="POST" type="string" length="30" label="职务/岗位"/>
+    <column field="CARDID" type="string" length="20" label="身份证号"/>
+    <column field="BIRTHDAY" type="string" length="10" label="出生日期" remark="yyyy-MM-dd"/>
+    <column field="TELEPHONE" type="string" length="40" label="联系电话"/>
+    <column field="EMAIL" type="string" length="40" label="Email"/>
+    <column field="CTS" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="UTS" type="timestamp" label="更新时间戳" required="true" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" required="true" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_CORE_PERSONNEL" field="SYSID"/>
+    <unique name="UK_CORE_PERSONNEL_CODING" field="CODING"/>
+    <foreign name="FK_CORE_PERSONNEL_ORGID" field="ORGID" reference="CORE_ORGANIZATION" referField="SYSID"/>
+  </table>
+</model>

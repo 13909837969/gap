@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="GZZHGL_FRHZQTZZXX" label="法人或者其他组织信息">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="SLBH" type="string" length="30" label="受理编号" remark="编码详见 9.9"/>
+    <column field="DWMC" type="string" length="200" label="单位名称" remark="自填，填写单位或组织的全称"/>
+    <column field="DWSZD" type="string" length="500" label="单位所在地" remark="自填"/>
+    <column field="JGZS" type="string" length="100" label="机构证书" remark="自填"/>
+    <column field="JGDM" type="string" length="50" label="机构代码" remark="自填"/>
+    <column field="LXDH" type="string" length="40" label="联系电话" remark="自填，格式为固话“区号-号码”或手机号码"/>
+    <column field="FDDBR" type="string" length="20" label="法定代表人（负责人）" remark="自填"/>
+    <column field="FDDBRXB" type="string" length="2" label="法定代表人（负责人）性别" remark="见 GB/T 2261.1"/>
+    <column field="FDDBRLXDH" type="string" length="40" label="法定代表人（负责人）联系电话" remark="自填，格式为固话“区号-号码”或手机号码"/>
+    <column field="FDDBRZW" type="string" length="60" label="法定代表人（负责人）职务" remark="自填"/>
+    <column field="FDDBRZJLX" type="string" length="3" label="法定代表人（负责人）证件类型" remark="见 GA/T 517"/>
+    <column field="FDDBRZJHM" type="string" length="18" label="法定代表人（负责人）证件号码" remark="自填，根据证件类型填写相关证件号码"/>
+    <column field="FDDBRZZ" type="string" length="200" label="法定代表人（负责人）住址" remark="自填"/>
+    <column field="FDDBRZP" type="string" length="10" label="法定代表人（负责人）照片"/>
+    <column field="DSRLB" type="string" length="2" label="当事人类别" remark="编码详见 9.19"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_GZZHGL_FRHZQTZZXX" field="ID"/>
+  </table>
+</model>

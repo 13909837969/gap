@@ -1,0 +1,126 @@
+/**
+ * @Description 
+ * @author wangbao
+ * @date 2018年4月17日
+ */
+package com.ehtsoft.rep.services;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
+
+import com.ehtsoft.fw.core.db.MongoClient;
+import com.ehtsoft.fw.core.db.RowDataListener;
+import com.ehtsoft.fw.core.db.SQLAdapter;
+import com.ehtsoft.fw.core.db.SqlDbClient;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.utils.ReflectUtil;
+import com.ehtsoft.fw.utils.NumberUtil;
+import com.ehtsoft.fw.utils.StringUtil;
+import com.ehtsoft.fw.utils.api.IDictionary;
+import com.ehtsoft.supervise.api.SupConst;
+import com.ehtsoft.supervise.dto.ActivityObj;
+import com.ehtsoft.supervise.utils.ParameterUtil;
+
+/**
+ * @Description 服刑人员活动信息采集表
+ * 通过服刑人员的行动，自动采集服刑人员活动信息
+ * 包括：1.停留  2.人脸签到 3.声纹签到 4.指纹签到 5.步数抽检 6.心跳抽检 7.越界报警 
+ * 8.进入特定区域 9.步行 10.骑车 11.驾车 等信息
+ * @author wangbao
+ * @date 2018年4月17日
+ *
+ */
+@Service("ActivityService")
+public class ActivityService {
+	
+	@Resource(name="sqlDbClient")
+	private SqlDbClient dbClient;
+	
+	@Resource(name="mongoClient")
+	private MongoClient mongoClient;
+	
+	@Resource
+	private IDictionary dictionary;
+	
+	private int interval = 600 * 2;
+	
+	@PostConstruct
+	public void init(){
+		try{
+			//停留时间阀值设置（分钟），默认 10 分钟
+			interval = NumberUtil.toInt(ParameterUtil.getParameter(dbClient).get(SupConst.ParameterKey.KEY_SYSTEM_002).getValue());
+			if(interval==0){
+				interval = 600 * 2;
+			}
+			
+			BasicMap<String, Object> one = dbClient.findOne(new SQLAdapter("SELECT ID from REP_JZRYHDXXB LIMIT 1"));
+			if(one==null){
+				//{describe:{$exists:true,$ne:null},time:{$gt:interval}}
+				Query query = Query.query(Criteria.where("time").gt(interval).and("address").exists(true).ne(null));
+				mongoClient.find(SupConst.Collections.REP_STAY_TIME,query ,null,new RowDataListener() {
+					public void processData(BasicMap<String, Object> rowData) {
+						Object o = rowData.get("location");
+						double lng = 0;
+						double lat = 0;
+						if(o!=null && o instanceof Map){
+							Map m = (Map)o;
+							Object coordinates = m.get("coordinates");
+							if(coordinates!=null && coordinates instanceof List){
+								List ls = (List)coordinates;
+								lng = NumberUtil.toDouble(ls.get(0));
+								lat = NumberUtil.toDouble(ls.get(1));
+							}
+						}
+						
+						ActivityObj activityObj = new ActivityObj();
+						activityObj.setId(StringUtil.toString(rowData.get("_id")));
+						activityObj.setYwid(StringUtil.toString(rowData.get("_id")));
+						activityObj.setYwcts(new Date(NumberUtil.to_long(rowData.get("cts"))));
+						//"address" : "中国内蒙古自治区呼和浩特市玉泉区", "describe" : "在育德幼儿园附近"
+						activityObj.setAddr(StringUtil.toString(rowData.get("address")));
+						activityObj.setAid(StringUtil.toString(rowData.get("aid")));
+						activityObj.setHdjg(NumberUtil.to_double(rowData.get("time"))/60);  // 分钟
+						activityObj.setHdjgms("停留 "+ NumberUtil.toInt(rowData.get("time"))/60 + "分钟");
+						activityObj.setHdlx("1");// 1.停留  2.人脸签到 3.声纹签到 4.指纹签到 5.步数抽检 6.心跳抽检 7.越界报警 
+						 						 // 8.进入特定区域 9.步行 10.骑车 11.驾车 等信息
+						activityObj.setHdlxms("停留");
+						if(lng!=0){
+							activityObj.setLng(lng);
+						}
+						if(lat!=0){
+							activityObj.setLat(lat);
+						}
+//						activityObj.setOrgid(rowData.get(key));
+						insert(activityObj);
+					}
+				});
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 保存活动对象信息
+	 */
+	public void insert(ActivityObj activityObj){
+		try{
+			BasicMap<String,Object> data = ReflectUtil.bean2Map(activityObj, "F_");
+			data.put("id", activityObj.getId());
+			data.put("ywcts", activityObj.getYwcts());
+			data.put("cts", new Date());
+			data.put("uts", new Date());
+			dbClient.setSkipInterceptor(true);
+			dbClient.insert(SupConst.Collections.REP_JZRYHDXXB,data);
+			dbClient.setSkipInterceptor(false);
+		}catch(Exception ex){}
+	}
+}

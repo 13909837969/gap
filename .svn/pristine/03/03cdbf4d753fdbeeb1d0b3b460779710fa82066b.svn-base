@@ -1,0 +1,276 @@
+package com.ehtsoft.user.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import com.ehtsoft.fw.core.context.AppException;
+import com.ehtsoft.fw.core.db.InsertOperation;
+import com.ehtsoft.fw.core.db.RowDataListener;
+import com.ehtsoft.fw.core.db.SQLAdapter;
+import com.ehtsoft.fw.core.db.SqlDbFilter;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.sso.User;
+import com.ehtsoft.fw.core.services.SqlBasicService;
+import com.ehtsoft.fw.core.sso.SingleSignOnClient;
+import com.ehtsoft.fw.core.utils.AppUtil;
+import com.ehtsoft.fw.utils.NumberUtil;
+import com.ehtsoft.fw.utils.Util;
+import com.ehtsoft.user.api.UserConst;
+
+
+
+public class PermissionService extends SqlBasicService{
+	
+	@Resource
+	private SingleSignOnClient ssoClient;
+	
+	@Resource
+	private BillTypeService billService;
+	/**
+	 *查询左组织结构树 
+	 * @throws AppException 
+	 */
+	public List<BasicMap<String,Object>> findOrgTree() throws AppException{
+		List<BasicMap<String,Object>> list=find(UserConst.Collections.CORE_ORGANIZATION,null);
+		
+		return AppUtil.list2Tree(list, "parentid", "sysid");
+	}
+	
+	
+	
+	/**
+	 *查询功能角色树 
+	 * @throws AppException 
+	 */
+	public List<BasicMap<String,Object>> findRoleTree(BasicMap<String,Object> query) throws AppException{
+		User user = ssoClient.getUser();
+		String sqlstr = "SELECT A.*,B.ROLEID FROM CORE_ROLE A " +
+ 	 			"LEFT JOIN CORE_ACCOUNT_ROLE B ON A.SYSID = B.ROLEID AND B.ACCOUNTID " + 
+ 	 			(Util.isEmpty(query.get("ACCOUNTID"))?"is null":"=" + query.get("ACCOUNTID"));
+		SQLAdapter sql = new SQLAdapter(sqlstr);
+		if(!user.isPsa()){
+			sqlstr = "SELECT A.*,B.ROLEID FROM ( " +
+					"SELECT * FROM CORE_ROLE WHERE SYSID  in (" +
+					" SELECT ROLEID FROM CORE_ORGANIZATION_ROLE WHERE ORGID = '"+user.getOrgid()+"') OR ORGID = '" + user.getOrgid() + "'" +
+					" ) A " +
+					"LEFT JOIN CORE_ACCOUNT_ROLE B ON A.SYSID = B.ROLEID AND B.ACCOUNTID " + 
+	 	 			(Util.isEmpty(query.get("ACCOUNTID"))?"is null":"= '" + query.get("ACCOUNTID")+"'");
+			sql = new SQLAdapter(sqlstr);
+		}else{
+			sql.getFilter().isNull("A.ORGID");
+		}
+		sql.getFilter().asc("A.CTS");
+		List<BasicMap<String,Object>> list=this.sqlDbClient.find(sql,new RowDataListener() {
+			public void processData(BasicMap<String, Object> rowData) {
+				//CASE WHEN B.ROLEID IS NULL THEN 0 ELSE 1 END SELECTED
+				if(Util.isEmpty(rowData.get("ROLEID"))){
+					rowData.put("SELECTED", 0);
+				}else{
+					rowData.put("SELECTED", 1);
+				}
+			}
+		});
+		return AppUtil.list2Tree(list, "parentid", "sysid");
+	}
+	
+	
+	
+	/**
+	 * 右侧 常用功能菜单
+	 * OSA 权限设置中使用 
+	 * @param query
+	 * @return
+	 * @throws AppException
+	 */
+	public List<BasicMap<String,Object>> findMenuTree(BasicMap<String,Object> query) throws AppException{
+		
+		/*String sqlstr = "SELECT A.*,CASE  WHEN B.MENUID IS NULL THEN 0 ELSE 1 END SELECTED FROM CORE_MENU A " +
+ 	 			"LEFT JOIN CORE_SHORTCUT B ON A.SYSID = B.MENUID AND B.ACCOUNTID " + 
+ 	 			(AppUtil.isEmpty(query.get("ACCOUNTID"))?" is null":"=" + query.get("ACCOUNTID")) +" ORDER BY A.SORT ";*/
+		
+		/*
+		String sqlstr = "SELECT DISTINCT M.SYSID,M.PARENTID,M.MENUCODE,M.MENUNAME,M.ACTIONURI,M.SORT,M.ICON, "+
+		"CASE WHEN S.MENUID IS NULL THEN 0 ELSE 1 END SELECTED  "+
+		"FROM CORE_ACCOUNT_ROLE AR "+
+		"INNER JOIN CORE_ROLE R ON AR.ROLEID=R.SYSID AND R.FLAG=1  "+
+		"INNER JOIN CORE_ROLE_MENU RM ON AR.ROLEID=RM.ROLEID "+
+		"INNER JOIN CORE_MENU M ON RM.MENUID = M.SYSID  "+
+		"LEFT  JOIN CORE_SHORTCUT S ON S.MENUID=M.SYSID AND  S.ACCOUNTID " + 
+		(AppUtil.isEmpty(query.get("ACCOUNTID"))?" IS NULL ":"=" + query.get("ACCOUNTID"));
+		*/
+		
+		String sqlstr ="SELECT  DISTINCT M.SYSID,M.PARENTID,M.MENUCODE,M.MENUNAME,M.ACTIONURI,M.SORT,M.ICON,S.MENUID "+
+		" FROM  CORE_MENU M "+
+		" INNER JOIN CORE_ROLE_MENU RM ON M.SYSID = RM.MENUID"+
+		" INNER JOIN CORE_ROLE R ON RM.ROLEID=R.SYSID AND R.FLAG=1 "+
+		" LEFT JOIN CORE_SHORTCUT S ON S.MENUID = M.SYSID AND S.ACCOUNTID "+
+		(Util.isEmpty(query.get("ACCOUNTID"))?" IS NULL ":"= '" + query.get("ACCOUNTID") + "'");
+		
+		List roleIds = new ArrayList();
+		if(query.get("ROLEID")!=null && !((List)query.get("ROLEID")).isEmpty()){			
+			roleIds = (List)query.get("ROLEID");
+		}else{
+			roleIds.add("");
+		}
+		SQLAdapter sql = new SQLAdapter(sqlstr);
+		sql.setFilter(new SqlDbFilter().in("R.SYSID", roleIds).eq("M.DEL", 0).asc("M.SORT"));
+		
+		List<BasicMap<String,Object>> list=this.sqlDbClient.find(sql,new RowDataListener() {
+			public void processData(BasicMap<String, Object> rowData) {
+				//CASE WHEN S.MENUID IS NULL THEN 0 ELSE 1 END SELECTED
+				if(Util.isEmpty(rowData.get("MENUID"))){
+					rowData.put("SELECTED",0);
+				}else{
+					rowData.put("SELECTED",1);
+				}
+			}
+		});
+		return AppUtil.list2Tree(list, "parentid", "sysid");
+	}
+	
+	
+	/**
+	 * 右侧  组织结构树 
+	 * @param query
+	 * @return
+	 * @throws AppException
+	 */
+	public List<BasicMap<String,Object>> findOrgTree(BasicMap<String,Object> query) throws AppException{
+		
+		String sqlstr = "SELECT A.*,B.defaultorg FROM CORE_ORGANIZATION A " +
+ 	 			"LEFT JOIN CORE_ACCOUNT_ORGANIZATION B ON A.SYSID = B.ORGID AND B.ACCOUNTID " + 
+ 	 			(Util.isEmpty(query.get("ACCOUNTID"))?"is null":"=" + query.get("ACCOUNTID"));
+		
+		List<BasicMap<String,Object>> list=this.sqlDbClient.find(new SQLAdapter(sqlstr),new RowDataListener() {
+			@Override
+			public void processData(BasicMap<String, Object> rowData) {
+				//CASE WHEN B.ORGID IS NULL THEN 0 ELSE 1 END SELECTED
+				if(Util.isEmpty(rowData.get("ORGID"))){
+					rowData.put("SELECTED",0);
+				}else{
+					rowData.put("SELECTED",1);
+				}
+			}
+		});
+		return AppUtil.list2Tree(list, "parentid", "sysid");
+	}
+	
+	/**
+	 * 该方法废弃掉（审批流重新设计）
+	 * @param accountId
+	 * @return
+	 * @throws AppException
+	 */
+	@Deprecated
+	public  List<BasicMap<String,Object>> findBillTree(String accountId) throws AppException{
+		/**
+		 * 获取表单类型数据
+		 */
+		final List<BasicMap<String,Object>> rtn = billService.find(null);
+		
+		this.sqlDbClient.find(UserConst.Collections.CORE_ACCOUNT_BILL,new SqlDbFilter().eq("ACCOUNTID", accountId),new RowDataListener() {
+			@Override
+			public void processData(BasicMap<String, Object> rowData) {
+				/**
+				 * 当前审核通过状态      CPASS
+				 * 当前审核不通过状态  NOTBY
+				 * 前一审核通过状态      PPASS
+				 * 表单类型ID     BILLID
+				 */
+				for(BasicMap<String,Object> b : rtn){
+					if(b.containsKey("children")){
+						List<BasicMap<String,Object>> children = (List<BasicMap<String,Object>>)b.get("children");
+						for(BasicMap<String,Object> c : children){
+							if(NumberUtil.toLong(c.get("BILLID"))==NumberUtil.toLong(rowData.get("BILLID")) && 
+									NumberUtil.toLong(c.get("AUDITID"))==NumberUtil.toLong(rowData.get("AUDITID"))){
+								c.put("SELECTED", true);
+							}
+						}
+					}
+				}
+			}
+		});
+		return rtn;
+	}
+	
+	/**
+	 * 设置保存功能角色、常用功能（快捷方式）、审批权限
+	 * @param accountid  用户账号id
+	 * @param roleData   角色列表数据
+	 * @param menuData   常用功能列表数据（快捷方式)
+	 * @throws AppException
+	 */
+	public void save(final String accountid,
+							List<BasicMap<String,Object>> roleData,
+							List<BasicMap<String,Object>> menuData) throws AppException{
+		save(accountid,roleData,menuData,null);
+	}
+	/**
+	 * 设置保存功能角色、常用功能（快捷方式）、审批权限、用户跨部门的信息
+	 * @param accountid  用户账号id
+	 * @param roleData   角色列表数据
+	 * @param menuData   常用功能列表数据（快捷方式)
+	 * @param orgids	 机构/部门列表数据
+	 * @throws AppException
+	 */
+	public void save(final String accountid,
+							List<BasicMap<String,Object>> roleData,
+							List<BasicMap<String,Object>> menuData,
+							List<String> orgids) throws AppException{
+		if(Util.isEmpty(accountid)){
+			throw new AppException("设置的用户账号id不能为空[accountid]");
+		}
+		//保存角色数据
+		SqlDbFilter filter = new SqlDbFilter();
+		filter.eq("ACCOUNTID",accountid);
+		/*
+		 * 根据账号ID删除账号中原角色，保存新的角色
+		 */
+		sqlDbClient.remove(UserConst.Collections.CORE_ACCOUNT_ROLE, filter);
+		if(!roleData.isEmpty())
+		//保存新的角色
+		sqlDbClient.insert(UserConst.Collections.CORE_ACCOUNT_ROLE, roleData,new InsertOperation() {
+			@Override
+			public void insertBefore(BasicMap<String, Object> data) {
+				data.put("ACCOUNTID", accountid);
+			}
+			@Override
+			public void insertAfter(BasicMap<String, Object> data) {
+			}
+		});
+		/*
+		 * 根据账号ID删除账号中原快捷菜单，保存新的快捷菜单
+		 */
+		sqlDbClient.remove(UserConst.Collections.CORE_SHORTCUT, filter);
+		if(!menuData.isEmpty())
+		//保存新的快捷菜单
+		sqlDbClient.insert(UserConst.Collections.CORE_SHORTCUT, menuData,new InsertOperation() {
+			@Override
+			public void insertBefore(BasicMap<String, Object> data) {
+				data.put("ACCOUNTID", accountid);
+			}
+			@Override
+			public void insertAfter(BasicMap<String, Object> data) {
+			}
+		});
+		
+		/**
+		 * 一个用户跨多个部门的情况
+		 */
+		if(orgids!=null){
+			filter.eq("DEFAULTORG",0);
+			sqlDbClient.remove(UserConst.Collections.CORE_ACCOUNT_ORGANIZATION, filter);
+			if(!orgids.isEmpty()){
+				for(String orgid : orgids){
+					BasicMap<String,Object> ao = new BasicMap<>();
+					ao.put("ACCOUNTID", accountid);
+					ao.put("ORGID", orgid);
+					ao.put("DEFAULTORG",0);
+					sqlDbClient.insert(UserConst.Collections.CORE_ACCOUNT_ORGANIZATION, ao);
+				}
+			}
+		}
+	}
+}

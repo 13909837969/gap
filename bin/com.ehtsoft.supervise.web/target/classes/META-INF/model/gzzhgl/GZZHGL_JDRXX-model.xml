@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="GZZHGL_JDRXX" label="鉴定人员信息">
+    <column field="ID" type="uuid" length="36" label="主键" required="true"/>
+    <column field="XM" type="string" length="50" label="鉴定人姓名"/>
+    <column field="SFZH" type="string" length="20" label="身份证号"/>
+    <column field="ZYZH" type="string" length="20" label="执业证号"/>
+    <column field="XB" type="string" length="20" label="性别（GB）"/>
+    <column field="MZ" type="string" length="20" label="民族（GB）"/>
+    <column field="XL" type="string" length="20" label="学历（GB）"/>
+    <column field="ZC" type="string" length="20" label="职称"/>
+    <column field="ZZMM" type="string" length="20" label="政治面貌"/>
+    <column field="LXDH" type="string" length="20" label="联系电话"/>
+    <column field="YX" type="string" length="20" label="邮箱"/>
+    <column field="YXKSSJ" type="string" length="100" label="执业证有效开始日期"/>
+    <column field="YXJSSJ" type="string" length="100" label="执业证有效截止日期"/>
+    <column field="BYYX" type="string" length="50" label="毕业院校"/>
+    <column field="ZYFS" type="string" length="5" label="执业方式"/>
+    <column field="ZP" type="string" length="100" label="照片路径"/>
+    <column field="JJ" type="string" length="500" label="简介"/>
+    <column field="ZYZT" type="string" length="2" label="执业状态"/>
+    <column field="SZJDJG" type="string" length="100" label="所在鉴定机构"/>
+    <column field="ZYFW" type="string" length="200" label="执业范围"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒)数据格式yyyyMMddd数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒)数据格式yyyyMMddd数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id:user.getUid()(core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id:user.getUid()(core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID:user.getAid()(core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID:user.getAid()(core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID:user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_GZZHGL_JDRXX" field="ID"/>
+  </table>
+</model>

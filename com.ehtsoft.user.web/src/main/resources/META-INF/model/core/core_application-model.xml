@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_APPLICATION" label="系统应用管理">
+    <column field="SYSID" type="uuid" length="36" label="主键" required="true" remark="自动生成"/>
+    <column field="APPCODE" type="string" length="20" label="应用编码" required="true"/>
+    <column field="APPNAME" type="string" length="20" label="应用名称" required="true"/>
+    <column field="PROJECT" type="string" length="20" label="项目" required="true" remark="应用项目"/>
+    <column field="REQADDRESS" type="string" length="50" label="请求地址"/>
+    <column field="FRULE" type="string" length="4" label="应用角色" remark="应用范围（PSA 平台系统管理员  OSA 机构用户）"/>
+    <column field="REMARK" type="string" length="400" label="备注"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" required="true" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" required="true" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_CORE_APPLICATION" field="SYSID"/>
+    <unique name="UK_CORE_APPLICATION_APPCODE" field="APPCODE"/>
+  </table>
+</model>

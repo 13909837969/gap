@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="REP_LSCBAJSJB" label="律师承办案件数据表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="LSSWSMC" type="string" length="20" label="律师事务所名称" required="true" remark="自填"/>
+    <column field="AJBH" type="string" length="20" label="案件编号" required="true" remark="自填"/>
+    <column field="LSSWS" type="uuid" length="36" label="律师事务所" required="true" remark="自填"/>
+    <column field="SARQ" type="string" length="15" label="收案日期" required="true" remark="自填"/>
+    <column field="GDRQ" type="string" length="15" label="归档日期" required="true" remark="自填"/>
+    <column field="AJLX" type="string" length="20" label="案件类型" required="true" remark="自填"/>
+    <column field="AY" type="string" length="500" label="案由" required="true" remark="自填"/>
+    <column field="WTR" type="string" length="20" label="委托人" required="true" remark="自填"/>
+    <column field="CBLSID" type="uuid" length="36" label="承办律师 ID" required="true" remark="自填"/>
+    <column field="NSFY" type="string" length="20" label="拟收费用" required="true" remark="自填"/>
+    <column field="SFFS" type="double" length="20" precision="3" label="收费方式" required="true" remark="自填"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_REP_LSCBAJSJB" field="ID"/>
+  </table>
+</model>

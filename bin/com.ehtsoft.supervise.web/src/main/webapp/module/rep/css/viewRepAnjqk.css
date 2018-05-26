@@ -1,0 +1,143 @@
+#contanjqk-cent-left{
+	width:28%;
+	height:95%;
+	position: absolute;
+	top: 20px;
+	left:10px;
+	bottom:20px;
+	border-radius:5px;
+	box-shadow:0px 0px 5px #ccc;
+}
+#contanjqk-cent-right{
+	width:28%;
+	height:95%;
+	position: absolute;
+	top: 20px;
+	right:10px;
+	bottom:50px;
+	border-radius: 5px;
+	box-shadow:0px 0px 5px #ccc;
+}
+#anjqk-zbqk-1{
+	width:100%;
+	height:49.5%;
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+#anjqk-zbqk-text{
+	color:#fff;
+	font-size:18px;
+	margin-top:10px;
+	text-align:center;
+}
+#anjqk-zbqk-shuj{
+	width:100%;
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+}
+#anjqk-zbqk-line1{
+	width:100%;
+	background:#fff;
+	margin:0 auto;
+	height:1px;
+	position:absolute;
+	top:50%;
+	opacity:0.3;
+}
+#anjqk-zbqk-2{
+	width:100%;
+	height:49.5%;
+	position:absolute;
+	bottom:0px;
+	left:0px;
+}
+#anjqk-zbqk-tjajqs{
+	color:#fff;
+	font-size:18px;
+	margin-top:10px;
+	text-align:center;
+}
+#anjqk-zbqk-anjqs{
+	width:100%;
+	position:absolute;
+	left:0px;
+	top:0px;
+	bottom:0px;
+	right:0px;
+	color:#fff;
+}
+#anjqk-zbqk-3{
+	width:100%;
+	height:49.5%;
+	position:absolute;
+	top:0px;
+	right:0px;
+	bottom:0px;
+}
+#anjqk-anjjf-text{
+	color:#fff;
+	font-size:18px;
+	margin-top:10px;
+	text-align:center;
+}
+/*��*/
+#anjqk-zbqk-line2{
+	width:100%;
+	background:#fff;
+	margin:0 auto;
+	height:1px;
+	position:absolute;
+	top:50%;
+	opacity:0.3;
+}
+#anjqk-anjjf-shuj{
+	width:100%;
+	position:absolute;
+	top:0px;
+	bottom:0px;
+	left:0px;
+	color:#fff;
+}
+#anjqk-zbqk-4{
+	width:100%;
+	height:49.5%;
+	position:absolute;
+	bottom:0px;
+	right:0px;
+}
+#anjqk-zzl-text{
+	color:#fff;
+	font-size:18px;
+	margin-top:10px;
+	text-align:center;
+}
+#anjqk-zzl-zzlShuj{
+	width:100%;
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	color:#fff;
+}
+/*��͸����*/
+.ltrhao-spsSqjz-body-rightSel-opacity{
+	position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: #0b0d0f;
+    opacity: 0.9;
+}
+/*--------*/
+.anjqk-zbqk-img{
+	position:absolute;
+	top:7px;
+	left:20px;
+	z-index:999;
+}

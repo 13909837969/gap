@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>智慧社区管理系统</title>
+<script type="text/javascript" src="resources/script/jquery/eht.rmi.json.js"></script>
+<script type="text/javascript" src="resources/script/jquery/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="resources/script/core/eht.ui.utils.js"></script>
+<script type="text/javascript" src="resources/script/core/eht.rmi.responder.js"></script>
+
+<link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/compiled/theme_styles.css" />
+
+<link type="image/x-icon" href="favicon.png" rel="shortcut icon" />
+<script type="text/javascript" src="json/LoginService.js"></script>
+<script type="text/javascript">
+$(function(){
+	var ls = new LoginService();
+	ls.logout();
+	var forw = Eht.Utils.getParameter("forward");
+	if(forw!=null){
+		$("#forwardInput").val(forw);
+	}
+	$("#loginpanel").css({top:($(window).height()-402)/2,left:($(window).width()-553)/2});
+	$(window).resize(function(){
+		$("#loginpanel").css({top:($(window).height()-402)/2,left:($(window).width()-553)/2});
+	});
+	$("#password").keydown(function(e){
+		if(e.keyCode==13){
+			$("#loginButton").click();
+		}
+	});
+	$("#loginButton").click(function(){
+		var data = {};
+		$("#loginform").find("input[name]").not("input[type='button']").each(
+				function(){
+					data[$(this).attr("name")]=$(this).val();
+				}
+		);
+		var resp = new Eht.Responder();
+		resp.success=function(data, textStatus, jqXHR){
+			//window.top.location.href="../supervise/main2.jsp";
+			 window.top.location.href = data.value;
+		};
+		resp.error=function(request, textStatus, error){
+			$("#loginerrorinfo").html(request.responseText);
+		};
+		ls.login(data,resp);
+		
+	});
+});
+</script>
+</head>
+<body id="login-page-full">
+	<div id="login-full-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div id="login-box">
+						<div id="login-box-holder">
+							<div class="row">
+								<div class="col-xs-12">
+									<header id="login-header">
+										<div id="login-logo">
+											内蒙古公共法律服务智能一体化平台
+										</div>
+									</header>
+									<div id="login-box-inner">
+										<div id="loginform">
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-user"></i></span>
+												<input id="accountId" name="accountid" class="form-control" type="text"  placeholder="账       户">
+											</div>
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-key"></i></span>
+												<input id="password" type="password" name="password" class="form-control"  placeholder="密      码">
+												<input type="hidden" name="forward" id="forwardInput"/>
+											</div>
+											<!--  
+											<div id="remember-me-wrapper">
+												<div class="row">
+													<div class="col-xs-6">
+														<div class="checkbox-nice">
+															<input type="checkbox" id="remember-me" checked="checked" />
+															<label for="remember-me"> 记住密码 </label>
+														</div>
+													</div>
+													<a href="forgot-password-full.html" id="login-forget-link"
+														class="col-xs-6"> 忘记密码? </a>
+												</div>
+											</div>
+											-->
+											<div class="row">
+												<div class="col-xs-12">
+													<!-- 
+													<div style="text-align:center;color:#f00">系统升级中...</div>
+													 -->
+														<button type="submit" class="btn btn-success col-xs-12" id="loginButton">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xs-12" id="loginerrorinfo" style="color:#f00;margin-top:5px;font-size:12px;text-weight:bold;text-align:right;"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="login-box-footer">
+							<div class="row">
+								<div class="col-xs-12">
+									版权说明
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

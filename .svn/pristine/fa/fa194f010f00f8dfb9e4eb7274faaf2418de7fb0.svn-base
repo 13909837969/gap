@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="RMTJ_WYHJCSSXXB" label="人民调解委员会基础设施信息表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="TWHBM" type="string" length="14" label="调委会编码" remark="编码集详见 9.1"/>
+    <column field="SFYYDLTJCS" type="string" length="8" label="是否拥有独立调解场所" remark="编码集详见 9.10"/>
+    <column field="BGCSMJ" type="string" length="10" label="办公场所面积" remark="自填"/>
+    <column field="BGCSZP" type="string" length="10" label="办公场所照片" remark="见 8.15"/>
+    <column field="GZDHSL" type="string" length="10" label="工作电话数量" remark="自填"/>
+    <column field="BGDNSL" type="string" length="10" label="办公电脑数量" remark="自填"/>
+    <column field="DYFYCZSL" type="string" length="10" label="打印机/复印机/传真机数量" remark="自填"/>
+    <column field="LYLXSBSL" type="string" length="10" label="录音录像设备数量" remark="自填"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_RMTJ_WYHJCSSXXB" field="ID"/>
+  </table>
+</model>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="IM_USERINFO_ACCOUNT" label="消息用户账户信息">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_AID" type="uuid" length="36" label="消息用户主键" required="true" remark="系统自动生成"/>
+    <column field="F_ACCOUNTID" type="string" length="40" label="账户" required="true" remark="手机号，Email 等唯一标识用户的信息"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_USERINFO_ACCOUNT" field="F_ID"/>
+    <unique name="UK_USERINFO_ACCOUNT_ACCOUNTID" field="F_ACCOUNTID"/>
+    <foreign name="FK_USERINFO_ACCOUNT_AID" field="F_AID" reference="IM_USERINFO" referField="F_AID"/>
+  </table>
+</model>

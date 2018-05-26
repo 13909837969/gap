@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RMTJ_rmtjxys(dsr)" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6c157aaf-21a8-4d05-9eb8-a34279ae63a0">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ltData"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="aid" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+	A.ID,
+	A.xm,
+	A.xb,
+	A.nl,
+	A.dhhm,
+	A.jtzz,
+	A.tjajxxid,
+	B.f_name
+FROM RMTJ_TJAJSQR A
+LEFT JOIN sys_dictionary B ON B.f_typecode = 'SYS000'
+AND A .xb = B.f_code
+where tjajxxid=$P{aid}]]>
+	</queryString>
+	<field name="id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+	</field>
+	<field name="xm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xm"/>
+	</field>
+	<field name="xb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xb"/>
+	</field>
+	<field name="nl" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nl"/>
+	</field>
+	<field name="dhhm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dhhm"/>
+	</field>
+	<field name="jtzz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jtzz"/>
+	</field>
+	<field name="tjajxxid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tjajxxid"/>
+	</field>
+	<field name="f_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="f_name"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="23" y="0" width="70" height="30" uuid="114aa5e9-5af9-440e-895e-3a4c257468cd"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[当事人姓名]]></text>
+			</staticText>
+			<line>
+				<reportElement x="93" y="30" width="85" height="1" uuid="ce222fb2-dd4b-4e87-a5df-37290070f5e3"/>
+			</line>
+			<staticText>
+				<reportElement x="178" y="0" width="35" height="30" uuid="d831706d-2ef4-44b0-bc25-c8438c86411e"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[性别]]></text>
+			</staticText>
+			<line>
+				<reportElement x="210" y="30" width="30" height="1" uuid="7870c0e7-cc15-4b55-bdb3-f976ca520f82"/>
+			</line>
+			<staticText>
+				<reportElement x="240" y="0" width="30" height="30" uuid="24b1c691-8635-441f-ad31-79b428102168"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[民族]]></text>
+			</staticText>
+			<line>
+				<reportElement x="270" y="31" width="50" height="1" uuid="71bd8126-1432-4b8f-bc27-619f4a6edb3d"/>
+			</line>
+			<staticText>
+				<reportElement x="401" y="2" width="62" height="30" uuid="9b2e7020-d451-4596-8b84-22ef92d1e29a"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[联系方式]]></text>
+			</staticText>
+			<line>
+				<reportElement x="463" y="33" width="90" height="1" uuid="4e016a17-0f5c-47f2-ad41-95b013fc3e5e"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="33" width="70" height="30" uuid="af92cf72-0617-4f39-993d-277fb4cfc1f3"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[职业或职务]]></text>
+			</staticText>
+			<line>
+				<reportElement x="70" y="62" width="85" height="1" uuid="7f7e92c4-2fe0-41de-96b7-3f1d67e91dd4"/>
+			</line>
+			<staticText>
+				<reportElement x="155" y="33" width="90" height="30" uuid="946f4df6-1e07-410f-8095-1f150b420694"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[单位或者住址]]></text>
+			</staticText>
+			<line>
+				<reportElement x="245" y="62" width="309" height="1" uuid="183ffb19-d526-4b85-81ae-d122050732e2"/>
+			</line>
+			<staticText>
+				<reportElement x="323" y="2" width="37" height="30" uuid="27719624-7a37-4660-a8ec-cb867afc3a07"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<text><![CDATA[年龄]]></text>
+			</staticText>
+			<line>
+				<reportElement x="360" y="31" width="41" height="1" uuid="da0f7778-4c27-4eba-aae8-07df85d08112"/>
+			</line>
+			<textField>
+				<reportElement x="93" y="0" width="85" height="30" uuid="f1d9963f-42c0-4f7c-bd29-9162e62c032a"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{xm}==null) ? " ":$F{xm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="0" width="30" height="30" uuid="2b444b1f-6978-4ad4-9a75-047be3b05da0"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[com.ehtsoft.fw.utils.StringUtil.toEmptyString($F{f_name})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="2" width="40" height="28" uuid="707f21a4-267c-4edd-9fd2-2edd299c49b0"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{nl}==null) ? " ":$F{nl}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="463" y="3" width="90" height="28" uuid="4d1b66a8-a74d-4dd2-97fa-17515404fbb0"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{dhhm}==null) ? " ":$F{dhhm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="245" y="34" width="308" height="28" uuid="c708ed07-3e5b-4a4d-a887-da39265f2d4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="华文仿宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{jtzz}==null) ? " ":$F{jtzz}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

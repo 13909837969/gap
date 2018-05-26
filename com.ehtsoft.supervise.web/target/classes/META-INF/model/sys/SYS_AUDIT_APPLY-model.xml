@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_AUDIT_APPLY" label="单据申请信息记录表">
+    <column field="F_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_BILLID" type="string" length="40" label="审批单据ID" required="true"/>
+    <column field="F_BSID" type="uuid" length="36" label="申请业务ID" remark="申请业务如外出申请单据等"/>
+    <column field="F_TITLE" type="string" length="200" label="申请标题" remark="内容如：到xxxx地的外出申请,迁入xxxx（呼和浩特市新城区xx街道）的变更申请,进入xxxx区域的申请"/>
+    <column field="F_CONTENT" type="string" length="600" label="申请内容"/>
+    <column field="F_TIMEAREA" type="string" length="200" label="日期及时间范围"/>
+    <column field="F_AID" type="uuid" length="36" label="申请人ID"/>
+    <column field="F_NAME" type="string" length="40" label="申请人姓名"/>
+    <column field="F_ADDR" type="string" length="200" label="申请地地址"/>
+    <column field="F_LAT" type="double" length="16" precision="12" label="纬度" remark="申请的位置"/>
+    <column field="F_LNG" type="double" length="16" precision="12" label="经度" remark="申请的位置"/>
+    <column field="F_APPROVER" type="uuid" length="36" label="审批人ID" remark="审批人ID,根据人的"/>
+    <column field="F_PROJECT" type="uuid" length="36" label="项目ID" remark="项目ID,不同项目走不同的流程（项目和流程配置存在一对一的关系）
+project &lt;-&gt; config,如果为空，不走项目配置直接走流程配置"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过  2、不通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_SYS_AUDIT_APPLY" field="F_ID"/>
+  </table>
+</model>

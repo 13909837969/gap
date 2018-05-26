@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="RMTJ_DCJZ_YWSZ" label="书面调解-人民调解调查卷宗和人民调解业务设置关联表">
+    <column field="DCJZID" type="uuid" length="36" label="调查卷宗ID" required="true"/>
+    <column field="YWSZID" type="string" length="36" label="人民调解业务设置ID" required="true"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_RMTJ_DCJZ_YWSZ" field="DCJZID,YWSZID"/>
+  </table>
+</model>

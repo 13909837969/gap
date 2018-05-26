@@ -1,0 +1,357 @@
+package com.ehtsoft.supervise.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+
+import org.springframework.stereotype.Service;
+
+import com.ehtsoft.common.services.SSOService;
+import com.ehtsoft.fw.core.db.RowDataListener;
+import com.ehtsoft.fw.core.db.SQLAdapter;
+import com.ehtsoft.fw.core.db.SqlDbClient;
+import com.ehtsoft.fw.core.db.SqlDbFilter;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.dto.Paginate;
+import com.ehtsoft.fw.core.dto.ResultList;
+import com.ehtsoft.fw.core.services.AbstractService;
+import com.ehtsoft.fw.core.sso.User;
+import com.ehtsoft.fw.utils.StringUtil;
+import com.ehtsoft.supervise.api.SupConst;
+
+/**
+ * 社区服务
+ * @author Administrator
+ * 集中服务 和 分散服务
+ */
+@Service("SqfwService")
+public class SqfwService extends AbstractService{
+
+	@Resource(name="sqlDbClient")
+	SqlDbClient dbClient;
+	
+	
+	@Resource(name="SSOService")
+	private SSOService service;
+	
+
+	/**
+	 * 
+	 * 手机端分散服务列表
+	 * @return<br>
+	 * 返回值格式:<br>
+	 *
+	 * @author Administrator
+	 * @date   2018年4月1日
+	 * 方法的作用：TODO
+	 */
+	public List<BasicMap<String, Object>> findFsfw(BasicMap<String,Object> query) {
+		
+		/**
+		 * 获取 登录user 信息
+		 */
+		User user = service.getUser();
+		String orgid = user.getOrgid();
+	StringBuffer sqlstr = new StringBuffer("SELECT a.sqfsfwid,a.f_aid,a.fwdz,a.fwdfzr,a.fwdlxrdh,a.fwkssj,a.fwjssj,a.fwcs,a.msfwnr,b.jgmc, " + 
+			" (SELECT count(c.*) FROM JZ_SQFSFWJLB c where c.sqfsfwid  = A .sqfsfwid)as yfwcs  " + 
+			" FROM JZ_SQFSFW a LEFT JOIN jc_sfxzjgjbxx b ON a.orgid = b.id " + 
+			" WHERE a.orgid = '"+ orgid +"' and a.F_AID = '"+ query.get("f_aid")+ "'");
+	if (null != StringUtil.toString(query.get("where"))) {
+		sqlstr.append(" and a.fwdz like '"+ StringUtil.toString(query.get("where")) +"%'");
+	}
+		SQLAdapter adapter = new SQLAdapter(sqlstr.toString());
+		List<BasicMap<String, Object>> list = dbClient.find(adapter);
+		return list;
+	}
+	
+	/**
+	 * 
+	 * 手机端的分散服务的添加
+	 * @param data<br>
+	 * 返回值格式:<br>
+	 *
+	 * @author Administrator
+	 * @date   2018年4月1日
+	 * 方法的作用：TODO
+	 */
+	public void saveFsfw(BasicMap<String, Object> data) {
+		data.put("ID", data.get("listid"));
+		dbClient.save(SupConst.Collections.JZ_SQFSFWJLB, data);
+		/*BasicMap<String, Object> img = new BasicMap<>();
+		img.put("LISTID", data.get("listid"));
+		img.put("data", data.get("sqfwqz"));//签字处理
+		img.put("sqfsfwid", data.get("sqfsfwid"));
+		img.put("tpbj", "2");//签字照片
+		dbClient.save(SupConst.Collections.JZ_SQFSFWJLB_IMG, img);
+		//return StringUtil.toEmptyString(data.get("ID"));
+*/
+	}
+	
+	
+	/**
+	 * 
+	 * 分散服务的添加 pad端
+	 * 返回值格式:<br>
+	 *
+	 * @author Administrator
+	 * @date   2018年3月28日
+	 * 方法的作用：TODO
+	 */
+	public void saveDispersedService(BasicMap<String, Object> query) {
+		dbClient.save(SupConst.Collections.JZ_SQFSFW, query);
+	}
+	
+	
+	
+	/**
+	 * 集中服务通知列表
+	 * @return
+	 */
+	public List<BasicMap<String,Object>> findFocusNotifi(BasicMap<String, Object> query){
+		/*
+		 * 无筛选条件的，无分页的查询！【检索全部】
+		Paginate paginate = new Paginate();
+		paginate.setPageCount(50);
+		paginate.setSkip(true);
+		return dbClient.find("IM_GROUP_AFFICHE", new SqlDbFilter().desc("cts"));
+		*/
+		String sql = "SELECT * from IM_GROUP_AFFICHE where f_type= 6 ORDER BY cts DESC";
+		SQLAdapter sqlAdapter = new SQLAdapter(sql);
+		return dbClient.find(sqlAdapter);
+	}
+	/**
+	 * 集中服务情况查询
+	 * @param query
+	 * @param paginate
+	 * @return
+	 * [
+	 * 	{
+	 * 		id:主键
+	 * 		fwbt:服务标题
+	 * 		sqfwkssj:社区服务开始时间
+	 * 		sqfwjssj:社区服务结束时间
+	 * 		ydrs:应到人数
+	 * 		sdrs:实到人数
+	 * 		sqfwsc:社区服务时长
+	 * 		sqfwdd:社区服务地点
+	 * 		sqfwnr:社区服务内容
+	 * 		sqfwhdzj:社区服务活动总结
+	 * 	}
+	 * ]
+	 */
+	public ResultList<BasicMap<String, Object>> findFocusService(BasicMap<String, Object> query,Paginate paginate){
+		/**
+		 * 获取 登录user 信息
+		 */
+		User user = service.getUser();
+		ResultList<BasicMap<String,Object>> resultList = new ResultList<>();
+		if(user!=null) {
+			SqlDbFilter filter = toSqlFilter(query);
+			StringBuffer sqlstr = new StringBuffer("select id,fwbt,sqfwkssj,sqfwjssj,ydrs,sdrs,sqfwsc,sqfwdd,sqfwnr,sqfwhdzj,jlr from jz_sqfwxx");
+			SQLAdapter salAdapter = new SQLAdapter(sqlstr.toString());
+			filter.eq("orgid", user.getOrgid());
+			sqlstr.append(" order by cts desc");
+			salAdapter.setFilter(filter);
+			resultList = dbClient.find(salAdapter, paginate);
+		}
+		return resultList;
+	}
+	
+	/**
+	 * 集中服务情况查询【未分页】
+	 * @param query
+	 * @param paginate
+	 * @return
+	 * [
+	 * 	{
+	 * 		id:主键
+	 * 		fwbt:服务标题
+	 * 		sqfwkssj:社区服务开始时间
+	 * 		sqfwjssj:社区服务结束时间
+	 * 		ydrs:应到人数
+	 * 		sdrs:实到人数
+	 * 		sqfwsc:社区服务时长
+	 * 		sqfwdd:社区服务地点
+	 * 		sqfwnr:社区服务内容
+	 * 		sqfwhdzj:社区服务活动总结
+	 * 	}
+	 * ]
+	 */
+	public List<BasicMap<String, Object>> findFocuslist(BasicMap<String, Object> query){
+		/**
+		 * 获取 登录user 信息
+		 */
+		User user = service.getUser();
+		String orgid = user.getOrgid();
+		List<BasicMap<String,Object>> list = new ArrayList<>();
+		String sqlstr = "select id,fwbt,sqfwkssj,sqfwjssj,ydrs,sdrs,sqfwsc,sqfwdd,sqfwnr,sqfwhdzj,jlr from jz_sqfwxx ORDER BY cts DESC";
+		SQLAdapter salAdapter = new SQLAdapter(sqlstr);
+		SqlDbFilter sqlDbFilter = toSqlFilter(query);
+		salAdapter.setFilter(sqlDbFilter);
+		list = dbClient.find(salAdapter);
+		return list;
+	}
+	
+	
+	/**
+	 * 插入或者修改一条集中服务情况信息
+	 * @param data
+	 */
+	public void saveFocusService(BasicMap<String, Object> data){
+		dbClient.save(SupConst.Collections.JZ_SQFWXX, data);
+	}
+	/**
+	 * 删除一条集中服务情况信息
+	 */
+	public void deleteFocusService(String id){
+		dbClient.remove(SupConst.Collections.JZ_SQFWXX, new SqlDbFilter().eq("id", id));
+	}
+	/**
+	 * 查询分散服务情况 
+	 * 主键:sqfsfwid
+	 * 矫正人员ID:f_aid
+	 * 服务地址:fwdz
+	 * 服务点负责人:fwdfzr
+	 * 服务点联系电话:fwdlxrdh
+	 * 服务开始日期:fwkssj
+	 * 服务结束日期:fwjssj
+	 * 服务次数:fwcs
+	 * 描述服务内容:msfwnr
+	 * 矫正人员姓名:xm
+	 */
+	public ResultList<BasicMap<String, Object>> findDisperseService(BasicMap<String, Object> query,Paginate paginate){
+		/**
+		 * 获取 登录user 信息
+		 */
+		User user = service.getUser();
+		ResultList<BasicMap<String, Object>> list = new ResultList<BasicMap<String, Object>>();
+		if(user!=null) {
+				SqlDbFilter filter = toSqlFilter(query);
+				String sql = "SELECT A .sqfsfwid, A .f_aid, A .fwdz, A .fwdfzr, A .fwdlxrdh, A .fwkssj, " + 
+							 "A .fwjssj, A .fwcs, b.xm, A.msfwnr, " + 
+							 "(SELECT count(c.*) FROM JZ_SQFSFWJLB c where  c.SQFSFWID = a.sqfsfwid) as yfwcs " + 
+							 "FROM jz_sqfsfw A LEFT JOIN jz_jzryjbxx b ON A .f_aid = b. ID ";
+				SQLAdapter sqlAdapter = new SQLAdapter(sql);
+				filter.eq("A.orgid", user.getOrgid());
+				sqlAdapter.setFilter(filter);
+				list = dbClient.find(sqlAdapter, paginate);
+		}
+		return list;
+	}
+	/**
+	 * 查询分散服务记录
+	 * 主键:sqfsfwjlb01
+	 * 分散服务情况ID:sqfsfwid
+	 * 服务时间:fwsj
+	 * 服务地址:fwdz
+	 * 服务情况描述:fwqkms
+	 */
+	public List<BasicMap<String, Object>> findDisperseJlService(String data){
+		User user = service.getUser();
+		String orgid = user.getOrgid();
+		String sql = "SELECT id,sqfsfwid,fwsj,fwdz,fwms " + 
+				"FROM  jz_sqfsfwjlb where orgid = '"+ orgid +"' and  sqfsfwid = '"+ data +"'";
+		SQLAdapter sqlAdapter = new SQLAdapter(sql);
+		final List<String> li = new ArrayList<>();
+		List<BasicMap<String, Object>> list = dbClient.find(sqlAdapter,new RowDataListener() {
+ 			@Override
+			public void processData(BasicMap<String, Object> rowData) {
+ 				li.add(StringUtil.toString(rowData.get("id")));
+ 			}
+		});
+		
+		//返回IMGID 
+		SQLAdapter sql_imgid = new SQLAdapter("select imgid,sqfsfwid,listid from jz_sqfsfwjlb_img ");
+		sql_imgid.getFilter().in("listid", li);
+
+		BasicMap<String,List<String>> map = new BasicMap<>();
+		dbClient.find(sql_imgid,new RowDataListener() {
+			public void processData(BasicMap<String, Object> rowData) {
+			   String sqfsfwid = StringUtil.toString(rowData.get("listid"));
+			   if(map.get(sqfsfwid)==null){
+				   List<String> l = new ArrayList<String>();
+				   l.add(StringUtil.toString(rowData.get("IMGID")));
+				   map.put(sqfsfwid, l);
+			   }else{
+				   map.get(sqfsfwid).add(StringUtil.toString(rowData.get("IMGID")));
+			   }
+			}
+		});
+		list.forEach((o)->{
+			String sqfsfwid = StringUtil.toString(o.get("id"));
+			o.put("images", map.get(sqfsfwid));
+		});
+		
+		return list;
+	}
+	/**
+	 * 查询社区服务情况登记图片表
+	 * 主键:imgid
+	 * @param id
+	 * @return
+	 */
+	public List<BasicMap<String, Object>> findImageService(String id){
+		SqlDbFilter sqlDbFilter = new SqlDbFilter();
+		sqlDbFilter.eq("sqfsfwid", id);
+		String sql = "select imgid,sqfsfwid from jz_sqfsfwjlb_img";
+		SQLAdapter sqlAdapter = new SQLAdapter(sql);
+		sqlAdapter.setFilter(sqlDbFilter);
+		List<BasicMap<String, Object>> list = dbClient.find(sqlAdapter);
+		return list;
+	}
+	
+	/**
+	 * 集中服务 查询一条
+	 * TODO(方法的描述，哪那个地方使用的等)
+	 * @param id
+	 * @return<br>
+	 * 返回值格式:BasicMap<String, Object>
+	 *
+	 * @author Administrator
+	 * @date   2018年3月20日
+	 * 方法的作用：根据id检索一条的详细信息
+	 */
+	public BasicMap<String, Object> findOne(String id){
+		BasicMap<String,Object> data=new BasicMap<>();
+		String sql="select id,fwbt,sqfwkssj,sqfwjssj,ydrs,sdrs,sqfwsc,sqfwdd,sqfwnr,sqfwhdzj,jlr,futzid from jz_sqfwxx";
+		SQLAdapter adapter=new SQLAdapter(sql);
+		SqlDbFilter filter=new SqlDbFilter();
+		filter.eq("id", id);
+		adapter.setFilter(filter);
+		data=dbClient.findOne(adapter);
+		return data;
+	}
+	
+	
+	/**
+	 * 查询集中服务图片集合
+	 * @param tablename
+	 * @param imgid
+	 * @return
+	 */
+	public List<BasicMap<String,Object>> findJzImg(String tablename,String imgid){
+		List<BasicMap<String,Object>> list=new ArrayList<>();
+		String sql="select IMGID from " + tablename+ " where SQFSFWID='"+imgid+"'";
+		SQLAdapter adapter=new SQLAdapter(sql);
+		list=dbClient.find(adapter);
+		return list;
+	}
+
+	/**
+	 * 
+	 * 查询分散服务图片集合
+	 * @return<br>
+	 * 返回值格式: List<BasicMap<String, Object>>
+	 * @author Administrator
+	 * @date  2018年3月29日
+	 * 
+	 */
+	public List<BasicMap<String, Object>> findFsImg(String tablename,String sqfsfwid) {
+		String sql = "select IMGID from "+ tablename +" where sqfsfwid = '"+ sqfsfwid +"'";
+		SQLAdapter adapter = new SQLAdapter(sql);
+		List<BasicMap<String, Object>> list = dbClient.find(adapter);
+		return list;
+ 	}
+}

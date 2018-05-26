@@ -1,0 +1,194 @@
+package com.ehtsoft.user.utils;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
+import com.ehtsoft.fw.core.context.AppException;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.sso.SingleSignOnClient;
+import com.ehtsoft.fw.utils.StringUtil;
+import com.ehtsoft.fw.utils.Util;
+
+public class MenuUtil {
+	
+	public static void main(String[] args){
+		
+		try {
+			InputStream is = new FileInputStream("D:/workspace/gap/com.ehtsoft.ocs.web/doc/init/ocs-menu.xml");
+			Long s = new Date().getTime();
+			List<BasicMap<String,Object>> l = getApplicationMenu(is).get("appmenus");
+			
+			for(BasicMap<String,Object> b:l){
+				if(Util.isNotEmpty(b.get("children"))){
+					List<BasicMap<String,Object>> children = (List<BasicMap<String,Object>>)b.get("children");
+					for(BasicMap<String,Object> bb:children){
+						((SYSID)bb.get("SYSID")).setValue(UUID.randomUUID().toString());
+						bb.put("SYSID", ((SYSID)bb.get("SYSID")).getValue());
+					}
+					
+				}
+			}
+			
+			System.out.println(new Date().getTime() - s);
+		} catch (FileNotFoundException e) {
+		} catch (AppException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 根据应用菜单数据（xml）解析获取应用数据及功能菜单数据
+	 * @param is
+	 * @return List<BasicMap<String,Object>>  数据为  Application 数据， children 数据列表为  menu 数据 ,parentcode 为上级 menucode
+	 * @throws AppException
+	 */
+	public static BasicMap<String,List<BasicMap<String,Object>>> getApplicationMenu(InputStream is) throws AppException{
+		BasicMap<String,List<BasicMap<String,Object>>> rtn = new BasicMap<String,List<BasicMap<String,Object>>>();
+		List<BasicMap<String,Object>> applist = new ArrayList<BasicMap<String,Object>>();
+		List<BasicMap<String,Object>> rolelist = new ArrayList<BasicMap<String,Object>>();
+		SAXReader reader = new SAXReader();
+		try {
+			Document doc = reader.read(is);
+			Element root = doc.getRootElement();
+			if(!"apps".equals(root.getName())){
+				throw new AppException("导入应用文件格式错误");
+			}
+			
+			List<Element> apps = root.elements("app");
+			for(Element app : apps){
+				BasicMap<String,Object> ap = new BasicMap<String,Object>();
+				for(int i=0;i<app.attributeCount();i++){
+					ap.put(app.attribute(i).getName(),app.attribute(i).getValue());
+				}
+				applist.add(ap);
+				List<BasicMap<String,Object>> menus = new ArrayList<BasicMap<String,Object>>();
+				Element children = app.element("children");
+				if(children!=null){
+					iterElement(menus,children,null);
+					ap.put("children",menus);
+				}
+			}
+			
+			//<role>
+			List<Element> roles = root.elements("role");
+			for(Element role : roles){
+				BasicMap<String,Object> r = new BasicMap<String,Object>();
+				for(int i=0;i<role.attributeCount();i++){
+					r.put(role.attribute(i).getName(),role.attribute(i).getValue());
+				}
+				// <app>
+				List<Element> roleapps = role.elements("app");
+				if(roleapps!=null){
+					StringBuffer appcodes = new StringBuffer();
+					StringBuffer exclude = new StringBuffer();
+					for(Element app:roleapps){
+						appcodes.append("'" + app.attributeValue("appcode") + "'");
+						appcodes.append(",");
+						//排除app设定中的功能
+						//Element ec = app.element("exclude");
+						Element ec = role.element("exclude");
+						if(ec!=null){
+							List<Element> l = ec.elements("menu");
+							for(Element e:l){
+								exclude.append("'"+e.attributeValue("menucode")+"'");
+								exclude.append(",");
+							}
+						}
+					}
+					if(appcodes.length()>0){
+						appcodes.deleteCharAt(appcodes.length()-1);
+					}
+					r.put("appcodes", appcodes);
+					if(exclude.length()>0){
+						exclude.deleteCharAt(exclude.length()-1);
+					}
+					r.put("exclude", exclude.toString());
+				}
+				List<Element> rolemenus = role.elements("menu");
+				if(rolemenus!=null){
+					StringBuffer menucodes = new StringBuffer();
+					for(Element app:rolemenus){
+						menucodes.append("'" + app.attributeValue("menucode") + "'");
+						menucodes.append(",");
+					}
+					if(menucodes.length()>0){
+						menucodes.deleteCharAt(menucodes.length()-1);
+					}
+					r.put("menucodes", menucodes);
+				}
+				rolelist.add(r);
+			}
+		} catch (DocumentException e) {
+			throw new AppException("导入应用文件格式错误");
+		}
+		rtn.put("appmenus", applist);
+		rtn.put("rolemenus",rolelist);
+		return rtn;
+	}
+
+	private static void iterElement(List<BasicMap<String,Object>> menus,Element children,BasicMap<String,Object> parent){
+		if(children!=null){
+			List<Element> ms = children.elements("menu");
+			for(Element m : ms){
+				BasicMap<String,Object> menu = new BasicMap<String,Object>();
+				menu.put("SYSID",new SYSID());
+				menu.put("SORT", menus.size()+100);
+				for(int i=0;i<m.attributeCount();i++){
+					menu.put(m.attribute(i).getName(),m.attribute(i).getValue());
+				}
+				if(parent!=null){
+					menu.put("parentId",parent.get("SYSID"));
+				}
+				menus.add(menu);
+				iterElement(menus,m.element("children"),menu);
+			}
+		}
+	}
+	/**
+	 * 根据 application 及 menu 数据获取功能菜单的 url 地址
+	 * @param appmenu
+	 * @return
+	 */
+	public static String getMenuUrl(BasicMap<String,Object> appmenu,SingleSignOnClient ssoClient){
+		String proj = "";
+		String reqAddr = "";
+		if(Util.isEmpty(appmenu.get("PROJECT"))||String.valueOf(appmenu.get("PROJECT")).toLowerCase().contains("self")){
+			proj = "";
+		}else{
+			proj = StringUtil.toString(appmenu.get("PROJECT"));
+		}
+		if(Util.isEmpty(appmenu.get("REQADDRESS"))||String.valueOf(appmenu.get("REQADDRESS")).toLowerCase().contains("self")){
+			reqAddr = "";
+		}else{
+			reqAddr = StringUtil.toString(appmenu.get("REQADDRESS"));
+		}
+		String actionUri = StringUtil.toString(appmenu.get("ACTIONURI"));
+		String url = Util.isNotEmpty(actionUri)?( reqAddr + ("".equals(proj)?"":"/" + proj + "/") + actionUri):null;
+		if(actionUri!=null){
+			if(actionUri.toLowerCase().startsWith("http")){
+				url = actionUri;
+			}
+		}
+		if(url!=null){
+			if("true".equals(ssoClient.getShowToken())){
+				 if(url.contains("?")){
+					 url = url + "&token=" + ssoClient.getToken();
+				 }else{
+					 url = url +"?token=" + ssoClient.getToken();
+				 }
+			}
+			appmenu.put("url",url);
+		}
+		return url;
+	}
+}

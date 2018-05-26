@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="IM_FOOTPRINT" label="足迹信息">
+    <column field="F_FID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_AID" type="uuid" length="36" label="用户ID" required="true"/>
+    <column field="F_LAT" type="double" length="16" precision="12" label="纬度" required="true"/>
+    <column field="F_LNG" type="double" length="16" precision="12" label="经度" required="true"/>
+    <column field="F_STEP" type="integer" defaultValue="0" label="步数" remark="当前行走的步数(最终步数值）"/>
+    <column field="F_ALTITUDE" type="float" length="8" precision="2" defaultValue="0" label="海拔高度"/>
+    <column field="F_ADDRESS" type="string" length="200" label="地址"/>
+    <column field="F_DESCRIBE" type="string" length="200" label="位置描述"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_FOOTPRINT" field="F_FID"/>
+    <remark><![CDATA[mongodb:
+{
+ "_id" : "fafcafd6-97ea-47b5-83c0-81a043f58ba1",
+ "aid" : "8c5a0fb5-e863-47b2-8b98-2a398ef84156",
+ "address" : "中国内蒙古自治区呼和浩特市赛罕区先锋西巷",
+ "cts" : NumberLong("1506615033953"),
+ "uts" : NumberLong("1506615033953"),
+ "location" : {
+  "coordinates" : [
+   111.712512,//经度
+   40.832117  //纬度
+  ],
+  "type" : "Point"
+ },
+ "describe" : "在呼和浩特市自来水公司家属院附近",
+ "speed" : 0,
+ "STEP":1 //步数
+}]]></remark>
+  </table>
+</model>

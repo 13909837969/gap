@@ -1,0 +1,535 @@
+#ltrhao-spsAzbj-body-div{
+	position: absolute; 
+	top: 0px; 
+	bottom: 0px; 
+	right: 0px; 
+	left: 0px; 
+	background-color: #08304B; 
+	overflow: hidden;
+}
+#ltrhao-spsAzbj-body-div1{
+	height: 100%; 
+	width: 100%;
+}
+#das_mapID{
+	height: 100%;
+}
+#spsAzbj-container-left1{
+	position: absolute;
+	top: 20px;
+	right: 15px;
+	height: 50px;
+	width: 550px;
+	background: #ffffff;
+	box-sizing: border-box;
+	border-radius: 5px;
+	margin-bottom: 0px;
+	box-shadow: 0px 0px 5px #999;
+}
+#spsAzbj-container-left1-diva{
+	position: absolute;
+    left: 20px;
+    top: 10px;
+    border: 1px solid #ccc;
+    color:#ccc;
+    font-size: 18px;
+    border-radius: 3px;
+    text-align:center;
+    width: 100px;
+}
+.glyphicon-triangle-bottom{
+	position: absolute;
+    left: 90;
+    top: 13
+}
+#spsAzbj-span1{
+	position: absolute;
+    left: 270;
+    top: 12;
+}
+#spsAzbj-span2{
+	position: absolute;
+    left: 430;
+    top: 12;
+}
+#spsAzbj-container-left1-div2{
+	position: absolute;
+    left: 140px;
+    top: 10px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    color:#999;
+    border-radius:3px;
+    text-align:center;
+    width: 150px;
+}
+#spsAzbj-container-left1-div3{
+    position: absolute;
+    left: 300px;
+    top: 10px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    color: blue;
+    border-radius: 3px;
+    text-align:center;
+    width: 160px;
+}
+#spsAzbj-container-left1-div4{
+	position: absolute;
+    right: 15px;
+    top: 10px;
+    border:0px solid transparent;
+    border-radius: 5px;
+    padding: 3px 15px;
+    background-color:#128ef6;
+    box-sizing: border-box;
+    color:#ffffff;
+}
+#spsAzbj-container-left2 {
+	position: absolute;
+	bottom: 10px;
+	left: 15px;
+	height: 120px;
+	width: 350px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	margin-bottom: 0px;
+	box-shadow: 0px 0px 5px #999;
+}
+.glyphicon-stop{
+    color: #4CAF50;
+    font-size: 28px;
+    position: absolute;
+    top: 20px;
+    left: 27px;
+}
+.spsAzbj-container-left2-div1{
+	position: absolute;
+    left: 45px;
+    top: 25px;
+    font-size: 18px;
+    color:#f6a60b;
+}
+
+.spsAzbj-container-left2-div2{
+	position: absolute;
+    top: 60px;
+    left: 20px;
+    font-size: 18px;
+    color: #fff;
+}
+.spsAzbj-container-left2-div3{
+	position: absolute;
+    left: 160px;
+    font-size: 18px;
+    color: #fff;
+    top: 20px;
+}
+.spsAzbj-container-left2-div4{
+	position: absolute;
+    left: 280px;
+    font-size: 18px;
+    top: 20px;
+    color:#f6a60b;
+}
+.spsAzbj-container-left2-div5{
+	position: absolute;
+    left: 160px;
+    top: 60px;
+    font-size: 18px;
+    color: #fff;
+}
+.spsAzbj-container-left2-div6{
+	position: absolute;
+    top: 60;
+    right: 20;
+    font-size: 18;
+    color:#f6a60b;
+}
+.glyphicon-list-alt{
+	color:#ff0;
+    font-size: 28px;
+    position: absolute;
+    left: 50px;
+    top: 20px;
+}
+#spsAzbj-container-left2-div51{
+	position: absolute;
+    left:100px;
+    font-size: 22px;
+    color:#ff0;
+    top:18px;
+}
+#spsAzbj-container-left2-div52{
+	position: absolute;
+    font-size: 23px;
+    left: 50px;
+    top:60px;
+    color:#fff;
+}
+#spsAzbj-container-left3 {
+    position: absolute;
+    bottom: 10px;
+    left: 375;
+    height: 120px;
+    width: 350;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-bottom: 0px;
+    box-shadow: 0px 0px 5px #999;
+}
+#spsAzbj-container-left4 {
+    position: absolute;
+    bottom: 10px;
+    left: 735;
+    height: 120px;
+    width: 350;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-bottom: 0px;
+    box-shadow: 0px 0px 5px #999;
+}
+#spsAzbj-container-left5 {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    height: 120px;
+    width: 250;
+    box-sizing: border-box;
+    border-radius:5px;
+    margin-bottom: 0px;
+    box-shadow: 0px 0px 5px #999;
+}
+#spsAzbj-container-right1{
+	position: absolute;
+	top: 10px;
+	left: 15px;
+	height:75%;
+	width:470px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	margin-bottom: 0px;
+	box-shadow: 0px 0px 5px #999;
+}
+#spsAzbj-container-right1-div1{
+	position: absolute;
+    top: 10px;
+    left: 80px;
+    font-size: 20px;
+    color:#fff;
+}
+#spsAzbj-glyphicon-list{
+	padding-left: 30;
+}
+#spsAzbj-container-right1-div3{
+	color:#fff;
+}
+#spsAzbj-container-right1-div3-span1{
+	font-size: 16;
+    position: absolute;
+    top: 50;
+    left: 30;
+}
+#spsAzbj-container-right1-div3-span2{
+	font-size:16px;
+    position: absolute;
+    top:50px;
+    left:200px;
+}
+#spsAzbj-container-right1-div3-span3{
+	font-size:16px;
+    position:absolute;
+    top:50px;
+    left:310px;
+}
+#spsAzbj-container-right1-div4{
+	position: absolute;
+    top: 75px;
+    bottom:5px;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-right:20px;
+    overflow: auto;
+    width: 100%;
+}
+#spsAzbj-container-right2{
+	position: absolute;
+	top: 10px;
+	left: 12px;
+	height:75%;
+	width: 25%;
+	box-sizing: border-box;
+	border-radius: 5px;
+	margin-bottom: 0px;
+	box-shadow: 0px 0px 5px #999;
+} 
+#spsAzbj-container-right2-div1{
+	position: absolute;
+    top: 10px;
+    left: 50px;
+    font-size: 20px;
+    color:#fff;
+}
+
+#spsAzbj-container-right2-div3{
+	overflow:hidden;
+    height: 378;
+    padding: 0 auto;
+    /* background-color: #BDBDBD; */
+    margin-top: 40;
+}
+#spsAzbj-container-right2-div3-span1{
+	font-size: 16;
+    font-weight: bold;
+    position: absolute;
+    top: 90;
+    left: 20;
+}
+#spsAzbj-container-right2-div3-span2{
+	font-size: 16;
+    font-weight: bold;
+    position: absolute;
+    top: 90;
+    left: 160;
+}
+#spsAzbj-container-right2-div3-span3{
+	font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 90;
+    left: 240;
+}
+#spsAzbj-container-right2-div3-span4{
+	font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 90;
+    right: 20;
+}
+#spsAzbj-container-right2-div3-span5{
+	font-size: 16;
+    font-weight: bold;
+    position: absolute;
+    top: 90;
+    left: 80px;
+}
+.glyphicon-sort-by-attributes-alt{
+	padding-left:15px;
+}
+
+#spsAzbj-hidenDiv-div1{
+	height:35px;
+	border-bottom:1px solid #c0c0c0;
+    border-radius: 5px;
+}
+#spsAzbj-hidenDiv-div11{
+	margin-left:10px;
+	margin-top:16px;
+	font-weight:bold;
+	font-size:16px;
+}
+.table > tbody > tr > td
+ {
+  padding:8px;
+  color:#fff;
+  border-bottom:1px solid #409fd8;
+  border-top:0px ;
+}
+.badge{
+	height:25px;
+	display: inline-block;
+	padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius:0px;			
+}
+.table-hover>tbody>tr:hover{
+	background:#598faf;
+}	
+
+.hidden-div-li{
+	display:inline-block;
+	font-size:16px;
+	list-style: none;
+	font-weight:normal;
+	width:140px;
+}
+#ltrhao-sign{
+	width: 60px;
+    height: 10px;
+    background-color: #21a1d0;
+    position: absolute;
+    left: 23;
+    border:1px solid #2b92d4; 
+    border-radius:5px;
+    cursor:pointer; 
+    box-shadow:0 1px 2px rgba(0,0,0,.3); 
+    overflow:hidden;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#6cc3fe), to(#21a1d0));
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-name: breathe;
+    -webkit-animation-duration: 2700ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+}
+/*隐藏区域的div  的 样式*/
+#hidenDivBtn{
+	position: absolute; 
+	right:10px;
+	top:20px;
+	}	
+#spsAzbj-hidenDiv{
+	width: 480px;
+    background-color: #fff;
+    z-index:99999;
+    position: absolute;
+    top:80px;
+    right:85px;
+    box-shadow:1px 0px 3px #ccc;  
+	}
+#spsSqjz-hidenDiv-div1{
+	height:35px;
+	border-bottom:1px solid #E0E0E0;
+	}
+#spsSqjz-hidenDiv-div11{
+	font-size:18px;
+	color:#333;
+	margin-left:10px;
+	margin-top:16px;
+	}
+#spsSqjz-hidenDiv-qc{
+	font-size: 14px;
+    color: #ffffff;
+    background-color:#fb8c00;
+    position: absolute;
+    right: 85px;
+    top: 358px;
+}
+#spsSqjz-hidenDiv-qd{
+	font-size: 14px;
+    color: #ffffff;
+    background-color:#246af6;
+    position: absolute;
+    right: 20px;
+    top: 358px;
+}
+#spsSqjz-hidenDivSS{
+	height:300px;
+	overflow:auto;
+	}
+#spsSqjz-hidenDivBtn{
+	transform: scale(1.2);
+	position: absolute; 
+	right:15px;
+	top:20px;
+	}
+.btn-info{
+	background:#128ef6;
+	border:0px;
+	border-radius:5px;
+	}
+.btn-info:hover{
+	background:#3273f5;
+	border:0px;
+	border-radius:5px;
+	}
+.hidden-div-ul{
+	color:#666;
+	font-size:14px;
+	list-style: none;
+	cursor:pointer;
+	}
+.hidden-div-ul span{
+	font-size:18px;
+}
+.hidden-div-li{
+	width:210px;
+}
+#spsSqjz-hidenDivSS ul li ul{
+	padding-left:0px;
+}
+/*小三角写法*/
+.spssjfx-indicate{
+	width:10px;
+	height:10px;
+	position:absolute;
+	top:-20px;
+	left:50px;
+	border-style:solid;
+	border-width:10px;
+	border-color:transparent transparent #fff transparent;
+}
+/*不透明度样式*/
+.ltrhao-spsSqjz-body-rightSel-opacity{
+	position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: #0b0d0f;
+    opacity: 0.9;
+}
+.ltrhao-spsSqjz-body-rightSel-opacity2{
+	position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: #e44b09;
+    opacity: 0.9;
+}
+/*滚动条样式*/
+.spsAzbj-innerbox{
+    overflow-x: hidden;
+    overflow-y: auto;
+    color: #000;
+    font-size:22px;
+    font-family: "\5FAE\8F6F\96C5\9ED1",Helvetica,"黑体",Arial,Tahoma;
+    }
+    /*滚动条样式*/
+.spsAzbj-innerbox::-webkit-scrollbar {/*滚动条整体样式*/
+	width: 7px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+}
+.spsAzbj-innerbox::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+	border-radius: 10px;
+	/*-webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.2);*/
+    background:#a4cde5;
+    margin-right:2px;
+}
+/* .spsAzbj-innerbox::-webkit-scrollbar-track {滚动条里面轨道 
+	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius:10px;
+    background:#999;
+    margin-right:2px;
+} */
+/*隐藏区域滚动条********样式*/
+#spsSqjz-hidenDivSS{
+    overflow-x: hidden;
+    overflow-y: auto;
+    }
+    /*滚动条样式*/
+#spsSqjz-hidenDivSS::-webkit-scrollbar {/*滚动条整体样式*/
+	width: 7px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+    opacity:0.5;
+}
+#spsSqjz-hidenDivSS::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+	border-radius: 10px;
+	/*-webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.2);*/
+    background:#a4cde5;
+    margin-right:2px;
+    
+}
+/* #spsSqjz-hidenDivSS::-webkit-scrollbar-track {滚动条里面轨道 
+	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius:10px;
+    background:#999;
+    margin-right:2px;
+} */
+

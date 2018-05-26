@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="RMTJ_DCJZ_IMG" label="书面调解-人民调解调查封底相关照片">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="data" type="binary" label="图片数据"/>
+    <column field="mimetype" type="string" length="20" label="图像类型" remark="图片类型如：image/png"/>
+    <column field="DCJZID" type="uuid" length="36" label="人民调解调查卷宗ID"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_RMTJ_DCJZ_IMG" field="IMGID"/>
+  </table>
+</model>

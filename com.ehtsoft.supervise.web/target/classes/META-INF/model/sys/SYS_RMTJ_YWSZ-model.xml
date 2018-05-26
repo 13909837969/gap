@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_RMTJ_YWSZ" label="人民调解业务设置">
+    <column field="ID" type="string" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="LX" type="string" length="20" label="类型" remark="申请,调查,取证,记录,协议，回访，确认，说明，封底"/>
+    <column field="MC" type="string" length="100" label="名称"/>
+    <column field="URL" type="string" length="200" label="Android 编辑页面"/>
+    <column field="VURL" type="string" length="200" label="Android 查看页面"/>
+    <column field="SFJY" type="string" length="1" defaultValue="0" label="是否禁用" remark="是否禁用  1 是  0 否"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_SYS_RMTJ_YWSZ" field="ID"/>
+  </table>
+</model>

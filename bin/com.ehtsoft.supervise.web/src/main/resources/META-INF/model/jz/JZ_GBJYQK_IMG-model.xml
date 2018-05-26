@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_GBJYQK_IMG" label="个别教育情况签字记录表">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true" remark="矫正人员ID"/>
+    <column field="data" type="binary" label="头像数据"/>
+    <column field="mimetype" type="string" length="20" label="图像类型" remark="图片类型如：image/png"/>
+    <column field="PFHDDJID" type="uuid" length="36" label="普法宣传活动信息登记ID"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_GBJYQK_IMG" field="IMGID"/>
+  </table>
+</model>

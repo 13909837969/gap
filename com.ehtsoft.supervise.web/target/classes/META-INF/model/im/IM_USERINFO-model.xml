@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="IM_USERINFO" label="消息用户信息表">
+    <column field="F_AID" type="uuid" length="36" label="主键" required="true" remark="业务系统的人员主键"/>
+    <column field="F_CODE" type="string" length="20" label="编码" required="true" remark="业务系统的人员编码（唯一的）"/>
+    <column field="F_GENDER" type="string" length="2" label="性别"/>
+    <column field="F_NICKNAME" type="string" length="40" label="用户名/昵称" required="true"/>
+    <column field="F_PASSWORD" type="string" length="32" label="密码" required="true"/>
+    <column field="F_DISABLE" type="integer" length="1" defaultValue="0" label="是否禁用" remark="1 禁用 0 不禁用"/>
+    <column field="F_FLAG" type="integer" length="1" defaultValue="0" label="标记" remark="0 矫正人员  1 工作人员 2 机构"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" required="true" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" required="true" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_USERINFO" field="F_AID"/>
+    <unique name="UK_USERINFO_CODE" field="F_CODE"/>
+  </table>
+</model>

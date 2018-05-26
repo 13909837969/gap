@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Plugin
+Bundle-SymbolicName: com.ehtsoft.fw.plugin; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.ehtsoft.fw.plugin.Activator
+Bundle-Vendor: EHTSOFT
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.console,
+ org.eclipse.jface.text,
+ org.eclipse.core.resources,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: libs/jtds-1.2.8.jar,
+ libs/ojdbc14-10.2.0.4.0.jar,
+ libs/postgresql-9.3-1100-jdbc4.jar,
+ libs/dom4j-1.6.1.jar,
+ .

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_REGION" label="行政区划字典表" base="true">
+    <column field="REGIONID" type="string" length="20" label="主键" required="true" remark="默认初始化机构的 orgid 值（CORE_ORGANIZATION.SYSID)"/>
+    <column field="PARENTID" type="string" length="20" label="父级ID"/>
+    <column field="REGION_CODE" type="string" length="20" label="编码" required="true"/>
+    <column field="REGION_NAME" type="string" length="100" label="名称" required="true"/>
+    <column field="LVL" type="integer" length="2" label="机构类型" remark="机构类型（1、省   2、市  3、区 ）"/>
+    <column field="LFT" type="integer" label="左排序"/>
+    <column field="RGT" type="integer" label="右排序"/>
+    <column field="LAT" type="double" length="16" precision="12" label="纬度" required="true"/>
+    <column field="LNG" type="double" length="16" precision="12" label="经度" required="true"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_SYS_REGION" field="REGIONID"/>
+    <unique name="UK_SYS_REGION_REGION_CODE" field="REGION_CODE"/>
+  </table>
+</model>

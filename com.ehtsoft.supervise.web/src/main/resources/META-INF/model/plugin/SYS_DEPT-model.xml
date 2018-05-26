@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_DEPT" label="擎天-法律援助机构表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="DEPTLEADERS" type="string" length="50" label="部门负责人"/>
+    <column field="CHINANAME" type="string" length="50" label="部门名称"/>
+    <column field="PARENTID" type="string" length="50" label="上级部门"/>
+    <column field="DEPTTYPE" type="integer" length="4" label="单位性质"/>
+    <column field="REGIONCODE" type="string" length="50" label="区域代码"/>
+    <column field="ADDRESS" type="string" length="255" label="单位地址"/>
+    <column field="BUILDTIME" type="string" length="20" label="成立时间"/>
+    <column field="DEPTCLASS" type="string" length="10" label="单位类型1管理2法援"/>
+    <column field="DEPTYPE" type="string" length="3" label="单位种类（法援中心/管理处）"/>
+    <column field="DEPTSORT" type="integer" length="4" label="机构种类 1、法律援助中心  2、社会法援组织"/>
+    <column field="FEE" type="integer" length="5" label="独立经费"/>
+    <column field="BUSINESSRANGE" type="string" length="500" label="业务范围"/>
+    <column field="ACTUALNUM" type="integer" length="11" label="实有人数"/>
+    <column field="DEALEDCASENUM" type="integer" length="11" label="办理案件数"/>
+    <column field="CONNECTMODE" type="string" length="1000" label="联系方式"/>
+    <primary name="PK_SYS_DEPT" field="ID"/>
+  </table>
+</model>

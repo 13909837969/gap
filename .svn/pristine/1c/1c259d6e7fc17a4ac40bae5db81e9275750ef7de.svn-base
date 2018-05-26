@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_AUDIT_TEAM" label="审批工作小组">
+    <column field="F_TEAMID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_TEAMNAME" type="string" length="200" label="工作组名称" remark="如，司法所监管小组"/>
+    <column field="F_FLAG" type="integer" length="1" defaultValue="0" label="工作协调标记" remark="协调工作组标记：
+0 表示同组（同一个机构的同一级别）有一个审核通过，就走下一个流程
+1 表示同组（同一个机构的同一级别）所有相同级别的人审核通过后，就走下个流程"/>
+    <column field="F_BILLID" type="string" length="40" label="审批单据ID" required="true"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <primary name="PK_SYS_AUDIT_TEAM" field="F_TEAMID"/>
+  </table>
+</model>

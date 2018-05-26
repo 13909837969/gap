@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="IM_GROUP" label="群组信息" skip="true">
+    <column field="F_GID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_NAME" type="string" length="100" label="群组名" required="true"/>
+    <column field="F_AID" type="uuid" length="36" label="群主ID" required="true"/>
+    <column field="F_TYPE" type="integer" length="1" defaultValue="5" label="群类型" remark="见：GroupType 
+1.司法厅, 2.司法局,3.区司法局, 4.司法所, 9.工作群组"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_GROUP" field="F_GID"/>
+    <foreign name="FK_GROUP_AID" field="F_AID" reference="IM_USERINFO" referField="F_AID"/>
+  </table>
+</model>

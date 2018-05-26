@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_SQJZRYZTXXCJB" label="社区矫正人员状态信息采集表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_AID" type="uuid" length="36" label="社区矫正人员id"/>
+    <column field="SQJZRYBH" type="string" length="20" label="社区矫正人员编号" remark="编码见 9.7"/>
+    <column field="GLJB" type="string" length="20" label="管理级别" remark="SYS054"/>
+    <column field="JZTJ" type="string" length="20" label="居住条件" remark="SYS061"/>
+    <column field="SHLY" type="string" length="20" label="生活来源" remark="SYS062"/>
+    <column field="JYNL" type="string" length="20" label="就业能力" remark="SYS063"/>
+    <column field="ZKNL" type="string" length="20" label="自控能力" remark="SYS064"/>
+    <column field="HYJTGX" type="string" length="20" label="婚姻家庭关系" remark="SYS065"/>
+    <column field="JTCYHJZQK" type="string" length="20" label="家庭成员配合矫正情况" remark="SYS066"/>
+    <column field="JYZK" type="string" length="20" label="交友状况" remark="SYS067"/>
+    <column field="SHLLGX" type="string" length="20" label="社会邻里关系" remark="SYS068"/>
+    <column field="DSQJZDRSHJSCD" type="string" length="20" label="对社区矫正的认识和接受程度" remark="SYS069"/>
+    <column field="FXGLJZJSFQK" type="string" length="20" label="服从日常管理及遵纪守法情况" remark="SYS070"/>
+    <column field="JSJYQK" type="string" length="20" label="接受教育情况" remark="SYS071"/>
+    <column field="ZSQXJZDQK" type="string" length="20" label="遵守请销假制度情况" remark="SYS072"/>
+    <column field="WCSQFWQK" type="string" length="20" label="完成社区服务情况" remark="SYS073"/>
+    <column field="SXHBJGT" type="string" length="20" label="思想汇报及沟通" remark="SYS074"/>
+    <column field="CJJYJNPX" type="string" length="20" label="参加就业技能培训" remark="SYS075"/>
+    <column field="JZCJQK" type="string" length="20" label="矫正惩戒情况" remark="SYS076"/>
+    <column field="JTRYBGXX" type="string" length="20" label="家庭人员变故信息" remark="SYS077"/>
+    <column field="RZFFTD" type="string" length="20" label="认罪服法态度" remark="SYS078"/>
+    <column field="DSHDXT" type="string" length="20" label="对社会的心态" remark="SYS079"/>
+    <column field="DSHSFYXX" type="string" length="20" label="对生活是否有信心" remark="SYS080"/>
+    <column field="XLJKZK" type="string" length="20" label="心理健康状况" remark="SYS081"/>
+    <column field="CJR" type="string" length="20" label="采集人" remark="自填"/>
+    <column field="CJSJ" type="string" length="20" label="采集日期" remark="自填，格式按照 GB/T7408 中规定 yyyy-MM-dd"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_SQJZRYZTXXCJB" field="ID"/>
+  </table>
+</model>

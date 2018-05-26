@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<roles>
+  <role flag="1" rolename="平台管理员" frule="PSA" rolecode="PSA01">
+    <menu menucode="PSA01" menuname="系统管理"/>
+    <menu menucode="PSA0101" menuname="应用配置管理"/>
+    <menu menucode="PSA0102" menuname="PSA用户"/>
+    <menu menucode="PSA0104" menuname="功能菜单管理"/>
+    <menu menucode="PSA0105" menuname="功能角色管理"/>
+    <menu menucode="PSA0107" menuname="场景信息管理"/>
+    <menu menucode="PSA0108" menuname="数据库差异分析"/>
+  </role>
+  <role flag="1" rolename="机构管理员" frule="OSA" rolecode="OSA01">
+    <menu menucode="OSA01" menuname="系统管理"/>
+    <menu menucode="OSA0101" menuname="机构用户管理"/>
+    <menu menucode="OSA0102" menuname="功能角色管理"/>
+    <menu menucode="OSA0103" menuname="用户权限管理"/>
+    <menu menucode="OSA0104" menuname="登录首页设置"/>
+  </role>
+</roles>

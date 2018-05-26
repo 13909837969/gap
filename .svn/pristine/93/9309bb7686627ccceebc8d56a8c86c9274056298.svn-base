@@ -1,0 +1,466 @@
+package com.ehtsoft.supervise.services;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.ehtsoft.common.services.SSOService;
+import com.ehtsoft.fw.core.db.SQLAdapter;
+import com.ehtsoft.fw.core.db.SqlDbClient;
+import com.ehtsoft.fw.core.dto.Basic;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.services.AbstractService;
+import com.ehtsoft.fw.core.sso.User;
+import com.ehtsoft.fw.utils.NumberUtil;
+import com.ehtsoft.fw.utils.StringUtil;
+import com.ehtsoft.supervise.api.SupConst;
+
+/**
+ * 社区矫正-业务监管-数据报表用
+ * @author Lenovo
+ *
+ */
+@Service("SqjzYwjgSjbbService")
+public class SqjzYwjgSjbbService extends AbstractService{
+
+	@Resource(name = "sqlDbClient")
+	private SqlDbClient dbClient;
+	
+	@Resource(name = "SSOService")
+	private SSOService service;
+	
+	/**
+	 * 查找工作监管数据
+	 * @param orgid
+	 * @return
+	 */
+	public List<BasicMap<String, Object>> findAllData(String orgid,String likeGroupBy){
+		List<BasicMap<String, Object>> list = new ArrayList<BasicMap<String,Object>>();
+		
+		String groupBy = "GROUP BY a.jgmc ORDER BY a.jgmc DESC ";
+		String likeSfjGroupBy = " and a.jgmc like '%司法局' GROUP BY a.jgmc ORDER BY a.jgmc DESC ";
+		String likeSfsGroupBy = "and a.jgmc like '%司法所' GROUP BY a.jgmc ORDER BY a.jgmc DESC ";
+		//判断当前登录人是否为司法厅
+		if (NumberUtil.toInt(likeGroupBy)<4) {
+			list = findDatasfsOrsfj(orgid,likeSfjGroupBy);
+		}else {
+			list = findDatasfsOrsfj(orgid,likeSfsGroupBy);
+		}
+			
+		
+		return list;
+		
+	}
+	public List<BasicMap<String, Object>> findDatasfsOrsfj(String orgid,String likeSfsGroupBy){
+		
+		List<BasicMap<String, Object>> list1 = new ArrayList<BasicMap<String,Object>>();
+		
+		//------1----在册社区矫正人数  zcjzrs  宽松管理   kg 普通管理  pg 严格管理  yg
+		String str1 = "select a.jgmc,count(b.id) as zcsqjzrs, " + 
+				"sum(case when b.jglx='1' then 1 else 0 end) as ksgl, " + 
+				"sum(case when b.jglx='2' then 1 else 0 end) as ptgl, " + 
+				"sum(case when b.jglx='3' then 1 else 0 end) as yggl, " + 
+				"sum(case when b.bdqk>'01' then 1 else 0 end) as bdwg  " + 
+				"from jc_sfxzjgjbxx a " + 
+				"left JOIN JZ_JZRYJBXX b ON a.id = b.orgid " + 
+				"where a.parentid =  '"+orgid+"'" +likeSfsGroupBy;
+		SQLAdapter sql = new SQLAdapter(str1);
+		list1 = dbClient.find(sql);
+	
+		/*//-----2----矫正小组--jzxzrs 
+		 * select a.jgmc, COALESCE(count(c.xzid),0) as jzxzrs from jc_sfxzjgjbxx a 
+		left JOIN JZ_JZXZCY c  on c.orgid = a.id where a.parentid = 'NM0000000000-0000-0000-0000000-01422' and a.jgmc like '%司法所%'
+				group BY a.jgmc
+				ORDER BY a.jgmc DESC*/
+		String str2 = "select a.jgmc, COALESCE(count(c.xzid),0) as jzxz from jc_sfxzjgjbxx a " + 
+				"left JOIN JZ_JZXZCY c on c.orgid = a.ID and a.parentid = '"+orgid+"' "+likeSfsGroupBy;		
+		list1 = findDataUtil(list1, str2);
+		
+		//----3------帮困扶助--bkfzrs
+		String str3 = "select  a.jgmc, count(e.id) as bkfz from jc_sfxzjgjbxx a  left JOIN  JZ_BFXXCJB e on a.id = e.orgid " + 
+				"where a.parentid ='"+orgid+"' " +likeSfsGroupBy;
+		list1 = findDataUtil(list1, str3);
+		
+		//----4--------托管情况--tgqkrs
+		String str4 = "select a.jgmc, count(d.tgxxid) as  tggl from jc_sfxzjgjbxx a LEFT JOIN " + 
+				"JZ_TGXXCJB	d on a.id = d.orgid where a.parentid ='"+orgid+"'"+likeSfsGroupBy;
+		list1 = findDataUtil(list1, str4);
+		
+		//-----5-----集中教育--jzjyrs
+		String str5 = "select  a.jgmc, count(e.pxqkid) as zzjzjy from jc_sfxzjgjbxx a  left JOIN  JZ_PXQKDJB e on a.id = e.orgid " + 
+				"where a.parentid ='"+orgid+"' "+likeSfsGroupBy;
+		list1 = findDataUtil(list1, str5);
+		
+		//-----6-----个别教育--gbjyrs
+		String str6 = "select a.jgmc,count(f.pxqkid) as gbthjy from jc_sfxzjgjbxx a  LEFT JOIN  JZ_GBJYQK	f on a.id = f.orgid " + 
+				"where a.parentid ='"+orgid+"' "+likeSfsGroupBy;
+		list1 = findDataUtil(list1, str6);
+		
+		//-----7---------心里辅导
+		String str7 = "select  a.jgmc, count(e.id) as jxxlfd from jc_sfxzjgjbxx a  left JOIN  JZ_XLJZB e on a.id = e.orgid " + 
+				"where a.parentid ='"+orgid+"' "+likeSfsGroupBy;
+		list1 = findDataUtil(list1, str7);
+		
+		//-----8---------组织社区服务
+		String str8 = "select a.jgmc, COALESCE(sum(cast(g.sdrs as int)),0) as zzsqfw " + 
+				"from jc_sfxzjgjbxx a   LEFT JOIN  JZ_SQFWXX	g on a.id = g.orgid " + 
+				"where a.parentid ='"+orgid+"' "+likeSfsGroupBy;
+		list1 = findDataUtil(list1, str8);
+		//----9---------减刑  警告  治安处罚
+		String str9 = "select a.jgmc, " + 
+				"sum(case when h.jclb='01' then 1 else 0 end) as jg, " + 
+				"sum(case when h.jclb='02' then 1 else 0 end) as zacf, " + 
+				"sum(case when h.jclb='03' then 1 else 0 end) as jx  from jc_sfxzjgjbxx a " + 
+				"left JOIN JZ_SQJZRYJCXXCJB h on a.id = h.orgid  " + 
+				"where a.parentid = '"+orgid+"' "+likeSfsGroupBy;
+		list1 = findDataUtil(list1, str9);
+		
+		//----10---------收监执行
+		String str10 = "select a.jgmc,count(i.id) as sjzz from jc_sfxzjgjbxx a  LEFT JOIN  JZ_TQSJZXXXCJB	i on a.id = i.orgid " + 
+				"where a.parentid ='"+orgid+"' "+likeSfsGroupBy;
+		list1 = findDataUtil(list1, str10);
+				
+		//----11---------在犯罪信息
+		String str11 = "select a.jgmc,count(j.id) as zfz  from jc_sfxzjgjbxx a " + 
+				"LEFT JOIN  JZ_SQJZRYZJZQJZFZXXCJB	j on a.id = j.orgid " + 
+				"where a.parentid ='"+orgid+"' "+likeSfsGroupBy;
+		list1 = findDataUtil(list1, str11);
+		
+		//----12--------接受委托---完成评估--采信--
+		String str12 = "select a.jgmc, " + 
+				"sum(case when k.sfdcpg='1' then 1 else 0 end) as jswt, " + 
+				"sum(case when k.DCYJCXQK='01' then 1 else 0 end) as cx, " + 
+				"sum(case when k.DCPGYJ='01' then 1 else 0 end) as wcpg " + 
+				"from jc_sfxzjgjbxx a  " + 
+				"LEFT JOIN JZ_JZRYJBXX_JZ k on a.id = k.orgid  where a.parentid = '"+orgid+"' "+likeSfsGroupBy;
+		list1 = findDataUtil(list1, str12);
+		
+		//----13------队伍建设-----志愿者03---专职工作者01--社会工作者02---
+		String str13 = "select a.jgmc, " + 
+				"sum(case when k.XZCYLX='01' then 1 else 0 end) as zzgzz, " + 
+				"sum(case when k.XZCYLX='02' then 1 else 0 end) as zzshgzz, " + 
+				"sum(case when k.XZCYLX='03' then 1 else 0 end) as shzyz " + 
+				"from jc_sfxzjgjbxx a " + 
+				"LEFT JOIN JZ_JZXZCY k on a.id = k.orgid  where a.parentid = '"+orgid+"' "+likeSfsGroupBy;
+		list1 = findDataUtil(list1, str13);
+		
+		//----14---就业基地02--社区服务基地01-教育基地03----社区矫正中心99----
+				String str14 = "select a.jgmc, " + 
+						"sum(case when k.JDLX='01' then 1 else 0 end) as yjlsqfwjd, " + 
+						"sum(case when k.JDLX='02' then 1 else 0 end) as yjljyjd, " + 
+						"sum(case when k.JDLX='03' then 1 else 0 end) as jyjdyjl, " + 
+						"sum(case when k.JDLX='99' then 1 else 0 end) as yjlsqjzzx " + 
+						"from jc_sfxzjgjbxx a  " + 
+						"LEFT JOIN ANZBJ_AZBJJDJSXXCJB k on a.id = k.orgid  where a.parentid = '"+orgid+"' "+likeSfsGroupBy;
+				list1 = findDataUtil(list1, str14);
+				
+		return list1;
+		
+		
+	}
+	/**
+	 * 拼接查询数据
+	 * @param list
+	 * @param sql
+	 * @return
+	 */
+	public List<BasicMap<String, Object>> findDataUtil(List<BasicMap<String, Object>> list,String sql){
+		List<BasicMap<String, Object>> list1 = new ArrayList<BasicMap<String,Object>>();
+		//sql
+		SQLAdapter sqlData = new SQLAdapter(sql);
+		list1 = dbClient.find(sqlData);
+		//总list
+		for (BasicMap<String, Object> basicMap : list) {
+			for (BasicMap<String, Object> basicMap1 : list1) {
+				if (basicMap.get("jgmc").equals(basicMap1.get("jgmc"))) {
+					//名字一样则放入
+					basicMap.putAll(basicMap1);
+				}
+			}
+		}
+		return list;
+	}
+	
+	/**
+	 * 每天晚上12点执行一次入库操作
+	 * 计算增量在入库
+	 */
+	public void saveIncrement(){
+		//入库司法所
+		//查询rep_gzjgxxcjb表中所有数据
+		String str = "select distinct orgid,jgmc,parentid from  rep_gzjgxxcjb where jgmc like '%司法局' ";
+		SQLAdapter sql = new SQLAdapter(str);
+		//根据id一条一条查
+		List<BasicMap<String,Object>> list = dbClient.find(sql);
+		//循环查询下级司法所的所有工作报表字段
+		for (BasicMap<String, Object> basicMap : list) {
+			String strBiao = "select jgmc, " + 
+					"sum(cast(zcsqjzrs as int)) as zcsqjzrs,sum(cast(jzxz as int)) as jzxz,sum(cast(bkfz as int)) as bkfz, " + 
+					"sum(cast(ksgl as int)) as ksgl,sum(cast(ptgl as int)) as ptgl,sum(cast(yggl as int)) as yggl, " + 
+					"sum(cast(bdwg as int)) as bdwg,sum(cast(tggl as int)) as tggl,sum(cast(zzjzjy as int)) as zzjzjy, " + 
+					"sum(cast(gbthjy as int)) as gbthjy,sum(cast(jxxlfd as int)) as jxxlfd,sum(cast(zzsqfw as int)) as zzsqfw, " + 
+					"sum(cast(jx as int)) as jx,sum(cast(jg as int)) as jg,sum(cast(zacf as int)) as zacf, " + 
+					"sum(cast(sjzz as int)) as sjzz,sum(cast(zfz as int)) as zfz,sum(cast(jswt as int)) as jswt, " + 
+					"sum(cast(wcpg as int)) as wcpg,sum(cast(cx as int)) as cx,sum(cast(zzgzry as int)) as zzgzry, " + 
+					"sum(cast(zzshgzz as int)) as zzshgzz,sum(cast(shzyz as int)) as shzyz,sum(cast(yjljyjd as int)) as yjljyjd, " + 
+					"sum(cast(jyjdyjl as int)) as jyjdyjl,sum(cast(yjlsqfwjd as int)) as yjlsqfwjd,sum(cast(yjlsqjzzx as int)) as yjlsqjzzx  " + 
+					"from rep_gzjgxxcjb where parentid = '"+basicMap.get("orgid")+"' " + 
+					"group by jgmc " + 
+					"order by jgmc desc ";
+			SQLAdapter sqlBiao = new SQLAdapter(strBiao);
+			//查找表rep_gzjgxxcjb中的数据
+			List<BasicMap<String, Object>> listBiaoData = dbClient.find(sqlBiao);
+			//判断名字
+			if(StringUtil.toEmptyString(basicMap.get("jgmc")).endsWith("司法局")){
+			//查找所有表中数据
+				List<BasicMap<String, Object>> listAllData = findAllData(StringUtil.toEmptyString(basicMap.get("orgid")),"4");
+				for (BasicMap<String, Object> mapBiaoData : listBiaoData) {
+					for (BasicMap<String, Object> mapAllData : listAllData) {
+						String str11 = "select id,parentid from jc_sfxzjgjbxx where jgmc ='"+mapBiaoData.get("jgmc")+"'";
+						List<BasicMap<String, Object>> listCm = dbClient.find(new SQLAdapter(str11));
+						for (BasicMap<String, Object> mapCm : listCm) {
+							
+							if (mapBiaoData.get("jgmc").equals(mapAllData.get("jgmc")) && basicMap.get("orgid").equals(mapCm.get("parentid"))) {
+								//存放司法所增量数据
+								BasicMap<String, Object> resultMap = new BasicMap<String, Object>();
+								resultMap.put("jgmc", mapBiaoData.get("jgmc"));
+								resultMap.put("parentid",mapCm.get("parentid"));
+								resultMap.put("orgid", mapCm.get("id"));
+								
+								//计算增量
+								resultMap.put("zcsqjzrs",NumberUtil.toInt(mapAllData.get("zcsqjzrs"))-NumberUtil.toInt(mapBiaoData.get("zcsqjzrs")));
+								resultMap.put("ksgl",NumberUtil.toInt(mapAllData.get("ksgl"))-NumberUtil.toInt(mapBiaoData.get("ksgl")));
+								resultMap.put("ptgl",NumberUtil.toInt(mapAllData.get("ptgl"))-NumberUtil.toInt(mapBiaoData.get("ptgl")));
+								resultMap.put("yggl",NumberUtil.toInt(mapAllData.get("yggl"))-NumberUtil.toInt(mapBiaoData.get("yggl")));
+								
+								resultMap.put("jzxz",NumberUtil.toInt(mapAllData.get("jzxz"))-NumberUtil.toInt(mapBiaoData.get("jzxz")));
+								resultMap.put("bkfz",NumberUtil.toInt(mapAllData.get("bkfz"))-NumberUtil.toInt(mapBiaoData.get("bkfz")));
+								resultMap.put("bdwg",NumberUtil.toInt(mapAllData.get("bdwg"))-NumberUtil.toInt(mapBiaoData.get("bdwg")));
+								resultMap.put("tggl",NumberUtil.toInt(mapAllData.get("tggl"))-NumberUtil.toInt(mapBiaoData.get("tggl")));
+								resultMap.put("zzjzjy",NumberUtil.toInt(mapAllData.get("zzjzjy"))-NumberUtil.toInt(mapBiaoData.get("zzjzjy")));
+								resultMap.put("gbthjy",NumberUtil.toInt(mapAllData.get("gbthjy"))-NumberUtil.toInt(mapBiaoData.get("gbthjy")));
+								resultMap.put("jxxlfd",NumberUtil.toInt(mapAllData.get("jxxlfd"))-NumberUtil.toInt(mapBiaoData.get("jxxlfd")));
+								resultMap.put("zzsqfw",NumberUtil.toInt(mapAllData.get("zzsqfw"))-NumberUtil.toInt(mapBiaoData.get("zzsqfw")));
+								resultMap.put("jx",NumberUtil.toInt(mapAllData.get("jx"))-NumberUtil.toInt(mapBiaoData.get("jx")));
+								resultMap.put("jg",NumberUtil.toInt(mapAllData.get("jg"))-NumberUtil.toInt(mapBiaoData.get("jg")));
+								resultMap.put("zacf",NumberUtil.toInt(mapAllData.get("zacf"))-NumberUtil.toInt(mapBiaoData.get("zacf")));
+								resultMap.put("sjzz",NumberUtil.toInt(mapAllData.get("sjzz"))-NumberUtil.toInt(mapBiaoData.get("sjzz")));
+								resultMap.put("zfz",NumberUtil.toInt(mapAllData.get("zfz"))-NumberUtil.toInt(mapBiaoData.get("zfz")));
+								resultMap.put("jswt",NumberUtil.toInt(mapAllData.get("jswt"))-NumberUtil.toInt(mapBiaoData.get("jswt")));
+								resultMap.put("wcpg",NumberUtil.toInt(mapAllData.get("wcpg"))-NumberUtil.toInt(mapBiaoData.get("wcpg")));
+								resultMap.put("cx",NumberUtil.toInt(mapAllData.get("cx"))-NumberUtil.toInt(mapBiaoData.get("cx")));
+								resultMap.put("zzgzry",NumberUtil.toInt(mapAllData.get("zzgzry"))-NumberUtil.toInt(mapBiaoData.get("zzgzry")));
+								resultMap.put("zzshgzz",NumberUtil.toInt(mapAllData.get("zzshgzz"))-NumberUtil.toInt(mapBiaoData.get("zzshgzz")));
+								resultMap.put("shzyz",NumberUtil.toInt(mapAllData.get("shzyz"))-NumberUtil.toInt(mapBiaoData.get("shzyz")));
+								resultMap.put("yjljyjd",NumberUtil.toInt(mapAllData.get("yjljyjd"))-NumberUtil.toInt(mapBiaoData.get("yjljyjd")));
+								resultMap.put("jyjdyjl",NumberUtil.toInt(mapAllData.get("jyjdyjl"))-NumberUtil.toInt(mapBiaoData.get("jyjdyjl")));
+								resultMap.put("yjlsqfwjd",NumberUtil.toInt(mapAllData.get("yjlsqfwjd"))-NumberUtil.toInt(mapBiaoData.get("yjlsqfwjd")));
+								resultMap.put("yjlsqjzzx",NumberUtil.toInt(mapAllData.get("yjlsqjzzx"))-NumberUtil.toInt(mapBiaoData.get("yjlsqjzzx")));
+
+								dbClient.insert(SupConst.Collections.REP_GZJGXXCJB, resultMap);
+								System.out.println("初始化"+mapBiaoData.get("jgmc")+"-------ok");
+							}
+						}
+					}
+				}
+			}
+		}
+			//入库盟市司法局
+			List<BasicMap<String, Object>> listMssfjAllData = findAllData("NM0000000000-0000-0000-0000000-00001", "1");
+			for (BasicMap<String, Object> mapMssfjAllData : listMssfjAllData) {
+				//根据厅级orgidRep_gzjgxxcib中对应机构的sum集合
+				String strMsBiao = "select jgmc, " + 
+						"sum(cast(zcsqjzrs as int)) as zcsqjzrs,sum(cast(jzxz as int)) as jzxz,sum(cast(bkfz as int)) as bkfz, " + 
+						"sum(cast(ksgl as int)) as ksgl,sum(cast(ptgl as int)) as ptgl,sum(cast(yggl as int)) as yggl, " + 
+						"sum(cast(bdwg as int)) as bdwg,sum(cast(tggl as int)) as tggl,sum(cast(zzjzjy as int)) as zzjzjy, " + 
+						"sum(cast(gbthjy as int)) as gbthjy,sum(cast(jxxlfd as int)) as jxxlfd,sum(cast(zzsqfw as int)) as zzsqfw, " + 
+						"sum(cast(jx as int)) as jx,sum(cast(jg as int)) as jg,sum(cast(zacf as int)) as zacf, " + 
+						"sum(cast(sjzz as int)) as sjzz,sum(cast(zfz as int)) as zfz,sum(cast(jswt as int)) as jswt, " + 
+						"sum(cast(wcpg as int)) as wcpg,sum(cast(cx as int)) as cx,sum(cast(zzgzry as int)) as zzgzry, " + 
+						"sum(cast(zzshgzz as int)) as zzshgzz,sum(cast(shzyz as int)) as shzyz,sum(cast(yjljyjd as int)) as yjljyjd, " + 
+						"sum(cast(jyjdyjl as int)) as jyjdyjl,sum(cast(yjlsqfwjd as int)) as yjlsqfwjd,sum(cast(yjlsqjzzx as int)) as yjlsqjzzx  " + 
+						"from rep_gzjgxxcjb where parentid = 'NM0000000000-0000-0000-0000000-00001' " + 
+						"group by jgmc " + 
+						"order by jgmc desc ";
+				SQLAdapter sqlMsBiao = new SQLAdapter(strMsBiao);
+				//查找表rep_gzjgxxcjb中的数据
+				List<BasicMap<String, Object>> listMsBiaoData = dbClient.find(sqlMsBiao);
+				//循环计算增量
+				for (BasicMap<String, Object> mapMsBiaoData : listMsBiaoData) {
+					//查找当前数据
+					BasicMap<String, Object> bm = dbClient.findOne("select distinct orgid,parentid,jgmc from rep_gzjgxxcjb where jgmc = ?",mapMsBiaoData.get("jgmc"));
+					if (mapMsBiaoData.get("jgmc").equals(mapMssfjAllData.get("jgmc"))) {
+						//存放盟市司法局增量数据
+						BasicMap<String, Object> resultMap = new BasicMap<String, Object>();
+						//safadsfaf
+						resultMap.put("jgmc", mapMsBiaoData.get("jgmc"));
+						resultMap.put("parentid",bm.get("parentid"));
+						resultMap.put("orgid", bm.get("orgid"));
+						//计算增量
+						resultMap.put("zcsqjzrs",NumberUtil.toInt(mapMssfjAllData.get("zcsqjzrs"))-NumberUtil.toInt(mapMsBiaoData.get("zcsqjzrs")));
+						resultMap.put("ksgl",NumberUtil.toInt(mapMssfjAllData.get("ksgl"))-NumberUtil.toInt(mapMsBiaoData.get("ksgl")));
+						resultMap.put("ptgl",NumberUtil.toInt(mapMssfjAllData.get("ptgl"))-NumberUtil.toInt(mapMsBiaoData.get("ptgl")));
+						resultMap.put("yggl",NumberUtil.toInt(mapMssfjAllData.get("yggl"))-NumberUtil.toInt(mapMsBiaoData.get("yggl")));
+						
+						resultMap.put("jzxz",NumberUtil.toInt(mapMssfjAllData.get("jzxz"))-NumberUtil.toInt(mapMsBiaoData.get("jzxz")));
+						resultMap.put("bkfz",NumberUtil.toInt(mapMssfjAllData.get("bkfz"))-NumberUtil.toInt(mapMsBiaoData.get("bkfz")));
+						resultMap.put("bdwg",NumberUtil.toInt(mapMssfjAllData.get("bdwg"))-NumberUtil.toInt(mapMsBiaoData.get("bdwg")));
+						resultMap.put("tggl",NumberUtil.toInt(mapMssfjAllData.get("tggl"))-NumberUtil.toInt(mapMsBiaoData.get("tggl")));
+						resultMap.put("zzjzjy",NumberUtil.toInt(mapMssfjAllData.get("zzjzjy"))-NumberUtil.toInt(mapMsBiaoData.get("zzjzjy")));
+						resultMap.put("gbthjy",NumberUtil.toInt(mapMssfjAllData.get("gbthjy"))-NumberUtil.toInt(mapMsBiaoData.get("gbthjy")));
+						resultMap.put("jxxlfd",NumberUtil.toInt(mapMssfjAllData.get("jxxlfd"))-NumberUtil.toInt(mapMsBiaoData.get("jxxlfd")));
+						resultMap.put("zzsqfw",NumberUtil.toInt(mapMssfjAllData.get("zzsqfw"))-NumberUtil.toInt(mapMsBiaoData.get("zzsqfw")));
+						resultMap.put("jx",NumberUtil.toInt(mapMssfjAllData.get("jx"))-NumberUtil.toInt(mapMsBiaoData.get("jx")));
+						resultMap.put("jg",NumberUtil.toInt(mapMssfjAllData.get("jg"))-NumberUtil.toInt(mapMsBiaoData.get("jg")));
+						resultMap.put("zacf",NumberUtil.toInt(mapMssfjAllData.get("zacf"))-NumberUtil.toInt(mapMsBiaoData.get("zacf")));
+						resultMap.put("sjzz",NumberUtil.toInt(mapMssfjAllData.get("sjzz"))-NumberUtil.toInt(mapMsBiaoData.get("sjzz")));
+						resultMap.put("zfz",NumberUtil.toInt(mapMssfjAllData.get("zfz"))-NumberUtil.toInt(mapMsBiaoData.get("zfz")));
+						resultMap.put("jswt",NumberUtil.toInt(mapMssfjAllData.get("jswt"))-NumberUtil.toInt(mapMsBiaoData.get("jswt")));
+						resultMap.put("wcpg",NumberUtil.toInt(mapMssfjAllData.get("wcpg"))-NumberUtil.toInt(mapMsBiaoData.get("wcpg")));
+						resultMap.put("cx",NumberUtil.toInt(mapMssfjAllData.get("cx"))-NumberUtil.toInt(mapMsBiaoData.get("cx")));
+						resultMap.put("zzgzry",NumberUtil.toInt(mapMssfjAllData.get("zzgzry"))-NumberUtil.toInt(mapMsBiaoData.get("zzgzry")));
+						resultMap.put("zzshgzz",NumberUtil.toInt(mapMssfjAllData.get("zzshgzz"))-NumberUtil.toInt(mapMsBiaoData.get("zzshgzz")));
+						resultMap.put("shzyz",NumberUtil.toInt(mapMssfjAllData.get("shzyz"))-NumberUtil.toInt(mapMsBiaoData.get("shzyz")));
+						resultMap.put("yjljyjd",NumberUtil.toInt(mapMssfjAllData.get("yjljyjd"))-NumberUtil.toInt(mapMsBiaoData.get("yjljyjd")));
+						resultMap.put("jyjdyjl",NumberUtil.toInt(mapMssfjAllData.get("jyjdyjl"))-NumberUtil.toInt(mapMsBiaoData.get("jyjdyjl")));
+						resultMap.put("yjlsqfwjd",NumberUtil.toInt(mapMssfjAllData.get("yjlsqfwjd"))-NumberUtil.toInt(mapMsBiaoData.get("yjlsqfwjd")));
+						resultMap.put("yjlsqjzzx",NumberUtil.toInt(mapMssfjAllData.get("yjlsqjzzx"))-NumberUtil.toInt(mapMsBiaoData.get("yjlsqjzzx")));
+
+						dbClient.insert(SupConst.Collections.REP_GZJGXXCJB, resultMap);
+						System.out.println("初始化"+mapMsBiaoData.get("jgmc")+"-------ok");
+						//入库旗县司法局
+						String strQx = "select * from Rep_gzjgxxcjb where parentid = "+resultMap.get("orgid");
+						List<BasicMap<String, Object>>  listQxAllData = findAllData(StringUtil.toEmptyString(resultMap.get("orgid")), "3");
+						for (BasicMap<String, Object> mapQxAllData : listQxAllData) {
+							String strQxBiao = "select jgmc, " + 
+									"sum(cast(zcsqjzrs as int)) as zcsqjzrs,sum(cast(jzxz as int)) as jzxz,sum(cast(bkfz as int)) as bkfz, " + 
+									"sum(cast(ksgl as int)) as ksgl,sum(cast(ptgl as int)) as ptgl,sum(cast(yggl as int)) as yggl, " + 
+									"sum(cast(bdwg as int)) as bdwg,sum(cast(tggl as int)) as tggl,sum(cast(zzjzjy as int)) as zzjzjy, " + 
+									"sum(cast(gbthjy as int)) as gbthjy,sum(cast(jxxlfd as int)) as jxxlfd,sum(cast(zzsqfw as int)) as zzsqfw, " + 
+									"sum(cast(jx as int)) as jx,sum(cast(jg as int)) as jg,sum(cast(zacf as int)) as zacf, " + 
+									"sum(cast(sjzz as int)) as sjzz,sum(cast(zfz as int)) as zfz,sum(cast(jswt as int)) as jswt, " + 
+									"sum(cast(wcpg as int)) as wcpg,sum(cast(cx as int)) as cx,sum(cast(zzgzry as int)) as zzgzry, " + 
+									"sum(cast(zzshgzz as int)) as zzshgzz,sum(cast(shzyz as int)) as shzyz,sum(cast(yjljyjd as int)) as yjljyjd, " + 
+									"sum(cast(jyjdyjl as int)) as jyjdyjl,sum(cast(yjlsqfwjd as int)) as yjlsqfwjd,sum(cast(yjlsqjzzx as int)) as yjlsqjzzx  " + 
+									"from rep_gzjgxxcjb where parentid = '"+resultMap.get("orgid")+"' " + 
+									"group by jgmc " + 
+									"order by jgmc desc ";
+							SQLAdapter sqlQxBiao = new SQLAdapter(strQxBiao);
+							//查找表rep_gzjgxxcjb中的数据
+							List<BasicMap<String, Object>> listQxBiaoData = dbClient.find(sqlQxBiao);
+							for (BasicMap<String, Object> mapQxBiaoData : listQxBiaoData) {
+								//查找当前数据
+								BasicMap<String, Object> bmQx = dbClient.findOne("select distinct orgid,parentid,jgmc from rep_gzjgxxcjb where jgmc = ?",mapQxBiaoData.get("jgmc"));
+								if (mapQxBiaoData.get("jgmc").equals(mapQxAllData.get("jgmc"))) {
+									//存放盟市司法局增量数据
+									BasicMap<String, Object> resultQxMap = new BasicMap<String, Object>();
+									//safadsfaf
+									resultQxMap.put("jgmc", mapQxBiaoData.get("jgmc"));
+									resultQxMap.put("parentid",bmQx.get("parentid"));
+									resultQxMap.put("orgid", bmQx.get("orgid"));
+									//计算增量
+									resultQxMap.put("zcsqjzrs",NumberUtil.toInt(mapQxAllData.get("zcsqjzrs"))-NumberUtil.toInt(mapQxBiaoData.get("zcsqjzrs")));
+									resultQxMap.put("ksgl",NumberUtil.toInt(mapQxAllData.get("ksgl"))-NumberUtil.toInt(mapQxBiaoData.get("ksgl")));
+									resultQxMap.put("ptgl",NumberUtil.toInt(mapQxAllData.get("ptgl"))-NumberUtil.toInt(mapQxBiaoData.get("ptgl")));
+									resultQxMap.put("yggl",NumberUtil.toInt(mapQxAllData.get("yggl"))-NumberUtil.toInt(mapQxBiaoData.get("yggl")));
+									
+									resultQxMap.put("jzxz",NumberUtil.toInt(mapQxAllData.get("jzxz"))-NumberUtil.toInt(mapQxBiaoData.get("jzxz")));
+									resultQxMap.put("bkfz",NumberUtil.toInt(mapQxAllData.get("bkfz"))-NumberUtil.toInt(mapQxBiaoData.get("bkfz")));
+									resultQxMap.put("bdwg",NumberUtil.toInt(mapQxAllData.get("bdwg"))-NumberUtil.toInt(mapQxBiaoData.get("bdwg")));
+									resultQxMap.put("tggl",NumberUtil.toInt(mapQxAllData.get("tggl"))-NumberUtil.toInt(mapQxBiaoData.get("tggl")));
+									resultQxMap.put("zzjzjy",NumberUtil.toInt(mapQxAllData.get("zzjzjy"))-NumberUtil.toInt(mapQxBiaoData.get("zzjzjy")));
+									resultQxMap.put("gbthjy",NumberUtil.toInt(mapQxAllData.get("gbthjy"))-NumberUtil.toInt(mapQxBiaoData.get("gbthjy")));
+									resultQxMap.put("jxxlfd",NumberUtil.toInt(mapQxAllData.get("jxxlfd"))-NumberUtil.toInt(mapQxBiaoData.get("jxxlfd")));
+									resultQxMap.put("zzsqfw",NumberUtil.toInt(mapQxAllData.get("zzsqfw"))-NumberUtil.toInt(mapQxBiaoData.get("zzsqfw")));
+									resultQxMap.put("jx",NumberUtil.toInt(mapQxAllData.get("jx"))-NumberUtil.toInt(mapQxBiaoData.get("jx")));
+									resultQxMap.put("jg",NumberUtil.toInt(mapQxAllData.get("jg"))-NumberUtil.toInt(mapQxBiaoData.get("jg")));
+									resultQxMap.put("zacf",NumberUtil.toInt(mapQxAllData.get("zacf"))-NumberUtil.toInt(mapQxBiaoData.get("zacf")));
+									resultQxMap.put("sjzz",NumberUtil.toInt(mapQxAllData.get("sjzz"))-NumberUtil.toInt(mapQxBiaoData.get("sjzz")));
+									resultQxMap.put("zfz",NumberUtil.toInt(mapQxAllData.get("zfz"))-NumberUtil.toInt(mapQxBiaoData.get("zfz")));
+									resultQxMap.put("jswt",NumberUtil.toInt(mapQxAllData.get("jswt"))-NumberUtil.toInt(mapQxBiaoData.get("jswt")));
+									resultQxMap.put("wcpg",NumberUtil.toInt(mapQxAllData.get("wcpg"))-NumberUtil.toInt(mapQxBiaoData.get("wcpg")));
+									resultQxMap.put("cx",NumberUtil.toInt(mapQxAllData.get("cx"))-NumberUtil.toInt(mapQxBiaoData.get("cx")));
+									resultQxMap.put("zzgzry",NumberUtil.toInt(mapQxAllData.get("zzgzry"))-NumberUtil.toInt(mapQxBiaoData.get("zzgzry")));
+									resultQxMap.put("zzshgzz",NumberUtil.toInt(mapQxAllData.get("zzshgzz"))-NumberUtil.toInt(mapQxBiaoData.get("zzshgzz")));
+									resultQxMap.put("shzyz",NumberUtil.toInt(mapQxAllData.get("shzyz"))-NumberUtil.toInt(mapQxBiaoData.get("shzyz")));
+									resultQxMap.put("yjljyjd",NumberUtil.toInt(mapQxAllData.get("yjljyjd"))-NumberUtil.toInt(mapQxBiaoData.get("yjljyjd")));
+									resultQxMap.put("jyjdyjl",NumberUtil.toInt(mapQxAllData.get("jyjdyjl"))-NumberUtil.toInt(mapQxBiaoData.get("jyjdyjl")));
+									resultQxMap.put("yjlsqfwjd",NumberUtil.toInt(mapQxAllData.get("yjlsqfwjd"))-NumberUtil.toInt(mapQxBiaoData.get("yjlsqfwjd")));
+									resultQxMap.put("yjlsqjzzx",NumberUtil.toInt(mapQxAllData.get("yjlsqjzzx"))-NumberUtil.toInt(mapQxBiaoData.get("yjlsqjzzx")));
+
+									dbClient.insert(SupConst.Collections.REP_GZJGXXCJB, resultQxMap);
+									System.out.println("初始化"+mapQxBiaoData.get("jgmc")+"-------ok");
+							}
+							
+						}
+					}
+				}
+			}
+		}	
+	}
+	
+	/**
+	 * 初始化增量表(rep_gzjgxxcjb)
+	 */
+	
+	//司法所参数为旗县司法局的id
+	public void saveSfs(String orgid) {
+		
+			//查询当前旗县局下所有司法所
+			List<BasicMap<String, Object>> listAll = findAllData(orgid,"4");
+			for (BasicMap<String, Object> basicMap : listAll) {
+				//司法所入库(mmp有重名的)
+				String str = "select id,parentid from jc_sfxzjgjbxx where jgmc ='"+basicMap.get("jgmc")+"'";
+				List<BasicMap<String, Object>> list = dbClient.find(new SQLAdapter(str));
+				for (BasicMap<String, Object> basicMap2 : list) {
+					
+					if (orgid.equals(basicMap2.get("parentid"))) {
+						
+						basicMap.put("parentid",basicMap2.get("parentid"));
+						basicMap.put("orgid",basicMap2.get("id"));
+						//basicMap.put("id",basicMap1.get("id"));
+						dbClient.insert(SupConst.Collections.REP_GZJGXXCJB, basicMap);
+					}
+				}
+			}
+
+	
+	}
+	
+		//旗县司法局参数为盟市id
+		public void saveQxsfj(String orgid) {
+				//查询当前旗县局下所有司法所
+				List<BasicMap<String, Object>> list = findAllData(orgid,"3");
+				for (BasicMap<String, Object> basicMap : list) {
+					//司法所入库
+					BasicMap<String, Object> basicMap2 = dbClient.findOne("select id,parentid from jc_sfxzjgjbxx where jgmc = ?",basicMap.get("jgmc"));
+					basicMap.put("parentid",basicMap2.get("parentid"));
+					basicMap.put("orgid",basicMap2.get("id"));
+					//basicMap.put("id",basicMap2.get("id"));
+					dbClient.insert(SupConst.Collections.REP_GZJGXXCJB, basicMap);
+					
+					//保存司法所
+					saveSfs(StringUtil.toEmptyString(basicMap2.get("id")));
+				}
+		}
+		//盟市司法局
+		public void saveMssfj() {
+			List<BasicMap<String, Object>> listAll = findAllData(StringUtil.toEmptyString("NM0000000000-0000-0000-0000000-00001"),"2");
+				for (BasicMap<String, Object> basicMap : listAll) {
+					//盟市循环入库
+					basicMap.put("parentid", "NM0000000000-0000-0000-0000000-00001");
+					BasicMap<String, Object> basicMap2 = dbClient.findOne("select id from jc_sfxzjgjbxx where jgmc = ?",basicMap.get("jgmc"));
+					basicMap.put("orgid",basicMap2.get("id"));
+					//basicMap.put("id",basicMap2.get("id"));
+					dbClient.insert(SupConst.Collections.REP_GZJGXXCJB, basicMap);
+					
+					//保存旗县司法局
+					saveQxsfj(StringUtil.toEmptyString(basicMap2.get("id")));
+					
+				}
+		}
+}

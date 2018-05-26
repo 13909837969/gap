@@ -1,0 +1,1334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="jz_Sqjzryxxcjb(xzx)" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3bb58ab3-c96d-481e-81d7-df775e8030da">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<import value="com.ehtsoft.fw.utils.*"/>
+	<parameter name="id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+A.*,
+B.SFDCPG,B.DCPGYJ,B.DCYJCXQK,B.JZLB,
+C.YWGATSFZ,C.GATSFZLX,C.GATSFZHM,
+C.YWHZ,C.HZHM,C.HZBCZT,C.YWGATTXZ,C.GATTXZLX,C.GATTXZHM,C.GATTXZBCZT,C.YWGAJMWLNDTXZ,
+C.GAJMWLNDTXZ,C.GAJMWLNDTXZBCZT,C.YWTBZ,C.TBZHM,C.TBZBCZT,
+D.ZYJWZXRYSTZK,D.ZHJZYY,D.SFYJSB,D.JDJG,D.SFYCRB,D.JTCRB,
+E.GJ,E.HJDSFYJZDXT,E.GDJZDMX,E.HJSZDMX,
+F.data,F.mimetype
+FROM JZ_JZRYJBXX A
+LEFT JOIN JZ_JZRYJBXX_JZ B ON B.ID=A.ID
+LEFT JOIN JZ_JZRYJBXX_SF C ON C.ID=A.ID
+LEFT JOIN JZ_JZRYJBXX_JK D ON D.ID=A.ID
+LEFT JOIN JZ_JZRYJBXX_DZ E ON E.ID=A.ID
+LEFT JOIN JZ_JZRYJBXX_IMG F ON F.IMGID=A.ID
+where  A.ID=$P{id}]]>
+	</queryString>
+	<field name="id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+	</field>
+	<field name="sqjzrybh" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sqjzrybh"/>
+	</field>
+	<field name="xm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xm"/>
+	</field>
+	<field name="cym" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cym"/>
+	</field>
+	<field name="xb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xb"/>
+	</field>
+	<field name="mz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mz"/>
+	</field>
+	<field name="sfzh" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfzh"/>
+	</field>
+	<field name="csrq" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="csrq"/>
+	</field>
+	<field name="sfcn" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfcn"/>
+	</field>
+	<field name="wcn" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="wcn"/>
+	</field>
+	<field name="jglx" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jglx"/>
+	</field>
+	<field name="whcd" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="whcd"/>
+	</field>
+	<field name="hyzk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="hyzk"/>
+	</field>
+	<field name="grlxdh" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="grlxdh"/>
+	</field>
+	<field name="sfswry" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfswry"/>
+	</field>
+	<field name="pqzy" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="pqzy"/>
+	</field>
+	<field name="jyjxqk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jyjxqk"/>
+	</field>
+	<field name="xzzmm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xzzmm"/>
+	</field>
+	<field name="yzzmm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="yzzmm"/>
+	</field>
+	<field name="sfbxgjzl" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfbxgjzl"/>
+	</field>
+	<field name="wasbdqksm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="wasbdqksm"/>
+	</field>
+	<field name="ygzdw" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ygzdw"/>
+	</field>
+	<field name="xgzdw" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="xgzdw"/>
+	</field>
+	<field name="dwlxdh" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dwlxdh"/>
+	</field>
+	<field name="qtlxfs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="qtlxfs"/>
+	</field>
+	<field name="jzjgbm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jzjgbm"/>
+	</field>
+	<field name="jzjg" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jzjg"/>
+	</field>
+	<field name="sfcj" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="sfcj"/>
+	</field>
+	<field name="online" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="online"/>
+	</field>
+	<field name="sftk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sftk"/>
+	</field>
+	<field name="sfjljzxz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfjljzxz"/>
+	</field>
+	<field name="bdqk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bdqk"/>
+	</field>
+	<field name="sfjs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfjs"/>
+	</field>
+	<field name="jcjz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jcjz"/>
+	</field>
+	<field name="sfjid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfjid"/>
+	</field>
+	<field name="del" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="del"/>
+	</field>
+	<field name="audit" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="audit"/>
+	</field>
+	<field name="cts" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="cts"/>
+	</field>
+	<field name="uts" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="uts"/>
+	</field>
+	<field name="cdate" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="cdate"/>
+	</field>
+	<field name="udate" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="udate"/>
+	</field>
+	<field name="cuid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cuid"/>
+	</field>
+	<field name="uuid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="uuid"/>
+	</field>
+	<field name="caid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="caid"/>
+	</field>
+	<field name="uaid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="uaid"/>
+	</field>
+	<field name="orgid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="orgid"/>
+	</field>
+	<field name="remark" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="remark"/>
+	</field>
+	<field name="sfzp" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfzp"/>
+	</field>
+	<field name="lydwlx" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="lydwlx"/>
+	</field>
+	<field name="sfdcpg" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfdcpg"/>
+	</field>
+	<field name="dcpgyj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dcpgyj"/>
+	</field>
+	<field name="dcyjcxqk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dcyjcxqk"/>
+	</field>
+	<field name="jzlb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jzlb"/>
+	</field>
+	<field name="ywgatsfz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ywgatsfz"/>
+	</field>
+	<field name="gatsfzlx" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gatsfzlx"/>
+	</field>
+	<field name="gatsfzhm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gatsfzhm"/>
+	</field>
+	<field name="ywhz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ywhz"/>
+	</field>
+	<field name="hzhm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="hzhm"/>
+	</field>
+	<field name="hzbczt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="hzbczt"/>
+	</field>
+	<field name="ywgattxz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ywgattxz"/>
+	</field>
+	<field name="gattxzlx" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gattxzlx"/>
+	</field>
+	<field name="gattxzhm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gattxzhm"/>
+	</field>
+	<field name="gattxzbczt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gattxzbczt"/>
+	</field>
+	<field name="ywgajmwlndtxz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ywgajmwlndtxz"/>
+	</field>
+	<field name="gajmwlndtxz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gajmwlndtxz"/>
+	</field>
+	<field name="gajmwlndtxzbczt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gajmwlndtxzbczt"/>
+	</field>
+	<field name="ywtbz" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ywtbz"/>
+	</field>
+	<field name="tbzhm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tbzhm"/>
+	</field>
+	<field name="tbzbczt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tbzbczt"/>
+	</field>
+	<field name="zyjwzxrystzk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="zyjwzxrystzk"/>
+	</field>
+	<field name="zhjzyy" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="zhjzyy"/>
+	</field>
+	<field name="sfyjsb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfyjsb"/>
+	</field>
+	<field name="jdjg" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jdjg"/>
+	</field>
+	<field name="sfycrb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sfycrb"/>
+	</field>
+	<field name="jtcrb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jtcrb"/>
+	</field>
+	<field name="gj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gj"/>
+	</field>
+	<field name="hjdsfyjzdxt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="hjdsfyjzdxt"/>
+	</field>
+	<field name="gdjzdmx" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gdjzdmx"/>
+	</field>
+	<field name="hjszdmx" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="hjszdmx"/>
+	</field>
+	<field name="data" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="data"/>
+	</field>
+	<field name="mimetype" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mimetype"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="800" height="62" uuid="28c56742-22de-458c-802f-149a813c012e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="45"/>
+				</textElement>
+				<text><![CDATA[社区矫正人员信息采集表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="800" height="30" uuid="3c4ee584-cc23-4758-9edd-eb4ca40d3412"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="22"/>
+				</textElement>
+				<text><![CDATA[基本身份信息]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="450" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="180" height="20" uuid="c701523e-5ac6-4eb2-8cdc-15ccc5f9b715"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="180" y="0" width="100" height="20" uuid="2bb86bad-5d65-4d75-a00a-f4b501432e10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="670" y="0" width="130" height="139" uuid="d8530590-737b-46ec-a0c0-1c4889b9732a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="0" width="90" height="20" uuid="fa24d175-1153-465b-8bc0-8afa55ccf9a5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="370" y="0" width="110" height="20" uuid="67409f90-6682-4848-8950-5db8250b5404"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="480" y="0" width="110" height="20" uuid="4ca33389-6b33-4eb5-8e43-d45d9f041241"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="590" y="0" width="80" height="20" uuid="cc839b15-d20f-4a74-8a67-fce8627ec5e2"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="180" height="19" uuid="2d040a9a-ecbe-4f17-8e8e-9517148c6bc5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[1*是否调查评估]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="20" width="180" height="20" uuid="ef620293-57c0-40f2-a63d-b7fe5fd882dc"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="21" width="180" height="19" uuid="207aab49-9572-40db-9216-b57248991755"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[5*矫正类别]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="40" width="180" height="20" uuid="1028c729-9acb-44c2-9da1-376746c75e2d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="40" width="180" height="19" uuid="e036eba3-6e7c-4dc7-9601-8e95731d44a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[6*是否成年]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="60" width="180" height="20" uuid="25cbe319-6990-410e-86e1-ad0490647130"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="61" width="180" height="19" uuid="0559eb27-1f67-4287-bdb9-3356f9ad42f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[8*人员编号]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="80" width="180" height="20" uuid="4e426c78-b449-4838-bfe2-0b81c399b6b1"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="80" width="180" height="19" uuid="7fd61ede-f675-41b8-898a-0eb665d63b10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[9*姓名]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="100" width="180" height="20" uuid="2c3f6566-9657-4119-b745-39d3c2c698fe"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="101" width="180" height="19" uuid="42e04dc2-b7a4-44a6-8364-7b4c41847f4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[11*性别]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="119" width="180" height="20" uuid="cb7de2f6-5c86-44db-a4c4-999d4846cb9e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="120" width="180" height="19" uuid="b5871f18-2913-4ba0-9462-27812f92f38e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[13*身份证号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="90" height="19" uuid="1adbcf08-8029-41d9-b06c-78197bf73420"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[2*评估意见]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="110" height="19" uuid="c7eb7b77-8023-400e-8abc-c212865c6cc0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[3*评估意见采信情况]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="20" width="490" height="20" uuid="bec21fd5-182a-4177-bd08-ef5fe208d52b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="180" y="40" width="190" height="20" uuid="3c8f9290-f777-41ed-a14b-ac64091bffc9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="370" y="40" width="110" height="20" uuid="3463054c-9351-482a-a9b1-ab8c90229f76"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="370" y="40" width="110" height="19" uuid="03cc07a0-8d32-4cd2-9c3d-5d60c17ff881"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[7*未成年]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="480" y="40" width="190" height="20" uuid="b30a1a01-2752-484a-a045-b4106991f4a2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="180" y="60" width="490" height="20" uuid="00d65ad2-3915-48f7-bc05-b30f138d0738"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="180" y="80" width="190" height="20" uuid="07a42914-06ef-48ee-88f4-d832e199d372"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="370" y="80" width="110" height="20" uuid="e453dd1c-b4ae-44da-a994-32db9d48f033"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="370" y="80" width="110" height="19" uuid="66735a7a-d684-41c2-948a-c95e307f4bd2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[10*曾用名]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="480" y="80" width="190" height="20" uuid="9d43dd5d-91ca-4c20-8acd-c34bca5ca38a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="180" y="100" width="190" height="19" uuid="fb79b564-115d-4068-bf69-93e8f015c8a5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="180" y="119" width="190" height="20" uuid="99672a0b-0e28-4737-8365-242740ac62ea"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="370" y="100" width="110" height="20" uuid="d73d3481-ac0d-46cb-bc21-4f3ecb23910a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="370" y="119" width="110" height="20" uuid="fd59ebaa-aa31-4afb-b36c-9d0bc55f3030"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="370" y="100" width="110" height="19" uuid="83913509-99b8-48b3-9c26-447bb83c2fa3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[12*民族]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="120" width="110" height="19" uuid="d22095c6-7a35-4040-94d8-f8dd9287124a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[14*出生日期]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="480" y="100" width="190" height="20" uuid="57dd494c-a24b-495f-b925-cb7f6b066e4d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="480" y="119" width="190" height="20" uuid="2d629b77-771f-47eb-bbef-a85ee0dd571c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="139" width="180" height="40" uuid="c6d5471d-dae8-40e3-a24e-ff9be1250ffd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="140" width="180" height="39" uuid="bff1778b-4404-41b6-bab2-3259b2a1b5f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[15*有无港澳台身份证]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="139" width="100" height="40" uuid="92cd12c7-8c65-47e3-b57d-c6adc6634788"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="139" width="90" height="40" uuid="006275fa-d05c-43f9-9d45-de799e1175cd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="280" y="140" width="90" height="39" uuid="41c93921-da63-4ea4-85be-3632d780f2c8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[16*港澳台身份证类型]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="370" y="139" width="110" height="40" uuid="74bf97ee-f312-4c47-ae07-682c7c091379"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="480" y="139" width="110" height="40" uuid="dac0ec2c-aef0-4db0-87ad-d0cf04c0ddb8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="480" y="140" width="110" height="39" uuid="1c27b4ac-0ff2-4fe4-a59d-1b7327b4584a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[17*港澳台身份证号码]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="590" y="139" width="210" height="40" uuid="4da1e302-b65f-47fe-9a2e-f35260e0308a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="179" width="180" height="40" uuid="735f5f91-ca80-489c-9668-61f87e5bc759"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="180" width="180" height="39" uuid="02713438-53af-43b8-83e9-e6e01fc20c2e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[18*有无护照]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="219" width="180" height="40" uuid="081bda9b-3d11-4e08-a7de-4a83bddaf905"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="220" width="180" height="39" uuid="e02e5a90-50b9-459c-9d97-b96465297dc5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[21*有无港澳台通行证]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="259" width="180" height="40" uuid="be1da6c0-407a-42db-985b-588f6f82b337"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="260" width="180" height="39" uuid="621c313b-3779-4d96-b8ec-9309b5f4d898"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[24*港澳台通行证状态]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="179" width="100" height="40" uuid="cec54d56-c2e2-4371-a2e8-01c21f6f04ca"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="179" width="90" height="40" uuid="433d8276-34ed-4eec-b297-169837650b8a"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="280" y="179" width="90" height="39" uuid="1d942342-b085-4bed-abce-3dbd2544221a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[19*护照号码]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="370" y="179" width="220" height="40" uuid="e89c7291-1b5b-4970-a9d3-8663fbfabf11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="590" y="179" width="81" height="40" uuid="38cc1f9e-16f1-431b-816e-b6ee68b8703a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="670" y="179" width="130" height="40" uuid="3128b880-4193-4c5e-9711-fa5ef1a8bb0e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="590" y="180" width="80" height="39" uuid="ec626a92-c0a2-463b-9c73-30005dd78efb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[20*护照状态]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="219" width="100" height="40" uuid="b5c07fb7-ffea-40f9-bf4e-9c271e816d58"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="219" width="90" height="40" uuid="d610f134-e73f-49f0-81e2-298647b7d1b6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="280" y="219" width="90" height="39" uuid="4ca35bdc-1963-4c69-bc87-22141a557f7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[22*港澳台通行证类型]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="370" y="219" width="110" height="40" uuid="add5d30d-68c8-4e28-8cbe-f7401c799302"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="480" y="219" width="110" height="40" uuid="d052bf52-c291-4942-b9de-5c75a82b79e2"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="480" y="220" width="110" height="39" uuid="c4a5c977-89c5-4643-8f6c-83e7b00d94fa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[23*港澳台通行证号码]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="590" y="219" width="210" height="40" uuid="a6f6899d-8a82-4077-a780-3ea885e03ffa"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="180" y="259" width="620" height="40" uuid="552a88a8-0ee3-4211-a561-71b3ba8e9718"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="299" width="180" height="71" uuid="f415fcc1-ae22-4296-b9c0-3eeacf921c32"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="300" width="180" height="70" uuid="00ee4396-c192-494f-b4eb-e6111baa03ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[25*有无港澳居民往来内地通行证]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="299" width="100" height="71" uuid="f478f4a5-9d30-42ae-8c13-5ea5c5ea0f9f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="299" width="90" height="71" uuid="807a9b7f-be33-4b75-a987-35e12f7d57cb"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="280" y="299" width="90" height="70" uuid="6afcdeaf-1699-4e59-aa9d-d13ee85500c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[26*港澳居民往来内地通行证号码]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="370" y="299" width="220" height="71" uuid="683e05f6-c570-4e58-b247-e56ed4ccddb7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="590" y="299" width="81" height="71" uuid="5f8672b5-a180-4fe1-863c-463555c431e1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="670" y="299" width="130" height="71" uuid="22c926d0-7d57-4c24-aea8-814487c217c9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="590" y="300" width="80" height="70" uuid="36beb859-d38d-4b66-9485-5cd2320209bd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[27*港澳居民往来内地通行证状态]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="370" width="180" height="71" uuid="03d42b39-d8f2-4add-bd73-108789849ac1"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="371" width="180" height="70" uuid="b0f70ad9-ce2b-48aa-ab8a-04543fdaf92a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[28*有无台胞证]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="370" width="100" height="71" uuid="f03ad45f-2ce6-4677-9dfd-d9879d49c45c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="370" width="90" height="71" uuid="7dfde8ef-b42b-46b5-8fb6-4f6a29a05166"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="280" y="370" width="90" height="70" uuid="0eb754e2-0a19-4f69-8740-815151e6f532"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[29*台胞证号码]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="370" y="370" width="220" height="71" uuid="68103700-f548-48c9-86e6-29e52494987a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="590" y="370" width="81" height="71" uuid="8a74a9e9-52c0-48ed-ade3-f106de300330"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="670" y="370" width="130" height="71" uuid="517b6c97-bb18-4fc2-b51e-98f998bf30a4"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="590" y="371" width="80" height="70" uuid="a93cd11b-a0e6-4e72-8530-1f507f78c035"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[30*台胞证状态]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="0" width="100" height="19" uuid="a69a7cce-edd1-4195-983c-5b75a549f21d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{sfdcpg})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="110" height="19" uuid="e7d585a9-a078-4450-b2de-8edef24e87e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{dcpgyj})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="590" y="0" width="80" height="19" uuid="495b80fa-b0ee-472a-b10d-dda914430da3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{dcyjcxqk})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="20" width="490" height="19" uuid="c78f034f-c9e0-45bf-be7f-54e43b1c768e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{jzlb})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="40" width="190" height="19" uuid="341708fb-094f-4c3c-aae7-530e2d126804"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{sfcn})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="41" width="190" height="19" uuid="dac16afd-32a0-4d12-91a6-9ddd7e353f82"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{wcn})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="60" width="490" height="19" uuid="c3cef6fa-0c13-45cd-963c-239e51525d44"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{sqjzrybh}==null) ? " ":$F{sqjzrybh}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="81" width="190" height="19" uuid="27f5360b-32e9-46c3-8e6e-9b11da155ebd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{xm}==null) ? " ":$F{xm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="81" width="190" height="19" uuid="32748480-0b01-49dc-a9cf-0e51ede8227f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{cym}==null) ? " ":$F{cym}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="101" width="190" height="18" uuid="5c4f22f0-e5b0-4c5b-8fc4-2a0630065d07"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{xb})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="481" y="101" width="189" height="18" uuid="2aca4444-f9ec-4d36-894b-17c4b568e70e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{mz})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="120" width="190" height="18" uuid="89e2ae03-25a8-4811-b9c1-49ad4a714562"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sfzh}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="120" width="190" height="18" uuid="40fbea14-264f-412a-9510-d8da4058a94c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[DateUtil.format($F{csrq},null)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="671" y="0" width="129" height="138" uuid="3bc5ad11-9ac2-41a0-b1be-b18620bc2f96"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{mimetype}==null) ? " ":$F{mimetype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="140" width="100" height="39" uuid="cb34da10-d0dc-444f-bd24-15af8283787e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{ywgatsfz})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="140" width="110" height="39" uuid="73cb90f3-8e08-45fc-b2dd-6ea3406d15e5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{gatsfzlx})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="590" y="140" width="210" height="39" uuid="f277e24a-3836-4d8b-b870-2c3e1fd641ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{gattxzhm})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="179" width="100" height="39" uuid="67a7e6b3-7cae-419a-9ae5-dd11598e12b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{ywhz})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="180" width="219" height="39" uuid="1d057936-9ff0-4a94-945a-050586f60ff8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{hzhm})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="670" y="180" width="130" height="39" uuid="9b18dfdf-3b10-45cb-a8ec-db362aadd062"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{hzbczt})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="219" width="100" height="39" uuid="59bc0260-a075-45b6-b010-24319c9edfb5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{ywgattxz})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="590" y="220" width="210" height="39" uuid="132d8306-f8b4-4b98-aa53-6184feb45119"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{gatsfzhm})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="220" width="110" height="39" uuid="bf9b6648-85cc-4074-a895-a39701a1bfc5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{gatsfzlx})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="260" width="620" height="39" uuid="8d419d6f-c9fb-498f-ba4d-2cac8768a806"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{gattxzbczt})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="300" width="100" height="69" uuid="daf1eba6-f77a-4ce5-acb5-a921d86c8f28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{ywgajmwlndtxz})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="300" width="219" height="69" uuid="94e275b3-f27d-47d6-b860-a5ccdb83aa53"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{gajmwlndtxz})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="670" y="300" width="130" height="69" uuid="9d021542-2a41-4e5e-9fb7-99775f0229a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{gajmwlndtxzbczt})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="371" width="100" height="69" uuid="35de43ba-4f69-4bfa-af98-7162262acb9f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{ywtbz})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="371" width="219" height="69" uuid="c4453749-54ef-4b1a-a090-2dfabde947e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{tbzhm})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="671" y="371" width="129" height="69" uuid="2ff98b3b-f713-494b-943e-a92b612e88c7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{tbzbczt})]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="483">
+			<rectangle>
+				<reportElement x="0" y="0" width="280" height="40" uuid="baa1dd52-a55f-44dd-b62c-b4835f535d9d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="280" height="39" uuid="84eb78d5-ab61-4fa3-995b-0ccd97d5817f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[31*暂予监外执行人员身体状况]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="280" y="0" width="520" height="40" uuid="b8e5ab43-8e7c-4c8a-9edc-3e8b5e14b2d5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="40" width="180" height="40" uuid="40e6347d-9d69-408d-b28a-439ddc1bfa59"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="41" width="180" height="39" uuid="b26bb7ac-7599-413a-b247-93bbb86bc396"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[32*就诊医院]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="40" width="620" height="40" uuid="7f643d9d-c67c-4b80-8c69-43103ba69be1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="80" width="180" height="40" uuid="d0ce724c-e801-41fe-9369-32fb09d17e8c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="81" width="180" height="39" uuid="cfa13341-b987-47ca-85da-7d31bd59bfba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[33*是否具有精神疾病]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="80" width="100" height="40" uuid="665df49e-5444-4a58-8900-1f1b77565f86"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="80" width="90" height="40" uuid="739ee464-143e-4c05-bf49-66a20d42f4e5"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="280" y="81" width="90" height="39" uuid="dc50c3cf-0ff5-4084-ba49-87c81161be57"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[34*鉴定机构]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="370" y="80" width="430" height="40" uuid="a62143f3-f5dc-4a13-8eb6-31f62d325280"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="120" width="180" height="40" uuid="aa53b489-613f-465c-bfc5-0a99b78893c5"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="121" width="180" height="39" uuid="1826b6a9-b86f-40ce-b279-5dd7cebd0191"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[35*是否具有传染病]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="120" width="100" height="40" uuid="69916424-2174-4ba3-8d02-bfb6ad984914"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="120" width="90" height="40" uuid="3eea8eff-fb6c-4256-be40-4f59cf0ad9c1"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="280" y="121" width="90" height="39" uuid="f38cb81d-03f4-4fe5-a3eb-a786cc986eee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[36*具体传染病]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="370" y="120" width="430" height="40" uuid="86365c58-d47b-4a98-a8df-e709d3e68f0d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="160" width="180" height="40" uuid="325a9ea8-22f5-4a82-a127-5172a13afe85"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="161" width="180" height="39" uuid="7bec55d6-9eb2-4af0-bd5c-29380c8fa7da"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[37*文化程度]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="160" width="410" height="40" uuid="2fd21fd1-5283-4472-a0b6-4e6082ac4824"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="590" y="160" width="81" height="40" uuid="d94f42ad-5bfa-4203-be94-7e04383b7a17"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="670" y="160" width="130" height="40" uuid="a8c449b4-93d5-43fc-a9e2-2ab6e10c6a0b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="590" y="161" width="80" height="39" uuid="7ac8611e-41f0-4590-b2bc-f964c751f8ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[38*婚姻状况]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="200" width="180" height="40" uuid="7080bd91-b08b-48d9-a503-e0e37ab6c675"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="201" width="180" height="39" uuid="647a1329-3b8b-41c6-b9a0-34f48cefb991"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[39*捕前职业]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="200" width="410" height="40" uuid="9348742d-afa8-4176-85eb-3d5bd3c34a04"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="590" y="200" width="81" height="40" uuid="74f80b36-5345-4fbd-9247-375898acd7e5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="670" y="200" width="130" height="40" uuid="2ada59bf-c50c-4880-97f2-650ac12dae88"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="590" y="201" width="80" height="39" uuid="945b4b81-9c49-4092-a09e-36ec2de3c59f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[40*就业就学情况]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="240" width="180" height="40" uuid="0c6c8a46-6aaf-4f84-85ce-1ea91a480462"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="241" width="180" height="39" uuid="13d75dc5-42e1-4fd8-95ee-e93ddfdb6323"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[41*现政治面貌]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="240" width="100" height="40" uuid="bdad35c0-68ac-476a-8c0e-39ee7afcbfea"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="280" y="240" width="90" height="40" uuid="5fa3d033-4b22-41fc-8a4a-b8bafb0005d7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="280" y="241" width="90" height="39" uuid="2e099a8e-c639-4ab0-bfa8-df508cb6d948"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[42*原政治面貌]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="370" y="240" width="220" height="40" uuid="81ebd239-af46-4493-85e9-4f14a6dbf498"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="670" y="240" width="130" height="40" uuid="efef101a-39b4-4e32-94d0-e91bfc3196f0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="590" y="240" width="80" height="40" uuid="d05285e9-f77e-43e4-8195-ddf1622c777f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="590" y="240" width="80" height="39" uuid="d49645a7-170c-4c2e-9580-2bd2a918d63a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[43*个人联系电话]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="280" width="180" height="40" uuid="cf268424-93ab-410c-befc-2bc99df89734"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="281" width="180" height="39" uuid="86da8853-6261-494f-a33e-15279fe8b033"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[44*现工作单位]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="280" width="410" height="40" uuid="b2a38404-31f2-4607-8e91-d01e2e4fffad"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="590" y="280" width="81" height="40" uuid="74d5c972-8530-4630-bec3-67fbd05cbcc5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="670" y="280" width="130" height="40" uuid="5b98b309-853f-4739-8d4c-99544a9736d5"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="590" y="281" width="80" height="39" uuid="086ea930-0789-41ee-92c6-abeef93c496a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[45*单位联系电话]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="320" width="180" height="40" uuid="f9ba9e56-d705-46b4-b967-d77f81085c3f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="321" width="180" height="39" uuid="6b0bd351-b38a-4d0f-a617-33e3a5fdda1a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[46*国籍（户籍）]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="320" width="620" height="40" uuid="c245110c-ef51-420b-b80b-0b5ca4b694ef"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="360" width="180" height="40" uuid="c53c3b2c-8350-4efa-b3b4-f0ac749dd6b0"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="361" width="180" height="39" uuid="814845ea-bbb9-461e-970e-accdfd6b4523"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[47*户籍地是否与居住地相同]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="360" width="620" height="40" uuid="4a630eea-bcbb-4e2e-8ccd-946605792075"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="400" width="180" height="40" uuid="f629bc7a-8ed2-4a05-a261-73fb63c8d7f9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="401" width="180" height="39" uuid="14a5ac80-5d75-4d4b-af88-5786931217e3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[48*户籍地详细地址]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="400" width="620" height="40" uuid="7f697158-06f3-4122-a854-412e6b219593"/>
+			</rectangle>
+			<textField>
+				<reportElement x="280" y="1" width="520" height="38" uuid="e3efd2e0-e6a9-42c2-8a56-a287fcf5e999"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{zyjwzxrystzk}==null) ? " ":$F{zyjwzxrystzk}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="41" width="620" height="38" uuid="92fb8286-007c-4e0b-887e-546bc1f8fb72"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{zhjzyy}==null) ? " ":$F{zhjzyy}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="81" width="100" height="39" uuid="cfcbdb5b-a912-4f52-bb8b-1eb681414eef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{sfyjsb})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="120" width="100" height="39" uuid="28c04b50-a2cd-4f11-b8e7-17810a3e6f94"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{sfycrb})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="80" width="430" height="39" uuid="dd6bb451-2bc1-446f-98dd-7eb000b1ae3c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{jdjg}==null) ? " ":$F{jdjg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="121" width="430" height="39" uuid="005333f6-05c6-4580-a7b3-71609451075f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{jtcrb})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="161" width="410" height="39" uuid="4b85377f-0f4b-4de3-a742-857cf121255a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{whcd})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="670" y="161" width="130" height="39" uuid="bbe2cd13-d812-49b0-8dbe-b5deacc3bd7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{hyzk})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="200" width="410" height="39" uuid="578784a2-7b83-4970-a119-d1e39b105cbe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{pqzy})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="241" width="100" height="39" uuid="37811804-4c73-429a-af9d-5a6336c3842b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{xzzmm})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="241" width="219" height="39" uuid="caee84b0-d04c-4d6a-b301-9cab8e0b11f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{yzzmm})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="670" y="240" width="130" height="39" uuid="963f717c-c718-4e7a-a500-776515ef022a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{grlxdh}==null) ? " ":$F{grlxdh}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="281" width="410" height="39" uuid="07023f79-50fa-4822-b679-17212aac5dcd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ygzdw}==null) ? " ":$F{ygzdw}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="670" y="281" width="130" height="39" uuid="dedcd839-5205-4f16-9b97-9a0e3e2c4e42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{dwlxdh}==null) ? " ":$F{dwlxdh}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="321" width="620" height="39" uuid="0a881672-4acd-42b3-a552-5af423e81bef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{gj})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="360" width="620" height="39" uuid="d08ed336-a463-4f45-95b9-df1c0cc37dc7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{hjdsfyjzdxt})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="401" width="620" height="39" uuid="b22c444d-9227-45c4-9035-1c825bff60cb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{hjszdmx}==null) ? " ":$F{hjszdmx}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="670" y="200" width="130" height="39" uuid="23c9bc1e-91c0-43e1-b836-62345bc0e5e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{jyjxqk})]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="440" width="180" height="40" uuid="88b2f149-31a4-4a20-aeb5-0a758a7026df"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="441" width="180" height="39" uuid="13b3cfe8-04b8-49df-846f-783c620cab04"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[49*居住地详细地址]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="440" width="620" height="40" uuid="4158ff1e-4f8a-446e-a920-6d79fb96ae09"/>
+			</rectangle>
+			<textField>
+				<reportElement x="180" y="441" width="620" height="39" uuid="afd1856b-6d79-4d4c-8a35-59d5f0fc8bd0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{gdjzdmx}==null) ? " ":$F{gdjzdmx}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="387">
+			<subreport>
+				<reportElement x="0" y="10" width="740" height="80" uuid="7f82f241-14ae-4980-89cc-37529dbf498b"/>
+				<subreportParameter name="AID">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["jz_jzryxx_grjl.jasper"]]></subreportExpression>
+			</subreport>
+			<rectangle>
+				<reportElement x="0" y="101" width="180" height="40" uuid="293eb3ea-3f84-4954-a6ed-5f98818a547b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="102" width="180" height="39" uuid="0ddf40db-8294-4488-969c-7f606567808a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[51*是否三无人员]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="101" width="620" height="40" uuid="8dd319df-ee71-4982-9b68-6a146fd1258a"/>
+			</rectangle>
+			<textField>
+				<reportElement x="180" y="101" width="620" height="39" uuid="ba1cdee2-302c-4487-8515-5d4c6792cd5b"/>
+				<textFieldExpression><![CDATA[StringUtil.toEmptyString($F{sfswry})]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="262" width="180" height="40" uuid="63836584-9579-41a3-8ef9-e034793044ab"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="263" width="180" height="39" uuid="269b9b3b-9f69-4e52-92bc-bb9681ba712f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="14"/>
+				</textElement>
+				<text><![CDATA[53*矫正机构]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="180" y="262" width="620" height="40" uuid="d7ec36e1-b0ba-470d-8134-94e51b779f72"/>
+			</rectangle>
+			<textField>
+				<reportElement x="180" y="262" width="620" height="39" uuid="1d9624d3-47d8-463f-8fb5-2229723fd513"/>
+				<textFieldExpression><![CDATA[($F{jzjg}==null) ? " ":$F{jzjg}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="1" y="170" width="800" height="80" uuid="f403d3e3-482a-4eca-acda-08a7e59504f3"/>
+				<subreportParameter name="F_AID">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["jz_jzryxx_jtcy.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

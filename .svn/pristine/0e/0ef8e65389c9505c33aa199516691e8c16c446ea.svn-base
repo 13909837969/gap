@@ -1,0 +1,456 @@
+package com.ehtsoft.supervise.services;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import javax.annotation.Resource;
+
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
+
+import com.ehtsoft.common.services.SSOService;
+import com.ehtsoft.fw.core.db.MongoClient;
+import com.ehtsoft.fw.core.db.RowDataListener;
+import com.ehtsoft.fw.core.db.SQLAdapter;
+import com.ehtsoft.fw.core.db.SqlDbClient;
+import com.ehtsoft.fw.core.db.SqlDbFilter;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.dto.Paginate;
+import com.ehtsoft.fw.core.dto.ResultList;
+import com.ehtsoft.fw.core.services.AbstractService;
+import com.ehtsoft.fw.core.sso.User;
+import com.ehtsoft.fw.utils.DateUtil;
+import com.ehtsoft.fw.utils.NumberUtil;
+import com.ehtsoft.fw.utils.StringUtil;
+import com.ehtsoft.fw.utils.Util;
+import com.ehtsoft.im.api.ImConst;
+import com.ehtsoft.im.dto.Userinfo;
+import com.ehtsoft.im.protocol.Command;
+import com.ehtsoft.im.protocol.CommandType;
+import com.ehtsoft.im.protocol.IMProtocol;
+import com.ehtsoft.im.protocol.Message;
+import com.ehtsoft.im.services.IMSService;
+import com.ehtsoft.im.services.UserinfoService;
+import com.ehtsoft.rep.services.ActivityService;
+import com.ehtsoft.supervise.api.SupConst;
+import com.ehtsoft.supervise.dto.ActivityObj;
+import com.ehtsoft.supervise.utils.DateUtils;
+
+
+/**
+ * 
+ * 矫正人员签到信息表
+ * @创建人  ：liuzhih
+ * @创建时间：2017年10月11日 下午10:48:50
+ * @修改人  ：liuzhih
+ * @修改时间：2017年10月11日 下午10:48:50
+ * @修改备注：
+ * @version 1.0
+ */
+@Service("JzQdxxService")
+public class JzQdxxService extends AbstractService{
+	
+	@Resource(name = "sqlDbClient")
+	private SqlDbClient dbClient;
+	
+	@Resource(name="mongoClient")
+	private MongoClient mongoClient;
+	
+	@Resource
+	private IMSService broadcastService;
+	
+	@Resource
+	private UserinfoService userinfoService;
+	
+	@Resource(name="SSOService")
+	private SSOService service;
+	
+	
+	@Resource(name="ActivityService")
+	private ActivityService activityService;
+	
+	/**
+	 * @param query
+	 * {
+	 *  checkin:0 或 1，  0 未签到   1 签到
+	 * }
+	 * 按条件获取当前登录机构管理的矫正人员签到信息列表
+	 * @return List<BasicMap<String,Object>>
+	 * 数据格式：
+	 * [
+	 * {
+	 *   id:"人员ID (aid)",
+	 *   xm:"姓名"
+	 *   xb:"性别",
+	 *   grlxdh:联系电话，
+	 *   cts:签到时间,
+	 *   qdwz:签到位置
+	 *   lng:"经度"
+	 *   lat:"维度"
+	 * }
+	 * ]
+	 * 平板接口
+	 */
+	public List<BasicMap<String,Object>> findList(BasicMap<String,Object> query,Paginate paginate){
+		String sqlstr = "select t.id,t.xm,t.xb,t.grlxdh,b.cts,b.aid from  jz_jzryjbxx t  "
+				+" left join (select aid,max(cts) cts from jz_qdxxb where cdate = "+DateUtil.format(new Date(), "yyyyMMdd")+" group by aid) b"
+				+" on t.id = b.aid";
+		SQLAdapter sql = new SQLAdapter(sqlstr);
+		if(NumberUtil.toInt(query.get("checkin"))==0){ //未签到
+			sql.getFilter().isNull("b.aid");
+		}else{
+			sql.getFilter().isNotNull("b.aid");
+		}
+		sql.getFilter().in("t.BDQK", new String[]{"01","02"});
+		List<BasicMap<String,Object>>  result = dbClient.find(sql,paginate,new RowDataListener() {
+			@Override
+			public void processData(BasicMap<String, Object> rowData) {
+				String aid = StringUtil.toString(rowData.get("id"));
+				BasicMap<String,Object> one = mongoClient.findOne(ImConst.Collections.IM_CURRENT_LOCATION, Query.query(Criteria.where("_id").is(aid)));
+				if(one!=null){
+					rowData.put("lng", one.get("lng"));
+					rowData.put("lat", one.get("lat"));
+					if(Util.isEmpty(rowData.get("aid"))){
+						rowData.put("qdlx",0);//未签到
+					}else{
+						rowData.put("qdlx",NumberUtil.toInt(one.get("qdlx")));
+					}
+					if(Util.isNotEmpty(one.get("address"))){
+						rowData.put("qdwz",one.get("address"));
+					}else{
+						rowData.put("qdwz",one.get("describe"));
+					}
+				}
+			}
+		}).getRows();
+		return result;
+	}
+	
+	/**
+	 * 签到
+	 * @param data
+	 * {
+	 *  aid:签到人员ID
+	 *  qdlx:签到类型  1 指纹签到  2 声纹签到  3 人脸签到
+	 *  qdwz:签到位置
+	 *  lat:纬度
+	 *  lng:经度
+	 * }
+	 */
+	public void save(BasicMap<String,Object> data){
+		//签到记录，一天可以签到多次
+		dbClient.save(SupConst.Collections.JZ_QDXXB,data);
+		int qdlx = NumberUtil.toInt(data.get("qdlx"));
+		//查下这一天的签到次数 QDCS
+		BasicMap<String,Object> one = dbClient.findOne("select QDCS from REP_QDXXB where  AID = ? and udate = ?", 
+				StringUtil.toEmptyString(data.get("aid")),
+				NumberUtil.toInteger(DateUtil.format(new Date(), "yyyyMMdd")));
+		if(one==null){
+			dbClient.insert(SupConst.Collections.REP_QDXXB, data);
+		}else{
+			int qdcs = NumberUtil.toInt(one.get("QDCS"));
+			data.put("QDCS", qdcs + 1);
+			//记录一天内容最后一次记录
+			dbClient.update(SupConst.Collections.REP_QDXXB,data);
+		}
+		String aid = StringUtil.toString(data.get("aid"));
+		//成功签到后，人脸图片存在 JZ_FACE_IMG 表
+		mongoClient.update(ImConst.Collections.IM_CURRENT_LOCATION, new BasicMap<>("_id",aid,"qdlx",qdlx));
+		
+		//活动信息
+		ActivityObj activityObj = new ActivityObj();
+		activityObj.setYwid(aid);
+		activityObj.setYwcts(new Date());
+		//"address" : "中国内蒙古自治区呼和浩特市玉泉区", "describe" : "在育德幼儿园附近"
+		activityObj.setAddr(StringUtil.toString(data.get("qdwz")));
+		activityObj.setAid(aid);
+		activityObj.setHdjg(NumberUtil.to_double(data.get("SCORE"))); 
+		activityObj.setLng(NumberUtil.to_double(data.get("LNG")));
+		activityObj.setLat(NumberUtil.toDouble(data.get("LAT")));
+		
+		Command command = new Command();
+		Userinfo userInfo =  userinfoService.findUserinfo(StringUtil.toEmptyString(data.get("aid")));
+		command.setDirection(Command.DIRECTION_PHONE_TO_PAD);
+		command.setFrom(StringUtil.toString(data.get("aid")));
+		String msg = "签到成功";
+		if(qdlx==1){
+			command.setCommand(CommandType.COMMAND_FINGER_CHECKIN_SUCCESS);
+			msg = "指纹签到成功";
+			
+			activityObj.setHdlx("4"); //活动类型   4.指纹签到   5.步数抽检 6.心跳抽检 7.越界报警  8.进入特定区域 9.步行 10.骑车 11.驾车 等信息
+			activityObj.setHdlxms("指纹签到");
+			activityObj.setHdjgms("指纹签到成功");
+		}
+		if(qdlx==2){
+			command.setCommand(CommandType.COMMAND_VOICE_CHECKIN_SUCCESS);
+			msg = "声纹签到成功";
+			
+			activityObj.setHdlx("3"); //活动类型  3.声纹签到 
+			activityObj.setHdlxms("声纹签到");
+			activityObj.setHdjgms("声纹签到成功");
+		}
+		if(qdlx==3){
+			command.setCommand(CommandType.COMMAND_FACE_CHECKIN_SUCCESS);
+			msg = "人脸签到成功";
+			
+			activityObj.setHdlx("2");//活动类型 2.人脸签到 
+			activityObj.setHdlxms("人脸签到");
+			activityObj.setHdjgms("人脸签到成功，人脸匹配率 " + data.get("SCORE") + "%" );
+		}
+		command.setContent(msg);
+		command.setName(userInfo.getNickname());
+		broadcastService.sendCommand(command);
+		
+		activityService.insert(activityObj);
+	}
+	
+	/**Android
+	 * 查询签到信息
+	 * @param query
+	 * @param paginate
+	 * @return
+	 * [
+	 * 	{
+	 * 		aid:签到人员id
+	 * 		qdlx:签到类型
+	 * 		cts:签到时间
+	 * 		xm:姓名
+	 * 		qdwz:签到位置
+	 * 	}
+	 * ]
+	 */
+	public BasicMap<String,Object> findCheckInManage(BasicMap<String, Object> query,Paginate paginate){
+		BasicMap<String, Object> map = new BasicMap<>();
+		User user = service.getUser();
+
+		if(user!=null){
+			String orgids = user.getOrgidsByWhereIn();
+			String totalPerson = "select count(*) as totalPerson from jz_jzryjbxx where del = ? and orgid in ("+orgids+")";
+			String totalCheckIn = "select count(*) as totalCheckIn from rep_qdxxb a left join jz_jzryjbxx b on a.aid = b.id where a.cdate = ? and b.orgid in ("+orgids+")";
+			String fingerCheckIn = "select count(*) as fingerCheckIn from rep_qdxxb a left join jz_jzryjbxx b on a.aid = b.id  where a.qdlx = '1' and a.cdate = ? and b.orgid in ("+orgids+")";
+			String soundCheckIn = "select count(*) as soundCheckIn from rep_qdxxb a left join jz_jzryjbxx b on a.aid = b.id  where a.qdlx = '2' and a.cdate = ? and b.orgid in ("+orgids+")";
+			String faceCheckIn = "select count(*) as faceCheckIn from rep_qdxxb a left join jz_jzryjbxx b on a.aid = b.id where a.qdlx = '3' and a.cdate = ? and b.orgid in ("+orgids+")";
+			String todayCheckIn = "select a.*,b.xm from rep_qdxxb a left join jz_jzryjbxx b on a.aid = b.id";
+			map.putAll(dbClient.findOne(totalPerson, 0));
+			map.putAll(dbClient.findOne(totalCheckIn, NumberUtil.toInt(DateUtil.format(new Date(), "yyyyMMdd"))));
+			map.putAll(dbClient.findOne(fingerCheckIn, NumberUtil.toInt(DateUtil.format(new Date(), "yyyyMMdd"))));
+			map.putAll(dbClient.findOne(soundCheckIn, NumberUtil.toInt(DateUtil.format(new Date(), "yyyyMMdd"))));
+			map.putAll(dbClient.findOne(faceCheckIn, NumberUtil.toInt(DateUtil.format(new Date(), "yyyyMMdd"))));
+			
+			ResultList<BasicMap<String, Object>> resultList = new ResultList<>();
+			SQLAdapter sqlAdapter = new SQLAdapter(todayCheckIn);
+			SqlDbFilter sqlDbFilter = toSqlFilter(query).eq("a.cdate", NumberUtil.toInt(DateUtil.format(new Date(), "yyyyMMdd")))
+					.in("a.orgid", user.getOrgidSet());
+			sqlAdapter.setFilter(sqlDbFilter);
+			resultList = dbClient.find(sqlAdapter,paginate,new RowDataListener() {
+				@Override
+				public void processData(BasicMap<String, Object> rowData) {
+					rowData.put("cts", DateUtil.format(rowData.get("cts"), "yyyy-MM-dd HH:mm:ss"));
+				}
+			});
+			map.put("resultList", resultList);
+		}
+		return map;
+	}
+	
+	/**
+	 * 查询连续未签到人员信息
+	 * @param query
+	 * @param paginate
+	 * @return
+	 * [
+	 * 	{
+	 * 		id:矫正人员ID
+	 * 		xm:矫正人员姓名
+	 * 		grlxdh:个人联系电话
+	 * 		online:是否在线
+	 * 		max_date:签到最大日期
+	 * 		date:连续未签到天数
+	 * 	}
+	 * ]
+	 */
+	public ResultList<BasicMap<String, Object>> findContinuousNoSignIn(BasicMap<String, Object> query,Paginate paginate){
+		ResultList<BasicMap<String, Object>> resultList = new ResultList<>();
+		String xm = StringUtil.toEmptyString(query.get("xm"));
+		User user = service.getUser();
+		if(user!=null){
+			String orgids = user.getOrgidsByWhereIn();
+			String sqlstr = "select a.id,a.xm,a.grlxdh,a.online,a.cts,max(b.cdate) as max_date  from jz_jzryjbxx a "
+					+ "left join rep_qdxxb b on a.id = b.aid where"
+					+ " a.xm like '"+xm+"%' and a.orgid in ("+orgids+") AND	a.sfcj = 1 " 
+					+ "AND a.JCJZ = '0' " 
+					+ "AND a.SFJS = '1' "
+					+ "group by a.id,a.xm,a.grlxdh,a.online,a.cts order by max(b.cdate) asc";
+			SQLAdapter sqlAdapter = new SQLAdapter(sqlstr);
+			resultList = dbClient.find(sqlAdapter, paginate, new RowDataListener() {
+				@Override
+				public void processData(BasicMap<String, Object> rowData) {
+					if(rowData.get("max_date")!=null){
+					long days = DateUtils.getDaySub( 
+								StringUtil.toString(DateUtil.format(new Date(), "yyyy-MM-dd")),
+								StringUtil.toString(DateUtil.format(DateUtil.toDate(StringUtil.toString(rowData.get("max_date")),"yyyyMMdd"),"yyyy-MM-dd"))
+								);
+						rowData.put("date", Math.abs(NumberUtil.toInt(days)));//Math.abs(NumberUtil.toInt(rowData.get("max_date"))-NumberUtil.toInt(DateUtil.format(new Date(), "yyyyMMdd"))));
+					}else{
+						long days = DateUtils.getDaySub( 
+								StringUtil.toString(DateUtil.format(new Date(), "yyyy-MM-dd")),
+								StringUtil.toString(DateUtil.format(DateUtil.toDate(StringUtil.toString(rowData.get("cts")),"yyyyMMdd"),"yyyy-MM-dd"))
+								);
+						rowData.put("date", Math.abs(NumberUtil.toInt(days)));
+						//rowData.put("date", Math.abs(NumberUtil.toInt(DateUtil.format(rowData.get("cts"), "yyyyMMdd"))-NumberUtil.toInt(DateUtil.format(new Date(), "yyyyMMdd"))));
+					}
+					if (NumberUtil.toInt(rowData.get("online"))==1) {
+						rowData.put("ifOnline", "在线");
+					}else {
+						rowData.put("ifOnline", "离线");
+					}
+					if(NumberUtil.toInt(rowData.get("date"))==0){
+						rowData.clear();
+					}
+				}
+			});
+			Collections.sort(resultList.getRows(),new Comparator<BasicMap<String, Object>>() {
+				@Override
+				public int compare(BasicMap<String, Object> o1, BasicMap<String, Object> o2) {
+					int r = 0;
+					if(NumberUtil.toInt(o1.get("date"))< NumberUtil.toInt(o2.get("date"))){
+						r = 1;
+					}else if(NumberUtil.toInt(o1.get("date"))== NumberUtil.toInt(o2.get("date"))){
+						r = 0;
+					}else{
+						r = -1;
+					}
+					return r;
+				}
+			});
+		}
+		return resultList;
+	}
+	
+	/**
+	 * 电脑端
+	 * 查询签到信息
+	 * @param query
+	 * @param paginate
+	 * @return
+	 * [
+	 * 	{
+	 * 		aid:签到人员id
+	 * 		qdlx:签到类型
+	 * 		cts:签到时间
+	 * 		xm:姓名
+	 * 		qdwz:签到位置
+	 * 	}
+	 * ]
+	 */
+	public List<BasicMap<String,Object>> findQdList(BasicMap<String, Object> query){
+		String cdate=query.get("datestr").toString().replace("-", "");
+		String aid=query.get("aid").toString();
+		String sqlstr = "select a.aid,a.qdlx,a.qdwz,a.cts,b.xm,a.lng,a.lat from JZ_QDXXB a join JZ_JZRYJBXX b on a.aid = b.id  where a.cdate='"+cdate+"'  and a.aid='"+aid+"'  order by cts desc";
+		SQLAdapter sqlAdapter = new SQLAdapter(sqlstr);
+		List<BasicMap<String,Object>> list = dbClient.find(sqlAdapter,new RowDataListener() {
+			@Override
+			public void processData(BasicMap<String, Object> rowData) {
+				rowData.put("cts", DateUtil.format(rowData.get("cts"), "yyyy-MM-dd HH:mm:ss"));
+				if(NumberUtil.toInt(rowData.get("qdlx"))==1){
+					rowData.put("jdlxm", "指纹签到");
+				}
+				if(NumberUtil.toInt(rowData.get("qdlx"))==2){
+					rowData.put("jdlxm", "声纹签到");
+				}
+				if(NumberUtil.toInt(rowData.get("qdlx"))==3){
+					rowData.put("jdlxm", "人脸签到");
+				}
+			}
+		});
+		return list;
+	}
+	/**
+	 * 查看今日签到情况
+	 * @param query
+	 * @param paginate
+	 * @return
+	 * [
+	 * 	{
+	 * 		aid:矫正人员ID
+	 * 		xm:矫正人员姓名
+	 * 		grlxdh:矫正人员联系电话
+	 * 		qdlx:签到类型
+	 * 		uts:更新签到时间
+	 * 		
+	 * 	}
+	 * ]
+	 */
+	public ResultList<BasicMap<String, Object>> findTodayCheckSituation(BasicMap<String, Object> query,Paginate paginate){
+		ResultList<BasicMap<String, Object>> resultList = new ResultList<>();
+		User user = service.getUser();
+		if(user!=null){
+			String orgids = user.getOrgidsByWhereIn();
+			Set<String> setOrgid = user.getOrgidSet();
+			int checkin = NumberUtil.toInt(query.get("checkin"));
+			String sqlstr = "";
+			if(checkin==0){
+				sqlstr = "select id as aid,xm,grlxdh from jz_jzryjbxx where sfcj = 1 and JCJZ = '0' and SFJS = '1' and orgid in ("+orgids+") and id not in (select aid from rep_qdxxb where cdate = "+NumberUtil.toInt(DateUtil.format(new Date(), "yyyyMMdd"))+")";
+			}else if(checkin==1){
+				sqlstr = "select a.aid,a.qdlx,a.uts,b.xm,b.grlxdh"
+						+ " from rep_qdxxb a"
+						+ " left join jz_jzryjbxx b on b.id = a.aid";
+			}
+			SQLAdapter sqlAdapter = new SQLAdapter(sqlstr);
+			if (checkin==1) {
+				SqlDbFilter sqlDbFilter = new SqlDbFilter();
+				//String cdate = "20180111";//死数据
+				//String setOrgid1 = "NM0000000000-0000-0000-0000000-01389";
+				//sqlDbFilter.eq("a.cdate", cdate).in("a.orgid", setOrgid1);
+				sqlDbFilter.eq("a.cdate", NumberUtil.toInt(DateUtil.format(new Date(), "yyyyMMdd"))).in("a.orgid", setOrgid);
+				sqlAdapter.setFilter(sqlDbFilter);
+			}
+			resultList = dbClient.find(sqlAdapter, paginate, new RowDataListener() {
+				@Override
+				public void processData(BasicMap<String, Object> rowData) {
+					String aid = StringUtil.toString(rowData.get("aid"));
+					BasicMap<String,Object> one = mongoClient.findOne(ImConst.Collections.IM_CURRENT_LOCATION, Query.query(Criteria.where("_id").is(aid)));
+					if(one!=null){
+						rowData.put("lng", one.get("lng"));
+						rowData.put("lat", one.get("lat"));
+						rowData.put("online", one.get("online"));
+						if(Util.isNotEmpty(one.get("address"))){
+							rowData.put("qdwz",one.get("address"));
+						}else{
+							rowData.put("qdwz",one.get("describe"));
+						}
+					}
+					if(checkin==1){
+						rowData.put("uts", DateUtil.format(rowData.get("uts"), "yyyy-MM-dd HH:mm:ss"));
+					}
+				}
+			});
+		}
+		return resultList;
+	}
+	
+	/**
+	 * 发送签到通知
+	 * @param query
+	 */
+	public void sendCheckInMessage(BasicMap<String, Object> query){
+		List<String> tos = new ArrayList<>();
+		tos = (List<String>) query.get("tos");
+		//发送内容类型
+		Message message = IMProtocol.wrap(IMProtocol.Type.TEXT);
+		//发送方
+		message.setFrom(StringUtil.toString(query.get("from")));
+		//发送内容
+		message.setContent(StringUtil.toString(query.get("content")).getBytes());
+		for(int i=0;i<tos.size();i++){
+			message.setTo(tos.get(i));
+			broadcastService.sendMessage(message);
+		}
+	}
+
+}

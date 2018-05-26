@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_USER" label="擎天-法律援助机构人员表">
+    <column field="CHINANAME" type="string" length="20" label="姓名" required="true" remark="系统自动生成"/>
+    <column field="LOGINNAME" type="string" length="20" label="登录名"/>
+    <column field="BIRTH" type="string" length="20" label="出生年月"/>
+    <column field="SEX" type="integer" length="3" label="性别"/>
+    <column field="MOBILE" type="string" length="50" label="移动电话"/>
+    <column field="PHONEDEPT" type="string" length="50" label="单位电话"/>
+    <column field="PHONEHOME" type="string" length="50" label="家庭电话"/>
+    <column field="PERSONROLES" type="string" length="1000" label="人员角色"/>
+    <column field="IDENTITYNUM" type="string" length="50" label="证件号码"/>
+    <column field="ID" type="string" length="50" label="主键"/>
+    <column field="DEPTID" type="string" length="50" label="所属机构编码"/>
+    <column field="NATION" type="string" length="50" label="民族"/>
+    <column field="POLITICALFACE" type="string" length="50" label="政治面貌"/>
+    <column field="CULTURE" type="string" length="50" label="文化程度"/>
+    <column field="PROFESSION" type="string" length="50" label="专业"/>
+    <column field="WORKUNIT" type="string" length="50" label="工作单位名称"/>
+    <column field="JOB" type="string" length="50" label="职务"/>
+    <column field="FIRSTWORKDATE" type="DATE" label="参加工作时间"/>
+    <column field="DUTYBEGINDATE" type="DATE" label="从事法援工作时间"/>
+    <column field="WORKBEGINDATE" type="string" length="20" label="任职日期（默认与参加工作日期相同）"/>
+    <column field="ISLEGALWORK" type="integer" length="4" label="职业资格" remark="（1:律师资格，2:法律职业资格，0:无）"/>
+    <column field="LEGALWORKCARDNUMBER" type="string" length="50" label="资格证号"/>
+    <column field="WORKCARDNUMBER" type="string" length="50" label="执业证号"/>
+    <column field="CASENUMBER" type="integer" length="11" label="办案数量"/>
+    <column field="CAREERTYPE" type="string" length="10" label="职业身份"/>
+    <column field="IDCARDTYPE" type="string" length="50" label="证件类型"/>
+    <column field="IDCARDNO" type="string" length="50" label="证件号码"/>
+    <primary name="PK_SYS_USER" field="CHINANAME"/>
+  </table>
+</model>

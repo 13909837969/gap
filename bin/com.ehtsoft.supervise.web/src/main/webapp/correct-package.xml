@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apks>
+	<!-- 矫正人员版本 -->
+	<apk versionCode="1" versionName="1.0"
+		 filename="correct-release_20170713.apk"
+		 url="http://110.16.70.41:38080/correct-release.apk">
+	<![CDATA[		
+	    解决交流互动的功能bug问题
+		更新日期：2017-07-15 23:30
+	]]>
+	</apk>
+</apks>

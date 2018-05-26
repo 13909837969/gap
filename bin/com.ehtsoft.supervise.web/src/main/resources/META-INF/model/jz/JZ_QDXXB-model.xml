@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_QDXXB" label="社区矫正人员签到信息表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="AID" type="uuid" length="36" label="社区矫正人员ID" required="true"/>
+    <column field="QDLX" type="string" length="1" label="签到类型" required="true" remark="1 指纹签到  2 声纹签到  3 人脸签到"/>
+    <column field="QDWZ" type="string" length="200" label="签到位置" required="true"/>
+    <column field="LAT" type="double" length="16" precision="12" label="纬度" required="true"/>
+    <column field="LNG" type="double" length="16" precision="12" label="经度" required="true"/>
+    <column field="SCORE" type="double" length="6" precision="3" label="分数（相似度）"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_QDXXB" field="ID"/>
+  </table>
+</model>

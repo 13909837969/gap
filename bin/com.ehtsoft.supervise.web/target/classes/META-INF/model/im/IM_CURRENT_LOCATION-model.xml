@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="IM_CURRENT_LOCATION" label="当前位置">
+    <column field="F_AID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_LAT" type="double" length="16" precision="12" label="纬度" required="true"/>
+    <column field="F_LNG" type="double" length="16" precision="12" label="经度" required="true"/>
+    <column field="F_ALTITUDE" type="float" length="8" precision="2" defaultValue="0" label="海拔高度"/>
+    <column field="F_ADDRESS" type="string" length="200" label="地址"/>
+    <column field="F_DESCRIBE" type="string" length="200" label="位置描述"/>
+    <column field="uts" type="timestamp" label="更新时间戳" required="true" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="udate" type="integer" length="8" label="更新日期" required="true" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_CURRENT_LOCATION" field="F_AID"/>
+    <remark><![CDATA[mongo: _id = aid]]></remark>
+  </table>
+</model>

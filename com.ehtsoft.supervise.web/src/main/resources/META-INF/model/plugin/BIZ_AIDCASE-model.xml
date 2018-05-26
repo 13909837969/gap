@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="BIZ_AIDCASE" label="擎天-案件表 ">
+    <column field="PKID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="ADVISORYCONTENT" type="string" length="4000" label="咨询内容"/>
+    <column field="AIDTIME" type="string" length="20" label="受理时间"/>
+    <column field="CASEDETAIL" type="string" length="4000" label="案情描述"/>
+    <column field="CASELEAGLSTATUSVALUE" type="string" length="10" label="法律状态子项"/>
+    <column field="CASELEGALSTATUS" type="string" length="10" label="法律状态"/>
+    <column field="CODE_YEAR" type="string" length="100" label="案件年号"/>
+    <column field="CODE_NUMBER" type="string" length="20" label="案件期号"/>
+    <column field="CASESOURCE" type="string" length="10" label="案件来源"/>
+    <column field="FSTATUS" type="integer" length="1" label="案件状态"/>
+    <column field="AIDTYPE" type="string" length="20" label="援助方式"/>
+    <column field="LEGALITEMTYPE" type="string" length="10" label="事项类型"/>
+    <column field="LEGALPOSITION" type="string" length="10" label="法律地位"/>
+    <column field="CASEINVOLVED" type="integer" length="1" label="是否是群体案件："/>
+    <column field="DEPTID" type="string" length="40" label="处理机构ID"/>
+    <primary name="PK_BIZ_AIDCASE" field="PKID"/>
+  </table>
+</model>

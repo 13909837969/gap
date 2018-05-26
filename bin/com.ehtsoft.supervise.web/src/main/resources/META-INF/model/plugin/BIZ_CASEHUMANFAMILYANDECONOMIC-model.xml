@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="BIZ_CASEHUMANFAMILYANDECONOMIC" label="擎天-申请人家庭成员及收入表">
+    <column field="PKID" type="string" length="40" label="主键" required="true" remark="系统自动生成"/>
+    <column field="AGE" type="integer" length="3" label="家庭成员年龄"/>
+    <column field="DEPT" type="string" length="100" label="工作或学习单位"/>
+    <column field="HUMANID" type="string" length="40" label="受援人id"/>
+    <column field="JOB" type="string" length="50" label="职业"/>
+    <column field="MONEY1" type="double" length="10" precision="2" label="工资收入"/>
+    <column field="MONEY2" type="double" label="生产经营收入"/>
+    <column field="MONEY3" type="double" length="10" precision="2" label="其他收入"/>
+    <column field="NAME" type="string" length="50" label="家庭成员姓名"/>
+    <column field="RELATION" type="string" length="10" label="亲属关系"/>
+    <column field="MONEYTOTAL" type="string" length="20" label="合计收入"/>
+    <primary name="PK_BIZ_CASEHUMANFAMILYANDECONOMIC" field="PKID"/>
+  </table>
+</model>

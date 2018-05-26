@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<apps>
+  <app appcode="PSA" appname="PSA应用功能" reqaddress="_self" project="_self" remark="PSA(Platform Supper Admin) 平台管理员应用功能">
+    <children>
+      <menu menucode="PSA01" menuname="系统管理" sort="1" icon="window-func-icon21">
+        <children>
+          <menu menucode="PSA0101" menuname="应用配置管理" actionuri="module/medical/listApplication.jsp" sort="2" icon="window-func-icon31"/>
+          <menu menucode="PSA0102" menuname="PSA用户" actionuri="module/medical/listPsaOrganization.jsp" sort="3"/>
+          <menu menucode="PSA0103" menuname="系统用户管理" actionuri="module/medical/listOrganization.jsp" sort="4" icon="window-func-icon23"/>
+          <menu menucode="PSA0104" menuname="功能菜单管理" actionuri="module/medical/listMenu.jsp" sort="5" icon="window-func-icon15"/>
+          <menu menucode="PSA0105" menuname="功能角色管理" actionuri="module/medical/listRole.jsp" sort="6" icon="window-func-icon11"/>
+          <menu menucode="PSA0106" menuname="权限授权管理" actionuri="module/medical/listPsaPermission.jsp" sort="7"/>
+        </children>
+      </menu>
+    </children>
+  </app>
+  <app appcode="OSA" appname="OSA 应用功能" reqaddress="_self" project="_self" remark="OSA (Organization Supper Admin)机构管理员应用功能">
+    <children>
+      <menu menucode="OSA01" menuname="系统管理" sort="8" icon="window-func-icon21">
+        <children>
+          <menu menucode="OSA0101" menuname="机构用户管理" actionuri="module/medical/listOsaOrganization.jsp" sort="9"/>
+          <menu menucode="OSA0102" menuname="功能角色管理" actionuri="module/medical/listRole.jsp" sort="6" icon="window-func-icon11"/>
+          <menu menucode="OSA0103" menuname="用户权限管理" actionuri="module/medical/listOsaPermission.jsp" sort="3"/>
+        </children>
+      </menu>
+    </children>
+  </app>
+  <app appcode="AP1" appname="APP 平台注册应用" reqaddress="_self" project="app" remark="APP 应用平台中管理员应用功能，超级用户或实施用户所用功能">
+    <children>
+      <menu menucode="AP101" menuname="信息注册管理" sort="10" icon="window-func-icon31">
+        <children>
+          <menu menucode="AP10101" menuname="医疗机构信息注册" actionuri="module/app/listOrganization.jsp" sort="11" icon="window-func-icon31"/>
+          <menu menucode="AP10102" menuname="银行信息管理" actionuri="module/app/listBankinfo.jsp" sort="12" icon="window-func-icon12"/>
+          <menu menucode="AP10103" menuname="基础数据字典维护" actionuri="module/app/listDataStandards.jsp" sort="13" icon="window-func-icon21"/>
+          <menu menucode="AP10104" menuname="科室字典表" actionuri="module/app/listDepartments.jsp" sort="13" icon="window-func-icon21"/>
+          <menu menucode="AP10105" menuname="意见反馈" actionuri="module/app/listAdvice.jsp" />
+          <menu menucode="AP10106" menuname="医院支付宝信息管理" actionuri="module/app/listAlipayinfo.jsp" />
+          <menu menucode="AP10107" menuname="科室主治疾病设置" actionuri="module/app/listDepartmentsDisease.jsp"/>
+          <menu menucode="AP10108" menuname="疾病信息介绍" actionuri="module/app/listDiseaseInfos.jsp"/>
+        </children>
+      </menu>
+    </children>
+  </app>
+  <app appcode="AP2" appname="APP 机构业务管理" reqaddress="_self" project="app" remark="APP 机构业务管理，注册的医院用户或医院管理员用户功能">
+    <children>
+      <menu menucode="AP201" menuname="机构业务管理" sort="14" icon="window-func-icon31">
+        <children>
+          <menu menucode="AP20101" menuname="医疗机构信息维护" actionuri="module/app/formOrganization.jsp" sort="15" icon="window-func-icon31"/>
+          <menu menucode="AP20102" menuname="医疗科室信息维护" actionuri="module/app/listDepartment.jsp" sort="16"/>
+          <menu menucode="AP20103" menuname="卫生人员信息维护" actionuri="module/app/listPersonnel.jsp" sort="17"/>
+          <menu menucode="AP20104" menuname="检查检验结果" actionuri="module/app/listInspectionGroup.jsp" />
+          <menu menucode="AP20105" menuname="当天未结算明细信息" actionuri="module/app/listPaymentRecord.jsp" />
+          <menu menucode="AP20106" menuname="医院专家排班表" actionuri="module/app/listPlanScheduling.jsp" />
+          <menu menucode="AP20107" menuname="预约挂号" actionuri="module/app/listRegistration.jsp" />
+          <menu menucode="AP20108" menuname="医院挂号附加费用" actionuri="module/app/listRegistExpenses.jsp" />
+          <menu menucode="AP20109" menuname="组织机构信息图片管理" actionuri="module/app/listOrgImages.jsp" />
+          <menu menucode="AP20110" menuname="检查报告管理" actionuri="module/app/listCheckreport.jsp" />
+          <menu menucode="AP20111" menuname="患者咨询回复" actionuri="module/app/listConsultation.jsp" />
+        </children>
+      </menu>
+    </children>
+  </app>
+  <!-- 没有配置完成。。。 -->
+  <app appcode="OCS1" appname="一卡通应用平台" reqaddress="_self" project="ocs" remark="OCS (One Card Solution) 一卡通">
+    <children>
+      <menu menucode="OCS01" menuname="会员管理" sort="8" icon="window-func-icon21">
+        <children>
+          <menu menucode="OCS0101" menuname="会员实名登记" actionuri="" sort="9"/>
+          <menu menucode="OCS0102" menuname="会员积分管理" actionuri="" sort="6" icon="window-func-icon11"/>
+          <menu menucode="OCS0103" menuname="账号多卡管理" actionuri="" sort="3">
+          	<children>
+          		<menu menucode="OCS010301" menuname="个人联名卡家庭绑定" actionuri=""/>
+          	</children>
+          </menu>
+          <menu menucode="OCS0103" menuname="账号多卡管理" actionuri=""/>
+        </children>
+      </menu>
+    </children>
+  </app>
+  
+  
+  <app appcode="MPI" appname="EMPI 系统" reqaddress="_self" project="empi">
+    <children>
+      <menu menucode="MPI01" menuname="empi系统" sort="18">
+        <children>
+          <menu menucode="MPI0101" menuname="empi证件号码补充" actionuri="module/listEmpiPersonnel.jsp" sort="19"/>
+        </children>
+      </menu>
+    </children>
+  </app>
+  <app appcode="G01" appname="公共卫生应用" reqaddress="_self" project="ph">
+    <children>
+      <menu menucode="G0101" menuname="健康档案管理" sort="20">
+        <children>
+          <menu menucode="G010101" menuname="个人健康档案管理" actionuri="module/archives/listBasicArchives.jsp" sort="21" icon="window-func-icon32"/>
+          <menu menucode="G010102" menuname="家庭健康档案管理" actionuri="module/archives/listFamilyArchives.jsp" sort="22" icon="window-func-icon33"/>
+          <menu menucode="G010103" menuname="居民健康卡管理" sort="23" icon="window-func-icon12"/>
+        </children>
+      </menu>
+      <menu menucode="G0102" menuname="健康信息服务" sort="24" icon="window-func-icon24">
+        <children>
+          <menu menucode="G010201" menuname="健康档案查询" actionuri="module/archives/listBasicArchives.jsp" sort="25"/>
+          <menu menucode="G010202" menuname="健康信息发布" sort="26" icon="window-func-icon14"/>
+          <menu menucode="G010203" menuname="网上预约" sort="27" icon="window-func-icon20"/>
+          <menu menucode="G010204" menuname="健康教育门户" sort="28" icon="window-func-icon28"/>
+        </children>
+      </menu>
+      <menu menucode="G0103" menuname="基本公共卫生" sort="29" icon="window-func-icon10">
+        <children>
+          <menu menucode="G010301" menuname="健康教育" sort="30" icon="window-func-icon4">
+            <children>
+              <menu menucode="G01030101" menuname="健康教育活动记录" actionuri="module/archives/listEducation.jsp" sort="31" icon="window-func-icon4"/>
+              <menu menucode="G01030102" menuname="健康教育材料记录" actionuri="module/archives/listMaterialReg.jsp" sort="32"/>
+            </children>
+          </menu>
+          <menu menucode="G010302" menuname="预防接种" actionuri="module/archives/listVaccineCard.jsp" sort="33" icon="window-func-icon25"/>
+          <menu menucode="G010303" menuname="儿童健康管理" actionuri="module/archives/listChildrenFollow.jsp" sort="34" icon="window-func-icon5"/>
+          <menu menucode="G010304" menuname="孕产妇健康管理" actionuri="module/archives/listPrenatalFollowup1.jsp" sort="35" icon="window-func-icon7"/>
+          <menu menucode="G010305" menuname="老年人健康管理" sort="36">
+            <children>
+              <menu menucode="G01030501" menuname="老年人自理能力评估" actionuri="module/archives/listOldPeolpePg.jsp" sort="37" icon="window-func-icon13"/>
+            </children>
+          </menu>
+          <menu menucode="G010306" menuname="高血压患者健康管理" actionuri="module/archives/listHypertensionFollow.jsp" sort="38" icon="window-func-icon19"/>
+          <menu menucode="G010307" menuname="2型糖尿病健康管理" actionuri="module/archives/listDiabeticFollow.jsp" sort="39" icon="window-func-icon9"/>
+          <menu menucode="G010308" menuname="重型精神病健康管理" actionuri="module/archives/listPsychosis.jsp" sort="40" icon="window-func-icon22"/>
+          <menu menucode="G010309" menuname="传染病管理" actionuri="module/archives/listDiseasesCard.jsp" sort="41" icon="window-func-icon1"/>
+          <menu menucode="G010310" menuname="突发公共卫生事件管理" actionuri="module/archives/listHealthEmergency.jsp" sort="42"/>
+          <menu menucode="G010311" menuname="个人健康体检" actionuri="module/archives/listHealthy.jsp" sort="43" icon="window-func-icon33"/>
+        </children>
+      </menu>
+      <menu menucode="G0104" menuname="体检接入浏览" sort="44">
+        <children>
+          <menu menucode="G010401" menuname="体检信息列表" actionuri="module/tj/listCooperationCheck.jsp" sort="45"/>
+        </children>
+      </menu>
+      <menu menucode="G0105" menuname="基础数据管理" sort="46" icon="window-func-icon3">
+        <children>
+          <menu menucode="G010501" menuname="行政区划基础数据" actionuri="module/dic/listArea.jsp" sort="47" icon="window-func-icon27"/>
+          <menu menucode="G010502" menuname="儿童随访信息设置" actionuri="module/dic/listDicChildrenfollow.jsp" sort="48" icon="window-func-icon30"/>
+          <menu menucode="G010503" menuname="0-10岁儿童体重身高参考" actionuri="module/dic/listChildreference.jsp" sort="49" icon="window-func-icon26"/>
+          <menu menucode="G010504" menuname="疫苗名称信息设置" actionuri="module/dic/listDicVaccine.jsp" sort="50" icon="window-func-icon1"/>
+          <menu menucode="G010505" menuname="数据标准字典" actionuri="module/archives/listDataStandards.jsp" sort="51" icon="window-func-icon3"/>
+        </children>
+      </menu>
+    </children>
+  </app>
+  <app appcode="G02" appname="卫生资源应用" reqaddress="_self" project="res">
+    <children>
+      <menu menucode="G0201" menuname="卫生资源信息管理" sort="52">
+        <children>
+          <menu menucode="G020101" menuname="卫生医疗机构注册" actionuri="module/res/listOrganization.jsp" sort="53"/>
+          <menu menucode="G020102" menuname="卫生人员信息注册" actionuri="module/res/listPersonnel.jsp" sort="54"/>
+          <menu menucode="G020103" menuname="机构地理位置采集" actionuri="module/res/listHrOrgPosition.jsp" sort="55"/>
+          <menu menucode="G020104" menuname="医疗科室信息注册" actionuri="module/res/listDepartment.jsp" sort="56"/>
+        </children>
+      </menu>
+      <menu menucode="G0202" menuname="卫生资源统计分析" sort="57">
+        <children>
+          <menu menucode="G020201" menuname="医疗机构服务范围" actionuri="module/res/viewMedicalRange.jsp" sort="58"/>
+        </children>
+      </menu>
+    </children>
+  </app>
+  <app appcode="G03" appname="妇幼保健应用" reqaddress="_self" project="ph">
+    <children>
+      <menu menucode="G0301" menuname="妇幼保健系统" sort="59" icon="window-func-icon8">
+        <children>
+          <menu menucode="G030101" menuname="妇幼档案管理" sort="60">
+            <children>
+              <menu menucode="G03010101" menuname="孕产妇档案管理" actionuri="module/fy/listPregnantArchives.jsp" sort="61"/>
+              <menu menucode="G03010102" menuname="儿童档案管理" actionuri="module/fy/listChildrenArchives.jsp" sort="62" icon="window-func-icon4"/>
+            </children>
+          </menu>
+          <menu menucode="G030102" menuname="妇女保健服务" sort="63">
+            <children>
+              <menu menucode="G03010201" menuname="婚前保健服务" sort="64">
+                <children>
+                  <menu menucode="G0301020101" menuname="男性婚前检查" actionuri="module/fy/listPremaritalMan.jsp?xb=1" sort="65"/>
+                  <menu menucode="G0301020102" menuname="女性婚前检查" actionuri="module/fy/listPremaritalMan.jsp?xb=2" sort="66"/>
+                  <menu menucode="G0301020103" menuname="婚前医学证明" sort="67"/>
+                  <menu menucode="G0301020104" menuname="婚前医学检查疾病登记与咨询指导记录" sort="68"/>
+                </children>
+              </menu>
+              <menu menucode="G03010202" menuname="计划生育服务" sort="69">
+                <children>
+                  <menu menucode="G0301020201" menuname="男性计划生育服务" actionuri="module/fy/listFamilyPlanning.jsp?xb=1" sort="70"/>
+                  <menu menucode="G0301020202" menuname="女性计划生育服务" actionuri="module/fy/listFamilyPlanning.jsp?xb=2" sort="71"/>
+                </children>
+              </menu>
+              <menu menucode="G03010203" menuname="妇女病普查" sort="72">
+                <children>
+                  <menu menucode="G0301020301" menuname="妇女病普查" actionuri="module/fy/listWomenInformations.jsp" sort="73"/>
+                  <menu menucode="G0301020302" menuname="妇女病普查追踪" sort="74"/>
+                </children>
+              </menu>
+              <menu menucode="G03010204" menuname="孕前保健" sort="75">
+                <children>
+                  <menu menucode="G0301020401" menuname="男性孕前医学检查" actionuri="module/fy/listPremaritalCheck.jsp?xb=1" sort="76"/>
+                  <menu menucode="G0301020402" menuname="女性孕前医学检查" actionuri="module/fy/listPremaritalCheck.jsp?xb=2" sort="77"/>
+                </children>
+              </menu>
+              <menu menucode="G03010205" menuname="孕期保健" sort="78">
+                <children>
+                  <menu menucode="G0301020501" menuname="首次诊治记录" actionuri="module/fy/listPrenatalFirst.jsp" sort="79"/>
+                  <menu menucode="G0301020502" menuname="孕期复诊记录" sort="80"/>
+                  <menu menucode="G0301020503" menuname="孕产妇分娩记录" actionuri="module/fy/listPrenatalDelivery.jsp" sort="81"/>
+                  <menu menucode="G0301020504" menuname="新生儿产后访视" sort="82"/>
+                  <menu menucode="G0301020505" menuname="孕产妇产后访视" actionuri="module/fy/listPostnatalVisit.jsp" sort="83"/>
+                  <menu menucode="G0301020506" menuname="产后42天健康检查" actionuri="module/fy/listPostnatal42visit.jsp" sort="84"/>
+                </children>
+              </menu>
+              <menu menucode="G03010206" menuname="高危孕产妇管理" sort="85">
+                <children>
+                  <menu menucode="G0301020601" menuname="高危孕产妇档案" actionuri="module/fy/listHighRiskArchives.jsp" sort="86"/>
+                  <menu menucode="G0301020602" menuname="高危孕产妇随访" actionuri="module/fy/listHighRiskArchives.jsp" sort="87"/>
+                </children>
+              </menu>
+            </children>
+          </menu>
+          <menu menucode="G030103" menuname="儿童保健服务" sort="88">
+            <children>
+              <menu menucode="G03010301" menuname="新生儿疾病筛查管理" sort="89"/>
+              <menu menucode="G03010302" menuname="儿童健康体检" sort="90"/>
+              <menu menucode="G03010303" menuname="体弱儿管理" sort="91">
+                <children>
+                  <menu menucode="G0301030301" menuname="体弱儿童档案管理" actionuri="module/fy/listChildrenWeak.jsp?flag=0" sort="92"/>
+                  <menu menucode="G0301030302" menuname="体弱儿童随访" actionuri="module/fy/listChildrenWeak.jsp?flag=1" sort="93"/>
+                </children>
+              </menu>
+              <menu menucode="G03010304" menuname="出生缺陷儿管理" sort="94">
+                <children>
+                  <menu menucode="G0301030401" menuname="出生缺陷登记" actionuri="module/fy/listChildrenDefect.jsp" sort="95"/>
+                  <menu menucode="G0301030402" menuname="出生缺陷随访" sort="96"/>
+                </children>
+              </menu>
+              <menu menucode="G03010305" menuname="营养性疾病管理" actionuri="module/fy/listChildrenDiseaseReg.jsp" sort="97"/>
+              <menu menucode="G03010306" menuname="预防接种" sort="98"/>
+            </children>
+          </menu>
+          <menu menucode="G030104" menuname="死亡管理" sort="99">
+            <children>
+              <menu menucode="G03010401" menuname="孕产妇死亡管理" actionuri="module/fy/listPregnantDeath.jsp" sort="100"/>
+              <menu menucode="G03010402" menuname="儿童死亡管理" actionuri="module/fy/listChildrenDeath.jsp" sort="101"/>
+            </children>
+          </menu>
+          <menu menucode="G030105" menuname="卫统报表" sort="102">
+            <children>
+              <menu menucode="G03010501" menuname="孕产妇保健和健康情况年报表" actionuri="module/fy/fy_rep_wt36.jsp" sort="103"/>
+              <menu menucode="G03010502" menuname="七岁以下儿童保健和健康年报" actionuri="module/fy/fy_rep_wt37.jsp" sort="104"/>
+              <menu menucode="G03010503" menuname="妇女常见病筛查情况年报" actionuri="module/fy/fy_rep_wt39.jsp" sort="105"/>
+              <menu menucode="G03010504" menuname="计划生育服务数量和质量年报" actionuri="module/fy/fy_rep_wt40.jsp" sort="106"/>
+              <menu menucode="G03010505" menuname="男性婚前保健情况年报表" actionuri="module/fy/fy_rep_wt41.jsp" sort="107"/>
+              <menu menucode="G03010506" menuname="女性婚前保健情况年报表" actionuri="module/fy/fy_rep_wt42.jsp" sort="108"/>
+              <menu menucode="G03010507" menuname="流动人口儿童与孕产妇健康状况调查表" sort="109"/>
+            </children>
+          </menu>
+          <menu menucode="G030106" menuname="综合报表" sort="110">
+            <children>
+              <menu menucode="G03010601" menuname="孕产妇随访及高危情况分析" actionuri="module/fy/fy_rep_maternalfollow_highrisk.jsp" sort="111"/>
+              <menu menucode="G03010602" menuname="孕产妇随访及高危情况分析2" actionuri="module/fy/fy_rep_pfvhra2.jsp" sort="112"/>
+              <menu menucode="G03010603" menuname="儿童随访及体弱儿情况分析" actionuri="module/fy/formChildrenInformation.jsp" sort="113"/>
+            </children>
+          </menu>
+          <menu menucode="G030107" menuname="基础字典信息" sort="114">
+            <children>
+              <menu menucode="G03010701" menuname="儿童检查记录项目设置" actionuri="module/fy/listChildrenFieldsetting.jsp" sort="115"/>
+              <menu menucode="G03010702" menuname="儿童检查模板设置" actionuri="module/fy/listChildrenTemplateHeader.jsp" sort="116"/>
+            </children>
+          </menu>
+        </children>
+      </menu>
+    </children>
+  </app>
+  <app appcode="G04" appname="卫生综合管理"/>
+</apps>

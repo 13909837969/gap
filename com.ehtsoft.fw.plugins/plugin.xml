@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <!-- 数据库视图 -->
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="EHT Tools View"
+            id="com.ehtsoft.fw.plugin.view">
+      </category>
+      <view
+            name="EHT Database View"
+            icon="icons/sample.gif"
+            category="com.ehtsoft.fw.plugin.view"
+            class="com.ehtsoft.fw.plugin.views.DatabaseView"
+            id="com.ehtsoft.fw.plugin.views.DatabaseView">
+      </view>
+   </extension>
+   <!-- 透视图 * 所有  -->
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+         <!-- org.eclipse.jdt.ui.JavaPerspective -->
+      <perspectiveExtension
+            targetID="*">
+         <view
+               ratio="0.5"
+               relative="org.eclipse.ui.views.ProblemView"
+               relationship="right"
+               id="com.ehtsoft.fw.plugin.views.DatabaseView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <!-- 帮助信息 -->
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   <!-- 控制台日志输出 -->
+   <extension
+         point="org.eclipse.ui.console.consoleFactories">
+   		<consoleFactory class="com.ehtsoft.fw.plugin.utils.ConsoleFactory"
+   		label="EHT控制台"/>
+   </extension>
+	
+	<!-- 新建数据模型文件（通过向导方式） -->
+	<extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Eht Model Wizards"
+            id="com.ehtsoft.fw.plugin.wizard">
+      </category>
+      <wizard
+            name="Eht Model Editor"
+            icon="icons/sample.gif"
+            category="com.ehtsoft.fw.plugin.wizard"
+            class="com.ehtsoft.fw.plugin.wizard.XmlModelWizard"
+            id="com.ehtsoft.fw.plugin.wizard.XmlModelWizard">
+      </wizard>
+   </extension>
+   <!-- *-model.xml 文件编辑器插件扩展点 -->
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="EHT Model Editor"
+            extensions="-model.xml"
+            icon="icons/sample.gif"
+            contributorClass="com.ehtsoft.fw.plugin.editor.MultiPageEditorContributor"
+            class="com.ehtsoft.fw.plugin.editor.MultiPageEditor"
+            id="com.ehtsoft.fw.plugin.editor.MultiPageEditor">
+      </editor>
+   </extension>
+   
+   <!-- Project/Package Explorer 添加右键菜单弹出  -->
+    <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IResource"
+            id="com.ehtsoft.fw.plugin.popup">
+           <!-- 
+            org.eclipse.core.resources.IFile 
+            org.eclipse.core.resources.IFolder
+            
+            org.eclipse.jdt.core.IJavaProject 表示该右键菜单仅对java工程有效
+                                 IJavaElement:在任意Java元素上单击菜单有效。
+                                 IAdaptable:在任意处打击都有效。
+           -->
+           
+         <menu
+               label="EHT Tools"
+               path="additions"
+               id="com.ehtsoft.fw.plugin.popupmenu">
+            <separator
+                  name="ehtsoft.group">
+            </separator>
+         </menu>
+         <!-- enablesFor="multiple" 选择多个元素后右键菜单在有效
+         	  enablesFor="1" 选择 1 个
+         	  enablesFor="+" 选择 1 个或多个 
+         	  enablesFor="*" 选择任意多个
+          -->
+         <action
+               label="生成SQL脚本"
+               class="com.ehtsoft.fw.plugin.action.CreateSqlAction"
+               menubarPath="com.ehtsoft.fw.plugin.popupmenu/ehtsoft.group"
+               enablesFor="+"
+               id="com.ehtsoft.fw.plugin.action.CreateSqlAction">
+         </action>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            id="com.ehtsoft.fw.plugin.popup">
+         <action
+               label="生成JSON模板"
+               class="com.ehtsoft.fw.plugin.action.CreateJsonTemplate"
+               menubarPath="com.ehtsoft.fw.plugin.popupmenu/ehtsoft.group"
+               enablesFor="1"
+               id="com.ehtsoft.fw.plugin.action.CreateJsonTemplate">
+         </action>
+      </objectContribution>
+   </extension>
+   
+</plugin>

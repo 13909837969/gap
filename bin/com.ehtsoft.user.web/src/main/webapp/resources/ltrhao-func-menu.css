@@ -1,0 +1,372 @@
+@CHARSET "UTF-8";
+.menu_img{
+ 	background-image:url(images/cool/main/logo.png);
+ }
+ /*定位监控*/
+ .menu_dwjk{
+ 	background-image:url(images/cool/func/func_dwjk.png);
+ }
+ /*辅助决策*/
+ .menu_fzjc{
+ 	background-image:url(images/cool/func/func_fzjc.png);
+ }
+/* 智能分析（预判分析） */
+.menu_znfx{
+	background-image:url(images/cool/func/func_znfx.png);
+}
+/*预判分析*/
+.menu_ypfx{
+	background-image:url(images/cool/func/func_ypfx.png);
+}
+/* 初始化管理 */
+.menu_csh{
+	background-image:url(images/cool/func/func_csh.png);
+}
+/* 系统管理 */
+.menu_xtgl{
+	background-image:url(images/cool/func/func_xtgl.png);
+}
+/* 用户管理 */
+.menu_yhgl{
+	background-image:url(images/cool/func/func_yhgl.png);
+}
+/* 安置帮教 */
+.menu_azbj{
+	background-image:url(images/cool/func/func_azbj.png);
+}
+/* 法律服务 */
+.menu_flfw{
+	background-image:url(images/cool/func/func_flfw.png);
+}
+/* 社区矫正-图标区域{ */
+/*社区矫正*/
+.menu_sqjz{
+	background-image:url(images/cool/func/func_sqjz.png);
+}
+/*综合服务*/
+.menu_zhfw{
+	background-image:url(images/cool/func/func_zhfw.png);
+}
+/*通知公告列表*/
+.menu_tzgg{
+	background-image:url(images/cool/func/func_tzgg.png);
+}
+/*重点人员管控*/
+.menu_zdrgk{
+	background-image:url(images/cool/func/func_zdrgk.png);
+}
+/*隐患问题整改*/
+.menu_yhwt{
+	background-image:url(images/cool/func/func_yhwt.png);
+}
+/*值班管理*/
+.menu_zbgl{
+	background-image:url(images/cool/func/func_zbgl.png);
+}
+/*执法工作标准*/
+.menu_zfgz{
+	background-image:url(images/cool/func/func_zfgz.png);
+}
+/*工作计划*/
+.menu_gzjh{
+	background-image:url(images/cool/func/func_gzjh.png);
+}
+/*政策法规资料库*/
+.menu_zzfg{
+	background-image:url(images/cool/func/func_zzfg.png);
+}
+/*人民调解*/
+.menu_rmtj{
+	background-image:url(images/cool/func/func_rmtj.png);
+}
+/*决策总览*/
+.menu_jczl{
+	background-image:url(images/cool/func/func_jczl.png);
+}
+/*法治宣传*/
+.menu_fzxc{
+	background-image:url(images/cool/func/func_fzxc.png);
+}
+/*司法鉴定*/
+.menu_sfjd{
+	background-image:url(images/cool/func/func_sfjd.png);
+	}
+/*公正管理*/
+.menu_gzgl{
+	background-image:url(images/cool/func/func_gzgl.png);
+}
+/*律师管理*/
+.menu_lsgl{
+	background-image:url(images/cool/func/func_lsgl.png);
+}
+/*绩效考核*/
+.menu_jxkh{
+	background-image:url(images/cool/func/func_jxkh.png);
+}
+/*执法管理*/
+.menu_jzzfgl{
+	background-image:url(images/cool/func/func_jzzfgl.png);
+}
+/*教育矫正*/
+.menu_jyzz{
+	background-image:url(images/cool/func/func_jyzz.png);
+}
+/*综合保障*/
+.menu_zzbz{
+	background-image:url(images/cool/func/func_zzbz.png);
+}
+/*六位一体*/
+.menu_lwyt{
+	background-image:url(images/cool/func/func_lwyt_1.png);
+}
+/* 工作预警 */
+.menu_gzyj{
+	background-image:url(images/cool/func/func_gzyj.png);
+}
+/*汇总表*/
+.menu_hzb{
+	background-image:url(images/cool/func/func_hzb.png);
+}
+/*不假外出告警*/
+.menu_bjwcjg{
+	background-image:url(images/cool/func/func_bjwcjg.png);
+}
+/*定位失联人机分离*/
+.menu_dwslrjfl{
+	background-image:url(images/cool/func/func_dwslrjfl.png);
+}
+/*逾期入矫*/
+.menu_yqrj{
+	background-image:url(images/cool/func/func_yqrj.png);
+}
+/*逾期未入矫*/
+.menu_yqwrj{
+	background-image:url(images/cool/func/func_yqwrj.png);
+}
+/*提前解矫*/
+.menu_tqjj{
+	background-image:url(images/cool/func/func_tqjj.png);
+}
+/*逾期解矫*/
+.menu_yqjq{
+	background-image:url(images/cool/func/func_yqjq.png);
+}
+/*女性服刑人员矫正小组无女性*/
+.menu_jzxzwnx{
+	background-image:url(images/cool/func/func_yqjq.png);
+}
+/*未成年服刑人员参加集中教育*/
+.menu_ryjzjy{
+	background-image:url(images/cool/func/func_ryjzjy.png);
+}
+/*工作提醒*/
+.menu_gztx{
+	background-image:url(images/cool/func/func_gztx.png);
+}
+/*走访提醒*/
+.menu_zftx{
+	background-image:url(images/cool/func/func_zftx.png);
+}
+/*未进行风险评估体系*/
+.menu_wjxfxpg{
+	background-image:url(images/cool/func/func_wjxfxpg.png);
+}
+/*未制定矫正方案*/
+.menu_wzdjzfa{
+	background-image:url(images/cool/func/func_wzdjzfa.png);
+}
+/*矫正方案未及时调整（等级变更）*/
+.menu_jzfadjbg{
+	background-image:url(images/cool/func/func_jzfadjbg.png);
+}
+/*矫正方案未及时调整（半年到期）*/
+.menu_jzfabndq{
+	background-image:url(images/cool/func/func_jzfabndq.png);
+}
+/*请假到期*/
+.menu_qjdq{
+	background-image:url(images/cool/func/func_qjdq.png);
+}
+/*月度考核体系（上月考核没做的）*/
+.menu_ydkhxt{
+	background-image:url(images/cool/func/func_ydkhxt.png);
+}
+/*期满预告*/
+.menu_qmyg{
+	background-image:url(images/cool/func/func_qmyg.png);
+}
+/*期满警告（到期未解除矫正）*/
+.menu_qmjg{
+	background-image:url(images/cool/func/func_qmjg.png);
+}
+/*调查评估*/
+.menu_dcpg{
+	background-image:url(images/cool/func/func_dcpg.png);
+}
+/*评估小组建设*/
+.menu_pgxzjs{
+	background-image:url(images/cool/func/func_pgxzjs.png);
+}
+/*待评估*/
+.menu_dpg{
+	background-image:url(images/cool/func/func_dpg.png);
+}
+/**/
+/*已评估*/
+.menu_ypg{
+	background-image:url(images/cool/func/func_ypg.png);
+}
+/*执法管理*/
+.menu_zfgl{
+	background-image:url(images/cool/func/func_zfgl.png);
+}
+/*交付接收*/
+.menu_jfjs{
+	background-image:url(images/cool/func/func_jfjs.png);
+}
+/*待接收*/
+.menu_djs{
+	background-image:url(images/cool/func/func_djs.png);
+}
+/*已接收*/
+.menu_yjs{
+	background-image:url(images/cool/func/func_yjs.png);
+}
+/*法律援助*/
+.menu_flyz{
+	background-image:url(images/cool/func/func_flyz.png);
+}
+/*报到情况通知单*/
+/*管理等级变更*/
+/*进入特定区域*/
+/*居住地变更*/
+/*外出请假*/
+/*使用变更撤销电子定位*/
+/*月度考核*/
+/*提请警告*/
+/*提请表扬*/
+/*提请减刑*/
+/*提请治安处罚*/
+/*提请边控*/
+/*撤销边控*/
+/*提请撤销缓刑*/
+/*提请撤销假释*/
+/*提请收监*/
+/*中止、矫正解除与终止*/
+/*矫正到期预告*/
+/*矫正逾期警告*/
+/*中止社区矫正*/
+/*结束中止矫正*/
+/*矫正结束审批*/
+/*矫正结束人员名册*/
+/*免于社区服务*/
+/*免于教育服务*/
+/*免于电话汇报*/
+/*免于定位服务*/
+/*监督管理*/
+.menu_jdgl{
+	background-image:url(images/cool/func/func_jdgl.png);
+}
+/*矫正方案*/
+/*风险评估*/
+/*电话汇报*/
+/*电话汇报*/
+/*电话汇报（语音）*/
+/*电话回访（语音）*/
+/*电话汇报统计*/
+/*书面汇报*/
+/*工作走访*/
+/*小组反馈*/
+/*定位管理*/
+/*实时定位*/
+/*定位列表*/
+/*越界报警*/
+/*腕带告警*/
+/*轨迹查询*/
+/*边界管理*/
+/*定位圈选*/
+/*热区分析*/
+/*开通定位*/
+/*停止定位*/
+/*脱管管理*/
+/*教育矫正*/
+/*考勤机管理*/
+/*教育学习*/
+/*教育学习（未用考勤机）*/
+/*教育学习_时间*/
+/*教育学习_事件*/
+/*社区服务*/
+/*社区服务（未用考勤机）*/
+/*社区服务_时间*/
+/*社区服务_事件*/
+/*适应性扶助*/
+.menu_syxfz{
+	background-image:url(images/cool/func/func_syxfz.png);
+}
+/*机构人员管理*/
+.menu_jgrygl{
+	background-image:url(images/cool/func/func_jgrygl.png);
+}
+/*工作队伍*/
+/*五老志愿者*/
+/*证件管理*/
+/*证件申领*/
+/*证件批次*/
+/*证件统计*/
+/*外围数据*/
+.menu_wwsj{
+	background-image:url(images/cool/func/func_wwsj.png);
+}
+/*公安数据*/
+/*铁路信息*/
+/*进出港订票*/
+/*进出港机票*/
+/*旅店入住*/
+/*网吧上网*/
+/*法院数据*/
+/*委托调查*/
+/*交付接收*/
+/*分析研判*/
+.menu_fxyp{
+	background-image:url(images/cool/func/func_fxyp.png);
+}
+/*社区工作人员统计*/
+/*社区服刑人员查询*/
+/*服务人员图形统计*/
+/*工作队伍图形统计*/
+/*电话汇报*/
+/*书面汇报*/
+/*教育学习*/
+/*社区服务*/
+/*调查评估*/
+/*风险评估*/
+/*月度考核*/
+/*奖惩情况*/
+/*矫正结束*/
+/*电子定位*/
+/*系统使用*/
+/*综合查询*/
+.menu_zhcx{
+	background-image:url(images/cool/func/func_zhcx.png);
+}
+/*人员查询*/
+/*司法部报表*/
+.menu_sfbbb{
+	background-image:url(images/cool/func/func_sfbbb.png);
+}
+/*部报表人员情况月报查询*/
+/*部报表工作情况季报查询*/
+/*部报表工作情况季报下级审批*/
+/*部报表工作情况季报本级上报*/
+/**/
+/*信息上报管理*/
+/*奖罚信息管理*/
+/*签到管理*/
+/*基础信息管理*/
+.menu_jcxxgl{
+	background-image:url(images/cool/func/func_jcxxgl.png);
+}
+/*矫正档案管理*/
+/*报警管理*/
+/*日常教育*/
+/* }社区矫正-图标区域*/

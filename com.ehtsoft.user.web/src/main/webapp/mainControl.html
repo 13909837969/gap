@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico">
+<title>内蒙古公共法律服务智能一体化平台</title>
+<!-- Bootstrap core CSS -->
+<script src="resources/bootstrap/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript"
+	src="resources/script/core/eht.ui.utils.js"></script>
+<script type="text/javascript"
+	src="resources/script/core/eht.rmi.responder.js"></script>
+<script type="text/javascript"
+	src="resources/script/core/eht.rmi.paginate.js"></script>
+<link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link
+	href="resources/bootstrap/assets/css/ie10-viewport-bug-workaround.css"
+	rel="stylesheet">
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script
+	src="resources/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
+<!-- Custom styles for this template -->
+<link href="resources/css/usercss/mainControl.css" rel="stylesheet">
+<link href="resources/css/usercss/mainControlIcon.css" rel="stylesheet">
+<script type="text/javascript" src="json/MenuService.js"></script>
+<script type="text/javascript" src="json/LoginService.js"></script>
+
+</head>
+
+<body>
+	<div class="container-fulid">
+		<div class="container">
+			<div class="pull-right head-box">
+				<img src="resources/images/mainControl/coumm.png"> <span
+					class="head-span">【内蒙古卫生信息中心】-【宝宝】欢饮您！</span> <img
+					src="resources/images/mainControl/pswd.png"><span
+					class="head-span">【修改密码】</span> <img
+					src="resources/images/mainControl/exit.png"> <span
+					class="head-span"><a id="logout">【退出】</a></span>
+			</div>
+		</div>
+		<!-- Begin page content -->
+		<div class="container">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<span class="logo-inline-block"><img
+							src="resources/images/mainControl/logo.png"
+							class="img-responsive pull-right logo"></span> <span
+							class="logo-inline-block">
+							<div class="aline-left text-left">
+								<h1>赤峰市红山区智慧社区管理平台</h1>
+							</div> <span class="logo-title">District wisdom community
+								management platform of Hongshan，Chifeng City</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fulid">
+			<div class="carousel slide" id="carousel-657560">
+				<div class="carousel-inner" >
+					<div class="item active" id="deskItem">
+						<div class="container">
+							<div class="row text-center">
+								<div class="col-md-2" id="contentColl">
+									<div class="card-color9 img-rounded">
+									  <a href="#">
+										<img src="resources/images/mainControl/commun2.png"
+											class="card-img "><span class="span-text">社会组织管理</span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<a data-slide="prev" href="#carousel-657560"
+					class="left carousel-control">‹</a> <a data-slide="next"
+					href="#carousel-657560" class="right carousel-control">›</a>
+			</div>
+		</div>
+		<!--左侧栏模块开始 -->
+		<nav id="navLeft" class="leftnav-container">
+			<div class="mainnav" id="mainnavLeft">
+				<ul class="nav nav-pills">
+					<li role="presentation"><a href="#"><div class="funcIcon"></div></a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<img class="bottom-menu"
+			src="resources/images/mainControl/function.png" data-toggle="modal"
+			data-target="#myModal">
+		<!--左侧栏模块结束 -->
+
+		<!--右侧栏模块开始 -->
+		<nav id="navRight" class="mainnav-container">
+			<div class="mainnav">
+				<ul class="nav nav-pills">
+					<!--   <li role="presentation">
+                        <a href="#"><img   class="img-circle mainnav-content taskbar-func-icon45"></a>
+                    </li> -->
+				</ul>
+			</div>
+		</nav>
+		<!--侧栏模块结束 -->
+	</div>
+	<!-- Body-container-end -->
+
+	<!--Model area star -->
+	<!-- 左侧菜单展示界面-开始 -->
+	<div id="sideMenu">
+		<ul class="navigation-sub">
+			<li class="sidemenu-title"><span>基础数据管理</span></li>
+			<li class="sidemenu-content"><a href="#"><i
+					class="glyphicon glyphicon-glass"></i><span>小区信息</span></a></li>
+		</ul>
+	</div>
+	<!-- 左侧菜单展示界面-结束 -->
+
+
+	<!-- 模态框（Modal）快捷方式菜单窗口 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="color: #192234;">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true" style="vertical-align: middle;">
+						&times;</button>
+					<h4 class="modal-title" id="myModalLabel"
+						style="text-align: middle;">
+						<img src="resources/images/mainControl/shortcut.png"
+							style="padding-right: 5px;">快捷方式菜单
+					</h4>
+				</div>
+				<div class="modal-body" style="color: #000">
+					<dl class="dl-horizontal">
+						<dt>基础数据管理</dt>
+						<dd>
+							<label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>社区资源分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>人才资源分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>低保人群分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>失业人员分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>儿童信息分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>残疾人员分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>老年人信息分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>安全隐患分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>居民诉求分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>金点子信息分析
+							</label>
+						</dd>
+						<dt>基础数据管理</dt>
+						<dd>
+							<label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>社区资源分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>人才资源分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>低保人群分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>失业人员分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>儿童信息分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>残疾人员分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>老年人信息分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>安全隐患分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>居民诉求分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>金点子信息分析
+							</label>
+						</dd>
+						<dt>基础数据</dt>
+						<dd>
+							<label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>居民诉求分析
+							</label> <label class="checkboxStyle"> <input type="checkbox" /><span>&nbsp;</span>金点子信息分析
+							</label>
+						</dd>
+					</dl>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn"
+						style="background-color: #9b83ad; width: 80px;">创建</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<script src="resources/bootstrap/js/bootstrap.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script
+		src="resources/bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
+	<script type="text/javascript">
+        $("#logout").click(function(){
+    		var ls = new LoginService();
+    		ls.logout(new Eht.Responder({success:function(data){
+    			window.top.location.href = data.value;
+    		}}));
+    	});
+        
+        $(function() {
+            $.fn.myScrollbar = function(offetHeight) {
+                $(this).css("overflow", "hidden");
+                if (offetHeight == null) {
+                    offetHeight = 60;
+                }
+                $(this).height($(window).height() - offetHeight);
+                var _this = this;
+                $(window).resize(function() {
+                    $(_this).height($(this).height() - offetHeight);
+                });
+                $(this).hover(
+
+                    function() {
+                        var size = $(this).children(0).children().size();
+                        var h = $(this).children(0).children().eq(0).outerHeight(true);
+
+                        if ((h * size) > $(this).height()) {
+                            console.log("scrollbar")
+                            $(this).addClass("scrollbar");
+                        }
+                    },
+                    function() {
+                        $(this).removeClass("scrollbar");
+                    }
+                );
+            }
+            //插件定义
+            $.fn.taskBarClose = function(close){
+            var icon = $("<div><img src='resources/images/mainControl/close.png'></div>");
+            $(this).each(function() {
+                $(this).hover(
+                    //鼠标进入活动
+                    function() {
+                        var l = $(this).position().left + $(this).width()+2;
+                        var t = $(this).position().top -5;
+                        icon.css({
+                            "left": l,
+                            "top": t,
+                            "position": "absolute",
+                            "bacground-color":"red",
+                            "z-index": "100px"
+                        });
+                        $(this).append(icon);
+                        var a = $(this);
+                        icon.find("img").click(function() {
+							if(close){
+								close(a);
+							}
+                        });
+                        return true;
+                    },
+                    //鼠标出去活动
+                    function() {
+                        icon.remove();
+                        return true;
+                    });
+            });
+            }
+            
+            
+            
+
+        });
+        $(function() {
+            // 高度设置相等
+            $('.col-md-8').css("height", $('.col-md-4').height());
+            // menu 按钮关闭功能实现
+            $("#navLeft").myScrollbar();
+            $("#navRight").myScrollbar(0);
+            $("#sideMenu").click(function() {
+                return false;
+            });
+            $(document).click(function() {
+                $("#sideMenu").hide();
+            });
+            // 检测修改bar高度
+
+            var ms = new MenuService();
+            var res = new Eht.Responder();
+            res.success=function(data){
+            	var c = $("#mainnavLeft").children().eq(0).remove();
+            	/*隐藏右侧导航菜单 */
+            	$("#navRight").hide();
+				for(var i=0;i<data.length;i++){
+					 var ul = c.clone();
+	            	//taskbar-func-icon42
+	            	if(data[i].icon != null && data[i].icon.length>0){	
+	            		ul.find(".funcIcon").addClass(data[i].icon.replace("window","taskbar"));
+	            	}else{
+	            		ul.find(".funcIcon").addClass("taskbar-func-icon21");
+	            	}
+	            	//ul.show();
+	            	$("#mainnavLeft").append(ul);
+	            	
+	            	ul.find("a").data(data[i]);
+	            	ul.find("a").click(function() {
+	            		var cd = $(this).data();
+	                     $("#sideMenu").hide();//z-index: 1500px
+	                     $("#sideMenu").find(".sidemenu-title span").html(cd.menuname);
+	                     $("#sideMenu").find(".navigation-sub").children(":not('.sidemenu-title')").each(function(){
+                   		  $(this).remove();
+                   	  	});
+	                      for(var i=0;i<cd.children.length;i++){
+	                    	  cd.children[i].menuname;
+	                    	 var menuContent = $("<li><a href='#'><i class='glyphicon glyphicon-glass'></i><span>"+cd.children[i].menuname+"</span></a></li>");
+	                    	 /*点击事件是执行循环完毕之后再操作  */
+	                    	 menuContent.data(cd.children[i]);
+	                    	 menuContent.attr("data",cd.children[i].actionuri);
+	                    	 menuContent.click(function(){
+	                    		 $("#sideMenu").hide();
+	                    		 openWindow(this);
+	                    	 });
+	                    	 $("#sideMenu").find(".navigation-sub").append(menuContent);
+	                     } 
+	                     var l = $(this).position().left + $(this).outerWidth(true) + 2;
+	                     var t = $(this).offset().top;
+	                     $("#sideMenu").css({
+	                         "left": l,
+	                         "top": t
+	                     });
+	                     $("#sideMenu").show();
+	                     return false;
+	                 }); 
+				}
+            };
+            ms.findMenusByUser(res);
+            
+            /* 桌面功能模块获取  */
+            var scut = new Eht.Responder();
+            scut.success=function(data){
+            	console.log(data);
+            	var c = $("#deskItem").clone();
+            	/*获取玄幻的内容 
+            	c.find(".row:nth-child(2)");*/
+            	var page = Math.ceil((data.length*1.0)/12);
+            	var carousel = $("#deskItem").parent();
+            	var pageItem = $("#deskItem").remove();
+            	var c=0;
+            	for(var p=0;p<page;p++){
+            		var pitem = pageItem.clone();
+            		if(p!=0){
+            			pitem.removeClass("active");
+            		}
+            		carousel.append(pitem);
+            		var itemParent = pitem.find("#contentColl").parent();
+            		var itemcol = pitem.find("#contentColl").remove();
+            		for(;c<(p+1)*12;c++){
+            			var ic = itemcol.clone();
+            			ic.find(".span-text").html(data[c].menuname);
+            			//要使用点击事件，必须对象复制，传给调取方法。
+            			ic.data(data[c]);
+            			itemParent.append(ic);
+            			ic.click(function(){
+            				openWindow(this);
+            			});
+            		}
+            	}
+            }
+            ms.findShortcut(scut);
+            /*快捷菜单  */
+              //快捷菜单form树
+	      /*  var menuTree=new Eht.Tree({selector:"#menuTree",labelField:"menuname",multable:true});
+            menuTree.loadData(function(res){
+        		me.findShortcutSetting(res);
+        	}); */
+        	
+        	function openWindow(obj){
+        		 $(".mainWindow").css("z-index","200");
+        		 var div=$("<div class='mainWindow'><iframe style='width:100%;height:100%;' frameborder='0'></iframe></div>");
+        		 div.css({position:'absolute',top:'0px',left:'58px',right:'61px',bottom:'3px'});
+        		 div.attr("id",$(obj).data().sysid);
+        		 if($('#'+$(obj).data().sysid).length==0){
+        			 $(document.body).append(div);
+        			 div.css("z-index","250");
+        			 /*展示右侧导航 */
+        			 $("#navRight").show();
+        			 var l =$('<li role="presentation"><a href="#"><img class="img-circle mainnav-content"></a></li>');
+        			 /*自定义属性  */
+        			 l.attr("wid",$(obj).data().sysid);
+        			 $("#navRight  ul").append(l);
+        			 
+        			 //右侧关闭
+        			 $("#navRight .nav>li>a").taskBarClose(function(a){
+        				$("#"+$(a).parent().attr("wid")).remove();
+        				$(a).remove();
+        			 });
+        		 }else{
+        			 $('#'+$(obj).data().sysid).css("z-index","250");
+        			 $('#'+$(obj).data().sysid).show();
+        		 }
+        		 div.find("iframe").attr("src",$(obj).data().url);
+        	}
+            
+        }); 
+ 
+        
+        // var Person = function(){
+
+        // };
+        // function Person(){
+        //     var name;
+        //     var age;
+        //     function callfn(){
+
+        //     }
+        //     // function funca(){
+
+        //     // }
+
+        // };
+        // Person.prototype.funca = function(){
+
+        // };
+        // var p = new Person();
+        // p.callfn();
+        // p.funca();
+        </script>
+</body>
+
+</html>

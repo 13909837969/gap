@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<apps>
+	<!-- 监管矫正管理系统 -->
+	<role rolecode="SPS01" flag="1" rolename="系统初始化角色（admin）" frule="PSA">
+		<app appcode="SP1" />
+	</role>
+	<!-- 司法所功能角色 -->
+	<role rolecode="SPS02" flag="1" rolename="决策剧场所有功能" frule="OBM">
+		<app appcode="JC" />
+	</role>
+	<!-- 主管局功能角色（包括安全隐患主管局等） -->
+	<role rolecode="SPS03" flag="1" rolename="社区矫正所有功能" frule="OBM">
+		<app appcode="JZ" />
+	</role>
+
+
+	<app appcode="SP1" appname="应用初始化" reqaddress="_self" project="supervise" frule="PSA" remark="矫正监管系统">
+		<children>
+			<menu menucode="SP101" menuname="初始化管理" icon="menu_csh">
+				<children>
+					<menu menucode="SP10101" menuname="系统参数设置"
+						actionuri="module/sps/formParameter.jsp" icon="" />
+					<menu menucode="SP10102" menuname="区域边界设置"
+						actionuri="module/sqjz/listBoundary.jsp" icon="" />
+					<menu menucode="SP10103" menuname="题库管理"
+						actionuri="module/sqjz/listQuestion.jsp" icon="" />
+					<menu menucode="SP10104" menuname="数据字典设置"
+						actionuri="module/sps/listDictionary.jsp" icon="" />
+					<menu menucode="SP10105" menuname="Excel导入工具"
+						actionuri="module/sps/listImpExcel.jsp" icon="" />
+					<menu menucode="SP10110" menuname="数据模型管理"
+						actionuri="module/sps/listManual.jsp" icon="window-func-icon21" />
+						<menu menucode="SP10106" menuname="禁止区域设置"
+						actionuri="module/sqjz/listJzryjrjqsz.jsp" />
+				</children>
+			</menu>
+		</children>
+	</app>
+	<app appcode="JC" appname="决策剧场系统" reqaddress="_self" project="supervise"
+		frule="OSA" remark="">
+		<children>
+			<menu menucode="JC01" menuname="决策总览" actionuri="module/rep/nnn_viewJCZLDSJ.jsp"
+				icon="menu_tzgg" />
+			<menu menucode="JC02" menuname="社区矫正" actionuri="module/sps/spsSqjz.jsp"
+				icon="menu_img" />
+			<menu menucode="JC03" menuname="人民调解" actionuri="module/sps/spsRmtj.jsp"
+				icon="menu_tzgg" />
+			<menu menucode="JC04" menuname="安置帮教" actionuri="module/sps/spsAzbj.jsp"
+				icon="menu_azbj" />
+			<menu menucode="JC05" menuname="定位监控" actionuri="module/sqjz/rpDwjk.jsp"
+				icon="menu_img" />
+		</children>
+	</app>
+	<app appcode="JZ" appname="社区矫正系统" reqaddress="_self" project="supervise"
+		frule="OSA" remark="">
+		<children>
+			<menu menucode="JZ01" menuname="综合服务" actionuri="" icon="menu_zhfw">
+				<children>
+					<menu menucode="JZ0101" menuname="通知公告列表"
+						actionuri="http://221.226.83.71:9090/newcc/InfoPublish/cc_notice_list_page.htm"
+						icon="menu_tzgg" />
+					<menu menucode="JZ0102" menuname="重点人员管控"
+						actionuri="http://221.226.83.71:9090/newcc/RectifyMenu/keyPerson_list_page.htm"
+						icon="menu_zdrgk" />
+					<menu menucode="JZ0103" menuname="隐患问题整改"
+						actionuri="http://221.226.83.71:9090/newcc/RectifyMenu/workTrouble_list_page.htm"
+						icon="menu_yhwt" />
+					<menu menucode="JZ0104" menuname="值班管理"
+						actionuri="http://221.226.83.71:9090/newcc/Worklook/cc_duty_list_page.htm"
+						icon="menu_zbgl" />
+					<menu menucode="JZ0105" menuname="执法工作标准"
+						actionuri="http://221.226.83.71:9090/newcc/InfoPublish/cc_workstandard_list.htm"
+						icon="menu_zzfg" />
+					<menu menucode="JZ0106" menuname="工作计划"
+						actionuri="http://221.226.83.71:9090/newcc/InfoPublish/cc_workplan_list.htm"
+						icon="menu_gzjh" />
+					<menu menucode="JZ0107" menuname="政策法规资料库"
+						actionuri="http://221.226.83.71:9090/newcc/InfoPublish/cc_policydb_list.htm"
+						icon="menu_zzfg" />
+					<menu menucode="JZ0108" menuname="绩效考核" actionuri="" icon="menu_jxkh">
+						<children>
+							<menu menucode="JZ010801" menuname="绩效考核（执法管理）"
+								actionuri="http://221.226.83.71:9090/newcc/Reports/cc_qxjxkh_zfgl_stat.htm"
+								icon="menu_zfgl" />
+							<menu menucode="JZ010802" menuname="绩效考核（教育矫正）"
+								actionuri="http://221.226.83.71:9090/newcc/Reports/cc_qxjxkh_jyjz_stat.htm"
+								icon="menu_jyzz" />
+							<menu menucode="JZ010803" menuname="绩效考核（综合保障）"
+								actionuri="http://221.226.83.71:9090/newcc/Reports/cc_qxjxkh_zhbz_stat.htm"
+								icon="menu_zzbz" />
+							<menu menucode="JZ010804" menuname="绩效考核（汇总表）"
+								actionuri="http://221.226.83.71:9090/newcc/Reports/cc_qxjxkh_hzb_stat.htm"
+								icon="menu_hzb" />
+						</children>
+					</menu>
+				</children>
+			</menu>
+			<menu menucode="JZ02" menuname="工作预警" actionuri="" icon="menu_gzyj">
+				<children>
+					<menu menucode="JZ0201" menuname="不假外出告警" actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/noLeaveAlarm_list_page.htm" icon="" />
+					<menu menucode="JZ0202" menuname="定位失联人机分离"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/lostContactAlarm_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0203" menuname="逾期入矫"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/overdueInCorrectAlarm_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0204" menuname="逾期未入矫"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/overdueNoCorrectAlarm_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0205" menuname="提前解矫"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/advancerRelieveCorrectAlarm_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0206" menuname="逾期解矫"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/overdueRelieveCorrectAlarm_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0207" menuname="女性服刑人员矫正小组无女性"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/noWomenCorrectGroupAlarm_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0208" menuname="未成年服刑人员参加集中教育"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/juvenilesJoinEduAlarm_list_page.htm"
+						icon="" />
+				</children>
+			</menu>
+			<menu menucode="JZ03" menuname="工作提醒" actionuri="" icon="menu_gztx">
+				<children>
+					<menu menucode="JZ0301" menuname="走访提醒"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/visitAttention_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0302" menuname="未进行风险评估体系"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/noRiskAttention_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0303" menuname="未制定矫正方案"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/noPlanAttention_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0304" menuname="矫正方案未及时调整（等级变更）"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/noModPlanAttention_list_page1.htm"
+						icon="" />
+					<menu menucode="JZ0305" menuname="矫正方案未及时调整（半年到期）"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/noModPlanAttention_list_page2.htm"
+						icon="" />
+					<menu menucode="JZ0306" menuname="请假到期"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/leaveDueAttention_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0307" menuname="月度考核体系（上月考核没做的）"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/noExamineAttention_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0308" menuname="期满预告"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/completeCorrectAttention_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0309" menuname="期满警告（到期未解除矫正）"
+						actionuri="http://221.226.83.71:9090/newcc/DecisionGuidance/noRelieveCorrecionAttention_list_page.htm"
+						icon="" />
+				</children>
+			</menu>
+			<menu menucode="JZ04" menuname="调查评估" actionuri="" icon="">
+				<children>
+					<menu menucode="JZ0401" menuname="评估小组建设"
+						actionuri="http://221.226.83.71:9090/newcc/Organization/Cc_assessmentteam_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0402" menuname="待评估"
+						actionuri="http://221.226.83.71:9090/newcc/InvestigationAndEvaluation/cc_dcpg_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0403" menuname="已评估"
+						actionuri="http://221.226.83.71:9090/newcc/InvestigationAndEvaluation/cc_dcpg_list_page.htm?isfinish=true"
+						icon="" />
+				</children>
+			</menu>
+			<menu menucode="JZ05" menuname="执法管理" actionuri="" icon="">
+				<children>
+					<menu menucode="JZ0501" menuname="交付接收" actionuri="" icon="">
+						<children>
+							<menu menucode="JZ050101" menuname="待接收"
+								actionuri="http://221.226.83.71:9090/newcc/JoinAndArchiving/ToReceiveTermerInfo_list.htm"
+								icon="" />
+							<menu menucode="JZ050102" menuname="已接收"
+								actionuri="http://221.226.83.71:9090/newcc/JoinAndArchiving/TermerInfo_list.htm"
+								icon="" />
+							<menu menucode="JZ050103" menuname="报到情况通知单"
+								actionuri="http://221.226.83.71:9090/newcc/JoinAndArchiving/Reportinfocheckin_list.htm"
+								icon="" />
+						</children>
+					</menu>
+					<menu menucode="JZ0502" menuname="管理等级变更"
+						actionuri="http://221.226.83.71:9090/newcc/JoinAndArchiving/managementChange.htm"
+						icon="" />
+					<menu menucode="JZ0503" menuname="进入特定区域"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/tailorform/cc_jrtdqycsxxcjb_list_page.html"
+						icon="" />
+					<menu menucode="JZ0504" menuname="居住地变更"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/tailorform/cc_addressChange_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0505" menuname="外出请假"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/tailorform/cc_leave_list_page.html"
+						icon="" />
+					<menu menucode="JZ0506" menuname="使用变更撤销电子定位"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/Cc_AvoidService/positioningSupervisionPageList.htm"
+						icon="" />
+					<menu menucode="JZ0507" menuname="月度考核"
+						actionuri="http://221.226.83.71:9090/newcc/RewardsAndPunishment/monthscore/dataList.htm"
+						icon="" />
+					<menu menucode="JZ0508" menuname="提请警告"
+						actionuri="http://221.226.83.71:9090/newcc/RewardsAndPunishment/punishment/cc_jgxxcjbPageList.htm"
+						icon="" />
+					<menu menucode="JZ0509" menuname="提请表扬"
+						actionuri="http://221.226.83.71:9090/newcc/RewardsAndPunishment/rewards/biaoyangPageLsit.htm"
+						icon="" />
+					<menu menucode="JZ0510" menuname="提请减刑"
+						actionuri="http://221.226.83.71:9090/newcc/RewardsAndPunishment/rewards/jianxingPageLsit.htm"
+						icon="" />
+					<menu menucode="JZ0511" menuname="提请治安处罚"
+						actionuri="http://221.226.83.71:9090/newcc/RewardsAndPunishment/punishment/cc_tqzacfxxcjbPageList.htm"
+						icon="" />
+					<menu menucode="JZ0512" menuname="提请边控"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/tailorform/cc_borderControl_list_page.html?flag=0"
+						icon="" />
+					<menu menucode="JZ0513" menuname="撤销边控"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/tailorform/cc_borderControl_list_page.html?flag=1"
+						icon="" />
+					<menu menucode="JZ0514" menuname="提请撤销缓刑"
+						actionuri="http://221.226.83.71:9090/newcc/RewardsAndPunishment/punishment/cc_tqcxhxxxcjb_PageList.htm"
+						icon="" />
+					<menu menucode="JZ0515" menuname="提请撤销假释"
+						actionuri="http://221.226.83.71:9090/newcc/RewardsAndPunishment/punishment/cc_tqcxjsxxcjb_PageList.htm"
+						icon="" />
+					<menu menucode="JZ0516" menuname="提请收监"
+						actionuri="http://221.226.83.71:9090/newcc/RewardsAndPunishment/punishment/Cc_tqsjzxxxcjbPageList.htm"
+						icon="" />
+					<menu menucode="JZ0517" menuname="中止、矫正解除与终止" actionuri=""
+						icon="">
+						<children>
+							<menu menucode="JZ051701" menuname="矫正到期预告"
+								actionuri="http://221.226.83.71:9090/newcc/RelieveCorrection/cc_relievecorrectionAtTerm_list_page.html"
+								icon="" />
+							<menu menucode="JZ051702" menuname="矫正逾期警告"
+								actionuri="http://221.226.83.71:9090/newcc/RelieveCorrection/cc_relievecorrectionOverdue_list_page.htm"
+								icon="" />
+							<menu menucode="JZ051703" menuname="中止社区矫正"
+								actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/Cc_AvoidService/suspensionCorrectionPageList.htm?cutsuspension=0"
+								icon="" />
+							<menu menucode="JZ051704" menuname="结束中止矫正"
+								actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/Cc_AvoidService/suspensionCorrectionPageList.htm?cutsuspension=1"
+								icon="" />
+							<menu menucode="JZ051705" menuname="矫正结束审批"
+								actionuri="http://221.226.83.71:9090/newcc/RelieveCorrection/terminateCorrection_list.htm"
+								icon="" />
+							<menu menucode="JZ051706" menuname="矫正结束人员名册"
+								actionuri="http://221.226.83.71:9090/newcc/RelieveCorrection/cc_relievecorrection_list_page.html"
+								icon="" />
+						</children>
+					</menu>
+					<menu menucode="JZ0518" menuname="免于社区服务"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/Cc_AvoidService/avoidServicePageList.htm"
+						icon="" />
+					<menu menucode="JZ0519" menuname="免于教育服务"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/Cc_AvoidService/avoidSomePageList.htm?avoidtype=3"
+						icon="" />
+					<menu menucode="JZ0520" menuname="免于电话汇报"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/Cc_AvoidService/avoidSomePageList.htm?avoidtype=2"
+						icon="" />
+					<menu menucode="JZ0521" menuname="免于定位服务"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/Cc_AvoidService/avoidSomePageList.htm?avoidtype=1"
+						icon="" />
+				</children>
+			</menu>
+			<menu menucode="JZ06" menuname="监督管理" actionuri="" icon="">
+				<children>
+					<menu menucode="JZ0601" menuname="矫正方案"
+						actionuri="http://221.226.83.71:9090/newcc/BaseJob/cc_sqjzjzfan_list.htm"
+						icon="" />
+					<menu menucode="JZ0602" menuname="风险评估"
+						actionuri="http://221.226.83.71:9090/newcc/RiskEstimate/cc_fxpg_RiskEvaluation_list.htm"
+						icon="" />
+					<menu menucode="JZ0603" menuname="电话汇报" actionuri="" icon="">
+						<children>
+							<menu menucode="JZ060301" menuname="电话汇报"
+								actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/telePhoneReport/reportList.htm"
+								icon="" />
+							<menu menucode="JZ060302" menuname="电话汇报（语音）" actionuri=""
+								icon="" />
+							<menu menucode="JZ060303" menuname="电话回访（语音）" actionuri=""
+								icon="" />
+							<menu menucode="JZ060304" menuname="电话汇报统计" actionuri=""
+								icon="" />
+						</children>
+					</menu>
+					<menu menucode="JZ0604" menuname="书面汇报"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/paperReport/reportList.htm"
+						icon="" />
+					<menu menucode="JZ0605" menuname="工作走访"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/justiceOfficeInterview/dataList.htm"
+						icon="" />
+					<menu menucode="JZ0606" menuname="小组反馈"
+						actionuri="http://221.226.83.71:9090/newcc/SuperviseManager/ccGroupFeedBack/dataList.htm"
+						icon="" />
+					<menu menucode="JZ0607" menuname="定位管理" actionuri="" icon="">
+						<children>
+							<menu menucode="JZ060701" menuname="实时定位"
+								actionuri="http://221.226.83.71:9090/newcc/track/cc_location_person_page.htm"
+								icon="" />
+							<menu menucode="JZ060702" menuname="定位列表"
+								actionuri="http://221.226.83.71:9090/newcc/track/cc_track_list_page.htm"
+								icon="" />
+							<menu menucode="JZ060703" menuname="越界报警"
+								actionuri="http://221.226.83.71:9090/newcc/track/cc_track_overstep_list.htm"
+								icon="" />
+							<menu menucode="JZ060704" menuname="腕带告警"
+								actionuri="http://221.226.83.71:9090/newcc/track/cc_track_wdgj_list.htm"
+								icon="" />
+							<menu menucode="JZ060705" menuname="轨迹查询"
+								actionuri="http://221.226.83.71:9090/newcc/track/cc_track_person_page.htm"
+								icon="" />
+							<menu menucode="JZ060706" menuname="边界管理"
+								actionuri="http://221.226.83.71:9090/newcc/track/bianjie.htm" icon="" />
+							<menu menucode="JZ060707" menuname="定位圈选"
+								actionuri="http://221.226.83.71:9090/newcc/track/cc_trajectory_search_page.htm"
+								icon="" />
+							<menu menucode="JZ060708" menuname="热区分析" actionuri="" icon="" />
+							<menu menucode="JZ060709" menuname="开通定位"
+								actionuri="http://221.226.83.71:9090/newcc/track/cc_track_adduser.htm"
+								icon="" />
+							<menu menucode="JZ060710" menuname="停止定位"
+								actionuri="http://221.226.83.71:9090/newcc/track/cc_track_stopuser.htm"
+								icon="" />
+						</children>
+					</menu>
+					<menu menucode="JZ0608" menuname="脱管管理"
+						actionuri="http://221.226.83.71:9090/newcc/UnknownManager/Unknown_list_page.htm"
+						icon="" />
+				</children>
+			</menu>
+			<menu menucode="JZ07" menuname="教育矫正" actionuri="" icon="">
+				<children>
+					<menu menucode="JZ0701" menuname="考勤机管理" actionuri="" icon="" />
+					<menu menucode="JZ0702" menuname="教育学习" actionuri="" icon="">
+						<children>
+							<menu menucode="JZ070201" menuname="教育学习（未用考勤机）"
+								actionuri="http://221.226.83.71:9090/newcc/EducationalCounterpart/IntensiveEducation/dataList.htm?edutype=1"
+								icon="" />
+							<menu menucode="JZ070202" menuname="教育学习_时间" actionuri=""
+								icon="" />
+							<menu menucode="JZ070203" menuname="教育学习_事件" actionuri=""
+								icon="" />
+						</children>
+					</menu>
+					<menu menucode="JZ0703" menuname="社区服务" actionuri="" icon="">
+						<children>
+							<menu menucode="JZ070301" menuname="社区服务（未用考勤机）"
+								actionuri="http://221.226.83.71:9090/newcc/EducationalCounterpart/VoluntaryLabour/dataList.htm"
+								icon="" />
+							<menu menucode="JZ070302" menuname="社区服务_时间" actionuri=""
+								icon="" />
+							<menu menucode="JZ070303" menuname="社区服务_事件" actionuri=""
+								icon="" />
+						</children>
+					</menu>
+				</children>
+			</menu>
+			<menu menucode="JZ08" menuname="适应性扶助"
+				actionuri="http://221.226.83.71:9090/newcc/EducationalCounterpart/HelpingSolution/dataList.htm"
+				icon="" />
+			<menu menucode="JZ09" menuname="机构人员管理" actionuri="" icon="">
+				<children>
+					<menu menucode="JZ0901" menuname="工作队伍"
+						actionuri="http://221.226.83.71:9090/newcc/RectificationWorkFolder/jzry_list_page.htm"
+						icon="" />
+					<menu menucode="JZ0902" menuname="五老志愿者"
+						actionuri="http://221.226.83.71:9090/newcc/Organization/WuLao_list.htm"
+						icon="" />
+					<menu menucode="JZ0903" menuname="证件管理" actionuri="" icon="">
+						<children>
+							<menu menucode="JZ090301" menuname="证件申领"
+								actionuri="http://221.226.83.71:9090/newcc/Organization/User_card_page.htm"
+								icon="" />
+							<menu menucode="JZ090302" menuname="证件批次"
+								actionuri="http://221.226.83.71:9090/newcc/Organization/Batch_list_page.htm"
+								icon="" />
+							<menu menucode="JZ090303" menuname="证件统计"
+								actionuri="http://221.226.83.71:9090/newcc/Organization/User_card_view.htm"
+								icon="" />
+						</children>
+					</menu>
+				</children>
+			</menu>
+			<menu menucode="JZ10" menuname="外围数据" actionuri="" icon="">
+				<children>
+					<menu menucode="JZ1001" menuname="公安数据" actionuri="" icon="">
+						<children>
+							<menu menucode="JZ100101" menuname="铁路信息"
+								actionuri="http://221.226.83.71:9090/newcc/DataReceive/tlxx/fxyp_tlxx_list.htm"
+								icon="" />
+							<menu menucode="JZ100102" menuname="进出港订票"
+								actionuri="http://221.226.83.71:9090/newcc/DataReceive/jgdp/fxyp_jgdp_list.htm"
+								icon="" />
+							<menu menucode="JZ100103" menuname="进出港机票"
+								actionuri="http://221.226.83.71:9090/newcc/DataReceive/jgjp/fxyp_jgjp_list.htm"
+								icon="" />
+							<menu menucode="JZ100104" menuname="旅店入住"
+								actionuri="http://221.226.83.71:9090/newcc/DataReceive/jnlk/fxyp_jnlk_list.htm"
+								icon="" />
+							<menu menucode="JZ100105" menuname="网吧上网"
+								actionuri="http://221.226.83.71:9090/newcc/DataReceive/wbsw/fxyp_wbsw_list.htm"
+								icon="" />
+						</children>
+					</menu>
+				</children>
+			</menu>
+			<menu menucode="JZ12" menuname="分析研判" actionuri="" icon="">
+				<children>
+					<menu menucode="JZ1201" menuname="社区工作人员统计"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/user_report.htm" icon="" />
+					<menu menucode="JZ1202" menuname="社区服刑人员查询"
+						actionuri="http://221.226.83.71:9090/newcc/JoinAndArchiving/TermerInfo_list.htm"
+						icon="" />
+					<menu menucode="JZ1203" menuname="服务人员图形统计"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/human_query_list.htm"
+						icon="" />
+					<menu menucode="JZ1204" menuname="工作队伍图形统计"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/staff_query_list.htm"
+						icon="" />
+					<menu menucode="JZ1205" menuname="电话汇报"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/work_dhhb_page.htm"
+						icon="" />
+					<menu menucode="JZ1206" menuname="书面汇报"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/work_smhb_page.htm"
+						icon="" />
+					<menu menucode="JZ1207" menuname="教育学习"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/work_jyxx_page.htm"
+						icon="" />
+					<menu menucode="JZ1208" menuname="社区服务"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/work_sqfw_page.htm"
+						icon="" />
+					<menu menucode="JZ1209" menuname="调查评估"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/work_dcpg_page.htm"
+						icon="" />
+					<menu menucode="JZ1210" menuname="风险评估"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/work_fxpg_page.htm"
+						icon="" />
+					<menu menucode="JZ1211" menuname="月度考核"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/work_ydkh_page.htm"
+						icon="" />
+					<menu menucode="JZ1212" menuname="奖惩情况"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/work_jcqk_page.htm"
+						icon="" />
+					<menu menucode="JZ1213" menuname="矫正结束"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/work_jzjs_page.htm"
+						icon="" />
+					<menu menucode="JZ1214" menuname="电子定位"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/work_dzdw_page.htm"
+						icon="" />
+					<menu menucode="JZ1215" menuname="系统使用"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/work_zrwdl_list.htm"
+						icon="" />
+				</children>
+			</menu>
+			<menu menucode="JZ13" menuname="综合查询" actionuri="" icon="">
+				<children>
+					<menu menucode="JZ1301" menuname="人员查询"
+						actionuri="http://221.226.83.71:9090/newcc/JoinAndArchiving/TermerInfo_list.htm"
+						icon="" />
+				</children>
+			</menu>
+			<menu menucode="JZ14" menuname="用户管理"
+				actionuri="http://221.226.83.71:9090/newcc/Organization/User_manager_new_page.htm"
+				icon="" />
+			<menu menucode="JZ15" menuname="司法部报表" actionuri="" icon="">
+				<children>
+					<menu menucode="JZ1501" menuname="部报表人员情况月报查询"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/New_cc_object_stat_city.htm"
+						icon="" />
+					<menu menucode="JZ1502" menuname="部报表工作情况季报查询"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/New_cc_test_work_stat.htm"
+						icon="" />
+					<menu menucode="JZ1503" menuname="部报表工作情况季报下级审批"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/New_cc_test_work_stat_page_list.htm"
+						icon="" />
+					<menu menucode="JZ1504" menuname="部报表工作情况季报本级上报"
+						actionuri="http://221.226.83.71:9090/newcc/Reports/New_cc_test_work_stat_reg.htm?type=reg"
+						icon="" />
+				</children>
+			</menu>
+		</children>
+	</app>
+</apps>

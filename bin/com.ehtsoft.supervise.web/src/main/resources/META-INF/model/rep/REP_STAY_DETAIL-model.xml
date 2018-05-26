@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="REP_STAY_DETAIL" label="停留位置明细">
+    <column field="F_DETAIL_ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="F_SID" type="uuid" length="36" label="停留时间信息ID" required="true"/>
+    <column field="F_LAT" type="double" length="16" precision="12" label="纬度" required="true"/>
+    <column field="F_LNG" type="double" length="16" precision="12" label="经度" required="true"/>
+    <column field="F_INTIME" type="long" label="进入时间" remark="进入范围内的时间 毫秒数"/>
+    <column field="F_OUTTIME" type="long" label="出去时间" remark="出入范围内的时间 毫秒数"/>
+    <column field="F_STATUS" type="integer" defaultValue="0" label="状态标记" remark="0 进入标记   1 出去标记"/>
+    <primary name="PK_REP_STAY_DETAIL" field="F_DETAIL_ID"/>
+    <foreign name="FK_REP_STAY_DETAIL_SID" field="F_SID" reference="REP_STAY_TIME" referField="F_SID"/>
+    <remark><![CDATA[mongodb:
+location: {type: "Point",coordinates: [-73.856077, 40.848447]}]]></remark>
+  </table>
+</model>

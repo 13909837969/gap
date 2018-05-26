@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="jz_jcsqjztzs" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ea149057-c601-44b7-8d04-a48503dac51c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="550" height="50" uuid="79a4fb85-39e5-4b56-ae5b-073b3a354b35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="华文宋体" size="38"/>
+				</textElement>
+				<text><![CDATA[解除社区矫正通知书]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement x="344" y="17" width="20" height="30" uuid="04586b20-2e8c-416c-a074-f00ef7e7af55"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[（]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="17" width="20" height="30" uuid="f1a29c19-ccb5-41a8-9888-1c39681d1d69"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[）]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="15" width="30" height="32" uuid="f89dd9c3-2fdb-44e8-b0f4-c4aa90a62901"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[字第]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="17" width="30" height="32" uuid="62ced2d0-0513-44d6-a0e2-e4c7194eb807"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[号]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="698" splitType="Stretch">
+			<staticText>
+				<reportElement x="29" y="0" width="31" height="30" uuid="349e839d-1ac1-47fc-9e5a-53edf4b83b58"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[姓名]]></text>
+			</staticText>
+			<line>
+				<reportElement x="60" y="30" width="119" height="1" uuid="a8743c86-bae9-4a59-89d7-8405e8b5b458"/>
+			</line>
+			<staticText>
+				<reportElement x="183" y="0" width="37" height="30" uuid="08d34e98-16eb-461b-bb11-b28beb7dcc0a"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[性别]]></text>
+			</staticText>
+			<line>
+				<reportElement x="210" y="30" width="123" height="1" uuid="c303b2dc-ea04-4b48-a145-3df94bf5db06"/>
+			</line>
+			<staticText>
+				<reportElement x="29" y="30" width="58" height="30" uuid="4b1a3f79-0087-4da5-994a-9d60304b8b17"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[出生日期]]></text>
+			</staticText>
+			<line>
+				<reportElement x="87" y="60" width="156" height="1" uuid="e9b4ad32-550b-4699-ade3-3d8cd1770eab"/>
+			</line>
+			<staticText>
+				<reportElement x="272" y="31" width="61" height="30" uuid="3230d6c6-f67c-4938-a9a7-4ce20487250c"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[身份证号]]></text>
+			</staticText>
+			<line>
+				<reportElement x="333" y="61" width="190" height="1" uuid="7ce72905-cbaa-4e29-acb3-a51ab83f1314"/>
+			</line>
+			<staticText>
+				<reportElement x="29" y="61" width="31" height="30" uuid="fd825ae1-c35e-4edb-ab23-aab80f866783"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[罪名]]></text>
+			</staticText>
+			<line>
+				<reportElement x="60" y="91" width="490" height="1" uuid="83135123-231d-4c47-b519-40ab9677c153"/>
+			</line>
+			<staticText>
+				<reportElement x="28" y="91" width="58" height="30" uuid="67eef777-ed55-4348-8711-77b342e30307"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[原判刑罚]]></text>
+			</staticText>
+			<line>
+				<reportElement x="86" y="121" width="464" height="1" uuid="f3cc88ec-78ff-47df-a4c5-b6f81e98ccb0"/>
+			</line>
+			<staticText>
+				<reportElement x="28" y="122" width="58" height="30" uuid="7e92235b-1c00-4638-965c-07dde6c6f4b3"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[原判刑期]]></text>
+			</staticText>
+			<line>
+				<reportElement x="86" y="152" width="464" height="1" uuid="9ff63ace-2555-4527-8fbe-fd9914dded5b"/>
+			</line>
+			<staticText>
+				<reportElement x="28" y="153" width="58" height="30" uuid="6b29dda9-ac7e-4852-9cc1-db2c0f098d92"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[原判法院]]></text>
+			</staticText>
+			<line>
+				<reportElement x="86" y="183" width="464" height="1" uuid="295b8661-b888-4257-af2e-cdd124e8c80a"/>
+			</line>
+			<staticText>
+				<reportElement x="28" y="183" width="42" height="30" uuid="8225755e-b30d-4735-8c78-0bdd2390e0da"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[居住地]]></text>
+			</staticText>
+			<line>
+				<reportElement x="71" y="213" width="479" height="1" uuid="6154030e-061c-4bd4-8784-55bf0bc4f0ff"/>
+			</line>
+			<staticText>
+				<reportElement x="28" y="213" width="42" height="30" uuid="d1e5525f-bf99-4ed0-b18b-7d0e0d267cad"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[户籍地]]></text>
+			</staticText>
+			<line>
+				<reportElement x="71" y="243" width="479" height="1" uuid="5ed2c5e8-a0d2-4f19-a9d3-20f8f5140506"/>
+			</line>
+			<staticText>
+				<reportElement x="28" y="244" width="72" height="30" uuid="b25a695c-6aed-4fbb-be4d-39ec2045bb6d"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[矫正期限自]]></text>
+			</staticText>
+			<line>
+				<reportElement x="101" y="274" width="156" height="1" uuid="18ba05f6-72c1-4ad6-aa43-fef5909ff594"/>
+			</line>
+			<staticText>
+				<reportElement x="457" y="244" width="23" height="30" uuid="51abd783-1464-4e48-8e70-e97b93110e8d"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[止]]></text>
+			</staticText>
+			<line>
+				<reportElement x="300" y="274" width="156" height="1" uuid="642dd090-2dbc-49af-9cf1-6ef870c287f3"/>
+			</line>
+			<staticText>
+				<reportElement x="269" y="249" width="36" height="30" uuid="34ad0794-cca8-415f-8640-c283d7f831d5"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[起至]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="275" width="112" height="30" uuid="fb12fa17-9383-49c9-944b-010b33ce06da"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[矫正期限执行变更]]></text>
+			</staticText>
+			<line>
+				<reportElement x="140" y="305" width="410" height="1" uuid="83b8b2ba-27a9-4ce6-9ea1-d057468ecd7d"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="306" width="28" height="30" uuid="0651eef2-ab9e-4025-a00c-2423b218f2f7"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[发往]]></text>
+			</staticText>
+			<line>
+				<reportElement x="27" y="336" width="123" height="1" uuid="2ffbfa32-e668-43de-a011-a9e5858b5983"/>
+			</line>
+			<staticText>
+				<reportElement x="151" y="306" width="193" height="30" uuid="65d3e6ec-3c1c-4fd8-866f-a3e2b2087ff9"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[人民法院(公安局,监狱管理局),]]></text>
+			</staticText>
+			<line>
+				<reportElement x="344" y="337" width="195" height="1" uuid="62b7d5eb-0164-4815-9aa2-52ddda779b85"/>
+			</line>
+			<staticText>
+				<reportElement x="539" y="306" width="10" height="30" uuid="bf31d9c7-75f6-4fd2-88bc-c463c4ba5dbf"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="337" width="70" height="30" uuid="f6bee875-adbf-433f-b471-3007b13ae71b"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[民检察院，]]></text>
+			</staticText>
+			<line>
+				<reportElement x="71" y="367" width="123" height="1" uuid="dfbeea7c-9e1b-4d2b-8213-9222a544ea30"/>
+			</line>
+			<staticText>
+				<reportElement x="194" y="338" width="86" height="30" uuid="f111da6b-3be2-43c1-ae09-3c08a2bcc3e2"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[公安（分）局]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="370" width="52" height="30" uuid="a315e954-8732-4416-acdf-d250d94bc583"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[填发人]]></text>
+			</staticText>
+			<line>
+				<reportElement x="80" y="400" width="123" height="1" uuid="15a09196-6c3b-4b5d-9786-c422fea8e0ee"/>
+			</line>
+			<staticText>
+				<reportElement x="27" y="401" width="52" height="30" uuid="de19ba4c-cc11-47e6-b26e-e60b2f5ce0c1"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[批准人]]></text>
+			</staticText>
+			<line>
+				<reportElement x="79" y="431" width="123" height="1" uuid="3c850edd-b70a-4be5-bd9f-89288d4f8b58"/>
+			</line>
+			<staticText>
+				<reportElement x="294" y="650" width="66" height="30" uuid="6aeec124-b6ab-4be5-9cc8-3a49fa400919"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[填发日期]]></text>
+			</staticText>
+			<line>
+				<reportElement x="357" y="680" width="123" height="1" uuid="6c0ac467-d298-4680-8828-7c83c906289a"/>
+			</line>
+			<staticText>
+				<reportElement x="19" y="510" width="530" height="30" uuid="44138f35-9cf5-4869-809b-193d03693164"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[注释：没有连接SQL]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

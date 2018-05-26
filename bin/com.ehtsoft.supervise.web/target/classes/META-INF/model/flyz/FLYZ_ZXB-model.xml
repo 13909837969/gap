@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="FLYZ_ZXB" label="咨询表">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="ZXLSH" type="string" length="20" label="咨询流水号" remark="01+6位行政区划+yyyyMM+d{4}"/>
+    <column field="TLRS" type="string" length="10" label="同来人数"/>
+    <column field="ZXSXLXBM" type="string" length="10" label="咨询事项类型编码" remark="SYS118"/>
+    <column field="ZXSXRJAY" type="string" length="10" label="咨询事项二级案由" remark="民事参考法（2011）42号，刑事参考SF03001，行政案由见10.17"/>
+    <column field="ZXSXAYMC" type="string" length="50" label="咨询事项案由名称" remark="民事参考法（2011）42号，刑事参考SF03001，行政案由见10.17"/>
+    <column field="LXTJ" type="string" length="10" label="来信途径" remark="见10.5"/>
+    <column field="ZXSJ" type="string" length="20" label="咨询时间" remark="以YYYY-MM-DD格式"/>
+    <column field="ZXLX" type="string" length="10" label="咨询类型" remark="见10.3"/>
+    <column field="LDHM" type="string" length="20" label="来电号码"/>
+    <column field="JDRJGLSH" type="string" length="20" label="接待人机构流水号" remark="关联法律援助机构流水号"/>
+    <column field="SFSFLSQ" type="string" length="10" label="是否送法律申请"/>
+    <column field="LDLX" type="string" length="10" label="来电类型" remark="见10.7"/>
+    <column field="CLFS" type="string" length="10" label="处理方式" remark="见10.6"/>
+    <column field="JDRXM" type="string" length="20" label="接待人姓名"/>
+    <column field="JDRLSH" type="string" length="20" label="接待人流水号" remark="关联法律援助机构人员流水号"/>
+    <column field="JDRQ" type="string" length="20" label="接待日期"/>
+    <column field="DFYJ" type="string" length="2000" label="答复意见" remark="接待咨询；答复意见；来电来信；答复内容"/>
+    <column field="DFSJ" type="string" length="20" label="答复时间" remark="见 GB/T 7408， 以YYYY-MM-DD格式"/>
+    <column field="ZXNR" type="string" length="2000" label="咨询内容"/>
+    <column field="SQZT" type="string" length="1" label="是否送法援申请" remark="按照擎天内容扩展"/>
+    <column field="CLJGBM" type="string" length="40" label="处理机构编码" remark="按照擎天内容扩展"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_FLYZ_ZXB" field="ID"/>
+  </table>
+</model>

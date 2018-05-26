@@ -1,0 +1,125 @@
+package com.ehtsoft.supervise.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.ehtsoft.common.services.SSOService;
+import com.ehtsoft.fw.core.db.MongoClient;
+import com.ehtsoft.fw.core.db.SQLAdapter;
+import com.ehtsoft.fw.core.db.SqlDbClient;
+import com.ehtsoft.fw.core.db.SqlDbFilter;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.services.AbstractService;
+import com.ehtsoft.fw.core.sso.User;
+import com.ehtsoft.fw.utils.StringUtil;
+
+/**
+ * 社区矫正--业务监管--工作监管Service
+ * @author zhuzj
+ *
+ */
+@Service("SqjzYwjgService")
+public class SqjzYwjgService extends AbstractService{
+	
+
+	@Resource(name = "sqlDbClient")
+	private SqlDbClient dbClient;
+	
+	@Resource(name = "SSOService")
+	private SSOService service;
+	
+	@Resource(name = "SqjzYwjgSjbbService")
+	private SqjzYwjgSjbbService sqjzSjbbService;
+	
+	//根据父id查询下一级的所有报表信息
+	public List<BasicMap<String, Object>> findAllData(String parentid){
+		String str = "select jgmc, " + 
+				"sum(cast(zcsqjzrs as int)) as zcsqjzrs,sum(cast(jzxz as int)) as jzxz,sum(cast(bkfz as int)) as bkfz, " + 
+				"sum(cast(ksgl as int)) as ksgl,sum(cast(ptgl as int)) as ptgl,sum(cast(yggl as int)) as yggl, " + 
+				"sum(cast(bdwg as int)) as bdwg,sum(cast(tggl as int)) as tggl,sum(cast(zzjzjy as int)) as zzjzjy, " + 
+				"sum(cast(gbthjy as int)) as gbthjy,sum(cast(jxxlfd as int)) as jxxlfd,sum(cast(zzsqfw as int)) as zzsqfw, " + 
+				"sum(cast(jx as int)) as jx,sum(cast(jg as int)) as jg,sum(cast(zacf as int)) as zacf, " + 
+				"sum(cast(sjzz as int)) as sjzz,sum(cast(zfz as int)) as zfz,sum(cast(jswt as int)) as jswt, " + 
+				"sum(cast(wcpg as int)) as wcpg,sum(cast(cx as int)) as cx,sum(cast(zzgzry as int)) as zzgzry, " + 
+				"sum(cast(zzshgzz as int)) as zzshgzz,sum(cast(shzyz as int)) as shzyz,sum(cast(yjljyjd as int)) as yjljyjd, " + 
+				"sum(cast(jyjdyjl as int)) as jyjdyjl,sum(cast(yjlsqfwjd as int)) as yjlsqfwjd,sum(cast(yjlsqjzzx as int)) as yjlsqjzzx  " + 
+				"from rep_gzjgxxcjb where parentid = '"+parentid+"' " + 
+				"group by jgmc " + 
+				"order by jgmc desc ";
+		SQLAdapter sql = new SQLAdapter(str);
+		List<BasicMap<String, Object>> list = dbClient.find(sql);
+		return list;
+		
+	}
+	//查询时间
+	public List<BasicMap<String, Object>> findQueryData(BasicMap<String, Object> basicMap){
+		String dataTime ="";
+		
+		if(!"".equals(basicMap.get("qssj")) && basicMap.get("qssj") != null) {
+			if(!"".equals(basicMap.get("jssj")) && basicMap.get("jssj") != null) {
+				//处理字符串
+				String  strTime1 =  StringUtil.toEmptyString(basicMap.get("qssj")).replace("-","");
+				String  strTime2 =  StringUtil.toEmptyString(basicMap.get("jssj")).replace("-","");
+				//拼接时间
+				dataTime = " and cdate between "+strTime1+" and "+strTime2+" ";
+			}
+		}
+		String str = "select jgmc, " + 
+				"sum(cast(zcsqjzrs as int)) as zcsqjzrs,sum(cast(jzxz as int)) as jzxz,sum(cast(bkfz as int)) as bkfz, " + 
+				"sum(cast(ksgl as int)) as ksgl,sum(cast(ptgl as int)) as ptgl,sum(cast(yggl as int)) as yggl, " + 
+				"sum(cast(bdwg as int)) as bdwg,sum(cast(tggl as int)) as tggl,sum(cast(zzjzjy as int)) as zzjzjy, " + 
+				"sum(cast(gbthjy as int)) as gbthjy,sum(cast(jxxlfd as int)) as jxxlfd,sum(cast(zzsqfw as int)) as zzsqfw, " + 
+				"sum(cast(jx as int)) as jx,sum(cast(jg as int)) as jg,sum(cast(zacf as int)) as zacf, " + 
+				"sum(cast(sjzz as int)) as sjzz,sum(cast(zfz as int)) as zfz,sum(cast(jswt as int)) as jswt, " + 
+				"sum(cast(wcpg as int)) as wcpg,sum(cast(cx as int)) as cx,sum(cast(zzgzry as int)) as zzgzry, " + 
+				"sum(cast(zzshgzz as int)) as zzshgzz,sum(cast(shzyz as int)) as shzyz,sum(cast(yjljyjd as int)) as yjljyjd, " + 
+				"sum(cast(jyjdyjl as int)) as jyjdyjl,sum(cast(yjlsqfwjd as int)) as yjlsqfwjd,sum(cast(yjlsqjzzx as int)) as yjlsqjzzx  " + 
+				"from rep_gzjgxxcjb where parentid = '"+basicMap.get("orgid")+"' " + dataTime+
+				"group by jgmc " + 
+				"order by jgmc desc ";
+		SQLAdapter sql = new SQLAdapter(str);
+		List<BasicMap<String, Object>> list = dbClient.find(sql);
+		//如果为空则数据全部至0
+		if (list.size()<1) {
+			String Str1 = "select distinct jgmc from rep_gzjgxxcjb where parentid = '"+basicMap.get("orgid")+"'";
+			
+			SQLAdapter sql2 = new SQLAdapter(Str1);
+			List<BasicMap<String, Object>> list2 = dbClient.find(sql2);
+			for (BasicMap<String, Object> basicMap2 : list2) {
+				basicMap2.put("zcsqjzrs", "0");
+				basicMap2.put("jzxz", "0");
+				basicMap2.put("bkfz", "0");
+				basicMap2.put("ksgl", "0");
+				basicMap2.put("ptgl", "0");
+				basicMap2.put("yggl", "0");
+				basicMap2.put("bdwg", "0");
+				basicMap2.put("tggl", "0");
+				basicMap2.put("zzjzjy", "0");
+				basicMap2.put("gbthjy", "0");
+				basicMap2.put("jxxlfd", "0");
+				basicMap2.put("zzsqfw", "0");
+				basicMap2.put("jx", "0");
+				basicMap2.put("jg", "0");
+				basicMap2.put("zacf", "0");
+				basicMap2.put("sjzz", "0");
+				basicMap2.put("zfz", "0");
+				basicMap2.put("jswt", "0");
+				basicMap2.put("wcpg", "0");
+				basicMap2.put("cx", "0");
+				basicMap2.put("zzgzry", "0");
+				basicMap2.put("zzshgzz", "0");
+				basicMap2.put("shzyz", "0");
+				basicMap2.put("yjljyjd", "0");
+				basicMap2.put("jyjdyjl", "0");
+				basicMap2.put("yjlsqfwjd", "0");
+				basicMap2.put("yjlsqjzzx", "0");
+			}
+			return list2;
+		}
+		return list;
+	}
+}

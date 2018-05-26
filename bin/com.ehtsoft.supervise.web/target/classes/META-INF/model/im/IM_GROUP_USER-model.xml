@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="IM_GROUP_USER" label="组合消息用户信息关联表">
+    <column field="F_GID" type="uuid" length="36" label="群组信息ID" required="true"/>
+    <column field="F_AID" type="uuid" length="36" label="群成员ID" required="true"/>
+    <column field="F_TYPE" type="integer" length="1" defaultValue="0" label="成员类型" remark="成员类型：0 普通成员 1 管理员  2 群主"/>
+    <column field="F_NAME" type="string" length="50" label="成员备注名"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_GROUP_USER" field="F_GID,F_AID"/>
+    <remark><![CDATA[1.当对方设置为添加好友需要验证的时候，对方验证通过后，才将数据保存到该表中
+2.如果对方没有设置添加好用验证时，添加好友的时候，直接保存到该表中]]></remark>
+  </table>
+</model>

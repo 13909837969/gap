@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="ANZBJ_JYZFXX_IMG" label="教育走访信息记录表-图片附件信息">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="data" type="binary" label="居委会图片"/>
+    <column field="mimetype" type="string" length="20" label="图像类型" remark="图片类型如：image/png"/>
+    <column field="JYZFID" type="uuid" length="36" label="教育走访信息表ID"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_ANZBJ_JYZFXX_IMG" field="IMGID"/>
+  </table>
+</model>

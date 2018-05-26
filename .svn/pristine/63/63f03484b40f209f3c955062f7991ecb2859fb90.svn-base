@@ -1,0 +1,827 @@
+package com.ehtsoft.supervise.api;
+
+
+public class SupConst {
+
+	/**
+	 * 系统参数设置属性KEY 
+	 * @author wangbao
+	 */
+	public static class ParameterKey{
+		
+		/**
+		 * 轨迹采集频率设置（秒数),默认 3 秒 （android）
+		 */
+		public static final String KEY_SYSTEM_001 = "KEY_SYSTEM_001";
+		
+		/**
+		 * 停留时间阀值设置（分钟），默认 10 分钟
+		 */
+		public static final String KEY_SYSTEM_002 = "KEY_SYSTEM_002";
+		
+		/**
+		 * 停留范围半径（米），默认 40 米
+		 */
+		public static final String KEY_SYSTEM_003 = "KEY_SYSTEM_003";
+		
+		/**
+		 * 定位位置误差范围(去重复点范围)。默认 4 米（android）
+		 */
+		public static final String KEY_SYSTEM_004 = "KEY_SYSTEM_004";
+		
+		/**
+		 * 停留时间计算调度周期，默认 600秒
+		 */
+		public static final String KEY_SYSTEM_005 = "KEY_SYSTEM_005";
+		
+		/**
+		 * 报警时间设置（如关机多长时间报警）
+		 */
+		public static final String KEY_SYSTEM_006 = "KEY_SYSTEM_006";
+		
+		/**
+		 * 报到期限设置（天）
+		 */
+		public static final String KEY_SYSTEM_007 = "KEY_SYSTEM_007";
+		/**
+		 * 登记报到初始化推送信息
+		 */
+		public static final String KEY_SYSTEM_008 = "KEY_SYSTEM_008";
+		/**
+		 * 异常轨迹距离限制(米)
+		 */
+		public static final String KEY_SYSTEM_009 = "KEY_SYSTEM_009";
+		
+		/**
+		 * 禁入区域报警时间设置（分钟），默认 30 分钟
+		 */
+		public static final String KEY_SYSTEM_010 = "KEY_SYSTEM_010";
+		
+		/**
+		 * 重复报警间隔（分钟）
+		 */
+		public static final String KEY_SYSTEM_011 = "KEY_SYSTEM_011";
+		
+		/**
+		 * 报警拖延处理时间阀值（分）
+		 */
+		public static final String KEY_SYSTEM_012 = "KEY_SYSTEM_012";
+		
+		/**
+		 * 网易云视频URL
+		 */
+		public static final String KEY_SYSTEM_013 = "KEY_SYSTEM_013";
+		
+		/**
+		 * 网易视频云App Key
+		 */
+		public static final String KEY_SYSTEM_014 = "KEY_SYSTEM_014";
+		/**
+		 * 网易视频云App Secret
+		 */
+		public static final String KEY_SYSTEM_015 = "KEY_SYSTEM_015";
+		
+		/**
+		 * 考核分数
+		 */
+		public static final String KEY_SYSTEM_016 = "KEY_SYSTEM_016";
+		
+		/**
+		 * 盟市编码信息
+		 */
+		public static final String KEY_SYSTEM_017 = "KEY_SYSTEM_017";
+		
+		/**
+		 * 轨迹查询最大间隔时间（天）
+		 */
+		public static final String KEY_SYSTEM_018 = "KEY_SYSTEM_018";
+		
+	}
+	
+	public static class ErrorCode{
+
+	}
+	/**
+	 * IM 对应的表
+	 * @author wangbao
+	 */
+	public static class Collections{
+		/**
+		 * 数据修改日志（MongoDB 数据库）
+		 */
+		public final static String LOG_RECORD_HISTORY = "LOG_RECORD_HISTORY";
+		/**
+		 * 分散服务记录表
+		 */
+		public final static String JZ_SQFSFWJLB = "JZ_SQFSFWJLB";
+		
+		/**
+		 * 矫正人员活动信息表
+		 */
+		public final static String REP_JZRYHDXXB = "REP_JZRYHDXXB";
+		
+		/**
+		 * 停留时间信息报表
+		 */
+		public final static String REP_STAY_TIME = "REP_STAY_TIME";
+		
+		/**
+		 * 停留位置明细
+		 */
+		public final static String REP_STAY_DETAIL = "REP_STAY_DETAIL";
+		
+		/**
+		 * 人员停留位置MAP
+		 */
+		public final static String REP_STAY_MAP = "REP_STAY_MAP";
+		
+		/**
+		 * 电子围栏边界及不允许进入区域的边界设置
+		 * mongodb 格式：
+		 * {
+			   code:"行政区划编码",
+			   name:"区域名称"
+		 *     boundary:{
+				  type : "Polygon",
+				  coordinates : [
+				     [ [ 0 , 0 ] , [ 3 , 6 ] , [ 6 , 1 ] , [ 0 , 0 ] ],
+				     [ [ 2 , 2 ] , [ 3 , 3 ] , [ 4 , 2 ] , [ 2 , 2 ] ]
+				  ]
+				}
+			}
+		 */
+		public final static String SYS_BOUNDARY = "SYS_BOUNDARY";
+		/**
+		 * 系统参数设置记录表
+		 */
+		public final static String SYS_PARAMETER = "SYS_PARAMETER";
+		
+		/**
+		 * 数据字典类型表
+		 */
+		public final static String SYS_DICTIONARY_TYPE = "SYS_DICTIONARY_TYPE";
+		/**
+		 * 数据字典定义表
+		 */
+		public final static String SYS_DICTIONARY = "SYS_DICTIONARY";
+		/**
+		 * 必接必送数据表
+		 */
+		public final static String ANZBJ_BJBSXXJLB="ANZBJ_BJBSXXJLB";
+		/**
+		 * 基层法律服务工作登记表
+		 */
+		public final static String FLFW_JCFLFWDJB="FLFW_JCFLFWDJB";
+		/**
+		 * 人员衔接采集数据表
+		 */
+		public final static String ANZBJ_RYXJXXCJB = "ANZBJ_RYXJXXCJB";
+		/**
+		 * 人员退回上级记录表	
+		 */
+		public final static String ANZBJ_RYTHSJJLB = "ANZBJ_RYTHSJJLB";
+		/**
+		 * 行政区划数据表
+		 */
+		public final static String SYS_REGION = "SYS_REGION";
+		/**
+		 * 禁入区域设置表
+		 */
+		public final static String SYS_PROHIBIT = "SYS_PROHIBIT";
+		
+		/**
+		 *禁止区域设置表
+		 */
+		public final static String SYS_JZRY_JRQY = "SYS_JZRY_JRQY";
+		
+		/**
+		 * 安置信息采集表
+		 */
+		public final static String ANZBJ_AZXXCJB="ANZBJ_AZXXCJB";
+		/**
+		 * 教育走访图片表
+		 */
+		public final static String ANZBJ_JYZFXX_IMG="ANZBJ_JYZFXX_IMG";
+		
+		/**
+		 * 审批单据配置表
+		 */
+		public final static String SYS_AUDIT_BILL = "SYS_AUDIT_BILL";
+		
+		/**
+		 * 工作登记图片表
+		 */
+		public final static String ANZBJ_GZJL_IMG="ANZBJ_GZJL_IMG";
+		/**
+		 * 帮扶图片表
+		 */
+		public final static String JZ_BFXXCJB_IMG="JZ_BFXXCJB_IMG";
+		/**
+		 * 社区矫正人员转派信息退回记录表
+		 */
+		public final static String JZ_JZRYZPXXTH="JZ_JZRYZPXXTH";
+		
+		/**
+		 * 单据申请信息记录表
+		 */
+		public final static String SYS_AUDIT_APPLY = "SYS_AUDIT_APPLY";
+		
+		/**
+		 * 单据审批人流程信息记录表
+		 */
+		public final static String SYS_AUDIT_APPROVER = "SYS_AUDIT_APPROVER";
+		
+		/**
+		 * 单据的审批人及审批部门审批流程信息配置表
+		 */
+		public final static String SYS_AUDIT_CONFIG = "SYS_AUDIT_CONFIG";
+		
+		/**
+		 * 审批工作小组
+		 */
+		public final static String SYS_AUDIT_TEAM = "SYS_AUDIT_TEAM";
+		
+		/**
+		 * 审批工作小组成员
+		 */
+		public final static String SYS_AUDIT_TEAM_APPROVER = "SYS_AUDIT_TEAM_APPROVER";
+		
+		/**
+		 * 审批情况记录表（审批结果及历史记录表）
+		 */
+		public final static String SYS_AUDIT_RESULT = "SYS_AUDIT_RESULT";
+		
+		/**
+		 * 进入特定区域关联表（和 禁入区域设置表进行关联
+		 */
+		public final static String JZ_JRTDQY_PROHIBIT = "JZ_JRTDQY_PROHIBIT";
+		/**
+		 * 通知内容关联表(发送给谁了等）
+		 */
+		public final static String JZ_TZNRGLB = "JZ_TZNRGLB";
+		/**
+		 * 文件题库信息表
+		 */
+		public final static String JZ_WJTKXXB = "JZ_WJTKXXB";
+		
+		/**
+		 * 问卷题库信息答案选项表
+		 */
+		public final static String JZ_WJTKXX_DAXX = "JZ_WJTKXX_DAXX";
+		/**
+		 * 问卷试题信息记录表
+		 */
+		public final static String JZ_WJSTXXB = "JZ_WJSTXXB";
+		/**
+		 * 问卷试题信息明细记录表
+		 */
+		public final static String JZ_WJSTXX_MX = "JZ_WJSTXX_MX";
+		/**
+		 * 问卷答题情况信息
+		 */
+		public final static String JZ_WJDTQKXX = "JZ_WJDTQKXX";
+		/**
+		 * 矫正人员基本信息
+		 */
+		public final static String JZ_JZRYJBXX = "JZ_JZRYJBXX";
+		/**
+		 * 矫正人员基本信息文书信息
+		 */
+		public final static String JZ_JZRYJBXX_WS = "JZ_JZRYJBXX_WS";
+		/**
+		 * 矫正人员基本信息相关地址信息
+		 */
+		public final static String JZ_JZRYJBXX_DZ = "JZ_JZRYJBXX_DZ";
+		/**
+		 * 矫正人员基本信息犯罪信息
+		 */
+		public final static String JZ_JZRYJBXX_FZ = "JZ_JZRYJBXX_FZ";
+		/**
+		 * 矫正人员基本信息健康信息
+		 */
+		public final static String JZ_JZRYJBXX_JK = "JZ_JZRYJBXX_JK";
+		/**
+		 * 矫正人员基本信息矫正信息
+		 */
+		public final static String JZ_JZRYJBXX_JZ = "JZ_JZRYJBXX_JZ";
+		/**
+		 * 矫正人员基本信息附加身份信息
+		 */
+		public final static String JZ_JZRYJBXX_SF = "JZ_JZRYJBXX_SF";
+		/**
+		 * 矫正人员签到信息表
+		 */
+		public final static String  JZ_QDXXB = "JZ_QDXXB";
+		public final static String REP_QDXXB = "REP_QDXXB";
+		/**
+		 * 报到采集指纹等信息记录人员信息 (采集数据后向对方推送采集状态用该表中的管理人员信息)
+		 */
+		public final static String JZ_COLLECT_USER = "JZ_COLLECT_USER";
+		/**
+		 * 警告信息记录表（报警信息记录表）
+		 */
+		public final static String JZ_ALARM = "JZ_ALARM";
+		/**
+		 * 警告信息汇总情况记录表
+		 */
+		public final static String REP_ALARM = "REP_ALARM";
+		/**
+		 * 家庭成员及主要社会关系
+		 */
+		public final static String JZ_JTCYJZYSHGX="JZ_JTCYJZYSHGX";
+		
+		/**
+		 * 居住地变更信息采集表
+		 */
+		public final static String JZ_JZDBGXXCJB = "JZ_JZDBGXXCJB";
+		/**
+		 * 外出申请信息采集表
+		 */
+		public final static String JZ_WCSQXXCJB = "JZ_WCSQXXCJB";
+		/**
+		 * 进入特定区域（场所）信息采集表
+		 */
+		public final static String JZ_SQJZRYJRTDQYSPB = "JZ_SQJZRYJRTDQYSPB";
+		/**
+		 * 社区矫正人员奖惩信息采集表
+		 */
+		public final static String JZ_SQJZRYJCXXCJB = "JZ_SQJZRYJCXXCJB";
+		/**
+		 * 社区矫正人员状态信息采集表
+		 */
+		public final static String JZ_SQJZRYZTXXCJB = "JZ_SQJZRYZTXXCJB";
+		/**
+		 * 帮扶信息采集表
+		 */
+		public final static String JZ_BFXXCJB = "JZ_BFXXCJB";
+		/**
+		 * 工作记录采集表
+		 */
+		public final static String ANZBJ_GZJLCJB="ANZBJ_GZJLCJB";
+		
+		/**
+		 * 教育学习信息采集表
+		 */
+		public final static String JZ_JYXXXXCJB = "JZ_JYXXXXCJB";
+		/**
+		 * 日常报告信息采集表
+		 */
+		public final static String JZ_RCBGXXCJB = "JZ_RCBGXXCJB";
+		/**
+		 * 管理级别信息采集表
+		 */
+		public final static String JZ_GLJBXXCJB = "JZ_GLJBXXCJB";
+		/**
+		 * 警告信息采集表
+		 */
+		public final static String JZ_JGXXCJB = "JZ_JGXXCJB";
+		/**
+		 * 核实取证信息采集表
+		 */
+		public final static String JZ_HSQZXXCJB = "JZ_HSQZXXCJB";
+		/**
+		 * 考核信息采集表
+		 */
+		public final static String JZ_KHXX = "JZ_KHXX";
+		/**
+		 * 调查评估信息采集表
+		 */
+		public final static String JZ_DCPGXX = "JZ_DCPGXX";
+		
+		/**
+		 * 司法行政机关（单位）基本信息采集表
+		 */
+		public final static String JC_SFXZJGJBXX = "JC_SFXZJGJBXX";
+		
+		/**
+		 * 司法行政机关（单位）工作人员基本信息采集表
+		 */
+		public final static String JC_SFXZJGGZRYJBXX = "JC_SFXZJGGZRYJBXX";
+		
+		/**
+		 * 社区矫正人员个人简历表
+		 */
+		public final static String JZ_SQJZRYGRJL = "JZ_SQJZRYGRJL";
+		/**
+		 * 走访检查情况表
+		 */
+		public final static String JZ_ZFJCQK = "JZ_ZFJCQK";
+		/**
+		 *社区矫正人员禁止令信息采集表
+		 */
+		public final static String JZ_JZLXXCJB = "JZ_JZLXXCJB";
+		/**
+		 *脱管信息采集表
+		 */
+		public final static String JZ_TGXXCJB = "JZ_TGXXCJB";
+		
+		/**
+		 *司法行政机关（单位）基本信息采集表
+		 */
+		public final static String JZ_SFXZJGJBXX = "JZ_SFXZJGJBXX";
+		/**
+		 * 社区服务信息采集（集中服务情况）
+		 */
+		public final static String JZ_SQFWXX = "JZ_SQFWXX";
+		
+		/**
+		 * 社区服务信息采集（分散服务情况）
+		 */
+		public final static String JZ_SQFSFW = "JZ_SQFSFW";
+		
+		/**
+		 * 报警信息处理
+		 */
+		public final static String JZ_ALARM_SOLVE = "JZ_ALARM_SOLVE";
+		
+		/**
+		 * 个别教育情况
+		 */
+		public final static String JZ_GBJYQK = "JZ_GBJYQK";
+		/**
+		 * 个别教育情况签字
+		 */
+		public final static String JZ_GBJYQK_IMG = "JZ_GBJYQK_IMG";
+		
+		/**
+		 * 培训情况登记表
+		 */
+		public final static String JZ_PXQKDJB = "JZ_PXQKDJB";
+		
+		/**
+		 * 日常考核评分记录表
+		 */
+		public final static String JZ_RCKHPF = "JZ_RCKHPF";
+		
+
+		/**
+		 * 社区矫正人员违规信息采集表
+		 */
+		public final static String JZ_SQJZRYWGXXCJB ="JZ_SQJZRYWGXXCJB";
+		/**
+		 * 思想汇报
+		 */
+		public final static String JZ_SXHB = "JZ_SXHB";
+		/**
+		 * 社区矫正人员基本信息-照片
+		 */
+		public final static String JZ_JZRYJBXX_IMG = "JZ_JZRYJBXX_IMG";
+		
+		
+		/**
+		 * 矫正解除信息表
+		 */
+		public final static String JZ_JZJCXXCJB = "JZ_JZJCXXCJB";
+		
+		/**
+		 * mongoDB矫正人员足迹信息
+		 */
+		public final static String IM_FOOTPRINT_SOURCE = "IM_FOOTPRINT_SOURCE";
+		/**
+		 * 矫正人员同案犯信息
+		 */
+		public final static String JZ_TAFXXCJ = "JZ_TAFXXCJ";
+		/**
+		 * 矫正人员矫正小组
+		 */
+		public final static String JZ_JZXZCY = "JZ_JZXZCY";
+		/**
+		 * 矫正人员押送信息
+		 */
+		public final static String JZ_YSXX = "JZ_YSXX";
+		/**
+		 * 矫正人员虚拟身份
+		 */
+		public final static String JZ_XNSFXXCJ = "JZ_XNSFXXCJ";
+		/**
+		 * 矫正人员判决信息
+		 */
+		public final static String JZ_PJXX = "JZ_PJXX";
+		/**
+		 * 矫正人员矫正信息
+		 */
+		public final static String JZ_JZXX = "JZ_JZXX";	
+		/**
+		 * 矫正人员矫正解除信息
+		 */
+		public final static String JZ_JZJC = "JZ_JZJC";
+		/**
+	     * 提请撤销缓刑信息采集表
+	     */
+	    public static final String JZ_TQCXXXCJB="JZ_TQCXXXCJB";
+	    /**
+	     * 提请收监执行信息采集表
+	     */
+	    public static final String JZ_TQSJZXXXCJB="JZ_TQSJZXXXCJB";
+	    /**
+	     * 提请减刑信息采集表
+	     */
+	    public static final String JZ_TQJXXXCJB="JZ_TQJXXXCJB";
+	    
+	    /**
+	     * 社区矫正工作监管信息采集表
+	     */
+	    public static final String REP_GZJGXXCJB = "REP_GZJGXXCJB";
+		/*===========================人民调解============================================*/
+		/**
+		 * 委员会基本情况
+		 */
+		public final static String RMTJ_JWHJBXX = "RMTJ_JWHJBXX";
+		
+		/**
+		 * 调解员基本情况
+		 */
+		public final static String RMTJ_TJYJBXX = "RMTJ_TJYJBXX";
+		
+		/**
+		 * 口头调解
+		 */
+		public final static String RMTJ_TJAJXX = "RMTJ_TJAJXX";
+		/**
+		 * 调解笔记照片
+		 */
+		public final static String RMTJ_JJBJ_MEDIA = "RMTJ_JJBJ_MEDIA";
+		/**
+		 * 调解笔记
+		 */
+		public final static String RMTJ_JJBJ = "RMTJ_JJBJ";
+		/**
+		 * 申请人表
+		 */
+		public final static String RMTJ_TJAJSQR = "RMTJ_TJAJSQR";
+		/*===========================法治宣传============================================*/
+		/**
+		 * 普法宣传活动信息登记			
+		 */
+		public final static String FZXC_PFHDDJ = "FZXC_PFHDDJ";
+		
+		/**
+		 * 普法宣传活动信息(针对人群，活动形式)
+		 */
+		public final static String FZXC_PFHDDJ_LX = "FZXC_PFHDDJ_LX";
+		
+		/*===============================法律援助===============================*/
+		/**
+		 * 法律援助涉案人员表
+		 */
+		public final static String FLYZ_SARY = "FLYZ_SARY";
+		/**
+		 * 法律援助咨询表
+		 */
+		public final static String FLYZ_ZXB = "FLYZ_ZXB";
+		/**
+		 * 申请人家庭成员及收入表
+		 */
+		public final static String FLYZ_SQRJTCYJSRB = "FLYZ_SQRJTCYJSRB";
+		/**
+		 * 案件案由表
+		 */
+		public final static String FLYZ_AJAYB = "FLYZ_AJAYB";
+		/**
+		 * 案件申请人经济状况表
+		 */
+		public final static String FLYZ_AJSQRJJZKB = "FLYZ_AJSQRJJZKB";
+		/**
+		 * 申请人身份类别表
+		 */
+		public final static String FLYZ_SQRSFLBB = "FLYZ_SQRSFLBB";
+		/**
+		 * 案件表
+		 */
+		public final static String FLYZ_AJB = "FLYZ_AJB";
+		/**
+		 * 法律援助机构表
+		 */
+		public final static String FLYZ_FLYZJGB = "FLYZ_FLYZJGB";
+		/**
+		 * 法律咨询基本信息
+		 */
+		public final static String FLFW_FLZXJBXX = "FLFW_FLZXJBXX";
+		/**
+		 * 矫正方案信息采集表
+		 */
+		public final static String JZ_JZFAXX = "JZ_JZFAXX";
+		/**
+		 * 刑期变动情况
+		 */
+		public final static String JZ_XQBDQKXXCJB="JZ_XQBDQKXXCJB";
+		/**
+		 * 法治宣传活动图片
+		 */
+		public final static String FZXC_PFHDDJ_IMG = "FZXC_PFHDDJ_IMG";
+		/**
+		 * 心理矫正记录表
+		 */
+		public static final String JZ_XLJZB = "JZ_XLJZB";
+		/**
+		 * 法律服务法律工作者
+		 */
+		public static final String FLFW_JCFLFWGZZ = "FLFW_JCFLFWGZZ";
+		/**
+		 * 教育走访信息表
+		 */
+		public static final String ANZBJ_JYZFXX="ANZBJ_JYZFXX";
+		/**
+		 * 社区矫正 法律文书图片库
+		 */
+		public static final String JZ_JZRYFLWS_IMG = "JZ_JZRYFLWS_IMG";
+		/**
+		 * 提请治安处罚信息采集表
+		 */
+        public static final String JZ_TQZAQFXICJB = "JZ_TQZAQFXICJB";
+		/**
+		 * 法律援助 窗口服务 法律服务站图片
+		 */
+		public static final String FLYZ_FLYZJGB_IMG = "FLYZ_FLYZJGB_IMG";
+		
+		/**
+		 * 余罪再罪表
+		 */
+		public static final String JZ_YZHZZYGQKXXCJB = "JZ_YZHZZYGQKXXCJB";
+
+		/**
+		 * 基层法律服务所基本信息
+		 */
+		public static final String FLFW_JCFLFWS = "FLFW_JCFLFWS";
+		/**
+		 * 调查评估委托书记录表
+		 */
+		public static final String JZ_WTSJLB = "JZ_WTSJLB";
+		/**
+		 * 调查评估工作分配
+		 */
+		public static final String JZ_DCPGGZFP = "JZ_DCPGGZFP";
+		/**
+		 * 调查评估委托书记录-附件信息表
+		 */
+		public static final String JZ_WTSJLB_FJ = "JZ_WTSJLB_FJ";
+		/**
+		 * 调查评估信息记录表
+		 */
+		public static final String JZ_DCPGXXJL = "JZ_DCPGXXJL";
+		/**
+		 * 书面调解-人民调解申请书
+		 */
+		public static final String RMTJ_TJSQS = "RMTJ_TJSQS";
+		/**
+		 * 书面调解-人民调解调查卷宗
+		 */
+		public static final String RMTJ_DCJZ = "RMTJ_DCJZ";
+		/**
+		 * 书面调解-人民调解调查记录
+		 */
+		public static final String RMTJ_DCJL = "RMTJ_DCJL";
+		/**
+		 * 书面调解-人民调解当事人申请事项记录
+		 */
+		public static final String RMTJ_SQSXJL = "RMTJ_SQSXJL";
+		/**
+		 * 书面调解-人民调解调查卷宗和人民调解业务设置关联表
+		 */
+		public static final String RMTJ_DCJZ_YWSZ = "RMTJ_DCJZ_YWSZ";
+		/**
+		 * 书面调解-人民调解调查取证表
+		 */
+		public static final String RMTJ_QZXX = "RMTJ_QZXX";
+
+		/**
+		 * 手机端的分散服务图片记录表
+		 */
+		public static final String JZ_SQFSFWJLB_IMG = "JZ_SQFSFWJLB_IMG";
+		
+		/**
+		 * 书面调解 取证图片表
+		 */
+		public static final String RMTJ_QZXX_IMG = "RMTJ_QZXX_IMG";
+
+		/**
+		 * 书面调解 人民调解记录
+		 */
+		public static final String RMTJ_TJJL = "RMTJ_TJJL";
+
+		/**
+		 * 解除安置帮教信息采集表
+		 */
+		public static final String ANZBJ_JCAZBJXXCJB = "ANZBJ_JCAZBJXXCJB";
+
+		/**
+		 * 安置信息采集表-图片附件信息
+		 */
+		public static final String ANZBJ_AZXX_IMG = "ANZBJ_AZXX_IMG";
+
+		/**
+		 * 调解记录的图片表
+		 */
+		public static final String RMTJ_TJJL_IMG = "RMTJ_TJJL_IMG";
+		
+		/**
+		 * 调查记录图片
+		 */
+		public static final String RMTJ_DCJL_IMG = "RMTJ_DCJL_IMG";
+
+		/**
+		 * 回访记录表
+		 */
+		public static final String RMTJ_HFJL = "RMTJ_HFJL";
+
+		/**
+		 * 人民调节协议书（口头）
+		 */
+		public static final String RMTJ_XYS = "RMTJ_XYS";
+		
+		/**
+		 * 社区矫正人员在矫正期间在犯罪信息采集表
+		 */
+		public static final String JZ_SQJZRYZJZQJZFZXXCJB= "JZ_SQJZRYZJZQJZFZXXCJB";
+
+		/**
+		 * 社区矫正人员转派信息记录表
+		 */
+		public static final String JZ_JZRYZPXXJLB = "JZ_JZRYZPXXJLB";
+		/**
+		 * 司法所车辆信息表
+		 */
+		public static final String SFS_SFSJTGJXXB="SFS_SFSJTGJXXB";
+		/**
+		 * 社会工作者信息采集表
+		 */
+		public static final String JZ_SHGZZXXCJB = "JZ_SHGZZXXCJB";
+
+		/**
+		 * 涉案人员的相关人员信息表
+		 */
+		public static final String FLYZ_SARY_XGRY = "FLYZ_SARY_XGRY";
+		/**
+		 * 司法所业务用房信息表
+		 */
+		public static final String SFS_SFSYWYFXXB="SFS_SFSYWYFXXB";
+		/**
+		 * 司法所装备设备信息表
+		 */
+		public static final String SFS_SFSZBSBXXB="SFS_SFSZBSBXXB";
+		/**
+		 * 司法所工作经费来源信息表
+		 */
+		public static final String SFS_SFSGZJFLYXXB="SFS_SFSGZJFLYXXB";
+		/**
+		 * 司法所受表彰情况信息表
+		 */
+		public static final String SFS_SFSBZQKXXB="SFS_SFSBZQKXXB";
+		/**
+		 * 司法所制度建设情况信息表
+		 */
+		public static final String SFS_SFSZDJSQKXXB="SFS_SFSZDJSQKXXB";
+
+		/**
+		 * 人民调解协议书-当事人签字信息
+		 */
+		public static final String RMTJ_XYS_IMG = "RMTJ_XYS_IMG";
+		/**
+		 * 社会矫正基地
+		 */
+		public static final String JZ_SHJZJD = "JZ_SHJZJD";
+		/**
+		 * 社区矫正中心
+		 */
+		public static final String JZ_SQJZZX = "JZ_SQJZZX";
+		/**
+		 * 司法所组织培训信息表
+		 */
+	    public static final String SFS_SFSZZPXQKXXB="SFS_SFSZZPXQKXXB";
+	    /**
+	     * 司法所工作人员受表彰情况信息表
+	     */
+	    public static final String SFS_SFSGZRYSBZQKXXB="SFS_SFSGZRYSBZQKXXB";
+	    /**
+	     * 司法所工作人员受惩处情况信息表
+	     */
+	    public static final String SFS_SFSGZRYSCCQKXXB="SFS_SFSGZRYSCCQKXXB";
+	    /**
+	     * 司法所工作人员培训情况信息表
+	     */
+	    public static final String SFS_SFSGZRYCJPXQKXXB="SFS_SFSGZRYCJPXQKXXB";
+	    /**
+	     * 司法所工作人员职务信息表
+	     */
+	    public static final String SFS_SFSGZRYZWXXB="SFS_SFSGZRYZWXXB";
+	    /**
+	     * 司法所行政工作向村社区延伸情况信息表
+	     */
+	    public static final String SFS_SFSXXGZXCSQYSQKXXB="SFS_SFSXXGZXCSQYSQKXXB";
+	    
+	    /**
+	     * 解除社区矫正证明书
+	     */
+	    public static final String  JZ_JCSQJZZMS="JZ_JCSQJZZMS";
+	    
+	    public static final String JZ_TQCXHXXXCJB = "JZ_TQCXHXXXCJB";
+	    /**
+	     * 未成年年人信息采集表
+	     */
+	    public static final String  ANZBJ_WCNZNXXCJB="ANZBJ_WCNZNXXCJB";
+	    /**
+	     * 未成年子女帮扶信息采集表
+	     */
+	    public static final String ANZBJ_WCNZNBFXXCJB = "ANZBJ_WCNZNBFXXCJB";
+	}
+}

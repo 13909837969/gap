@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="model">
+		<xs:annotation>
+			<xs:documentation>model 元素为 ehtsoft 模型文件Root</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="table" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>table 定义模块的表名称及表的描述</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="column" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>column 定义表列的相关属性,不能为空</xs:documentation>
+								</xs:annotation>
+								<xs:complexType mixed="true">
+									<xs:attribute name="field" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>field 定义表字段名字,不能为空</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="type" use="required">
+										<xs:annotation>
+											<xs:documentation>type 定义表字段类型,不能为空,uuid,string,integer,long,double,float,boolean,date,binary</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="uuid"/>
+												<xs:enumeration value="string"/>
+												<xs:enumeration value="integer"/>
+												<xs:enumeration value="long"/>
+												<xs:enumeration value="double"/>
+												<xs:enumeration value="float"/>
+												<xs:enumeration value="boolean"/>
+												<xs:enumeration value="date"/>
+												<!-- timestamp 新增类型，存储没有实现 -->
+												<xs:enumeration value="timestamp"/>
+												<xs:enumeration value="binary"/>
+												<!-- clob 新增类型，存储没有实现 -->
+												<xs:enumeration value="clob"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="property" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>property 定义表字段映射java类的属性,如果没有映射的java类则可以省略</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="defaultValue" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>default 定义表字段数据默认值</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="length" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>length 定义表字段的长度</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="precision" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>precision 定义表数字类型字段的小数点（精度）</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="label" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>label 定义表字段描述信息</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="remark" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>remark 字段备注信息</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="required" default="true">
+										<xs:annotation>
+											<xs:documentation>字段是否必填项目,默认 true ,值为 true / false</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="true"/>
+												<xs:enumeration value="false"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="primary" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>primary 定义表的主键信息,只能出现1次或0次</xs:documentation>
+								</xs:annotation>
+								<xs:complexType mixed="true">
+									<xs:attribute name="name" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>name 定义表主键的名字 constraint name </xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="field" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>field 定义表主键的字段,复合主键采用","分割,如:field="column1,column2"</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="unique" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>unique 定义表的唯一字段信息,只能出现0次或多次</xs:documentation>
+								</xs:annotation>
+								<xs:complexType mixed="true">
+									<xs:attribute name="name" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>name 定义表唯一性字段的名字 constraint name </xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="field" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>field 定义表唯一性字段的字段名,复合唯一采用","分割,如:field="column1,column2" </xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="foreign" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>foreign 定义表的外键信息,只能出现0次或多次</xs:documentation>
+								</xs:annotation>
+								<xs:complexType mixed="true">
+									<xs:attribute name="name" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>name 外键的名字 constraint name </xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="field" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>field 该表的外键字段名</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="reference" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>reference 该表的参照表的名字</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="referField" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation>referField 该表的参照表的字段名字</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="name" type="xs:string" use="required">
+							<xs:annotation>
+								<xs:documentation>name 定义表的名字（生成数据库表的名字）不为空</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="label" type="xs:string" use="required">
+							<xs:annotation>
+								<xs:documentation>label 定义表的描述不为空</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="type" type="xs:string" use="optional">
+							<xs:annotation>
+								<xs:documentation>type 定义表对应的java类名(全类名)</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+					<xs:unique name="field_unique">
+						<xs:selector xpath="column"/>
+						<xs:field xpath="@field"/>
+					</xs:unique>
+					<xs:unique name="label_unique">
+						<xs:selector xpath="column"/>
+						<xs:field xpath="@label"/>
+					</xs:unique>
+					<xs:unique name="property_unique">
+						<xs:selector xpath="column"/>
+						<xs:field xpath="@property"/>
+					</xs:unique>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:unique name="tablename_unique">
+			<xs:annotation>
+				<xs:documentation>table 属性 name 必须是唯一的</xs:documentation>
+			</xs:annotation>
+			<xs:selector xpath="table"/>
+			<xs:field xpath="@name"/>
+		</xs:unique>
+	</xs:element>
+</xs:schema>

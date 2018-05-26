@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_SQFSFWJLB_IMG" label="分散服务记录图片表">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true"/>
+    <column field="LISTID" type="uuid" length="36" label="服务记录ID" remark="JZ_SQFSFWJLB.ID"/>
+    <column field="SQFSFWID" type="uuid" length="36" label="分散服务情况ID" required="true" remark="人员ID"/>
+    <column field="data" type="binary" label="图像数据"/>
+    <column field="mimetype" type="string" length="20" label="图像类型" remark="图片类型如：image/png"/>
+    <column field="tpbj" type="string" length="2" label="图片标记" remark="1：现场照片；2：签到照片"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_SQFSFWJLB_IMG" field="IMGID"/>
+  </table>
+</model>

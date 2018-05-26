@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="CORE_SCENE" label="组织机构场景及账号场景应用表">
+    <column field="SYSID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="SCENECODE" type="string" length="20" label="场景编码"/>
+    <column field="SCENENAME" type="string" length="20" label="场景名称"/>
+    <column field="MAINURL" type="string" length="80" label="主页面URL"/>
+    <column field="DEFAULTFLAG" type="integer" length="1" label="是否首选"/>
+    <column field="IMGSCENE" type="binary" label="场景预览图" remark="默认标记-是否首选(1首选,0 非首选)"/>
+    <column field="cts" type="timestamp" label="创建时间戳" required="true" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" required="true" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" required="true" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" required="true" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <primary name="PK_CORE_SCENE" field="SYSID"/>
+    <unique name="UK_CORE_SCENE_SCENECODE" field="SCENECODE"/>
+  </table>
+</model>

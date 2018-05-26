@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="ANZBJ_AZXX_IMG" label="安置信息采集表-图片附件信息">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true"/>
+    <column field="data" type="binary" label="头像数据"/>
+    <column field="mimetype" type="string" length="20" label="图像类型" remark="图片类型如：image/png"/>
+    <column field="AZXXID" type="uuid" length="36" label="安置信息ID"/>
+    <primary name="PK_ANZBJ_AZXX_IMG" field="IMGID"/>
+    <remark><![CDATA[remark]]></remark>
+  </table>
+</model>

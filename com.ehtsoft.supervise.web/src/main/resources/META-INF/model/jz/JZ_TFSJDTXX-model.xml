@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_TFSJDTXX" label="突发事件动态信息表">
+    <column field="ID" type="uuid" length="36" required="true" remark="关联(社区矫正突发事件上报 主键id)"/>
+    <column field="DTXXMS" type="string" length="100" label="动态信息描述" remark="自填"/>
+    <column field="TFSJDQZT" type="string" length="2" label="突发事件当前状态" remark="编码6.101 (01:处理中;02:已完结)"/>
+    <column field="SFTMC" type="string" length="50" label="司法厅（局）名称" remark="自填"/>
+    <column field="SBRMC" type="string" length="20" label="上报人名称" remark="自填"/>
+    <column field="SBSJ" type="string" length="20" label="上报时间" remark="自填，格式yyyy-MM-dd hh:mm:ss"/>
+	<foreign name="FK_JZ_TFSJDTXX_ID" field="ID" reference="JZ_SQJZTFSJSB" referField="ID"/>
+  </table>
+</model>

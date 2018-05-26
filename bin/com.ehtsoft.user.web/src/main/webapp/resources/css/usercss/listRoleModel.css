@@ -1,0 +1,11 @@
+/**
+ * 《功能角色管理》页面的JS文件
+ * @author 杜杰
+ * @since 2014-04-02
+ * @version 1.0
+ */
+ 
+.systemTop{height:80px;margin-bottom:10px;position:relative;}
+.systemTopbody{line-height:89px;height:80px;overflow:hidden}
+.addbut{position:absolute;right:70px;}
+.savebut{position:absolute;right:20px;}

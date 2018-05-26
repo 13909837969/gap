@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="SYS_REP_YPFXMB" label="研判分析模板">
+    <column field="ID" type="string" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="MENUCODE" type="string" length="20" label="功能编码"/>
+    <column field="YPZBNR" type="string" length="200" label="研判指标内容"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_SYS_REP_YPFXMB" field="ID"/>
+  </table>
+</model>

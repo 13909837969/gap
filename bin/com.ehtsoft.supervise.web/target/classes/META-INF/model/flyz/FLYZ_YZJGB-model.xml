@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="FLYZ_YZJGB" label="援助结果表">
+    <column field="YZJGB01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="YZJGLSH" type="string" length="20" label="援助结果流水号" remark="见10.1"/>
+    <column field="AJLSH" type="string" length="20" label="案件流水号" remark="关联9.2案件流水号"/>
+    <column field="PJJG" type="string" length="50" label="判决结果"/>
+    <column field="PJMSZR" type="string" length="200" label="判决民事责任"/>
+    <column field="SXHZQK" type="string" length="10" label="死刑核准情况"/>
+    <column field="LXZX" type="string" length="10" label="量刑主刑" remark="见10.33"/>
+    <column field="LXMS" type="string" length="200" label="量刑描述"/>
+    <column field="LXFJX" type="string" length="500" label="量刑附加刑" remark="见10.34"/>
+    <column field="JACX" type="string" length="10" label="结案程序" remark="见10.22"/>
+    <column field="JACXZX" type="string" length="10" label="结案程序子项" remark="见10.22"/>
+    <column field="JAFS" type="string" length="10" label="结案方式" remark="见10.22"/>
+    <column field="WHSSHQDLY" type="string" length="20" label="挽回损失或取得利益"/>
+    <column field="JGPJ" type="string" length="10" label="结果评价"/>
+    <column field="FLDW" type="string" length="10" label="法律地位" remark="民事见10.15；民事见10.13；行政见10.14"/>
+    <column field="CCBQ" type="string" length="10" label="财产保全" remark="见10.21"/>
+    <column field="CCBQSJ" type="string" length="20" label="财产保全时间" remark="以YYYY-MM-DD格式"/>
+    <column field="SFFYCDXYZX" type="string" length="20" label="是否法院裁定先于执行" remark="1代表是"/>
+    <column field="SFZCXYZF" type="string" length="20" label="是否仲裁先于支付" remark="1代表是"/>
+    <column field="JGMS" type="string" length="600" label="结果描述"/>
+    <column field="PJWZYY" type="string" length="500" label="判决无罪原因"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_FLYZ_YZJGB" field="YZJGB01"/>
+  </table>
+</model>

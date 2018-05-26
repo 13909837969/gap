@@ -1,0 +1,76 @@
+package com.ehtsoft.sqjz.services;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.ehtsoft.fw.core.db.SQLAdapter;
+import com.ehtsoft.fw.core.db.SqlDbClient;
+import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.core.services.AbstractService;
+
+@Service("SqjzzlNewService")
+public class SqjzzlNewService extends AbstractService {
+
+	@Resource(name="sqlDbClient")
+	SqlDbClient dbClient;
+	
+	//调解总数 ； 调解成功数 ； 调解不成功 ； 人民调解员总数 ； 调委会总数 ； 协议涉及金额
+		public List<BasicMap<String,Object>> find_zs(){
+			String sqlstr = "select count(1) cnt from rmtj_tjajxx union all "
+					+ "select count(1) cnt from rmtj_tjajxx where tjjg = '1' union all "
+					+ "select count(1) cnt from rmtj_tjajxx where tjjg = '2' union all "
+					+ "select count(1) cnt from RMTJ_TJYJBXX union all "
+					+ "select count(1) cnt from RMTJ_JWHJBXX union all "
+					+ "select sum(SAJE) cnt from rmtj_tjajxx";
+			SQLAdapter sql = new SQLAdapter(sqlstr);
+			return dbClient.find(sql);
+		}
+		
+		//履行情况
+		public List<BasicMap<String,Object>> find_lxqk(){
+			String sqlstr = "select * from view_rmtj_tjajxx_lxqk";
+			SQLAdapter sql = new SQLAdapter(sqlstr);
+			return dbClient.find(sql);
+		}
+		
+		//案件来源
+		public List<BasicMap<String,Object>> find_ajly(){
+			String sqlstr = "select b.f_name ajly,count(1) as cnt from rmtj_tjajxx a inner join "
+					+ "sys_dictionary b on a.ajly = b.f_code where b.f_typecode = 'SYS111' "
+					+ "group by b.f_name,b.f_code order by b.f_code asc";
+			SQLAdapter sql = new SQLAdapter(sqlstr);
+			return dbClient.find(sql);
+		}
+		
+		//实时监控  地图
+		public List<BasicMap<String,Object>> find_ssjk(){
+			return null;
+		}
+		
+		//案件难易
+		public List<BasicMap<String,Object>> find_ajny(){
+			String sqlstr = "select * from view_rmtj_tjajxx_ajny";
+			SQLAdapter sql = new SQLAdapter(sqlstr);
+			return dbClient.find(sql);
+		}
+		
+		//案件纠纷情况
+		public List<BasicMap<String,Object>> find_ajjf(){
+			String sqlstr = "select b.f_name jflx,count(1) as cnt from rmtj_tjajxx a "
+					+ "inner join sys_dictionary b on a.jflb = b.f_code "
+					+ "where b.f_typecode = 'SYS104' group by b.f_name,b.f_code order by b.f_code asc";
+			SQLAdapter sql = new SQLAdapter(sqlstr);
+			return dbClient.find(sql);
+		}
+		
+		//调解结果
+		public List<BasicMap<String,Object>> find_tjjg(){
+			String sqlstr = "select * from view_rmtj_tjajxx_tjjg";
+			SQLAdapter sql = new SQLAdapter(sqlstr);
+			return dbClient.find(sql);
+		}
+		
+}

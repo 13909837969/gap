@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="BIZ_ADVISORYCASE" label="擎天-咨询表 ">
+    <column field="PKID" type="UUID" length="40" label="主键UUID" required="true" remark="系统自动生成"/>
+    <column field="ADVISORYHUMANCOUNT" type="integer" label="同来人数"/>
+    <column field="ADVISORYITEMCODE" type="string" length="10" label="咨询事项类型编码"/>
+    <column field="ADVISORYITEMTYPE" type="string" length="10" label="咨询事项类型名称"/>
+    <column field="ADVISORYITEMVALUE" type="string" length="50" label="咨询事项"/>
+    <column field="ADVISORYTIME" type="string" length="20" label="咨询时间"/>
+    <column field="ASKFOR" type="string" length="500" label="接待咨询:咨询内容"/>
+    <column field="HASTRANED" type="string" length="1" label="是否送法援申请"/>
+    <column field="PROCESSMODE" type="string" length="10" label="处理方式"/>
+    <column field="REPLYER" type="string" length="100" label="接待人姓名"/>
+    <column field="REPLYERID" type="string" length="40" label="接待人id"/>
+    <column field="REPLYOPINION" type="string" length="4000" label="答复意见"/>
+    <column field="REPLYTIME" type="string" length="20" label="接待日期"/>
+    <column field="DEPTID" type="string" length="40" label="处理机构ID"/>
+    <primary name="PK_BIZ_ADVISORYCASE" field="PKID"/>
+  </table>
+</model>

@@ -1,0 +1,403 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: #4E3E5A;
+    color: #fff;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+
+
+/* Not required for template or sticky footer method. */
+
+body > .container {
+    padding: 60px 15px 0;
+}
+
+.container .text-muted {
+    margin: 20px 0;
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+code {
+    font-size: 80%;
+}
+
+.page-header {
+    border-bottom: 0px;
+}
+
+.head-box {
+    margin-top: 15px;
+}
+
+.logo {
+    height: 120px;
+    width: 140px;
+}
+
+.aline-left {
+    margin-left: 0px;
+}
+
+.logo-inline-block {
+    display: inline-block;
+}
+
+.logo-title {
+    font-size: 18px;
+}
+
+.logo-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.row {
+    /*margin-top: 10px;*/
+}
+
+.col-md-2 {
+    height: 160px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.col-md-4 {
+    height: 160px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.card-color1 {
+    background-color: #48B5EE;
+    width: 100%;
+    height: 100%;
+}
+
+.card-color2 {
+    background-color: #F5C147;
+    width: 100%;
+    height: 100%;
+}
+
+.card-color3 {
+    background-color: #74B849;
+    width: 100%;
+    height: 100%;
+}
+
+.card-color4 {
+    background-color: #6579DE;
+    width: 100%;
+    height: 100%;
+}
+
+.card-color5 {
+    background-color: #684E91;
+    width: 100%;
+    height: 100%;
+}
+
+.card-color6 {
+    background-color: #FD7837;
+    width: 100%;
+    height: 100%;
+}
+
+.card-color7 {
+    background-color: #91872E;
+    width: 100%;
+    height: 100%;
+}
+
+.card-color8 {
+    background-color: #F26C63;
+    width: 100%;
+    height: 100%;
+}
+
+.card-color9 {
+    background-color: #024883;
+    width: 100%;
+    height: 100%;
+}
+
+.head-span {
+    line-height: 20px;
+    vertical-align: middle;
+    padding-right: 15px;
+}
+
+.head-img {
+    height: 100%;
+}
+
+.span-text {
+    display: block;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+    padding: 0 5px;
+}
+
+.card-img {
+    margin-top: 20px;
+}
+
+.h1 {
+    margin-bottom: 0px;
+}
+
+.container-margin {
+    margin-right: 50px;
+    margin-top: 50px;
+}
+
+.carousel-control {
+    z-index: 100px;
+}
+
+
+/*图片滚动安妮*/
+
+
+/*.carousel{position:relative;margin-bottom:20px;line-height:1;}*/
+
+.carousel-control {
+    position: absolute;
+    top: 40%;
+    left: 60px;
+    width: 30px;
+    height: 30px;
+    margin-top: -20px;
+    font-size: 40px;
+    font-weight: 100;
+    line-height: 18px;
+    color: #ffffff;
+    text-align: center;
+    background: #222222;
+    border: 3px solid #ffffff;
+    -webkit-border-radius: 23px;
+    -moz-border-radius: 23px;
+    border-radius: 23px;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.carousel-control.right {
+    left: auto;
+    right: 60px;
+}
+
+
+/*侧栏信息提示*/
+
+.leftnav-container {
+    position: absolute;
+    width: 55px;
+    top: 0;
+    bottom: 0;
+    z-index: 4;
+    margin-left: 5px;
+    overflow: hidden;
+}
+
+.mainnav-container {
+    position: absolute;
+    width: 55px;
+    top: 0;
+    bottom: 0;
+    z-index: 4;
+    margin-left: 5px;
+    right: 2px;
+}
+
+.mainnav {
+    height: 100%;
+    /*background-color: #32404e;*/
+}
+
+.mainnav-content {
+    border: 2px solid #ffffff;
+    width: 38px;
+    height:38px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 50px;
+    background-repeat: no-repeat;
+}
+
+.nav > li > a {
+    display: block;
+    padding: 10px 11px;
+    margin-right:4px;
+    margin-top:4px;
+}
+
+.nav > li > a:hover {
+    background-color: #382646 !important;
+}
+
+.nav > li>a:visited {
+    background-color: #382646 !important;
+}
+
+#sideMenu {
+	postion:absolute;
+    display: none;
+    margin-left: 5px;
+    z-index:1500 !important;
+}
+.navigation-sub {
+    animation: 0.1s linear 0s normal none 1;
+    /*border: 1px solid #313D54;*/
+    border-radius: 3px;
+    list-style-type: none;
+    position: relative;
+    width: 200px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+    padding-left: 0px;
+    border: 1px solid #382646;
+}
+
+.navigation-sub>li>a:hover {
+    display: block;
+    background: #192234;
+    color: #747f95;
+    text-decoration: none;
+}
+
+.navigation-sub > li > a {
+    background: #4b4a5e;
+    color: #fff;
+    display: block;
+    outline: medium none;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.sidemenu-title {
+    background-color: #192234;
+    color: #fff;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    padding-top: 8px;
+}
+
+.glyphicon {
+    padding-right: 10px;
+}
+
+#sideMenu {
+    position: absolute;
+}
+
+.bottom-menu {
+    position: fixed;
+    left: 15px;
+    bottom: 15px;
+}
+.scrollbar{
+        overflow-y: hidden;
+        overflow-x:hidden;
+}
+.scrollbar:hover{
+    overflow-y: scroll !important;
+}
+.scrollbar::-webkit-scrollbar {
+    width: 3px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background-color: #808080;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: #ff4400;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+.modal-content {
+    background-color:#fafafa;
+
+}
+.modal-header{
+    border-bottom: 1px solid #bdb8b8;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.modal-dialog{
+    width: 800px;
+}
+
+/*复选框样式*/
+.checkboxStyle>span{
+    display:inline-block;
+    width:24px;
+    height:24px;
+    background:url("../../images/mainControl/checkbox-off.png");
+    vertical-align: middle;
+}
+.checkboxStyle>input[type=checkbox]{
+    visibility:hidden;
+}
+
+.checkboxStyle>input[type=checkbox]:checked + span{
+    background:url("../../images/mainControl/checkbox-on.png");
+}
+
+.dl-horizontal   label {
+    width: 160px;
+     font-weight:normal;
+}
+.dl-horizontal dd {
+    border-left: 4px solid #9b83ad;
+    margin-bottom: 6px;
+}
+.dl-horizontal dt {
+    font-size: 16px;
+}
+.img-rounded:hover{
+    
+}
+.mainWindow{
+	background-color:#fff;
+	z-index:100;
+	margin:0px;
+	padding:0px;
+}
+.mainWindow iframe{
+	margin:0px;
+}

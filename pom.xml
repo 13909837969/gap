@@ -1,0 +1,973 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ehtsoft</groupId>
+	<artifactId>gap</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>gap</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.main.dir>${basedir}</project.main.dir>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<com.ehtsoft.version>1.0-SNAPSHOT</com.ehtsoft.version>
+		<!--  compile  ,  provided  -->
+		<dependency.scope>compile</dependency.scope>
+		
+		<!-- 
+			web 应用的classes 打成 jar 包的时候，下面的两个文件不打到jar包中，放到 WEB-INF/classes中
+			resource.jar.filter1 = **/deploy.properties
+			resource.jar.filter2 = **/log4j.xml
+			resource.jar.filter3 = **/*.jasper
+			eclipse 开发的时候，将下面的 filter 的内容替换成eclipse，eclipse 插件问题，不能把相关文件参数替换成需要的配置
+		 -->
+		 
+		<!--
+		<resource.jar.filter1>**/deploy.properties</resource.jar.filter1>
+		<resource.jar.filter2>**/log4j.xml</resource.jar.filter2>
+		<resource.jar.filter3>*/jasper/*.*</resource.jar.filter3>
+		-->
+		
+		<resource.jar.filter1>eclipse</resource.jar.filter1>
+		<resource.jar.filter2>eclipse</resource.jar.filter2>
+		<resource.jar.filter3>eclipse</resource.jar.filter3>
+		
+		<!-- jar 版本 -->
+		<com.itextpdf.version>5.5.9</com.itextpdf.version>
+		<springframework.version>4.3.3.RELEASE</springframework.version>
+		<apache.cxf.version>3.1.10</apache.cxf.version>
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.1.0</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.httpcomponents</groupId>
+			    <artifactId>httpclient</artifactId>
+			    <version>4.5.2</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.httpcomponents</groupId>
+			    <artifactId>httpmime</artifactId>
+			    <version>4.5.2</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.httpcomponents</groupId>
+			    <artifactId>httpcore</artifactId>
+			    <version>4.4.5</version>
+			</dependency>
+			<!-- test -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- log -->
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>1.2</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.17</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- org.slf4j -->
+			<dependency>
+			    <groupId>org.slf4j</groupId>
+			    <artifactId>slf4j-api</artifactId>
+			    <version>1.7.21</version>
+			    <scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				  <groupId>org.slf4j</groupId>
+				  <artifactId>slf4j-log4j12</artifactId>
+				  <version>1.7.21</version>
+				  <scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- /log -->
+			<!-- JSP JSTL -->
+			<dependency>
+			      <groupId>org.apache.taglibs</groupId>
+			      <artifactId>taglibs-standard-spec</artifactId>
+			      <version>1.2.5</version>
+			      <scope>${dependency.scope}</scope>
+		    </dependency>
+		    <dependency>
+			      <groupId>org.apache.taglibs</groupId>
+			      <artifactId>taglibs-standard-impl</artifactId>
+			      <version>1.2.5</version>
+			      <scope>${dependency.scope}</scope>
+		    </dependency>
+		    <!-- \\ JSP JSTL -->
+			<!-- commons -->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>1.3.2</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.5</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+			    <groupId>commons-el</groupId>
+			    <artifactId>commons-el</artifactId>
+			    <version>1.0</version>
+			    <scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- dom4j -->
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>1.6.1</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+			  <groupId>jaxen</groupId>
+			  <artifactId>jaxen</artifactId>
+			  <version>1.1.6</version>
+			  <scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+			<dependency>
+			    <groupId>javax.mail</groupId>
+			    <artifactId>mail</artifactId>
+			    <version>1.4.7</version>
+			</dependency>	
+			<!-- 
+			<dependency>
+			    <groupId>com.sun.mail</groupId>
+			    <artifactId>javax.mail</artifactId>
+			    <version>1.5.6</version>
+			</dependency>
+			-->
+			<!-- 
+			<dependency>
+			   <groupId>org.apache.geronimo.specs</groupId>
+			   <artifactId>geronimo-jms_1.1_spec</artifactId>
+			   <version>1.1.1</version>
+			   <scope>${dependency.scope}</scope>
+			</dependency>
+			-->
+			<!-- spring framework -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${springframework.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${springframework.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${springframework.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${springframework.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${springframework.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${springframework.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${springframework.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${springframework.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${springframework.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${springframework.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${springframework.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${springframework.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jms</artifactId>
+				<version>${springframework.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+			  	<groupId>org.springframework</groupId>
+			  	<artifactId>spring-webmvc-struts</artifactId>
+			  	<version>2.5.6</version>
+			  	<scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- jar org.springframework.asm.ClassVisitor spring-core-4.0.1 重复,注释			
+			 <dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-asm</artifactId>
+				<version>3.1.4.RELEASE</version>
+			</dependency>
+			 -->
+			<dependency>
+			  	<groupId>org.springframework</groupId>
+			  	<artifactId>spring-websocket</artifactId>
+			  	<version>${springframework.version}</version>
+			  	<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+			    <groupId>org.springframework.data</groupId>
+			    <artifactId>spring-data-mongodb</artifactId>
+			    <version>2.0.0.RELEASE</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.springframework.data</groupId>
+			    <artifactId>spring-data-redis</artifactId>
+			    <version>2.0.6.RELEASE</version>
+			</dependency>
+			<dependency>
+			    <groupId>redis.clients</groupId>
+			    <artifactId>jedis</artifactId>
+			    <version>2.9.0</version>
+			</dependency>
+			<!-- spring aop 用 -->
+			<dependency>
+			    <groupId>org.aspectj</groupId>
+			    <artifactId>aspectjweaver</artifactId>
+			    <version>1.8.9</version>
+			    <scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+			    <groupId>javax.websocket</groupId>
+			    <artifactId>javax.websocket-api</artifactId>
+			    <version>1.1</version>
+			    <scope>provided</scope>
+			</dependency>
+			<!-- 分布式事务 jta -->
+			<dependency>
+			    <groupId>javax.transaction</groupId>
+			    <artifactId>jta</artifactId>
+			    <version>1.1</version>
+			</dependency>
+			<!-- 分布式事务依赖 atomikos -->
+			<dependency>
+			    <groupId>com.atomikos</groupId>
+			    <artifactId>transactions</artifactId>
+			    <version>4.0.4</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.atomikos</groupId>
+			    <artifactId>transactions-api</artifactId>
+			    <version>4.0.4</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.atomikos</groupId>
+			    <artifactId>transactions-jta</artifactId>
+			    <version>4.0.4</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.atomikos</groupId>
+			    <artifactId>transactions-jdbc</artifactId>
+			    <version>4.0.4</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.atomikos</groupId>
+			    <artifactId>atomikos-util</artifactId>
+			    <version>4.0.4</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.atomikos</groupId>
+			    <artifactId>transactions-jms</artifactId>
+			    <version>4.0.4</version>
+			</dependency>
+			<!-- // atomikos -->
+			
+			<!-- JDBC DRIVER -->
+			<dependency>
+		        <groupId>org.mongodb</groupId>
+		        <artifactId>mongodb-driver</artifactId>
+		        <version>3.5.0</version>
+		    </dependency>
+			<dependency>
+				<groupId>org.postgresql</groupId>
+				<artifactId>postgresql</artifactId>
+				<!-- <version>9.3-1100-jdbc4</version> -->
+				<version>42.1.4</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+			    <groupId>com.alibaba</groupId>
+			    <artifactId>druid</artifactId>
+			    <version>1.0.31</version>
+			</dependency>
+			<!-- mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar -Dfile=ojdbc6.jar -->
+			<dependency>
+				  <groupId>com.oracle</groupId>
+				  <artifactId>ojdbc6</artifactId>
+				  <version>11.2.0</version>
+				  <scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+			  <groupId>net.sourceforge.jtds</groupId>
+			  <artifactId>jtds</artifactId>
+			  <!--  <version>1.3.1</version>1.8-->
+					<version>1.2.8</version> 
+			  <scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- JDBC DRIVER END -->
+			
+			<!-- CXF -->
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-jaxws</artifactId>
+				<version>${apache.cxf.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-transports-http</artifactId>
+				<version>${apache.cxf.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- Jetty is needed if you're are not using the CXFServlet -->
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-transports-http-jetty</artifactId>
+				<version>${apache.cxf.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- AXIS webservice PS mas use-->
+			<dependency>
+			  <groupId>axis</groupId>
+			  <artifactId>axis</artifactId>
+			  <version>1.4</version>
+			</dependency>
+			<dependency>
+			  <groupId>axis</groupId>
+			  <artifactId>axis-jaxrpc</artifactId>
+			  <version>1.4</version>
+			</dependency>
+			<dependency>
+			  <groupId>axis</groupId>
+			  <artifactId>axis-saaj</artifactId>
+			  <version>1.4</version>
+			</dependency>
+			<dependency>
+			  <groupId>axis</groupId>
+			  <artifactId>axis-schema</artifactId>
+			  <version>1.3</version>
+			</dependency>
+			<!-- 和 CXF 中的 wsdl4j-1.6.3.jar 冲突
+			<dependency>
+			  <groupId>axis</groupId>
+			  <artifactId>axis-wsdl4j</artifactId>
+			  <version>1.5.1</version>
+			</dependency>
+ 			-->
+			<!-- active mq -->
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-spring</artifactId>
+				<version>5.7.0</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-core</artifactId>
+				<version>5.7.0</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+ 			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-web</artifactId>
+				<version>5.7.0</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- smack openfire -->
+			<dependency>
+			  <groupId>org.igniterealtime.smack</groupId>
+			  <artifactId>smack</artifactId>
+			  <version>3.2.1</version>
+			  <scope>${dependency.scope}</scope>
+			</dependency>
+		    <!-- <dependency>
+	            <groupId>com.sun.media</groupId>
+	            <artifactId>jai_imageio</artifactId>
+	            <version>1.1</version>
+       		</dependency> -->
+       		
+			<!-- eu.medsea.mimeutil -->
+			<dependency>
+			    <groupId>eu.medsea.mimeutil</groupId>
+			    <artifactId>mime-util</artifactId>
+			    <version>2.1</version>
+			    <scope>${dependency.scope}</scope>
+			</dependency>
+			
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-compress</artifactId>
+			    <version>1.12</version>
+			    <scope>${dependency.scope}</scope>
+			</dependency>
+	
+			<!-- Spring LDAP -->
+			<dependency>
+				<groupId>org.springframework.ldap</groupId>
+				<artifactId>spring-ldap-core</artifactId>
+				<version>1.3.2.RELEASE</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.sun</groupId>
+				<artifactId>ldapbp</artifactId>
+				<version>1.0</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- itextpdf -->
+			<dependency>
+				<groupId>com.itextpdf</groupId>
+				<artifactId>itextpdf</artifactId>
+				<version>${com.itextpdf.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.itextpdf</groupId>
+				<artifactId>itext-xtra</artifactId>
+				<version>${com.itextpdf.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.itextpdf</groupId>
+				<artifactId>itext-pdfa</artifactId>
+				<version>${com.itextpdf.version}</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.itextpdf</groupId>
+				<artifactId>itext-hyph-xml</artifactId>
+				<version>5.1.1</version>
+				<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+			  <groupId>com.itextpdf</groupId>
+			  <artifactId>itext-asian</artifactId>
+			  <version>5.2.0</version>
+			</dependency>
+			<!-- jasperreports use.-->
+			<dependency>
+			    <groupId>net.sf.jasperreports</groupId>
+			    <artifactId>jasperreports</artifactId>
+			    <version>6.5.1</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.lowagie</groupId>
+			    <artifactId>itext</artifactId>
+			    <version>2.1.7</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.lowagie</groupId>
+			  <artifactId>itextasian</artifactId>
+			  <version>2.1.7</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.google.zxing</groupId>
+			    <artifactId>core</artifactId>
+			    <version>3.2.0</version>
+			    <scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+			    <groupId>com.google.zxing</groupId>
+			    <artifactId>javase</artifactId>
+			    <version>3.2.0</version>
+			</dependency>
+			<!-- \\ jasperreports -->
+			<!-- poi Excel 操作 -->
+			<dependency>
+				  <groupId>org.apache.poi</groupId>
+				  <artifactId>poi</artifactId>
+				  <version>3.14</version>
+				  <scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				  <groupId>org.apache.poi</groupId>
+				  <artifactId>poi-ooxml</artifactId>
+				  <version>3.14</version>
+				  <scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				  <groupId>org.apache.poi</groupId>
+				  <artifactId>poi-ooxml-schemas</artifactId>
+				  <version>3.14</version>
+				  <scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				  <groupId>org.apache.xmlbeans</groupId>
+				  <artifactId>xmlbeans</artifactId>
+				  <version>2.6.0</version>
+				  <scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- \\ -->
+			<dependency>
+				  <groupId>commons-codec</groupId>
+				  <artifactId>commons-codec</artifactId>
+				  <version>1.10</version>
+				  <scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- jxl -->
+			<dependency>
+				  <groupId>net.sourceforge.jexcelapi</groupId>
+				  <artifactId>jxl</artifactId>
+				  <version>2.6.12</version>
+				  <scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- velocity -->
+			<dependency>
+			    <groupId>org.apache.velocity</groupId>
+			    <artifactId>velocity</artifactId>
+			    <version>1.7</version>
+			    <scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.velocity</groupId>
+			    <artifactId>velocity-tools</artifactId>
+			    <version>2.0</version>
+			    <scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- freemarker -->
+			<dependency>
+			    <groupId>org.freemarker</groupId>
+			    <artifactId>freemarker</artifactId>
+			    <version>2.3.23</version>
+			    <scope>${dependency.scope}</scope>
+			</dependency>
+			<!-- struts -->
+			<dependency>
+			  	<groupId>org.apache.struts</groupId>
+			  	<artifactId>struts-core</artifactId>
+			  	<version>1.3.10</version>
+			  	<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+			  <groupId>baidu.ueditor</groupId>
+			  <artifactId>baidu.ueditor</artifactId>
+			  <version>1.1.1</version>
+			</dependency>
+			<dependency>
+			  <groupId>baidu.ueditor.json</groupId>
+			  <artifactId>ueditor.json</artifactId>
+			  <version>1</version>
+			</dependency>
+			<!-- pinyin4j -->
+			<!-- https://mvnrepository.com/artifact/com.belerweb/pinyin4j -->
+			<dependency>
+			    <groupId>com.belerweb</groupId>
+			    <artifactId>pinyin4j</artifactId>
+			    <version>2.5.1</version>
+			</dependency>
+			<!--  A lightweight cryptography API -->
+			<dependency>
+			  <groupId>org.bouncycastle</groupId>
+			  <artifactId>bcprov-jdk15on</artifactId>
+			  <version>1.51</version>
+			</dependency>
+			<!-- \\ -->
+			<!-- APNS 消息推送用 jar (IOS) -->
+			<dependency>
+			  <groupId>com.notnoop.apns</groupId>
+			  <artifactId>apns</artifactId>
+			  <version>1.0.0.Beta4</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.fasterxml.jackson.core</groupId>
+			  <artifactId>jackson-annotations</artifactId>
+			  <version>2.4.1</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.fasterxml.jackson.core</groupId>
+			  <artifactId>jackson-core</artifactId>
+			  <version>2.4.1.1</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.fasterxml.jackson.core</groupId>
+			  <artifactId>jackson-databind</artifactId>
+			  <version>2.4.1.3</version>
+			</dependency>
+			<!-- APNS 消息推送用 jar (IOS)// -->
+			
+			<!-- dcm4che -->
+			<!-- 
+			<dependency>
+				<groupId>org.dcm4che</groupId>
+            	<artifactId>dcm4che-core</artifactId>
+            	<version>3.3.3</version>
+            	<scope>${dependency.scope}</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.dcm4che</groupId>
+            	<artifactId>dcm4che-imageio</artifactId>
+            	<version>3.3.3</version>
+            	<scope>${dependency.scope}</scope>
+		    </dependency>
+		    -->
+		    <!-- 
+		    <dependency>
+        		<groupId>dcm4che.tool</groupId>
+   	 			<artifactId>dcm4che-tool-dcm2jpg</artifactId>
+        		<version>2.0.27</version>
+        	</dependency>
+        	-->
+			<dependency>
+			    <groupId>org.codehaus.groovy</groupId>
+			    <artifactId>groovy-all</artifactId>
+			    <version>2.4.7</version>
+			</dependency>
+			<!-- gap -->
+			<dependency>
+				<groupId>com.ehtsoft</groupId>
+				<artifactId>com.ehtsoft.fw.utils</artifactId>
+				<version>${com.ehtsoft.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ehtsoft</groupId>
+				<artifactId>com.ehtsoft.fw.security</artifactId>
+				<version>${com.ehtsoft.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ehtsoft</groupId>
+				<artifactId>com.ehtsoft.fw.json</artifactId>
+				<version>${com.ehtsoft.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ehtsoft</groupId>
+				<artifactId>com.ehtsoft.fw.core</artifactId>
+				<version>${com.ehtsoft.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ehtsoft</groupId>
+				<artifactId>com.ehtsoft.user.api</artifactId>
+				<version>${com.ehtsoft.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<modules>
+		<module>com.ehtsoft.fw.security</module>
+		<module>com.ehtsoft.fw.utils</module>
+		<module>com.ehtsoft.fw.core</module>
+		<module>com.ehtsoft.fw.json</module>
+		<!-- 
+		<module>com.ehtsoft.proxy.srv</module>
+		<module>com.ehtsoft.user.web</module>
+    	<module>com.ehtsoft.supervise.web</module>
+		
+		
+		<module>com.ehtsoft.im.tools</module>
+		-->
+	</modules>
+    <profiles>
+     	<!-- 公司开发库 -->
+	  	<profile>
+	  		<id>dev</id>
+	  		<properties>
+	  			<env>dev</env>
+	  		</properties>
+	  		
+	  	</profile>
+	  	<profile>
+	  		<id>ip04</id>
+	  		<properties>
+	  			<env>ip04</env>
+	  		</properties>
+	  	</profile>
+	  	<profile>
+	  		<id>nmsf-test</id>
+	  		<properties>
+	  			<env>nmsf-test</env>
+	  		</properties>
+	  	</profile>
+	  	<profile>
+	  		<id>ip18</id>
+	  		<properties>
+	  			<env>ip18</env>
+	  		</properties>
+	  		<activation>
+	  			<activeByDefault>true</activeByDefault>
+	  		</activation>
+	  	</profile>
+	  	<profile>
+	  		<id>dl</id>
+	  		<properties>
+	  			<env>dl</env>
+	  		</properties>
+	  	</profile>
+	  	<profile>
+	  		<id>ip18e</id>
+	  		<properties>
+	  			<env>ip18e</env>
+	  		</properties>
+	  	</profile>
+	  	<profile>
+	  		<id>nmsf</id>
+	  		<properties>
+	  			<env>nmsf</env>
+	  		</properties>
+	  	</profile>
+	  	<profile>
+	  		<id>nmsf-dd</id>
+	  		<properties>
+	  			<env>nmsf-dd</env>
+	  		</properties>
+	  	</profile>
+	  	<profile>
+	  		<id>release</id>
+	  		<properties>
+	  			<env>release</env>
+	  		</properties>
+	  	</profile>
+	  	<profile>
+	  		<id>oracle</id>
+	  		<properties>
+	  			<env>oracle</env>
+	  		</properties>
+	  	</profile>
+    </profiles>
+   	<!-- 从以下地址价值依赖的  jar 包 -->
+	<repositories>
+		 <repository>
+		    <id>releases</id>
+		    <url>http://wangbao0412.vicp.cc:34628/nexus/content/repositories/releases</url>
+		 </repository>
+		<repository>
+			<id>snapshots</id>
+    		<url>http://wangbao0412.vicp.cc:34628/nexus/content/repositories/snapshots</url>
+		</repository>
+	</repositories>
+   <!-- upload jar -->
+   <distributionManagement>
+   	<repository>
+   		<id>releases</id>
+		<url>http://wangbao0412.vicp.cc:34628/nexus/content/repositories/releases/</url>
+   	</repository>
+   	<snapshotRepository>
+   		<id>snapshots</id>
+    	<url>http://wangbao0412.vicp.cc:34628/nexus/content/repositories/snapshots/</url>
+   	</snapshotRepository>
+   </distributionManagement>
+   <!-- mvn deploy –Dmaven.test.skip=true -->
+   
+	<build>
+		<filters> <!-- 指定使用 filter -->
+          <filter>../conf/cfg-${env}.properties</filter>
+        </filters>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<!-- 打成 jar 包排除 下面这个两个文件 -->
+				<!-- eclipse 开发的时候，下面的注释掉，否则，eclipse 中的配置文件无法替换成需要的参数 -->
+				<excludes>
+					<exclude>${resource.jar.filter1}</exclude>
+					<exclude>${resource.jar.filter2}</exclude>
+					<exclude>${resource.jar.filter3}</exclude>
+				</excludes>
+			</resource>
+		</resources>
+			<plugins>
+				<!-- 源代码压缩上传 插件 -->
+				<!-- 
+				<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.4</version>
+						<configuration>  
+	                    	<attach>true</attach>  
+	                	</configuration>  
+						<executions>
+							<execution>
+							    //<id>attach-sources</id>  
+								<phase>package</phase>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions> 
+					</plugin>
+			 	-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.6.1</version>
+					<configuration>
+						<source>8</source>
+						<target>8</target>
+						<showWarnings>true</showWarnings>
+						<showDeprecation>true</showDeprecation>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<!-- 资源文件打包不过了 jasper 文件（过滤后导致 ObjectInputStream 错误，lic 问题同样）  -->
+				     	<nonFilteredFileExtensions>
+				            <nonFilteredFileExtension>jasper</nonFilteredFileExtension>
+				            <nonFilteredFileExtension>jpg</nonFilteredFileExtension>
+				            <nonFilteredFileExtension>png</nonFilteredFileExtension>
+				            <nonFilteredFileExtension>lic</nonFilteredFileExtension>
+				            <nonFilteredFileExtension>keystore</nonFilteredFileExtension>
+				        </nonFilteredFileExtensions>
+					</configuration>
+				</plugin>
+				<plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-surefire-plugin</artifactId>
+			        <version>2.20.1</version>
+			        <configuration>
+			          <skip>true</skip>
+			        </configuration>
+			    </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.6</version>
+  
+					<configuration>
+					    <encoding>${project.build.sourceEncoding}</encoding>
+					    <!-- ##### 将 WEB 下的  class 文件压缩为 jar 文件 ##### -->
+					    <archiveClasses>false</archiveClasses>
+	                    <webResources>
+	                    	<!-- 替换 webapp 下 web.xml 文件中的 webAppRootKey 值 -->
+	                        <resource>  
+	                            <filtering>true</filtering>  
+	                            <directory>src/main/webapp</directory>
+	                            <includes>  
+	                                <include>**/web.xml</include>  
+	                            </includes>
+	                        </resource>
+	                         <resource>
+                                 <filtering>true</filtering>
+                                 <directory>src/main/resources</directory>
+                                 <targetPath>WEB-INF/classes</targetPath>
+                                 <!-- 将下面两个文件放到部署的 WEB-INF/classes 目录  -->
+					             <includes>
+									<include>${resource.jar.filter1}</include>
+									<include>${resource.jar.filter2}</include>
+									<include>${resource.jar.filter3}</include>
+								 </includes>
+                             </resource>
+	                    </webResources>
+                	</configuration>  
+				</plugin>
+				<!-- maven插件配置 -->
+				<plugin>
+					<!-- YUI Compressor Maven压缩插件 -->
+					<groupId>net.alchim31.maven</groupId>
+					<artifactId>yuicompressor-maven-plugin</artifactId>
+					<version>1.3.0</version>
+					<configuration>
+						<!-- 读取js,css文件采用UTF-8编码 -->
+						<encoding>UTF-8</encoding>
+						<!-- 不显示js可能的错误 -->
+						<jswarn>true</jswarn>
+						<!-- 若存在已压缩的文件，会先对比源文件是否有改动。有改动便压缩，无改动就不压缩 -->
+						<force>false</force>
+						<!-- 在指定的列号后插入新行 -->
+						<linebreakpos>-1</linebreakpos>
+						<!-- 压缩之前先执行聚合文件操作 true-->
+						<preProcessAggregates>false</preProcessAggregates>
+						<!-- 压缩后保存文件后缀 .min -->
+						<suffix>.min</suffix>
+						<!-- 源目录，即需压缩的根目录 -->
+						<sourceDirectory>${basedir}/mobile</sourceDirectory>
+						<!-- 压缩js和css文件 -->
+						<includes>
+							<include>**/*.js</include>
+							<!-- <include>**/*.css</include>-->
+						</includes>
+						<!-- 以下目录和文件不会被压缩 -->
+						<excludes>
+							<exclude>**/*.min.js</exclude>
+							<exclude>**/*.min.css</exclude>
+							<!-- <exclude>scripts/data/*.js</exclude>-->
+						</excludes>
+						<!-- 压缩后输出文件目录 -->
+						<outputDirectory>${basedir}/mobile</outputDirectory>
+						<!-- 聚合文件 -->
+						<!-- 
+						<aggregations>
+							<aggregation>
+								合并每一个文件后插入一新行
+								<insertNewLine>true</insertNewLine>
+								需合并文件的根文件夹
+								<inputDir>${basedir}/mobile/scripts</inputDir>
+								最终合并的输出文件
+								<output>${basedir}/mobile/scripts/app/app.js</output>
+								把以下js文件合并成一个js文件，是按顺序合并的
+								<includes>
+									<include>app/core.js</include>
+									<include>app/mlmanager.js</include>
+									<include>app/tmpl.js</include>
+									<include>app/ui.js</include>
+								</includes>
+							</aggregation>
+						</aggregations>
+						-->
+					</configuration>
+				</plugin>
+			</plugins>
+	</build>
+</project>

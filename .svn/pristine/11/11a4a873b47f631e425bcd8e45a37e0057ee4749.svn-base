@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="FLYZ_JG_IDDZ" label="法律援助机构ID对照表">
+    <column field="QTID" type="string" length="50" label="擎天机构ID" required="true" remark="系统自动生成"/>
+    <column field="QTJGMC" type="string" length="200" label="擎天机构名称"/>
+    <column field="QTQYDM" type="string" length="10" label="擎天区域代码"/>
+    <column field="LTID" type="uuid" length="36" label="龙腾机构ID"/>
+    <column field="LTJGMC" type="string" length="200" label="龙腾机构名称"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_FLYZ_JG_IDDZ" field="QTID"/>
+    <unique name="UK_FLYZ_JG_IDDZ_LTID" field="LTID"/>
+  </table>
+</model>

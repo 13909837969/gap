@@ -1,0 +1,131 @@
+var data = [
+	            [
+	    {name: '呼和浩特', value: 120},
+        {name: '包头', value: 58},
+        {name: '乌海', value: 175},
+        {name: '赤峰', value: 177},
+        {name: '通辽', value: 193},
+        {name: '鄂尔多斯', value: 194},
+        {name: '呼伦贝尔', value: 229},
+        {name: '乌兰察布', value: 273},
+        {name: '巴彦淖尔', value: 279},
+        {name: '兴安盟', value: 229},
+        {name: '阿拉善盟', value: 273},
+        {name: '锡林郭勒盟', value: 279}
+        ],
+        [
+           {name: '呼和浩特', value: 123},
+        {name: '包头', value: 580},
+        {name: '乌海', value: 175},
+        {name: '赤峰', value: 177},
+        {name: '通辽', value: 193},
+        {name: '鄂尔多斯', value: 194},
+        {name: '呼伦贝尔', value: 229},
+        {name: '乌兰察布', value: 273},
+        {name: '巴彦淖尔', value: 279},
+        {name: '兴安盟', value: 229},
+        {name: '阿拉善盟', value: 273},
+        {name: '锡林郭勒盟', value: 279}
+        ],
+        [
+	    {name: '呼和浩特', value: 163},
+        {name: '包头', value: 58},
+        {name: '乌海', value: 150},
+        {name: '赤峰', value: 177},
+        {name: '通辽', value: 193},
+        {name: '鄂尔多斯', value: 194},
+        {name: '呼伦贝尔', value: 229},
+        {name: '乌兰察布', value: 273},
+        {name: '巴彦淖尔', value: 279},
+        {name: '兴安盟', value: 229},
+        {name: '阿拉善盟', value: 273},
+        {name: '锡林郭勒盟', value: 279}
+			   ] ,
+			   [
+			 {name: '呼和浩特', value: 223},
+        {name: '包头', value: 345},
+        {name: '乌海', value: 175},
+        {name: '赤峰', value: 177},
+        {name: '通辽', value: 193},
+        {name: '鄂尔多斯', value: 194},
+        {name: '呼伦贝尔', value: 229},
+        {name: '乌兰察布', value: 273},
+        {name: '巴彦淖尔', value: 279},
+        {name: '兴安盟', value: 229},
+        {name: '阿拉善盟', value: 273},
+        {name: '锡林郭勒盟', value: 279}
+			   ],
+			   [
+			    {name: '呼和浩特', value: 263},
+		        {name: '包头', value: 58},
+		        {name: '乌海', value: 175},
+		        {name: '赤峰', value: 177},
+		        {name: '通辽', value: 193},
+		        {name: '鄂尔多斯', value: 194},
+		        {name: '呼伦贝尔', value: 229},
+		        {name: '乌兰察布', value: 273},
+		        {name: '巴彦淖尔', value: 279},
+		        {name: '兴安盟', value: 229},
+		        {name: '阿拉善盟', value: 273},
+		        {name: '锡林郭勒盟', value: 279}
+			   ] ,
+                [
+                  {name: '呼和浩特', value: 363},
+        {name: '包头', value: 58},
+        {name: '乌海', value: 175},
+        {name: '赤峰', value: 177},
+        {name: '通辽', value: 193},
+        {name: '鄂尔多斯', value: 194},
+        {name: '呼伦贝尔', value: 229},
+        {name: '乌兰察布', value: 273},
+        {name: '巴彦淖尔', value: 279},
+        {name: '兴安盟', value: 229},
+        {name: '阿拉善盟', value: 273},
+        {name: '锡林郭勒盟', value: 279}
+	      	 ],
+	       			[
+	       			  {name: '呼和浩特', value:463},
+        {name: '包头', value: 58},
+        {name: '乌海', value: 175},
+        {name: '赤峰', value: 177},
+        {name: '通辽', value: 193},
+        {name: '鄂尔多斯', value: 194},
+        {name: '呼伦贝尔', value: 229},
+        {name: '乌兰察布', value: 273},
+        {name: '巴彦淖尔', value: 279},
+        {name: '兴安盟', value: 229},
+        {name: '阿拉善盟', value: 273},
+        {name: '锡林郭勒盟', value: 279}
+   ] ,
+  [
+   {name: '呼和浩特', value: 563},
+   {name: '包头', value: 58},
+   {name: '乌海', value: 175},
+   {name: '赤峰', value: 177},
+   {name: '通辽', value: 193},
+   {name: '鄂尔多斯', value: 194},
+   {name: '呼伦贝尔', value: 229},
+   {name: '乌兰察布', value: 273},
+   {name: '巴彦淖尔', value: 279},
+   {name: '兴安盟', value: 229},
+   {name: '阿拉善盟', value: 273},
+   {name: '锡林郭勒盟', value: 279}
+ ] ];
+
+var geoCoordMap = {
+	'呼和浩特' : [ 111.66035052,40.82831887 ],
+	'包头' : [ 109.844819, 40.661834 ],
+	'乌海' : [ 106.797229, 39.663228 ],
+	'赤峰' : [ 118.889196, 42.264889 ],
+	'通辽' : [ 122.244198,43.660276 ],
+	'鄂尔多斯' : [109.781694,39.614704],
+	'呼伦贝尔' : [119.766046,49.219764 ],
+	'乌兰察布' : [113.134294,41.000966 ],
+	'巴彦淖尔' : [107.390374, 40.748703 ],
+	'兴安盟' : [ 122.040915, 46.089263 ],
+	'阿拉善盟' : [ 105.735018,38.858529 ],
+	'锡林郭勒盟' : [ 116.051804,43.940046 ]
+};
+var data1 = {
+		"timeline" : ['2010年','2011年', '2012年', '2013年', '2014年', '2015年','2016年','2017年' ]
+}

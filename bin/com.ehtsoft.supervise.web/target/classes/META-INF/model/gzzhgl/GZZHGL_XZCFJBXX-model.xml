@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="GZZHGL_XZCFJBXX" label="行政处罚基本信息">
+    <column field="XZCFJBXX01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="LX" type="string" length="10" label="类型" remark="0：个人1：单位"/>
+    <column field="RYLX" type="string" length="5" label="人员类型" remark="自填"/>
+    <column field="CFDX" type="string" length="32" label="处罚对象" remark="自填"/>
+    <column field="MC" type="string" length="100" label="名称" remark="自填"/>
+    <column field="PROVINCE" type="string" length="11" label="省" remark="自填"/>
+    <column field="CITY" type="string" length="11" label="市" remark="自填"/>
+    <column field="DISTRICT" type="string" length="11" label="县" remark="自填"/>
+    <column field="DQMC" type="string" length="200" label="地区名称" remark="自填"/>
+    <column field="XZCFJDSBH" type="string" length="18" label="行政处罚机构单位编码" remark="自填"/>
+    <column field="GZSX" type="string" length="50" label="公证事项" remark="自填"/>
+    <column field="CFSJ" type="string" length="20" label="处罚时间" remark="自填，格式按照 GB/T7408 中规定"/>
+    <column field="JDJG" type="string" length="100" label="决定机构" remark="自填"/>
+    <column field="ZGXLZT" type="string" length="10" label="主观心理状态" remark="0 过失1 故意"/>
+    <column field="WFJG" type="string" length="500" label="违法经过" remark="自填"/>
+    <column field="CFJG" type="string" length="10" label="处罚结果" remark="1 警告2 罚款3 没收违法所得4 停业整顿5 停止执业6 吊销执业证书其他"/>
+    <column field="FKJE" type="string" length="10" label="罚款金额" remark="自填"/>
+    <column field="WFSDJE" type="string" length="10" label="违法所得金额" remark="自填"/>
+    <column field="TYZDRJ" type="string" length="20" label="停业整顿日期" remark="自填，格式按照 GB/T7408 中规定"/>
+    <column field="TYZDQX" type="string" length="3" label="停业整顿期限" remark="自填"/>
+    <column field="TZZYRQ" type="string" length="20" label="停止执业日期" remark="自填，格式按照 GB/T7408 中规定"/>
+    <column field="TZZYQX" type="string" length="3" label="停止执业期限" remark="自填"/>
+    <column field="DXZYZSRQ" type="string" length="20" label="吊销执业证书日期" remark="自填，格式按照 GB/T7408 中规定"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_GZZHGL_XZCFJBXX" field="XZCFJBXX01"/>
+  </table>
+</model>

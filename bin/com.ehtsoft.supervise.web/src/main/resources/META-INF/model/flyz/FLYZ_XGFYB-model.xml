@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="FLYZ_XGFYB" label="相关费用表">
+    <column field="XGFYB01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="XGFYLSH" type="string" length="20" label="相关费用流水号" remark="件10.1"/>
+    <column field="SSYJFY" type="string" length="20" label="诉讼应缴费用"/>
+    <column field="SSSJFY" type="string" length="20" label="诉讼实缴费用"/>
+    <column field="AJLSH" type="string" length="20" label="案件流水号" remark="关联9.2案件流水号"/>
+    <column field="SSSFHJ" type="string" length="10" label="诉讼是否缓缴"/>
+    <column field="SSSFMC" type="string" length="10" label="诉讼是否免除"/>
+    <column field="FYXM" type="string" length="10" label="费用项目"/>
+    <column field="ZCYJFY" type="string" length="20" label="仲裁应缴费用"/>
+    <column field="ZCSJFY" type="string" length="20" label="仲裁实缴费用"/>
+    <column field="ZCSFHJ" type="string" length="10" label="仲裁是否缓缴"/>
+    <column field="ZCSFMC" type="string" length="10" label="仲裁是否免除"/>
+    <column field="GZYJFY" type="string" length="20" label="公正应缴费用"/>
+    <column field="GZSJFY" type="string" length="20" label="公证实缴费用"/>
+    <column field="GZSFHJ" type="string" length="10" label="公证是否缓缴"/>
+    <column field="GZSFMC" type="string" length="10" label="公证是否免除"/>
+    <column field="JDYJFY" type="string" length="20" label="鉴定应缴费用"/>
+    <column field="JDSJFY" type="string" length="20" label="鉴定实缴费用"/>
+    <column field="JDSFHJ" type="string" length="10" label="鉴定是否缓缴"/>
+    <column field="JDSFMC" type="string" length="10" label="鉴定是否免除"/>
+    <column field="FYYJFY" type="string" length="20" label="翻译应缴费用"/>
+    <column field="FYSJFY" type="string" length="20" label="翻译实缴费用"/>
+    <column field="FYSFHJ" type="string" length="10" label="翻译是否缓缴"/>
+    <column field="FYSFMC" type="string" length="10" label="翻译是否免除"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_FLYZ_XGFYB" field="XGFYB01"/>
+  </table>
+</model>

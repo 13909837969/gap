@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_PJXX" label="判决信息">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="矫正人员基本信息ID"/>
+    <column field="SQJZJDJG" type="string" length="2" label="社区矫正决定机关" required="true" remark="SYS055"/>
+    <column field="SQJZJDJGMC" type="string" length="50" label="社区矫正决定机关名称" required="true"/>
+    <column field="ZXTZSWH" type="string" length="100" label="执行通知书文号" required="true"/>
+    <column field="ZXTZSRQ" type="date" label="执行通知书日期" required="true" remark="自填 ，格式按照 GB/T
+7408 中规定"/>
+    <column field="YJZFJG" type="string" length="2" label="移交罪犯机关" remark="SYS056"/>
+    <column field="YJZFJGMC" type="string" length="50" label="移交罪犯机关名称"/>
+    <column field="ZYFZSS" type="string" length="500" label="主要犯罪事实" required="true"/>
+    <column field="SQJZQX" type="string" length="20" label="社区矫正期限" required="true"/>
+    <column field="YPXF" type="string" length="2" label="原判刑罚" remark="SYS012"/>
+    <column field="YPXQ" type="string" length="200" label="原判刑期"/>
+    <column field="YPXQKSRQ" type="date" label="原判刑期开始日期" required="true" remark="自填 ，格式按照 GB/T
+7408 中规定"/>
+    <column field="YPXQJSRQ" type="date" label="原判刑期结束日期" required="true" remark="自填，格式按照 GB/T
+7408 中规定"/>
+    <column field="YQTXQX" type="string" length="2" label="有期徒刑期限" remark="SYS032"/>
+    <column field="FJX" type="string" length="2" label="附加刑" required="true" remark="SYS013"/>
+    <column field="SFBXGJZL" type="string" length="2" label="是否被宣告禁止令" required="true" remark="sys001"/>
+    <column field="PJSBH" type="string" length="20" label="判决书编号"/>
+    <column field="WSLX" type="string" length="20" label="文书类型"/>
+    <column field="PJRQ" type="date" label="判决日期"/>
+    <column field="WSBH" type="string" length="50" label="文书编号"/>
+    <column field="WSSXRQ" type="date" label="文书生效日期"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_PJXX" field="ID"/>
+  </table>
+</model>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenes>
+    <scene scenecode="main01" scenename="桌面系统风格" mainurl="main.jsp" defaultflag="0" imgscene="META-INF/init/desktop_style.png"/>
+    <scene scenecode="main02" scenename="具备模块申请风格" mainurl="main-cool.jsp" defaultflag="1" imgscene="META-INF/init/maincool_style.png"/>
+    <scene scenecode="main03" scenename="传统系统风格" mainurl="main1.jsp" defaultflag="0" imgscene="META-INF/init/tradition_style.png"/>
+    <scene scenecode="main04" scenename="Office 工具栏风格" mainurl="main2.jsp" defaultflag="0" imgscene="META-INF/init/office_style.png"/>
+</scenes>

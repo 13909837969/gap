@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <!-- CORE_BILL_TYPE - 审核单据类型表-->
+  <table name="CORE_BILL_TYPE" label="审核单据类型表">
+    <column field="SYSID" type="uuid" length="36" label="代理主键" required="true"/>
+    <column field="NAME"  type="string" length="100" label="类型名称" required="true"/>
+    <column field="FLAG"  type="string" length="30" label="单据标记，标记单据类型用于权限查找" required="true"/>
+    <primary name="PK_CORE_BILL_TYPE" field="SYSID"/>
+  </table>
+  <!-- CORE_ACCOUNT_BILL - 用户审核单据权限表-->
+  <table name="CORE_ACCOUNT_BILL" label="审核单据类型表">
+    <column field="ACCOUNTID"  type="uuid" length="36" label="账号ID" required="true"/>
+    <column field="BILLID"  type="uuid" length="36" label="审核单据类型表ID" required="true"/>
+    <column field="AUDITID"  type="uuid" length="36" label="审核单据审核状态ID" required="true"/>
+    <unique name="UK_ACCOUNT_BILL" field="ACCOUNTID,BILLID"/>
+    <foreign name="FK_ACCOUNT_BILL_ACCOUNTID" field="ACCOUNTID" reference="CORE_ACCOUNT"  referField="SYSID" />
+    <foreign name="FK_ACCOUNT_BILL_BILLID" field="BILLID" reference="CORE_BILL_TYPE"  referField="SYSID" />
+ 	<foreign name="FK_ACCOUNT_BILL_AUDITID" field="AUDITID" reference="CORE_AUDIT_OPT"  referField="SYSID" />
+  </table>
+  <!-- CORE_AUDIT_OPT - 用户审核单据审核状态配置表-->
+  <table name="CORE_AUDIT_OPT" label="用户审核单据审核状态配置表">
+    <column field="SYSID" type="uuid" length="36"  label="代理主键" required="true"/>
+    <column field="NAME"  type="string" length="80" label="审核级别名称" required="true"/>
+    <column field="LVL"  type="integer" label="审核级别" required="true"/>
+    <column field="CPASS" type="integer"  label="审核通过值" remark="当前审核通过值"/>
+    <column field="NOTBY" type="integer"  label="审核不通过值" remark="当前审核不通过值"/>
+    <column field="PPASS" type="integer"  label="前一审核通过值" remark="前一级别审核通过值"/>
+    <column field="BILLID" type="uuid" length="36" label="单据ID" required="true"></column>
+    <primary name="UK_AUDIT_OPT" field="SYSID"/>
+    <foreign name="FK_AUDIT_OPT_BILLID" field="BILLID" reference="CORE_BILL_TYPE"  referField="SYSID" />
+  </table>
+</model>

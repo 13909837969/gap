@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="ANZBJ_WXXPGXXCJB" label="危险性评估信息采集表">
+    <column field="WXXPGXXCJB01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="AZBJRYBH" type="string" length="20" label="安置帮教人员编号" remark="编码见 6.3"/>
+    <column field="SFZH" type="string" length="20" label="身份证号" remark="编码见 6.60"/>
+    <column field="ZZ" type="string" length="50" label="住址" remark="编码见 6.61"/>
+    <column field="NL" type="string" length="20" label="年龄" remark="编码见 6.62"/>
+    <column field="WHCD" type="string" length="50" label="文化程度" remark="编码见 6.63"/>
+    <column field="JYQK" type="string" length="50" label="就业情况" remark="编码见 6.64"/>
+    <column field="SHLY" type="string" length="50" label="生活来源" remark="编码见 6.65"/>
+    <column field="GDZS" type="string" length="50" label="固定住所" remark="编码见 6.66"/>
+    <column field="STZK" type="string" length="50" label="身体状况" remark="编码见 6.67"/>
+    <column field="HYZK" type="string" length="50" label="婚姻状况" remark="编码见 6.68"/>
+    <column field="JTCYGX" type="string" length="50" label="家庭成员关系" remark="编码见 6.69"/>
+    <column field="JTJJQK" type="string" length="50" label="家庭经济情况" remark="编码见 6.70"/>
+    <column field="JTCYFZJL" type="string" length="50" label="家庭成员犯罪记录" remark="编码见 6.71"/>
+    <column field="JZJSBS" type="string" length="50" label="家族精神病史" remark="编码见 6.72"/>
+    <column field="WFFZLX" type="string" length="50" label="违法犯罪类型" remark="编码见 6.73"/>
+    <column field="ZGEXCD" type="string" length="50" label="主观恶性程度" remark="编码见 6.74"/>
+    <column field="FFLF" type="string" length="50" label="是否累犯" remark="编码见 6.75"/>
+    <column field="XLJKZK" type="string" length="50" label="心理健康状况" remark="编码见 6.76"/>
+    <column field="ZKNL" type="string" length="50" label="自控能力" remark="编码见 6.77"/>
+    <column field="FLZSHFZGN" type="string" length="50" label="法律知识或法制观念" remark="编码见 6.78"/>
+    <column field="DXSSHXT" type="string" length="50" label="对现实社会心态" remark="编码见 6.79"/>
+    <column field="JWFW" type="string" length="50" label="交往范围" remark="编码见 6.80"/>
+    <column field="SHJWTD" type="string" length="50" label="社会交往态度" remark="编码见 6.81"/>
+    <column field="XQ" type="string" length="50" label="刑期" remark="编码见 6.82"/>
+    <column field="RZFFTD" type="string" length="50" label="认罪服法态度" remark="编码见 6.83"/>
+    <column field="GZBX" type="string" length="50" label="改造表现" remark="编码见 6.84"/>
+    <column field="ZYJN" type="string" length="50" label="职业技能" remark="编码见 6.85"/>
+    <column field="JSPG" type="string" length="50" label="监所评估" remark="编码见 6.86"/>
+    <column field="HGQX" type="string" length="50" label="回归去向" remark="编码见 6.87"/>
+    <column field="DAZBJTD" type="string" length="50" label="对安置帮教态度" remark="编码见 6.88"/>
+    <column field="SFSWRY" type="string" length="50" label="是否三无人员" remark="编码见 6.21"/>
+    <column field="ZF" type="string" length="200" label="总分" remark="自填"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_ANZBJ_WXXPGXXCJB" field="WXXPGXXCJB01"/>
+  </table>
+</model>

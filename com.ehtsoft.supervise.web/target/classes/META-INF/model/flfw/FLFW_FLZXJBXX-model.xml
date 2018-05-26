@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="FLFW_FLZXJBXX" label="法律咨询基本信息">
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="ZXRMZ" type="string" length="300" label="咨询人名字"/>
+    <column field="ZXSJ" type="string" length="20" label="咨询时间"/>
+    <column field="ZXDXLX" type="string" length="30" label="咨询对象类型"/>
+    <column field="ZXDX" type="string" length="36" label="咨询对象"/>
+    <column field="TJLY" type="string" length="100" label="提交来源IP"/>
+    <column field="ZXNR" type="string" length="500" label="咨询内容"/>
+    <column field="ZXBT" type="string" length="200" label="咨询标题"/>
+    <column field="HFZT" type="string" length="30" label="回复状态" remark="回复状态10已回复，20未回复"/>
+    <column field="SFGK" type="string" length="30" label="是否公开" remark="是否公开 10 公开，20未公开"/>
+    <column field="ZXDXSZDY" type="string" length="30" label="咨询对象所在地域" remark="编码 GB/T 2260"/>
+    <column field="ZXWTFL" type="string" length="30" label="咨询问题分类"/>
+    <column field="ZXYWFL" type="string" length="30" label="咨询业务分类"/>
+    <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
+    <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_FLFW_FLZXJBXX" field="ID"/>
+  </table>
+</model>

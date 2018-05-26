@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="RMTJ_DCJL_IMG" label="人民调解调查记录取证图片">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="LISTID" type="uuid" length="36" label="列表ID"  remark="列表外键"/>
+    <column field="data" type="binary" label="图片数据"/>
+    <column field="mimetype" type="string" length="20" label="图像类型" remark="图片类型如：image/png"/>
+    <column field="DCJLID" type="uuid" length="36" label="教育走访信息表ID"/>
+    <column field="QZLX" type="string" length="2" defaultValue="0" label="签字类型" remark="0  调查图片记录  1 调查人签字  2 被调查人签字  3 记录人签字"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_RMTJ_DCJL_IMG" field="IMGID"/>
+  </table>
+</model>

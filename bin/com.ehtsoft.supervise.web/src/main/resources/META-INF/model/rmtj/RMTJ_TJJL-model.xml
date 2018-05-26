@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="RMTJ_TJJL" label="人民调解调解记录">
+    <column field="ID" type="uuid" length="36" label="调解记录ID" required="true"/>
+    <column field="ANJID" type="uuid" length="36" label="案件ID"/>
+    <column field="JLSJ" type="string" length="19" label="记录时间" remark="yyyy-MM-dd HH:mm"/>
+    <column field="JLRID" type="string" length="36" label="记录人员ID"/>
+    <column field="XM" type="string" length="30" label="记录人姓名"/>
+    <column field="JLDD" type="string" length="50" label="记录地点"/>
+    <column field="DCJLNR" type="string" length="200" label="调解记录内容"/>
+    <column field="DCJG" type="string" length="2" label="调解结果" remark="SYS110 ： 1 调解成功   2 调解不成功 3 有待继续调解"/>
+    <column field="TJYID" type="uuid" length="360" label="调解员ID"/>
+    <column field="TJYXM" type="string" length="20" label="调解员姓名"/>
+    <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>
+    <column field="uts" type="timestamp" label="更新时间戳" remark="数据更新操作时，更新其属性为当前的毫秒数"/>
+    <column field="cdate" type="integer" length="8" label="创建日期" remark="创建日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="udate" type="integer" length="8" label="更新日期" remark="修改日期(不含时分秒) 数据格式 yyyyMMddd 数字类型，如：20150202"/>
+    <column field="cuid" type="uuid" length="36" label="当前创建人员" remark="当前创建的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="uuid" type="uuid" length="36" label="当前更新人员" remark="当前更新的人员id :user.getUid() (core_personnel.sysid)"/>
+    <column field="caid" type="uuid" length="36" label="当前创建账号" remark="当前创建的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
+    <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_RMTJ_TJJL" field="ID"/>
+  </table>
+</model>
