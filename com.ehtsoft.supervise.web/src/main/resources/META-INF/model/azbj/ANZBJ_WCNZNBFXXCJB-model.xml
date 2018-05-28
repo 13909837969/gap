@@ -3,14 +3,14 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_WCNZNBFXXCJB" label="未成年子女帮扶信息采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="AZBJRYID" type="string" length="36" label="服刑人员编号" remark="编码见 6.4"/>
-    <column field="SFRZETFLY" type="string" length="2" label="是否入住儿童福利院" remark="编码见 6.30"/>
-    <column field="SFJTJY" type="string" length="2" label="是否家庭寄养" remark="编码见 6.31"/>
-    <column field="SFRZJZZHBHZX" type="string" length="2" label="是否入住救助站或保护中心" remark="编码见 6.32"/>
-    <column field="SFLSDB" type="string" length="2" label="是否落实低保" remark="编码见 6.33"/>
-    <column field="SFFX" type="string" length="2" label="是否复学" remark="编码见 6.34"/>
-    <column field="SFFFLSBT" type="string" length="2" label="是否发放临时补贴" remark="编码见 6.35"/>
-    <column field="SFJMXZF" type="string" length="2" label="是否减免学杂费" remark="编码见 6.36"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
+    <column field="SFRZETFLY" type="string" length="2" label="是否入住儿童福利院" remark="编码见 6.30(sys232)"/>
+    <column field="SFJTJY" type="string" length="2" label="是否家庭寄养" remark="编码见 6.31(sys233)"/>
+    <column field="SFRZJZZHBHZX" type="string" length="2" label="是否入住救助站或保护中心" remark="编码见 6.32(sys234)"/>
+    <column field="SFLSDB" type="string" length="2" label="是否落实低保" remark="编码见 6.33(sys235)"/>
+    <column field="SFFX" type="string" length="2" label="是否复学" remark="编码见 6.34(sys236)"/>
+    <column field="SFFFLSBT" type="string" length="2" label="是否发放临时补贴" remark="编码见 6.35(sys237)"/>
+    <column field="SFJMXZF" type="string" length="2" label="是否减免学杂费" remark="编码见 6.36(sys238)"/>
     <column field="BFHDKZCS" type="string" length="20" label="帮扶活动开展次数" remark="自填，只能填数字"/>
     <column field="HJD" type="string" length="200" label="户籍地" remark="自填"/>
     <column field="JZD" type="string" length="200" label="居住地" remark="自填"/>

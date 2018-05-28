@@ -5,7 +5,7 @@
 	<table name="ANZBJ_JTCYXXCJB" label="家庭成员信息采集表">
 		<column field="ID" type="uuid" length="36" label="主键"
 			required="true" remark="系统自动生成" />
-		<column field="AZBJRYID" type="string" length="20"
+		<column field="AZBJRYID" type="uuid" length="36"
 			label="安置帮教人员编号" remark="编码见 6.3" />
 		<column field="XM" type="string" length="50" label="姓名"
 			remark="自填" />

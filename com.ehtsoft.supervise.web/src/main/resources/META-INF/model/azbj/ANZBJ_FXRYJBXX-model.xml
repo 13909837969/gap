@@ -3,7 +3,7 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_FXRYJBXX" label="服刑人员基本信息采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="PriNo" type="string" length="20" label="服刑人员编号" remark="编码见 6.4"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
     <column field="Ptype" type="string" length="2" label="监所类型" remark="自填"/>
     <column field="PName" type="string" length="200" label="人员姓名" remark="自填"/>
     <column field="UsedName" type="string" length="200" label="曾用名" remark="自填"/>

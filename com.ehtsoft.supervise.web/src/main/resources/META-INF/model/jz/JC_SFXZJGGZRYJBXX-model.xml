@@ -3,7 +3,7 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="JC_SFXZJGGZRYJBXX" label="司法行政机关（单位）工作人员基本信息采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="RYBM" type="string" length="20" label="人员编码" required="true" remark="编码见 9.5|编码见 9.20 不能修改"/>
+    <column field="RYBM" type="string" length="22" label="人员编码" required="true" remark="编码见 9.5|编码见 9.20 不能修改"/>
     <column field="XM" type="string" length="50" label="姓名" required="true" remark="自填"/>
     <column field="YWM" type="string" length="50" label="英文名" remark="自填"/>
     <column field="XB" type="string" length="1" label="性别" remark="SYS000"/>

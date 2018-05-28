@@ -3,14 +3,14 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_NDJDXXCJB" label="年度鉴定信息采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="AZBJRYID" type="string" length="36" label="安置帮教人员编号" remark="编码见 6.3"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
     <column field="ND" type="string" length="4" label="年度" remark="自填，格式按照 GB/T 7408 中规定"/>
-    <column field="XSBX" type="string" length="50" label="现实表现" remark="编码见 6.51"/>
-    <column field="GZQK" type="string" length="50" label="工作情况" remark="编码见 6.53"/>
-    <column field="JJZK" type="string" length="50" label="经济状况" remark="编码见 6.52"/>
-    <column field="JTQK" type="string" length="50" label="家庭情况" remark="编码见 6.54"/>
-    <column field="HDCS" type="string" length="50" label="活动场所" remark="编码见 6.55"/>
-    <column field="SHJW" type="string" length="50" label="社会交往" remark="编码见 6.56"/>
+    <column field="XSBX" type="string" length="50" label="现实表现" remark="编码见 6.51(SYS149)"/>
+    <column field="GZQK" type="string" length="50" label="工作情况" remark="编码见 6.53(SYS150)"/>
+    <column field="JJZK" type="string" length="50" label="经济状况" remark="编码见 6.52(SYS240)"/>
+    <column field="JTQK" type="string" length="50" label="家庭情况" remark="编码见 6.54(SYS151)"/>
+    <column field="HDCS" type="string" length="50" label="活动场所" remark="编码见 6.55(SYS152)"/>
+    <column field="SHJW" type="string" length="50" label="社会交往" remark="编码见 6.56(SYS153)"/>
     <column field="YWCXFZQX" type="string" length="50" label="有无重新犯罪倾向" remark="自填"/>
     <column field="JJDSJWT" type="string" length="200" label="解决的实际问题" remark="自填"/>
     <column field="ZBZR" type="string" length="50" label="治保（调解）主任" remark="自填"/>

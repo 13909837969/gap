@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+ 
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_SLGXXCJB" label="双列管信息采集表">
-    <column field="SLGXXCJB01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="AZBJRYBH" type="string" length="20" label="安置帮教人员编号" remark="编码见 6.3"/>
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
     <column field="SQYY" type="string" length="200" label="申请原因" remark="自填"/>
     <column field="GFHTMC" type="string" length="200" label="购房合同名称" remark="自填"/>
     <column field="FJ" type="string" length="200" label="附件" remark="自填"/>
@@ -25,6 +25,6 @@
     <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
     <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
     <column field="remark" type="string" length="500" label="备注"/>
-    <primary name="PK_ANZBJ_SLGXXCJB" field="SLGXXCJB01"/>
+    <primary name="PK_ANZBJ_SLGXXCJB" field="ID"/>
   </table>
 </model>

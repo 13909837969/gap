@@ -3,10 +3,10 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_ZJXXCJB" label="转监信息采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="AZBJRYID" type="string" length="36" label="服刑人员编号" remark="编码见 6.4"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.3"/>
     <column field="ZRJS" type="string" length="50" label="转入监所" remark="自填"/>
-    <column field="ZCJC" type="string" length="50" label="转出监所" remark="自填"/>
-    <column field="SQZT" type="string" length="2" label="申请状态" remark="编码见 6.24"/>
+    <column field="ZCJS" type="string" length="50" label="转出监所" remark="自填"/>
+    <column field="SQZT" type="string" length="2" label="申请状态" remark="编码见 6.24(sys155)"/>
     <column field="YY" type="string" length="500" label="原因/备注" remark="自填"/>
     <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
     <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>

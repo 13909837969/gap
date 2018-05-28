@@ -2,7 +2,7 @@
 
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_SFXZDWLXRXXCJB" label="司法行政单位联系人信息采集表">
-    <column field="SFXZDWLXRXXCJB01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
     <column field="DWMC" type="string" length="200" label="单位名称" remark="自填"/>
     <column field="LXR" type="string" length="50" label="联系人" remark="自填"/>
     <column field="DH" type="string" length="20" label="电话" remark="自填"/>
@@ -18,6 +18,6 @@
     <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
     <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
     <column field="remark" type="string" length="500" label="备注"/>
-    <primary name="PK_ANZBJ_SFXZDWLXRXXCJB" field="SFXZDWLXRXXCJB01"/>
+    <primary name="PK_ANZBJ_SFXZDWLXRXXCJB" field="ID"/>
   </table>
 </model>

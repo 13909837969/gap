@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apps>
+
+	<!-- 安置帮教司法所应用角色 -->
+	<role rolecode="AZBJR1" flag="1" rolename="安置帮教司法所应用角色业务所有功能" frule="OBM" remark="司法所端用用">
+		<menu menucode="AZBJ01" menuname="安置帮教衔接"/>
+		<menu menucode="AZBJ0101" menuname="人员衔接"/>
+		<menu menucode="AZBJ0102" menuname="安置帮教人员档案管理"/>
+		<menu menucode="AZBJ0103" menuname="未成年子女信息采集表"/>
+		<menu menucode="AZBJ0104" menuname="未成年子女帮扶信息采集表"/>
+		<menu menucode="AZBJ0105" menuname="家庭成员信息"/>
+		<menu menucode="AZBJ0106" menuname="帮教小组信息"/>
+		
+		<menu menucode="AZBJ02" menuname="工作记录"/>
+		<menu menucode="AZBJ0201" menuname="工作记录管理"/>
+		<menu menucode="AZBJ0202" menuname="帮教信息管理"/>
+		<menu menucode="AZBJ0203" menuname="安置信息管理"/>
+		<menu menucode="AZBJ0204" menuname="奖惩信息管理"/>
+		<menu menucode="AZBJ0205" menuname="人员脱管信息"/>
+		<menu menucode="AZBJ0206" menuname="教育走访信息"/>
+		<menu menucode="AZBJ0207" menuname="年度鉴定信息采集表（村居）"/>
+		<menu menucode="AZBJ0208" menuname="年度鉴定信息采集表（乡镇街道）"/>
+		<menu menucode="AZBJ0209" menuname="双列管信息管理"/>
+		<menu menucode="AZBJ0210" menuname="安置帮教基地建设信息采集表"/>
+		<menu menucode="AZBJ0211" menuname="回执信息采集表"/>
+		<menu menucode="AZBJ0212" menuname="对话信息采集表"/>
+		<menu menucode="AZBJ0213" menuname="转监信息采集表"/>
+		
+		<menu menucode="AZBJ03" menuname="解除帮教"/>
+		<menu menucode="AZBJ0301" menuname="帮教解除"/>
+		<menu menucode="AZBJ0302" menuname="户籍地迁移信息"/>
+		<menu menucode="AZBJ0303" menuname="人员迁居信息"/>
+		<menu menucode="AZBJ0304" menuname="危险性评估"/>
+	</role>
+	<app appcode="AZBJ" appname="安置帮教" reqaddress="_self" project="supervise"
+		frule="OSA" remark="司法所端用用">
+		<children>
+			<!-- 司法所功能 -->
+			<menu menucode="AZBJ01" menuname="安置帮教衔接" actionuri="" icon="menu_zhfw">
+				<children>
+					<menu menucode="AZBJ0101" menuname="人员衔接" actionuri="module/azbj/listAzbjRyxj.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0102" menuname="安置帮教人员档案管理" actionuri="module/azbj/listAzbjDagl.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0103" menuname="未成年子女信息采集表" actionuri="module/azbj/AzbjWcnrxxcjb.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0104" menuname="未成年子女帮扶信息采集表" actionuri="module/azbj/listAnzbjwcnznbfxxcjb.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0101" menuname="家庭成员信息" actionuri="module/azbj/listAzbjJtcyxx.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0105" menuname="帮教小组信息" actionuri="module/azbj/listAzbjBjxzxx.jsp" icon="" remark="司法所端"/>
+				</children>
+			</menu>
+			<menu menucode="AZBJ02" menuname="工作记录" actionuri="" icon="menu_zhfw">
+				<children>
+					<menu menucode="AZBJ0201" menuname="工作记录管理" actionuri="module/azbj/listAzbjGzjlgl.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0202" menuname="帮教信息管理" actionuri="module/azbj/listAzbjBjxxgl.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0203" menuname="安置信息管理" actionuri="module/azbj/listAzbjAzxxgl.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0204" menuname="奖惩信息管理" actionuri="module/azbj/listAzbjJcqk.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0205" menuname="人员脱管信息" actionuri="module/azbj/listAzbjRytgxxcjb.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0206" menuname="教育走访信息" actionuri="module/azbj/listAzbjJyzfxx.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0207" menuname="年度鉴定信息采集表（村居）" actionuri="module/azbj/listAzbjNdjdxxcjb.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0208" menuname="年度鉴定信息采集表（乡镇街道）" actionuri="module/azbj/listAzbjNdjdXxcjbXz.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0210" menuname="安置帮教基地建设信息采集表" actionuri="module/azbj/listAzbjJdjsxxcj.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0209" menuname="双列管信息管理" actionuri="module/azbj/listAzbjSgjbxx.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0211" menuname="回执信息采集表" actionuri="module/azbj/listAzbjHzxxcjb.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0212" menuname="对话信息采集表" actionuri="module/azbj/listAzbjDhxx.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0213" menuname="转监信息采集表" actionuri="module/azbj/listAzbjZjxxcj.jsp" icon="" remark="司法所端"/>
+				</children>
+			</menu>
+			<menu menucode="AZBJ03" menuname="解除帮教" actionuri="" icon="menu_zhfw">
+				<children>
+					<menu menucode="AZBJ0201" menuname="帮教解除" actionuri="module/azbj/listAzbjBjjc.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0301" menuname="户籍地迁移信息" actionuri="module/azbj/listAzbjHjdqy.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0201" menuname="人员迁居信息" actionuri="module/azbj/listAzbjRyqjxx.jsp" icon="" remark="司法所端"/>
+					<menu menucode="AZBJ0201" menuname="危险性评估" actionuri="module/azbj/listAzbjWxxpgxxcjb.jsp" icon="" remark="司法所端"/>
+				</children>
+			</menu>
+		</children>
+	</app>
+</apps>

@@ -94,15 +94,9 @@
 						actionuri="module/sqjz/formTqcxhxxxgl.jsp" 
 						icon="" />
 					<menu menucode="JZ0305" menuname="提请收监执行管理" 
-						actionuri="module/azbj_bak/formTqsjzxxxcjb.jsp" 
-						icon="" />
-					<menu menucode="JZ0306" menuname="提请收监执行" 
 						actionuri="module/sqjz/formTqsjzxxxcjb.jsp" 
 						icon="" />
-					<menu menucode="JZ0307" menuname="提请撤销缓刑" 
-						actionuri="module/sqjz/formTqcxhxxxcjb.jsp" 
-						icon="" />
-					<menu menucode="JZ0308" menuname="提请减刑" 
+					<menu menucode="JZ0306" menuname="提请减刑管理" 
 						actionuri="module/sqjz/listTqjxxxcjb.jsp" 
 						icon="" />
 				</children>
@@ -207,9 +201,14 @@
 					<menu menucode="JZ1004" menuname="再犯罪信息采集" 
 						actionuri="module/sqjz/listzfz.jsp" 
 						icon="" />
+					
+					<menu menucode="JZ1005" menuname="解除矫正审核" 
+						actionuri="module/sqjz/listXfzx.jsp" icon="" />
+					
 					<menu menucode="JZ1006" menuname="解除矫正审核" 
 						actionuri="module/sqjz/listJcsqjzzms.jsp" 
 						icon="" />
+					
 						
 				</children>
 			</menu>
