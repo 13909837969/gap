@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<title>提请撤销缓刑信息采集表</title>
+<title>提请撤销缓刑信息管理</title>
 <jsp:include page="../ltrhao-common.jsp"></jsp:include>
 <script type="text/javascript" src="${localCtx}/json/JzTqcxhxxxcjbService.js"></script>
 <style type="text/css">
@@ -25,9 +25,10 @@
 .modal-lg{
 	width:600px;
 }
-td{
+#table td{
    	text-align:center;
    	width:70px;
+   	height:60px;
  }
 /* #siderightbar {
 	cursor: pointer;
@@ -71,7 +72,7 @@ textarea{
 				}
 				if(name=="tqyj"){
 					$("#count2").html(min+"/"+max);
-					if(min/max > 3/4){
+					if(bl > 3/4){
 						$("#count2").css("color","#f00");
 					}else{
 						$("#count2").css("color","#00f");
@@ -79,7 +80,7 @@ textarea{
 				}
 				if(name=="xsfjshyj"){
 					$("#count3").html(min+"/"+max);
-					if(min/max > 3/4){
+					if(bl > 3/4){
 						$("#count3").css("color","#f00");
 					}else{
 						$("#count3").css("color","#00f");
@@ -164,7 +165,7 @@ textarea{
 				}
 				return dv;
 			});
-			 if(orgType==2){
+			 if(orgType==2 ){
 		         $("#dsfjshr").val("${CURRENT_USER_SESSION.name}");
 		     };
 			if(orgType ==3){
@@ -255,8 +256,14 @@ textarea{
 					$("#tqcx_list_all #right-panel").hide();
 				});
 			}); */
-			
-			 
+			//提交法院
+			 $("#tjfy_btn").click(function(){
+				 alert(1);
+			 });
+			//提交中级法院
+			 $("#tjzjfy_btn").click(function(){
+				 alert(2);//cxhxspxq_Modal
+			 });
 		});
 		
 	</script>
@@ -369,7 +376,7 @@ textarea{
 				</div>
 				<div class="modal-body" id="modal-bodyAdd" style="height:510px;overflow-y:auto;overflow-x:hidden;">
 					<div id="tqcxhx_field">
-					  <table border="1" cellspacing="0" align="center" style="border-collapse:collapse;"><br>
+					  <table id="table" border="1" cellspacing="0" align="center" style="border-collapse:collapse;"><br>
 							<tr>
 								<td>姓名</td>
 								<td field="xm"></td>
@@ -422,6 +429,18 @@ textarea{
 							</tr>
 						</table>
 					</div>
+					<c:if test="${CURRENT_USER_SESSION.orgType == 3}"> 
+					
+						<div class="modal-footer">
+							<button id="tjfy_btn" type="button" class="btn btn-primary">提交法院</button>
+						</div>
+					</c:if>
+					<c:if test="${CURRENT_USER_SESSION.orgType == 2}"> 
+					
+						<div class="modal-footer">
+							<button id="tjzjfy_btn" type="button" class="btn btn-primary">提交中级法院</button>
+						</div>
+					</c:if>
 				</div>
 			</div>
 		</div>

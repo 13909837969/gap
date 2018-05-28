@@ -3,9 +3,9 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_BJXZXXCJB" label="帮教小组信息采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.3"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
     <column field="XM" type="string" length="50" label="姓名" remark="自填"/>
-    <column field="XB" type="string" length="20" label="性别" remark="见 GB/T 2261.1"/>
+    <column field="XB" type="string" length="20" label="性别" remark="见 GB/T 2261.1（sys0000）"/>
     <column field="NL" type="string" length="20" label="年龄" remark="自填"/>
     <column field="GZDWJZW" type="string" length="200" label="工作单位及职务" remark="自填"/>
     <column field="DH" type="string" length="50" label="电话" remark="自填"/>

@@ -59,6 +59,9 @@ Eht.Alert.prototype.show=function(message){
 	var top = ($(window).height())/3;
 	mdialg.css("margin-top",top);
 };
+Eht.Alert.prototype.showNotSelected=function(){
+	this.show("请选择一条数据进行操作.");
+};
 Eht.Alert.prototype.close=function(){
 	$("#"+this.opt.panelId).modal("hide");
 };
@@ -92,6 +95,9 @@ Eht.Confirm=function(opt){
 };
 Eht.Confirm.prototype.show=function(message){
 	this.alert.show(message);
+};
+Eht.Confirm.prototype.showDelete=function(message){
+	this.alert.show("此操作不可恢复，确定要删除选中记录吗?");
 };
 Eht.Confirm.prototype.onOk=function(func){
 	this.alert.onClickBtn2(func);

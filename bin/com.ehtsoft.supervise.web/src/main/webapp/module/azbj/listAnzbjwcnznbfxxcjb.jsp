@@ -5,137 +5,155 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>查询未成年子女帮扶信息</title>
- <jsp:include page="../ltrhao-common.jsp"></jsp:include>
-    <script type="text/javascript" src="${localCtx}/json/AzbjWcnznbfxxcjbService.js"></script>
-    <script type="text/javascript">
-   	$(function(){
-   		var qf = new Eht.Form({selector:"#query_form",codeEmpty:true,codeEmptyLabel:"全部"});
-   		var service = new AzbjWcnznbfxxcjbService();
-   		var form = new Eht.Form({selector:"#azbjryForm",autolayout:true});
-   		var tableview = new Eht.TableView({selector:"#tableview"});
-   		//展示页面信息
-   		tableview.loadData(function(page,res){
-   			service.findAll(qf.getData(), page, res);
-   		});
-   		//获取当前选中行的数据	
-		form.fill($(":checkbox:checked").data());
-		$("#btn_add").click(function(){
-			form.clear();
-		$("#myModal").modal({backdrop:'static'});
-		});
-		//模态框保存并且隐藏
-		$("#btn_submit").click(function(){
-	   				if(form.validate()){ 
-	   					var data = form.getData();
-	   					console.log(data);
-	   					service.saveOne(data,new Eht.Responder({
-	   						success:function(){
-	   							$("#myModal").modal("hide");
-	   							new Eht.Tips().show("保存成功");
-	   							tableview.refresh();
-	   					}
-	   				}));	
-	   			 }	 
-	   	}); 
-   		//新增按钮触发事件
-   		$("#btn_add").click(function(){
-   			if($(":checkbox:checked").length==1){
-   				form.enable();
-   	   		 	$("#btn_submit").show();
-   	   			$("#btn_close").show();
-				$("#myModal").modal();
-				form.fill($(":checkbox:checked").data());
-				tableview.refresh();
-   			}	
-   			//$("#myModal").modal({backdrop:"static"});
-   		});
-   		//模糊查询按钮事件
-   		$("#btn_search").click(function(){
-   			tableview.refresh();
-   		});
-   		//修改按钮事件
-   		$("#btn_edit").click(function(){
-   			if($(":checkbox:checked").length==1){
-   				$("#btn_submit").show();
-			    $("#btn_close").show();
-   				form.enable();
-   				form.clear();
-   			    //$("#btn_submit").show();
-   				$("#myModal").modal({backdrop : 'static'});
-   				form.fill($(":checkbox:checked").data());
-   			}
-   			else{
-   	   			var ale = new Eht.Alert();
-   				ale.show("请选中一条数据进行操作!");
-   	   		}
-   		});
-   		//人员查看事件
-   		$("#btn_view").click(function() {
-			if($(":checkbox:checked").length==1){
-			   	  $("#btn_submit").hide();
-			      $("#btn_close").hide();
-				  $("#myModal").modal({backdrop:'static'});
-			      
-			      form.disable();
-			      form.fill($(":checkbox:checked").data());
-			}else{
-				var ale = new Eht.Alert();
-				ale.show("请选中一条数据进行操作!!!!!!!!");
-			}
-		});
-   		//删除事件
-   		$("#btn_delete").click(
-			function() {
-				var sd_ry = tableview.getSelectedData();
-				if (sd_ry.length == 1) {
-					if (confirm("确定删除数据")) {
-						service.removeOne($(":checkbox:checked").data().id);
-						new Eht.Tips().show("删除成功");
-						tableview.refresh();
-					} else {
-						new Eht.Tips().show("删除失败");
-					}
-				}else{
-					var ale = new Eht.Alert();
-					ale.show("请选中一条数据进行操作!");
-					tableview.refresh();
-				}
-			});		
-   		/* $("#btn_delete").click(function(){
-  			 var sd_ry = tableview.getSelectedData();
-  			 if(sd_ry.length==1){
-  			//	$("#btn_submit").show();
-  				 var c = new Eht.Confirm();
-  				 c.show("此操作不可恢复！确定要删除选中记录吗？");
-  				 c.onOk(function(){
-  					 service.removeOne($(":checkbox:checked").data().id,new Eht.Responder({
-  					 success:function(){
-  					 tableview.refresh();
-  					 c.close();
-  					 new Eht.Tips().show("删除成功");
-  					 }
-  				 }));
-  			 });
-  		 }else{
-  			 var ale = new Eht.Alert();
-  			 ale.show("请选中一条数据进行操作!!!!!!!!");
-  			
-  		 }	
-      }); */
-
-   		//模态框查询人员信息事件
-   		 service.findJz(new Eht.Responder({
-   			success:function(data){
-   				$("#jzryxx_xmajglx").empty();
-   				$("#jzryxx_xmajglx").append('<option selected="selected"></option>');
-   				for(var i=0;i<data.length;i++){
-   					$("#jzryxx_xmajglx").append("<option value="+data[i].id+">"+data[i].xm+data[i].grlxdh+"</option>");
+<jsp:include page="../ltrhao-common.jsp"></jsp:include>
+<script type="text/javascript" src="${localCtx}/json/AzbjWcnznbfxxcjbService.js"></script>
+<script type="text/javascript">
+$(function()
+ {
+ 	var qf = new Eht.Form({selector:"#query_form",codeEmpty:true,codeEmptyLabel:"全部"});
+ 	var service = new AzbjWcnznbfxxcjbService();
+ 	var form = new Eht.Form({selector:"#azbjryForm",autolayout:true});
+ 	var tableview = new Eht.TableView({selector:"#tableview"});
+ 	var v= null;
+ 	//展示页面信息
+ 	tableview.loadData(function(page,res)
+ 	{
+ 		service.findAll(qf.getData(), page, res);
+ 		});
+ 	//获取当前选中行的数据
+	form.fill($("#tableview :checkbox:checked").data());
+	$("#btn_add").click(function()
+	{
+		form.clear();	
+	$("#myModal").modal({backdrop:'static'});
+	});
+	//模态框保存并且隐藏
+	$("#btn_submit").click(function(res)
+	{	
+		var data = form.getData();
+   		if(form.validate())
+   		{ 
+   			console.log(data);
+   			service.saveOne(data,new Eht.Responder(
+   			{
+   				success:function()
+   				{
+   					$("#myModal").modal("hide");
+   					new Eht.Tips().show("保存成功");
+   					tableview.refresh();
    				}
-   				$("#jzryxx_xmajglx").comboSelect();
-   			  }
-   		  })); 
-	   });  
-   </script>
+   				}));	
+   		 }else
+   		 {
+   			new Eht.Tips().show("保存失败");
+   		 }	 
+   	}); 
+	//新增按钮触发事件
+  $("#btn_add").click(function()
+  	{		
+  		form.clear();
+  		v = null;
+  		findRy(); 
+  		form.enable();
+  	   	$("#btn_submit").show();
+  	   	$("#btn_close").show();
+		$("#myModal").modal({backdrop : 'static'});
+		tableview.refresh();
+  		});
+  	    //模糊查询按钮事件
+  	$("#btn_search").click(function()
+  	{
+  		tableview.refresh();
+  	});
+  	//编辑按钮事件
+  	$("#btn_edit").click(function()
+  	{
+  		if($("#tableview :checkbox:checked").length==1)
+  		{
+  			v = $('#tableview :checkbox:checked').data().aid;
+  			findRy();
+  			$("#btn_submit").show();
+			$("#btn_close").show();
+  			form.enable();
+  			form.clear();
+  			$("#myModal").modal({backdrop : 'static'});
+  			form.fill($("#tableview :checkbox:checked").data());
+  			tableview.refresh();
+  		}
+  	else
+  	{
+  	   	var ale = new Eht.Alert();
+  		ale.show("请选中一条数据进行操作!");
+  	  }
+  	});
+  	//人员查看事件
+  	$("#btn_view").click(function() 
+  		{
+		if($("#tableview :checkbox:checked").length==1)
+		{
+			  v = $('#tableview :checkbox:checked').data().aid;
+			  findRy();
+		   	  $("#btn_submit").hide();
+			  $("#myModal").modal({backdrop:'static'});
+		      form.disable();
+		      form.fill($("#tableview :checkbox:checked").data());
+		}else
+		{
+			var ale = new Eht.Alert();
+			ale.show("请选中一条数据进行操作!");
+		}
+	});
+ 	//删除事件
+  	$("#btn_delete").click(function()
+   		{
+			if($("#tableview :checkbox:checked").length==1)
+			{
+				var c = new Eht.Confirm();
+				c.show("请确认是否删除！");
+				c.onOk(function()
+				{
+					service.removeOne($("#tableview :checkbox:checked").data(),new Eht.Responder(
+					{
+						success:function()
+						{
+							tableview.refresh();
+							c.close();
+							new Eht.Tips().show();
+						}
+					}));
+				});
+			}
+			 else
+			{
+				var ale = new Eht.Confirm();
+				ale.show("请选中一条数据进行操作!");
+			} 
+		});
+    //模态框查询人员信息事件
+  	function findRy()
+  		{
+  			service.findJz(new Eht.Responder(
+  			{
+  				success:function(data)
+  				{
+  					$("#jzryxx_xmajglx").empty();
+  					$("#jzryxx_xmajglx").append('<option></option>');
+  					for(var i=0;i<data.length;i++)
+  					  {
+  						if(data[i].id == v)
+  						{
+  							$("#jzryxx_xmajglx").append("<option value=" + data[i].id+" selected>" + data[i].xm + data[i].grlxdh + "</option>");
+  						 }else
+  						 {
+  							$("#jzryxx_xmajglx").append("<option value=" + data[i].id+">" + data[i].xm + data[i].grlxdh + "</option>");
+  						 }
+  					   }
+  					$("#jzryxx_xmajglx").comboSelect();
+  				}
+  			}))
+  		 }
+  });  
+</script>
 <body>
 	<div class="toolbar">
    			<button id="btn_add" type="button" class="btn btn-default" style="margin-left:10px;">
@@ -143,7 +161,7 @@
    			<button id="btn_view" type="button" class="btn btn-default" style="margin-left:10px;">
 				<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>
 			<button id="btn_edit" type="button" class="btn btn-default" style="margin-left:10px;">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</button>
+				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑</button>
 			<button id="btn_delete" type="button" class="btn btn-default" style="margin-left:10px;">
 				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除</button>
 	</div>
@@ -175,7 +193,7 @@
 		<div field="sflsdb" label="是否落实低保" code="SYS235"></div>
 		<div field="sffx" label="是否复学" code="SYS236"></div>
 		<div field="sffflsbt" label="是否发放临时补贴" code="SYS237"></div>
-		<div field="sfjnxzf" label="是否减免学杂费" code="SYS238"></div>
+		<div field="sfjmxzf" label="是否减免学杂费" code="SYS238"></div>
 		<div field="sfzh" label="身份证号"></div>
 	</div>
    </div>
@@ -192,7 +210,7 @@
    				<div class="modal-body" style="height:400px; overflow:auto">
    					<div class="modal-body-div">
    						<div id="azbjryForm" >
-   							<input type="hidden" name="id"  valid="{required:true}">
+   							<input type="hidden" name="id">
    							<select id="jzryxx_xmajglx" name="azbjryid" label="服刑人员:" style="max-width:none">
 							</select>
 							<input name="sfrzetfly" label="是否入住儿童福利院:" code="SYS232"  valid="{required:true}" >

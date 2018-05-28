@@ -168,7 +168,7 @@ Eht.Form.prototype.init=function(layout){
 					}
 				}
 				
-				combos[i].change(function(){
+				combos[i].unbind("change").bind("change",function(){
 					if(self._change!=null){
 						var pfg = self.getParentFormGroup($(this));
 						self._change.call(self,$(this).attr("name"),$(this).val(),$(this),pfg);
@@ -282,7 +282,7 @@ Eht.Form.prototype.init=function(layout){
 						sel.append("<option value='"+v+"'>"+l+"</option>");
 					}
 					$(this).replaceWith(sel);
-					sel.change(function(){
+					sel.unbind("change").bind("change",function(){
 						self.validateItem($(this));
 						if(self._change){
 							//name,value,combo,parent
@@ -292,7 +292,7 @@ Eht.Form.prototype.init=function(layout){
 				}
 			}else{
 				//不具备字典的数据
-				$(this).change(function(){
+				$(this).unbind("change").bind("change",function(){
 					self.validateItem($(this));
 					if(self._change){
 						//func(name,value,combo,parent)
@@ -318,10 +318,14 @@ Eht.Form.prototype.tiggerChange=function(){
 };
 Eht.Form.prototype.getParentFormGroup=function(combo){
 	var self = this;
-	if(combo.parent().hasClass("form-group")){
-		return combo.parent();
+	if(self.opt.autolayout){
+		if(combo.parent().hasClass("form-group")){
+			return combo.parent();
+		}else{
+			return self.getParentFormGroup(combo.parent());
+		}
 	}else{
-		return self.getParentFormGroup(combo.parent());
+		return combo.parent();
 	}
 };
 Eht.Form.prototype.validateItem = function(combo,checkFlag){
@@ -477,6 +481,7 @@ Eht.Form.prototype.validateItem = function(combo,checkFlag){
 			helpText = lbltxt + "不能为空";
 		}
 	}
+	var pfg = this.getParentFormGroup(combo);
 	//自定义验证，事件方法为 customValid(name,value,combo,parent);
 	if(this._customValid!=null){
 		rtn = self._customValid.call(self,combo.attr("name"),val,combo);
@@ -641,8 +646,10 @@ Eht.Form.prototype.fill=function(arg,triggerChange){
 			if(type != "radio" && type != "checkbox"){
 				if(self.data[name]==null){
 					$(this).val(self.opt.defaultDisplay);
+					$(this).attr("oldValue",self.opt.defaultDisplay);
 				}else{
 					$(this).val(self.data[name]);
+					$(this).attr("oldValue",self.data[name]);
 				}
 			}else{
 				if(type == "radio"){
@@ -677,6 +684,17 @@ Eht.Form.prototype.fill=function(arg,triggerChange){
 			}
 		}
 	});
+};
+/**
+ * 获取旧的数据
+ */
+Eht.Form.prototype.getOldValue=function(name){
+	var combo = this.selector.find("input[name='"+name+"'],textarea[name='"+name+"'],select[name='"+name+"']");
+	var rtn = combo.attr("oldValue");
+	if(rtn==null){
+		rtn = "";
+	}
+	return rtn;
 };
 /**
  * args:最后一个参数为 boolean 类型，true 表示，
@@ -724,7 +742,29 @@ Eht.Form.prototype.clearValidStyle=function(){
 };
 Eht.Form.prototype.getValue=function(name){
 	var combo = this.selector.find("input[name='"+name+"'],textarea[name='"+name+"'],select[name='"+name+"']");
-	return combo.val();
+	if(combo.size()==1){
+		return combo.val();
+	}
+	var rtn = "";
+	if(combo.size()>1){
+		var rs = [];
+		combo.each(function(){
+			var type = new String($(this).attr("type")).toLowerCase();
+			if(type != "radio" && type != "checkbox"){
+				rs.push($(this).val());
+			}else if(type=="radio"){
+				if(this.checked){
+					rs.push($(this).val());
+				}
+			}else if(type=="checkbox"){
+				if(this.checked){
+					rs.push($(this).val());
+				}
+			}
+		});
+		rtn = rs.join(",");
+	}
+	return rtn;
 }
 Eht.Form.prototype.setValue=function(name,value,triggerChange){
 	var self = this;
@@ -735,6 +775,9 @@ Eht.Form.prototype.setValue=function(name,value,triggerChange){
 				$(this).val(self.opt.defaultDisplay);
 			}else{
 				$(this).val(value);
+			}
+			if($(this).is("select")){				
+				$(this).attr("currentValue",value);
 			}
 		}else{
 			if(type == "radio"){
@@ -828,6 +871,14 @@ Eht.Form.prototype.enable=function(name){
 	  combo = this.selector.find("input[name],textarea[name],select[name]");
 	}
 	combo.enable();
+};
+Eht.Form.prototype.attr=function(fieldName,attrname,value){
+	var combo = this.selector.find("input[name='"+fieldName+"'],textarea[name='"+fieldName+"'],select[name='"+fieldName+"']");
+	if(value==null){
+		combo.removeAttr(attrname);
+	}else{
+		combo.attr(attrname,value);
+	}
 };
 Eht.Form.prototype.change=function(func){
 	//func(name,value,combo,parent)

@@ -6,6 +6,9 @@
 	<title>调查评估-司法所</title>
 	<jsp:include page="../../ltrhao-common.jsp"></jsp:include>
 	<style>
+	.text-input{
+		text-align: center;
+	}
 	.ui-state-default{
 		text-align:center;
 	}
@@ -122,7 +125,7 @@
 						$("#save").hide()
 						$("#receive").show();
 						$("#back").show();
-						$("#table_view").hide();
+						$("#table_form").hide();
 						tableView.clickRow(function(data){
 							json=data;
 							view_jbxx.fill(json);
@@ -150,7 +153,7 @@
 							$("#save").show()
 							$("#receive").hide();
 							$("#back").hide();
-							$("#table_view").show();
+							$("#table_form").show();
 							tableView.clickRow(function(data){
 								json=data;
 								view_jbxx.fill(json);
@@ -160,10 +163,15 @@
 								$("#listDcpg_sfs #dcdwsfs").val(data.jgmc);
 								$("#listDcpg_sfs #dcr").val("${CURRENT_USER_SESSION.name}");
 								$("#form_id").val(data.id);
-								
-								
 								$("#zp").attr("src","${localCtx}/image/RMIImageService?_table_name=SYS_FACE_IMG&imgid="+data.id+"&icon=per");
 							});
+							
+							service.findSfj(json.sfsid,new Eht.Responder({
+								success : function(data) {
+									
+									$("#dcdwxqj").val(data.jgmc);
+								}
+							}));
 							
 							$('#myModal_tjwtxx').modal({backdrop:'static'});
 				 	})
@@ -194,6 +202,7 @@
 		//添加调查记录保存信息触发事件
 		$("#listDcpg_sfs #save").click(function(){
 			if(form_dcnr.validate()){
+				console.log(form_dcnr.getData());
 				service.saveTcpgxx(form_dcnr.getData(),new Eht.Responder({
 					success:function(){
 						$('#myModal_tjwtxx').modal('hide');
@@ -204,61 +213,35 @@
 			}
 					
 		});
+		//动态添加人员
+		var Jzry_json={};
+		service.findSfsry(Jzry_json,new Eht.Responder({
+			success:function(data){
+				
+				$("#dcr").empty();
+				$("#dcr").append('<option selected="selected"></option>');
+				for(var i=0;i<data.length;i++){
+					$("#dcr").append("<option value="+data[i].xm+">"+data[i].xm+ "</option>");
+				}
+				$("#dcr").comboSelect();
+			}
+		}));
 		//字数计算
-		var textareaName = "#listDcpg_sfs #dcnr";//备注输入框id
-		var spanName = "#listDcpg_sfs #text-count";//计数span的id
-		$(textareaName).click(function() {
-			countChar(textareaName, spanName);
-		});
-		$(textareaName).keyup(function(){
-			countChar(textareaName, spanName);
-		});
-		$(textareaName).keydown(function() {
-			countChar(textareaName, spanName);
-		});
-		function countChar(textareaName, spanName) {
-			if ($(textareaName).val() != "") {
-				$(spanName)
-						.text("" + $(textareaName).val().length + "/1000");
-				if ($(textareaName).val().length > 0) {
-					$(spanName).css("color", "#3F51B5");
+		form_dcnr.charValid(function(name,min,max){
+			if(name=="pgyj"){
+				$("#count").html(min+"/"+max);
+				if( min/max > 3/4 ){
+					$("#count").css("color","#f00");
+				}else{
+					$("#count").css("color","#00f");
 				}
-				;
-				if ($(textareaName).val().length > 240) {
-					$(spanName).css("color", "#FF0000");
-				}
-				;
-			} else {
-				$(spanName).text("0/1000");
 			}
-		};
-		var textareaName2="#listDcpg_sfs #pgyj_sfs";//备注输入框id
-		var spanName2 ="#listDcpg_sfs #text-count2";//计数span的id
-		$(textareaName2).click(function() {
-			countChar2(textareaName2, spanName2);
+			
 		});
-		$(textareaName2).keyup(function(){
-			countChar2(textareaName2, spanName2);
-		});
-		$(textareaName2).keydown(function() {
-			countChar2(textareaName2, spanName2);
-		});
-		function countChar2(textareaName2, spanName2) {
-			if ($(textareaName2).val() != "") {
-				$(spanName2)
-						.text("" + $(textareaName2).val().length + "/100");
-				if ($(textareaName2).val().length > 0) {
-					$(spanName2).css("color", "#3F51B5");
-				}
-				;
-				if ($(textareaName2).val().length >50) {
-					$(spanName2).css("color", "#FF0000");
-				}
-				;
-			} else {
-				$(spanName2).text("0/100");
-			}
-		};
+		
+		
+		
+		
 		$("#listDcpg_sfs #close").click(function(){
 			$("#myModal_tjwtxx").modal('hide');
 		})
@@ -299,9 +282,12 @@
 						</button>
 						<h4 class="modal-title" id=modal_title>委托信息</h4>
 					</div>
-					<div class="modal-body" style="overflow: auto;">
+					<div class="modal-body"  >
 						<div id="title_jbxx">
 							<table border="1" cellspacing="0"  align="center" id="show_table">
+								<tr>
+									<td colspan="6" style="font-size: 18px;">基&nbsp;&nbsp;本&nbsp;&nbsp;信&nbsp;&nbsp;息</td>
+								</tr>
 								<tr>
 									<td class="td1">被告人</td>
 									<td field="bgrxm" colspan="2"></td>
@@ -359,15 +345,9 @@
 								</tr>
 									<tr>
 									<td>委托机构类别</td>
-									<td colspan="3"><div  field="wtjglb" code="sys206" ></div>
+									<td colspan="1"><div  field="wtjglb" code="sys206" ></div>
 									<td >委托单位</td>
-									<td colspan="1"><div field="wtdw" ></div></td>
-								</tr>
-								<tr>
-									<td>指派机构</td>
-									<td colspan="5">
-										<div field="jgmc" style="margin: 0px;"></div>
-									</td>
+									<td colspan="3"><div field="wtdw" ></div></td>
 								</tr>
 								<!-- <tr>
 									<td>委托调查书</td>
@@ -399,7 +379,7 @@
 								<tr>
 									<td>调查事项</td>
 									<td colspan="5">
-										<textarea rows="3" getdis="true" label="调查事项" name="dcsx"style="border:none; resize: none;overflow: hidden; width: 100%;height: 50px; outline: none;"valid="{required:true}"></textarea>
+										<textarea rows="3" getdis="true" label="调查事项" name="dcsx"style="border:none; resize: none;overflow: hidden; width: 100%;height: 50px; outline: none;"></textarea>
 									</td>
 								</tr>
 								<tr>
@@ -408,7 +388,7 @@
 								</tr>
 								<tr>
 									<td >调查人</td>
-									<td colspan="2"><input id="dcr" label="调查人" name="dcr" type="text"class="input_1" valid="{required:true}"></td>
+									<td colspan="2"><select id="dcr" label="调查人" name="dcr" type="text"class="input_1" style="margin: 0px;width:100%;max-width: none;" valid="{required:true}"></select>
 									<td >调查意见审核人 </td>
 									<td colspan="2"><input name="dcyjshr" label="调查意见审核人" type="text"class="input_1"valid="{required:true}"></td>
 								</tr> 
@@ -416,13 +396,14 @@
 								 <tr>
 									<td >调查单位（司法所） </td>
 									<td colspan="2"><input id="dcdwsfs" label="调查单位（司法所）" name="dcdwsfs"class="input_1" style="height: 41px;" type="text"valid="{required:true}"></td>
-									<td >调查单位（县区局） </td>
-									<td colspan="2"><input id="dcdwxqj" name="dcdwxqj"class="input_1" style="height: 41px;" type="text"></td>
+									<td >调查单位（旗县市区司法局） </td>
+									<td colspan="2"><input id="dcdwxqj"label="调查单位（旗县市区司法局）" name="dcdwxqj"class="input_1" style="height: 41px;" type="text"valid="{required:true}"></td>
 								</tr> 
 								<tr>
-									<td>评估意见</td>
+									<td>司法所评估意见</td>
 									<td colspan="5">
-										<textarea rows="3" name="pgyj"  label="评估意见"style="border:none; resize: none;overflow: hidden; width: 100%;height: 50px;outline: none;"valid="{required:true}"></textarea>
+										<textarea rows="3" name="pgyj"  label="评估意见"style="border:none; resize: none;overflow: hidden; width: 100%;height: 50px;outline: none;"valid="{required:true}" maxlength="200"></textarea>
+										<div class="text-right"><span id="count"  style="color: #3F51B5"></span></div>
 									</td>
 								</tr>
 							</table>
@@ -570,7 +551,7 @@
 							<tr>
 								<td>评估意见</td>
 								<td colspan="5">
-									<div  field="pgyj"  ></div>
+									<div  field="pgyj" ></div>
 								</td>
 							</tr>
 							

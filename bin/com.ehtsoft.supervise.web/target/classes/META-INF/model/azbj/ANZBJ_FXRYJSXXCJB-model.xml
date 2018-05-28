@@ -2,8 +2,8 @@
 
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_FXRYJSXXCJB" label="服刑人员家属信息采集表">
-    <column field="FXRYJSXXCJB01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="FXBJRYBH" type="string" length="20" label="服刑帮教人员编号" remark="编码详见 6.4 章节"/>
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
     <column field="JSXM" type="string" length="50" label="家属姓名" remark="自填"/>
     <column field="GX" type="string" length="50" label="关系" remark="自填"/>
     <column field="JSZY" type="string" length="200" label="家属职业" remark="自填"/>
@@ -22,6 +22,6 @@
     <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
     <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
     <column field="remark" type="string" length="500" label="备注"/>
-    <primary name="PK_ANZBJ_FXRYJSXXCJB" field="FXRYJSXXCJB01"/>
+    <primary name="PK_ANZBJ_FXRYJSXXCJB" field="ID"/>
   </table>
 </model>

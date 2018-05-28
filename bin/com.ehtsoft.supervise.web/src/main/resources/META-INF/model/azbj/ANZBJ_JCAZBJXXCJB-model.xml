@@ -5,7 +5,7 @@
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
     <column field="F_AID" type="string" length="36" label="矫正人员ID" remark="编码见 6.3"/>
     <column field="JCSJ" type="string" length="20" label="解除时间" remark="自填，格式按照 GB/T7408 中规定"/>
-    <column field="JCYY" type="string" length="50" label="解除原因" remark="编码见 6.57"/>
+    <column field="JCYY" type="string" length="50" label="解除原因" remark="编码见 6.57(SYS169)"/>
     <column field="JCBJZJ" type="string" length="500" label="解除帮教总结" remark="自填"/>
     <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
     <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>

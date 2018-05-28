@@ -1,4 +1,4 @@
-----安置帮教总览界面--全年安置帮教人员表现情况
+----安置帮教总览界面--全年安置帮教人员表现情况(界面总览没有用上，缺少计算月份的，重新写了一个计算月份的在Servic 里面写的)
 
 create or replace view view_zl_azbj_qnazbjrybxqk
 as 

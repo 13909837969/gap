@@ -3,8 +3,8 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_NDJDXXCJBXZ" label="年度鉴定信息采集表（乡镇街道）">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="AZBJRYBH" type="string" length="36" label="安置帮教人员编号" remark="编码见 6.3"/>
-    <column field="ND" type="string" length="20" label="年度" remark="自填，格式按照 GB/T 7408 中规定"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
+    <column field="ND" type="string" length="4" label="年度" remark="自填，格式按照 GB/T 7408 中规定"/>
     <column field="DQZFTHQK" type="string" length="200" label="定期走访谈话情况" remark="自填"/>
     <column field="BJXZCYLSQK" type="string" length="200" label="帮教小组成员落实情况" remark="自填"/>
     <column field="JZJZQK" type="string" length="200" label="卷宗记载情况" remark="自填"/>

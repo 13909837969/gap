@@ -208,7 +208,7 @@ textarea{
 				$("#tqza_list_all #tqcxhx_tjsq_Modal").modal({backdrop:'static'});
 				
 			})
-			if(orgType ==3 || orgType ==4){
+			if(orgType ==4){
 				$("#addbtn").attr("type","button");
 			}
 			
@@ -290,7 +290,7 @@ textarea{
 				<select class="btn btn-default" type="text" label="审批状态" id="spzt">
 					<option value="">全部</option>
 					<option value="1">通过</option>
-					<option value="2">未通过</option>
+					<option value="3">未通过</option>
 					<option value="0">待审核</option>
 				</select>
 				<span>
@@ -323,15 +323,12 @@ textarea{
 				<div class="modal-body" id="modal-bodyAdd" style="height:510px;overflow-y:auto;overflow-x:hidden;">
 					<div id="tqzacfsq_field">
 						<select id="tqzaform_xmAndLxdh" name="aid" label="服刑人员" ></select>
-		    			<textarea id="tqly2"	 type="text"    label="提请理由"     name="tqly"    maxlength="500"  valid="{required:true}"></textarea>
+		    			<textarea rows="6" id="tqly2"	 type="text"    label="提请理由"     name="tqly"    maxlength="500"  valid="{required:true}"></textarea>
 		    			<div class="text-right"><span id="count" style="color: #3F51B5;margin-right: 40px;"></span></div>
-		    			<textarea id="tqyj2"     type="text"    label="提请依据" 	   name="tqyj"    maxlength="500"  valid="{required:true}"></textarea>
+		    			<textarea rows="6" id="tqyj2"     type="text"    label="提请依据" 	   name="tqyj"    maxlength="500"  valid="{required:true}"></textarea>
 						<div class="text-right"><span id="count2"  style="color: #3F51B5;margin-right: 40px;"></span></div>
 						<input name="sfssqsj"    label="申请时间"  class="form_date" id="sfssqsj" fixedValue="true" readonly="readonly">
 						<input name="sfssqr" type="text" label="申请人" id="sfssqr" value="${CURRENT_USER_SESSION.name}" readonly="true" fixedValue="true">
-		    			<input name="sfsshr" type="hidden"  id="sfsshr" value="${CURRENT_USER_SESSION.name}" >
-		    			<input name="sfsshyj" type="hidden"  id="sfsshyj" value="通过" >
-		    			
 		    		</div>
 				</div>
 				<div class="modal-footer">

@@ -6,34 +6,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <jsp:include page="../ltrhao-common.jsp"></jsp:include>
-<script type="text/javascript"
-	src="${localCtx }/json/AzbjNdjdxxcjbService.js"></script>
+<script type="text/javascript" src="${localCtx }/json/AzbjNdjdxxcjbService.js"></script>
 <title>年度鉴定信息采集表（村居）</title>
 <script type="text/javascript">
 $(function() {
-	var query = new Eht.Form({
-		selector : "#query_form"
-	});
+	var query = new Eht.Form({selector : "#query_form"});
 	var service = new AzbjNdjdxxcjbService();
-	var form = new Eht.Form({
-		formCol : 2,
-		selector : "#form",
-		autolayout : true
-	});
-	var tableview = new Eht.TableView({
-		selector : "#tableview"
-	});
-
-	//展示页面信息
+	var form = new Eht.Form({formCol : 2,selector : "#form",autolayout : true});
+	var tableview = new Eht.TableView({selector : "#tableview"});
+	//人员数据
 	tableview.loadData(function(page, res) {
-
 		service.findNdjdxxcjb(query.getData(), page, res);
 	});
-
+	//人员查询按钮
+	$("#btn_search").click(function() {
+		tableview.refresh();
+	});
+	//人员新增按钮...
+	$('#btn_add').click(function() {
+		form.enable();
+		form.clear();
+		//findRy();
+		$("#btn_save").show();
+		$("#myModal ").modal({backdrop:'static'});
+	});
+	//模态框新增人员信息事件
+	function findRy(){
+		service.findJz(new Eht.Responder({
+			success:function(data){
+				$("#azbjryid").empty();
+				$("#azbjryid").append('<option></option>');
+				for(var i=0;i<data.length;i++){
+					if(data[i].id == v){
+						$("#azbjryid").append("<option value=" + data[i].id+" selected>" + data[i].xm + data[i].grlxdh + "</option>");
+					}else{
+						$("#azbjryid").append("<option value=" + data[i].id+">" + data[i].xm + data[i].grlxdh + "</option>");
+					}
+				}
+				$("#azbjryid").comboSelect();
+			}
+		}))
+	}
 	//查看人员按钮
 	$("#btn_look").click(function() {
 		if ($(":checkbox:checked").length == 1) {
-			$("#myModal").modal({backdrop:'static'});
+			form.clear();
+			$("#myModal ").modal({backdrop:'static'});
+			$("#btn_close").show();
 			$("#btn_save").hide();
 			form.disable();
 			form.fill($(":checkbox:checked").data());
@@ -42,24 +61,14 @@ $(function() {
 			ale.show("请选中一条数据进行操作!!!!!!!!");
 		}
 	});
-	//人员新增按钮
-	$('#btn_add').click(function() {
-		form.enable();
-		form.clear();
-		$("#btn_save").show();
-		$("#myModal").modal({backdrop:'static'});
-	});
-	//点击查询时查模糊查询
-	$("#btn_search").click(function() {
-		tableview.refresh();
-	});
-
-	// 修改  人员编辑按钮
+	// 编辑  人员编辑按钮
 	$("#btn_edit").click(function() {
 		if ($(":checkbox:checked").length == 1) {
 			form.enable();
+			form.clear();
 			$("#btn_save").show();
-			$("#myModal").modal({backdrop:'static'});
+			$("#btn_close").show();
+			$("#myModal ").modal({backdrop:'static'});
 			form.fill($(":checkbox:checked").data());
 		} else {
 			var ale = new Eht.Alert();
@@ -67,40 +76,49 @@ $(function() {
 		}
 	});
 	//删除事件
-	$("#btn_delete").click(function() {
-		var sd_ry = tableview.getSelectedData();
-		if (sd_ry.length == 1) {
-			if (confirm("确定删除数据")) {
-				service.removeOne($(":checkbox:checked").data().id);
-				new Eht.Tips().show("删除成功");
-				tableview.refresh();
-			} else {
-				new Eht.Tips().show("删除失败");
-			}
-		} else {
+	 $("#btn_delete").click(function(){
+		if($("#tableview :checkbox:checked").length == 1){
+			var c = new Eht.Confirm();
+			c.show("此操作不可恢复，确定要删除选中记录吗！");
+			c.onOk(function(){
+				service.removeOne($("#tableview :checkbox:checked").data(),new Eht.Responder({
+					success:function(){
+						tableview.refresh();
+						c.close();
+						new Eht.Tips().show("删除成功");
+					}
+				}));
+			});
+		}else{
 			var ale = new Eht.Alert();
 			ale.show("请选中一条数据进行操作!");
-			tableview.refresh();
 		}
-	});
-	//模态框保存并且隐藏
-	$('#btn_save').click(function() {
-		if (form.validate()) {
+	}); 
+	//保存添加人员
+	 $('#btn_save').click(function() {
+		 /* if (form.validate()) { */
 			service.saveOne(form.getData(), new Eht.Responder({
-				success : function(data) {
-					$('#myModal').modal({backdrop:'static'});
+				success : function() {
+					$('#myModal ').modal("hide");
+					new Eht.Tips().show("保存成功");
 					tableview.refresh();
 				}
 			}));
-		}
-	});
+			/*} else {
+				new Eht.Tips().show("保存失败");
+	 	} */
+	}); 
 	//模态框查询安置帮办人员信息事件
 	service.findJz(new Eht.Responder({
 		success : function(data) {
 			$("#azbjryid").empty();
 			$("#azbjryid").append('<option selected="selected"></option>');
 			for (var i = 0; i < data.length; i++) {
-				$("#azbjryid").append("<option value="+data[i].id+">" + data[i].xm + +data[i].grlxdh + "</option>");
+				if(i==6){
+					$("#azbjryid").append("<option value="+data[i].id+"selected>"+data[i].xm + data[i].grlxdh + "</option>");	
+					}else{
+						$("#azbjryid").append("<option value="+data[i].id+">"+data[i].xm + data[i].grlxdh + "</option>");
+					}
 			}
 			$("#azbjryid").comboSelect();
 		}
@@ -146,7 +164,7 @@ $(function() {
 		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看
 	</button>
 	<button type="button" class="btn btn-default" style="margin-left: 10px;" id="btn_edit">
-		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑
 	</button>
 	<button type="button" class="btn btn-default" style="margin-left: 10px;" id="btn_delete">
 		<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除
@@ -190,6 +208,7 @@ $(function() {
 		</button>
 	</div>
 </form>
+<!-- //显示的界面的id -->
 <div id="tableview">
 	<div field="xz" label="选择" checkbox="true"></div>
 	<div field="xm" label="姓名"></div>
@@ -212,9 +231,10 @@ $(function() {
 				<h4 class="modal-title" id="myModalLabel">年度鉴定信息采集表</h4>
 			</div>
 			<div class="modal-body" style="overflow: auto; height: 450px;">
+				<!-- //添加页面的id -->
 				<div id="form">
 					<input type="hidden" name="id">
-					<select id="azbjryid" name="azbjryid" label="安置帮教人员" valid="{required:true}"> 
+					<select id="azbjryid" name="azbjryid" label="安置帮教人员"> 
 					</select>
 					<input type="text" name="nd" id="time" label="年度" valid="{required:true,number:true}"> 
 					<input id="xsbx" name="xsbx" label="现实表现" code="SYS149" valid="{required:true}"> 
@@ -240,7 +260,7 @@ $(function() {
 			</div>
 			<div class="modal-footer">
 				<button id="btn_save" class="btn btn-primary" type="button">保存</button>
-				<button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+				<button id="btn_close" class="btn btn-default" type="button" data-dismiss="modal">取消</button>
 			</div>
 		</div>
 	</div>

@@ -24,55 +24,79 @@
 $(function(){
 	var sqjzzl = new SqjzzlNewService();
 	
-	var jzzs_list = [];
-	/* sqjzzl.find_jzzs(new Eht.Responder({
+	var ryzs_list = [];
+	var query_ryzs = [];
+	query_ryzs["provinceid[eq]"] = '150000';
+	sqjzzl.find_ryzs(query_ryzs,new Eht.Responder({
 		success:function(data){
-			jzzs_list = data;
-			if(jzzs_list != null){
-				jzzs(jzzs_list);  //矫正人员总数
+			ryzs_list = data;
+			if(ryzs_list != null){
+				ryzs(ryzs_list);  //矫正人员总数
+			}
+		}
+	}));
+	
+	var jyjz_list = [];
+	var query_jyjz = [];
+	query_jyjz["provinceid ="] = '150000';
+	sqjzzl.find_jyjz(query_jyjz,new Eht.Responder({
+		success:function(data){
+			jyjz_list = data;
+			if(jyjz_list != null){
+				jyjz(jyjz_list);  //教育矫正
+			}
+		}
+	}));
+	
+	var syqk_list = [];
+	/* var query_syqk = [];
+	query_syqk["provinceid[eq]"] = '150000';
+	sqjzzl.find_syqk(query_syqk,new Eht.Responder({
+		success:function(data){
+			syqk_list = data;
+			if(syqk_list != null){
+				syqk(syqk_list);  //使用情况
 			}
 		}
 	})); */
-	var jyjz_list = [];
-	var syqk_list = [];
+	
+	var jcqk_list = [];
+	var query_jcqk = [];
+	query_jcqk["provinceid ="] = '150000';
+	sqjzzl.find_jcqk(query_jcqk,new Eht.Responder({
+		success:function(data){
+			jcqk_list = data;
+			if(jcqk_list != null){
+				jcqk(jcqk_list);  //奖惩情况
+			}
+		}
+	}));
+	
+	
 	var ssjk_list = [];
 	var flqk_list = [];
-	var jcqk_list = [];
 	var zmqk_list = [];
 	
 	
-	
-	jzzs(jzzs_list);
-	jyjz(jyjz_list);
-	syqk(syqk_list);
+	syqk(syqk_list)
 	ssjk(ssjk_list);
 	flqk(flqk_list);
-	jcqk(jcqk_list);
 	zmqk(zmqk_list);
  
 });
 
-function jzzs(jzzs_list){
+function ryzs(ryzs_list){
 	var dom = document.getElementById("l_top");
 	var myChart = echarts.init(dom,'shine');
 	
-	/* var x_data = [];    //月份 
-	var leg_city1 = [];    //{履行情况：[每个月的数据]}
-	var leg_city2 = [];
-	var leg_city3 = [];
-	var leg_city4 = [];
-	var leg_city5 = [];
+	var x_data = [];    //总数 
 	
-	if(lxqk_list != null){
-		for(var i=0; i<lxqk_list.length; i++){
-			x_data.push(lxqk_list[i].city);
-			leg_city1.push(lxqk_list[i].cnt1);
-			leg_city2.push(lxqk_list[i].cnt2);
-			leg_city3.push(lxqk_list[i].cnt3);
-			leg_city4.push(lxqk_list[i].cnt4);
-			leg_city5.push(lxqk_list[i].cnt5);
-		}
-	} */
+	if(ryzs_list != null && ryzs_list.length == 1){
+		document.getElementById("lab_ryzs").innerHTML=ryzs_list[0].cnt1;
+		x_data.push(ryzs_list[0].cnt2);
+		x_data.push(ryzs_list[0].cnt3);
+		x_data.push(ryzs_list[0].cnt4);
+	}
 	
 	option = {
 		    tooltip : {
@@ -91,6 +115,7 @@ function jzzs(jzzs_list){
 		    xAxis : [
 		        {
 		            type : 'value',
+		            //name : '人',
 		            boundaryGap : true,
 		            axisLine: {
 		            	show: false
@@ -102,7 +127,10 @@ function jzzs(jzzs_list){
 		                }
 		            },
 		            axisTick: {
-		            	show: false
+		            	//show: fals,
+		            	textStyle: {
+		                    color: '#fff'
+		                }
 		            },
 		            splitLine: {
 		                show: false
@@ -142,10 +170,10 @@ function jzzs(jzzs_list){
 		                        y2: 1,
 		                        colorStops: [{
 		                            offset: 0,
-		                            color: '#00d386' // 0% 处的颜色
+		                            color: '#008acd' // 0% 处的颜色
 		                        }, {
 		                            offset: 1,
-		                            color: '#0076fc' // 100% 处的颜色
+		                            color: '#59c4e6' // 100% 处的颜色
 		                        }],
 		                        globalCoord: false // 缺省为 false
 		                    },
@@ -153,7 +181,7 @@ function jzzs(jzzs_list){
 		                }
 		            },
 		            barWidth: '20%',
-		            data:['20','30','50']
+		            data:x_data
 		        }
 		    ]
 		};
@@ -168,20 +196,19 @@ function jyjz(jyjz_list){
 	var dom = document.getElementById("l_cen");
 	var myChart = echarts.init(dom,'shine');
 	
-	/* var y_data = [];    //案件来源类型
-	var lx_data = [];    //数量
-	var selected = {};
+	var x_data = [];    //矫正开始月份
+	var jy_data1 = [];    //集中教育
+	var jy_data2 = [];    //心理咨询
+	var jy_data3 = [];    //个别教育
 	
-	if(ajly_list != null){
-		for(var i=0; i<ajly_list.length; i++){
-			y_data.push(ajly_list[i].ajly);
-			var data = {};
-			data["value"] = ajly_list[i].cnt;
-			data["name"] = ajly_list[i].ajly;
-			lx_data.push(data);
-			selected[ajly_list[i].ajly] = i < 5;  //选中5个
+	if(jyjz_list != null){
+		for(var i=0; i<jyjz_list.length; i++){
+			x_data.push(jyjz_list[i].rq);
+			jy_data1.push(jyjz_list[i].cnt1);
+			jy_data2.push(jyjz_list[i].cnt2);
+			jy_data3.push(jyjz_list[i].cnt3);
 		}
-	} */
+	}
 	
 	option = null;
 	option = {
@@ -197,11 +224,11 @@ function jyjz(jyjz_list){
 		    	textStyle: {
 		            color: '#fff'
 		        },
-		        data:['集中教育','个别教育']
+		        data:['集中教育','心理咨询','个别教育']
 
 		    },
 		    grid: {
-		    	top: '20%',
+		    	top: '25%',
 		    	left: '3%',
 		        right: '4%',
 		        bottom: '3%',
@@ -224,12 +251,13 @@ function jyjz(jyjz_list){
 		            axisTick: {
 		                show: false
 		            },
-		            data : ['2月','4月','6月','8月','10月']
+		            data : ['2月','4月','6月','8月','10月'] //x_data
 		        }
 		    ],
 		    yAxis : [
 		        {
 		        	type: 'value',
+		        	name: '人',
 		            min: 0,
 		            max: 50,
 		            interval: 10,
@@ -253,12 +281,17 @@ function jyjz(jyjz_list){
 		    	{
 		            name:'集中教育',
 		            type:'line',
-		            data:['10','20','15','25','30']
+		            data:['10','20','15','25','30'] //jy_data1
+		        },
+		        {
+		            name:'心理咨询',
+		            type:'line',
+		            data:['25','30','15','20','27'] //jy_data2
 		        },
 		        {
 		            name:'个别教育',
 		            type:'line',
-		            data:['20','25','10','15','22']
+		            data:['20','25','10','15','22'] //jy_data3
 		        }
 		    ]
 		};
@@ -300,6 +333,8 @@ function syqk(syqk_list){
 		    },
 		    legend: {
 		    	type: 'scroll',
+		    	right:5,
+		    	left:60,
 		    	pageIconColor: '#fff',
 		    	pageTextStyle: {
 		    		color: '#fff'
@@ -311,7 +346,7 @@ function syqk(syqk_list){
 
 		    },
 		    grid: {
-		    	top: '20%',
+		    	top: '25%',
 		    	left: '3%',
 		        right: '4%',
 		        bottom: '3%',
@@ -340,9 +375,10 @@ function syqk(syqk_list){
 		    yAxis : [
 		        {
 		        	type: 'value',
-		            min: 0,
-		            max: 100,
-		            interval: 10, 
+		        	name: '人',
+		            min: 0, //最小值
+		            max: 100, //最大值
+		            interval: 20,  //
 		            splitLine: {show: false},
 		            axisLine: {
 		                lineStyle: {
@@ -597,16 +633,17 @@ function jcqk(jcqk_list){
 	var dom = document.getElementById("r_cen");
 	var myChart = echarts.init(dom,'shine');
 
-	/* var y_data = [];    //纠纷类型
-	var lx_data = [];    //[纠纷数量]
+	var lx_data = [];    //数量
 	
-	if(ajjf_list != null){
-		for(var i=0; i<ajjf_list.length; i++){
-			y_data.push(ajjf_list[i].jflx);
-			lx_data.push(ajjf_list[i].cnt);
+	if(jcqk_list != null){
+		for(var i=0; i<jcqk_list.length; i++){
+			var data = {};
+			data["value"] = jcqk_list[i].cnt;
+			data["name"] = jcqk_list[i].lbname;
+			lx_data.push(data);
 		}
 	}
-	 */
+	
 	option = null;
 	option = {
 		    tooltip : {
@@ -632,13 +669,14 @@ function jcqk(jcqk_list){
 		                    show: true
 		                }
 		            },
-		            data:[
+		            data:lx_data,
+		            /* [
 		            	{value:20,name:'治安'},
 		            	{value:30,name:'警告'},
 		            	{value:40,name:'撤销.缓刑.假释'},
 		            	{value:50,name:'减刑'},
 		            	{value:60,name:'暂予监外执行人员'}
-		            ],
+		            ] */
 		            itemStyle: {
 		                emphasis: {
 		                    shadowBlur: 10,
@@ -687,7 +725,7 @@ function zmqk(zmqk_list){
 		        }
 		    },
 		    grid: {
-		    	top: '10%',
+		    	top: '20%',
 		    	left: '3%',
 		        right: '3%',
 		        bottom: '3%',
@@ -721,6 +759,7 @@ function zmqk(zmqk_list){
 		    yAxis : [
 		        {
 		        	type: 'value',
+		        	name: '人',
 		            /* min: 0,
 		            max: 50,
 		            interval: 10, */
@@ -764,6 +803,7 @@ body{height:100%;background-image: url(../rmtj/bg.png);color: #fff;}
 
 .left_div_a{height:29.5%;width:100%;margin-bottom:10px;}
 .left_div_a a{color:#fff;height:14px;line-height:18px;}  /* border-bottom:2px solid #ef3838; border-radius: 4px;box-shadow: 0 1px 3px rgba(0,0,0,.1);*/
+.left_div_a a:hover{color:red;cusor:point;}
 
 .left_div{height:90%;border-top: 1px solid #005eaa;border-bottom: 1px solid #005eaa;padding: 5px;}
 
@@ -771,19 +811,25 @@ body{height:100%;background-image: url(../rmtj/bg.png);color: #fff;}
 
 /* .left_div a:before{content:""; width:1px; height:2px; position:absolute; bottom:-2px; right:-1px;} */
 
-.bot_div{width:25%;height:35%;border: 3px solid #59c4e6;border-radius: 8px;margin:10px 20px;float:left;}
+.bot_div{width:25%;height:35%;border: 3px solid #59c4e6;border-radius: 8px;margin:3% 4%;float:left;}
 
 </style> 
 
 </head>
 <body>
-<div>  <!--background-color:#191970;  color: #fff;text-shadow: 1px 1px 2px #333;-->
+<div>
+	<div style="width:100%;height:50px;background: url(../rmtj/nav_bg.png) no-repeat center;margin:0px;position:absolute;top: -15px;">
+		<label style="font-size:16px;line-height:18px;margin:24px 42% 9px 42%;">全民社区矫正总览界面</label>
+	</div>
+	
 	<div id="left" style="float:left;margin:10px;width:29%;margin-top:40px;padding:0px 5px;">
 		<div class="left_div_a">
 			<a href="#">矫正人员总数</a><br/>
 			<div class="left_div">
 				<div style="height:100%;width:30%;float:left;">
 					<div style="width:90%;height:35%;border: 3px solid #59c4e6;border-radius: 8px;margin:45% 0px;">
+						<div style="background: url(../rmtj/user.png) no-repeat left;width:55%;height:70%;"></div>
+						<label id="lab_ryzs">14500</label><br/><label>在册人员总数</label>
 					</div>
 				</div>
 				<div id="l_top" style="height:100%;width:70%;float:right;border-left: 1px solid #005eaa;"></div>

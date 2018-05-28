@@ -129,7 +129,7 @@ var sqjzry_jcqkForm = $(function(){
 		<div id="sqjzryxfzx_form_jcqk" style="margin-top: 18px;">
 		
 			<input col="4" labelCol="3" id="jcqk" type="text" label="奖惩情况" name="jcqk"  getdis="true" code="sys001"/>
-			<div class="form-group col-sm-6 col-xs-12"  id="jcxx">
+			<div class="form-group col-sm-6 col-xs-12"  id="jcxx" style="display: none;">
 				<h4 style="font-size: 14px;font-weight: bold;margin-top: 4px;" >奖惩信息：
 						<input id="btnAdd" type="button" class="btn btn-default btn-sm" value="新增">
 						<input id="btnDel" type="button" class="btn btn-default btn-sm" value="删除">

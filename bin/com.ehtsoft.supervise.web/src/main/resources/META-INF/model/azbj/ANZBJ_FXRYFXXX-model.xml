@@ -3,26 +3,26 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_FXRYFXXX" label="服刑人员服刑信息采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="Azbjryid" type="uuid" length="36" label="安置帮教人员ID" remark="JZ_JZRYJBXX.ID"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
     <column field="tiqian" type="string" length="2" label="是否减刑提前释放" remark="自填"/>
     <column field="tq_reason" type="string" length="20" label="减刑提前释放原因" remark="自填"/>
     <column field="Critype" type="string" length="20" label="罪名" remark="自填，取自最新刑法内容"/>
-    <column field="Pritime" type="string" length="2" label="刑期" remark="编码见 6.12"/>
-    <column field="Drughis" type="string" length="2" label="吸毒史" remark="编码见 6.14"/>
-    <column field="Precri" type="string" length="2" label="是否累犯" remark="编码见 6.13"/>
-    <column field="Addition" type="string" length="10" label="附加刑" remark="编码见 6.11"/>
-    <column field="Peixun" type="string" length="2" label="是否参加职业技能培训" remark="编码见 6.18"/>
-    <column field="Jineng" type="string" length="2" label="是否获得职业技能证书" remark="编码见 6.19"/>
-    <column field="Xinli" type="string" length="2" label="是否心理健康" remark="编码见 6.20"/>
-    <column field="Lianxi" type="string" length="2" label="家庭联系情况" remark="编码见 6.10"/>
-    <column field="Sanwu" type="string" length="2" label="是否三无人员" remark="编码见 6.21"/>
-    <column field="Pinggu" type="string" length="2" label="危险性评估" remark="编码见 6.16"/>
-    <column field="Gaizao" type="string" length="2" label="改造表现" remark="编码见 6.17"/>
-    <column field="Renzui" type="string" length="2" label="认罪态度" remark="编码详 6.15"/>
+    <column field="Pritime" type="string" length="2" label="刑期" remark="编码见 6.12（sys220）"/>
+    <column field="Drughis" type="string" length="2" label="吸毒史" remark="编码见 6.14（sys222）"/>
+    <column field="Precri" type="string" length="2" label="是否累犯" remark="编码见 6.14（sys221）"/>
+    <column field="Addition" type="string" length="10" label="附加刑" remark="编码见 6.13（sys013）"/>
+    <column field="Peixun" type="string" length="2" label="是否参加职业技能培训" remark="编码见 6.11（sys223）"/>
+    <column field="Jineng" type="string" length="2" label="是否获得职业技能证书" remark="编码见 6.18（sys224）"/>
+    <column field="Xinli" type="string" length="2" label="是否心理健康" remark="编码见 6.19（sys225）"/>
+    <column field="Lianxi" type="string" length="2" label="家庭联系情况" remark="编码见 6.20（sys044）"/>
+    <column field="Sanwu" type="string" length="2" label="是否三无人员" remark="编码见 6.10（sys226）"/>
+    <column field="Pinggu" type="string" length="2" label="危险性评估" remark="编码见 6.21（sys043）"/>
+    <column field="Gaizao" type="string" length="2" label="改造表现" remark="编码见 6.16（sys165）"/>
+    <column field="Renzui" type="string" length="2" label="认罪态度" remark="编码见 6.17（sys165）"/>
     <column field="Remark" type="string" length="20" label="服刑期间特殊情况备注及帮教建议" remark="自填"/>
     <column field="JiuYi" type="string" length="2" label="是否办理保外就医" remark="编码见 6.82"/>
     <column field="SiWang" type="string" length="2" label="是否死亡" remark="编码见 6.82"/>
-    <column field="sw_reason" type="string" length="2" label="死亡原因" remark="编码见 6.86"/>
+    <column field="sw_reason" type="string" length="2" label="死亡原因" remark="编码见 6.86（sys048）"/>
     <column field="sw_shuoming" type="string" length="500" label="死亡说明" remark="自填"/>
     <column field="TongZhiShu" type="string" length="100" label="刑满释放（解除社区矫正）人员通知书" remark="自填，存储文件存放路径"/>
     <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>

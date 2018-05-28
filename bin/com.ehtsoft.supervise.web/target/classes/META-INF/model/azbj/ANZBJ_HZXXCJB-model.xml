@@ -3,11 +3,11 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_HZXXCJB" label="回执信息采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="AZBJRYID" type="string" length="36" label="服刑人员编号" remark="编码见 6.4"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
     <column field="HZNR" type="string" length="500" label="回执内容" remark="自填"/>
     <column field="HFXXBH" type="string" length="20" label="回复信息编号" remark="自填"/>
     <column field="HFNR" type="string" length="500" label="回复内容" remark="自填"/>
-    <column field="HFCKZT" type="string" length="2" label="回执查看状态" remark="编码见 6.58"/>
+    <column field="HFCKZT" type="string" length="2" label="回执查看状态" remark="编码见 6.58(sys170)"/>
     <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
     <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>
     <column field="cts" type="timestamp" label="创建时间戳" remark="数据创建（插入）保存当前插入数据的毫秒数"/>

@@ -63,12 +63,12 @@
 								<tr>
 									<td >是否调查评估</td>
 									<td>
-										<input radio="true" name="sfdcpg" code="sys001"/>
+										<input radio="true" name="sfdcpg" label="是否调查评估" valid="{required:true}"code="sys001"/>
 									</td>
 									
 									<td colspan="2">评估意见采信情况</td>
 									<td colspan="2">
-										<input  name="dcyjcxqk"  code="sys034" radio="true" style="margin-left: 6px;padding: 0px;"/>
+										<input  name="dcyjcxqk" label="评估意见采信情况" valid="{required:true}" code="sys034" radio="true" style="margin-left: 6px;padding: 0px;"/>
 									</td>
 									<td rowspan="3">
 										<label for="jbxxfile" style="width:120px;height:140px;">
@@ -76,7 +76,7 @@
 												src="${localCtx}/image/RMIImageService?_table_name=SYS_FACE_IMG&imgid=${param.id}&icon=per" 
 												osrc = "${localCtx}/image/RMIImageService?_table_name=SYS_FACE_IMG&imgid=${param.id}&icon=per"
 												 style="width:110px;height:140px; "/>
-											<span id="photo_remark" style="font-size: 1px;display: none;">照片格式:JPG 格式，分辨率 295*413，大小不超 100KB</span>
+											<span id="photo_remark" style="font-size: 1px;">照片格式:JPG 格式，分辨率 295*413，大小不超 100KB</span>
 											<form id="jzryjbxxuploadForm" action="${localCtx}/upload/RMIImageService?_table_name=SYS_FACE_IMG&imgid=${param.id}" 
 												method="post" enctype="multipart/form-data" 
 												target="importFrame" style="margin:0px;padding:0px;">
@@ -91,21 +91,20 @@
 								<tr>
 									<td>评估意见</td>
 									<td colspan="5">
-										<input radio="true" name="dcpgyj" style="margin-left: 35px;" code="sys033"/>
+										<input radio="true" label="评估意见" valid="{required:true}"name="dcpgyj" style="margin-left: 35px;" code="sys033"/>
 									</td>
 								</tr>
-								
 								<tr>
 									<td>矫正类别</td>
 									<td colspan="5" id="jzlb">
-										<input  name="jzlb"  code="sys017" radio="true" valid="{requierd:true}"/>
+										<input  name="jzlb" label="矫正类别" valid="{required:true}" code="sys017" radio="true" valid="{requierd:true}"/>
 										
 									</td>
 								</tr>
 								<tr>
 									<td >是否成年</td>
 									<td colspan="2" id="sfcn">
-										<input  name="sfcn"  code="sys001" radio="true" valid="{requierd:true}"/>
+										<input  name="sfcn" label="是否成年" valid="{required:true}" code="sys001" radio="true" valid="{requierd:true}"/>
 									</td>
 									<td >未成年</td>
 									<td colspan="3" id="wcn">
@@ -113,30 +112,26 @@
 									</td>
 								</tr>
 								<tr>
-									<td >人员编号</td>
-									<td colspan="6"><input style="height: 46px;" name="sqjzrybh" id="sqjzrybh" disabled="disabled"></td>
-								</tr>
-								<tr>
 									<td>姓名</td>
-									<td colspan="2"><input style="height: 46px;" type="text" name="xm" id="xm" valid="{requierd:true}"></td>
+									<td colspan="2"><input style="height: 46px;"label="姓名" valid="{required:true}" type="text" name="xm" id="xm" valid="{requierd:true}"></td>
 									<td>曾用名</td>
 									<td colspan="3"><input style="height: 46px;" type="text" name="cym" id="cym"></td>
 								</tr>
 								<tr>
 									<td>性别</td>
 									<td colspan="2">
-										<input  name="xb" code="sys000"  radio="true" valid="{requierd:true}"/>
+										<input  name="xb" code="sys000" label="性别" valid="{required:true}" radio="true" valid="{requierd:true}"/>
 										
 									</td>
 									<td>民族</td>
 									<td colspan="3" id="mz">
-										<input  name="mz" code="sys003" type="input" style="width:100%;height: 40px;border: none;" valid="{requierd:true}"/>
+										<input  name="mz" code="sys003"label="民族" valid="{required:true}" type="input" style="width:100%;height: 40px;border: none;" valid="{requierd:true}"/>
 									
 									</td>
 								</tr>
 								<tr>
 									<td>身份证号</td>
-									<td colspan="2"><input style="height: 46px;" type="text" name="sfzh" id="sfzh" valid="{cardNO:true}"></td>
+									<td colspan="2"><input style="height: 46px;"label="身份证号" valid="{required:true,cardNo:true}" type="text" name="sfzh" id="sfzh" valid="{cardNO:true}"></td>
 									<td>出生日期</td>
 									<td colspan="3"><input style="height: 46px;" type="text" name="csrq" id="csrq" disabled="disabled"></textarea></td>
 								</tr>
@@ -221,7 +216,7 @@
 								</tr>
 								<tr>
 									<td>就诊医院</td>
-									<td colspan="6"><input style="height: 46px;" name="zhjzyy" id="zhjzyy" type="text"></textarea></td>
+									<td colspan="6"><input style="height: 46px;"label="就诊医院" valid="{onlyChinese:true}" name="zhjzyy" id="zhjzyy" type="text"></textarea></td>
 								</tr>
 								<tr>
 									<td>是否有精神病</td>
@@ -229,7 +224,7 @@
 										<input radio="true" name="sfyjsb"  code="sys001"/>
                               		</td>
 									<td>鉴定机构</td>
-									<td colspan="3"><input type="text" style="height: 46px;" name="jdjg" id="jdjg"></textarea></td>
+									<td colspan="3"><input type="text"label="鉴定机构" valid="{onlyChinese:true}" style="height: 46px;" name="jdjg" id="jdjg"></textarea></td>
 								</tr>
 								<tr>
 									<td>是否有传染病</td>
@@ -275,17 +270,17 @@
 								</tr>
 								<tr>
 									<td>现工作的单位</td>
-									<td colspan="4"><input type="text" style="height: 46px;" name="xgzdw"></td>
+									<td colspan="4"><input type="text"label="现工作的单位" valid="{hasChinese:true}" style="height: 46px;" name="xgzdw"></td>
 									<td>单位联系电话</td>
-									<td><input style="height: 46px;" type="text" name="dwlxdh"></textarea></td>
+									<td><input style="height: 46px;" label="单位联系电话" valid="{number:true}" type="text" name="dwlxdh"></textarea></td>
 								</tr>
 								<tr>
 									<td>国籍</td>
 									<td colspan="4">
-										<input radio="true" name="gj"  code="sys051"/>
+										<input radio="true" name="gj" label="国籍" valid="{required:true}" code="sys051"/>
 									</td>
 									<td>个人联系电话</td>
-									<td colspan="1"><input style="height: 46px" type="text" name="grlxdh" id="grlxdh"></td>
+									<td colspan="1"><input style="height: 46px" label="个人联系电话" valid="{number:true}" type="text" name="grlxdh" id="grlxdh"></td>
 								</tr>
 								<tr>
 									<td>户籍地是否与居住地相同</td>
@@ -305,14 +300,14 @@
 			      							<select name="gdjzdszxq" type="text"  id="gdjzdszxq" getdis="true">
 			      								<option value="" selected="selected">---选择旗县---</option>
 			      							</select>&nbsp;&nbsp;
-			      							<input type="text" id="gdjzdmx" name="gdjzdmx" style="height:20px;" placeholder="请填写详细地址" getdis="true">
+			      							<input type="text" id="gdjzdmx" name="gdjzdmx" style="height:20px;" placeholder="请填写详细地址" getdis="true"label="详细地址" valid="{hasChinese:true}" >
 			      						</div>
 									</td>
 								<tr>
 									<td>户籍地详细地址</td>
 									<td colspan="6">
 										<div>
-											<select name="hjszs" type="text" id="hjszs" getdis="true" style="margin-left:48px;">
+											<select name="hjszs" type="text" id="hjszs" getdis="true" style="margin-left: 48px;">
 			      							</select>&nbsp;&nbsp;
 			      							<select name="hjszds" type="text" id="hjszds" getdis="true">
 			      								<option value="" selected="selected">---选择盟市---</option>
@@ -320,8 +315,8 @@
 			      							<select name="hjszxq" type="text" id="hjszxq" getdis="true">
 			      								<option value="" selected="selected">---选择旗县---</option>
 			      							</select>&nbsp;&nbsp;
-			      							<input type="text" id="hjszdmx" name="hjszdmx" style="height: 20px;" placeholder="请填写详细地址" getdis="true">
-			      							<input value="同上" id="isSame" type="checkbox">&nbsp;同上
+			      							<input type="text" id="hjszdmx" name="hjszdmx" style="height: 20px;" placeholder="请填写详细地址" getdis="true"label="详细地址" valid="{hasChinese:true}">
+			      							<!-- <input value="同上" id="isSame" type="checkbox">&nbsp;同上 -->
 			      						</div>
 		      						</td>
 								</tr>

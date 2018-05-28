@@ -3,14 +3,14 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_WCNZNXXCJB" label="未成年子女信息采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="AZBJRYID" type="string" length="36" label="服刑人员编号" remark="编码见 6.4"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
     <column field="WCNZNXM" type="string" length="200" label="未成年子女姓名" remark="自填"/>
-    <column field="XB" type="string" length="2" label="性别" remark="见 GB/T 2261.1"/>
-    <column field="JHRQK" type="string" length="100" label="监护人情况" remark="编码见 6.25"/>
-    <column field="SHKNCD" type="string" length="50" label="生活困难程度" remark="编码见 6.26"/>
-    <column field="SFSX" type="string" length="2" label="是否失学" remark="编码见 6.27"/>
-    <column field="SFLLSH" type="string" length="2" label="是否流浪社会" remark="编码见 6.28"/>
-    <column field="YWWFFZXW" type="string" length="2" label="有无违法犯罪行为" remark="编码见 6.29"/>
+    <column field="XB" type="string" length="2" label="性别" remark="见 GB/T 2261.1(sys000)"/>
+    <column field="JHRQK" type="string" length="100" label="监护人情况" remark="编码见 6.25(sys156)"/>
+    <column field="SHKNCD" type="string" length="50" label="生活困难程度" remark="编码见 6.26(sys157)"/>
+    <column field="SFSX" type="string" length="2" label="是否失学" remark="编码见 6.27(sys229)"/>
+    <column field="SFLLSH" type="string" length="2" label="是否流浪社会" remark="编码见 6.28(sys230)"/>
+    <column field="YWWFFZXW" type="string" length="2" label="有无违法犯罪行为" remark="编码见 6.29(sys231)"/>
     <column field="CSNY" type="string" length="20" label="出生年月" remark="自填，格式按照 GB/T 7408 中规定"/>
     <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
     <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>

@@ -35,8 +35,6 @@ $(function() {
 		
 	});
 	
-
-	
 	//提示框div初始状态为隐藏
 	$('#listJcjzxx #hideDiv').hide();
 	$('#listJcjzxx #hideScDiv').hide();
@@ -101,6 +99,17 @@ $(function() {
 		$("#listJcjzxx #ckmyModal").modal({backdrop: 'static', keyboard: false});//弹出模态框
 		formCk.fill(json);
 	});
+	tableView.transColumn("audit",function(data) {
+		if(data.audit == 0){
+			return "未解除"
+		}
+		if(data.audit == 1){
+			return "已解除"
+		}
+		if(data.audit== 2){
+			return "待解除"
+		}
+	})
 	tableView.transColumn("cz",function(data) {
 		if(data.zmsid){
 			var button=$('<button  class="btn btn-default btn-sm" style="border-color:#128ef6;color:#128ef6;"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;生成通知书</button>');
@@ -108,7 +117,6 @@ $(function() {
 		}
 		
 	})
-	
 	
 	//
 	var textareaName1 = "#listJcjzxx #floor1";//备注输入框id
@@ -198,7 +206,8 @@ $(function() {
 			$("#listJcjzxx #floor1").disable();//具体死因
 		}
 	})
-})
+	
+});
 
 </script>
 </head>
@@ -238,6 +247,7 @@ $(function() {
 					<div field="grlxdh" label="联系电话"></div>
 					<div field="jjlx" label="矫正解除（终止）类型" code="sys018"></div>
 					<div field="jjrq" label="矫正解除（终止）日期"></div>
+					<div field="audit" label="解除状态"></div>
 					<div field="cz" label="操作"></div>
 				</div>
 			</div>

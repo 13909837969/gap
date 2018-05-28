@@ -9,45 +9,67 @@
 <script type="text/javascript">
 $(function() {
 	var azbj = new AzbjBjxzxxService();
-	var azbj_query = new Eht.Form({selector : "#azbj_query"});
-	var azbj_form = new Eht.Form({selector : "#azbj_form",autolayout : true});
-	var azbj_bjxzxx = new Eht.TableView({selector : "#azbj_bjxzxx"});
-	v = null;
+	var azbj_query = new Eht.Form({
+		selector : "#azbj_query"
+		});
+	var azbj_form = new Eht.Form({
+		selector : "#azbj_form",
+		autolayout : true
+		});
+	var azbj_bjxzxx = new Eht.TableView({
+		selector : "#azbj_bjxzxx"
+		});
 	//人员数据
 	azbj_bjxzxx.loadData(function(page, res) {
 		azbj.findBjxzxx(azbj_query.getData(), page, res);
 	});
-	//人员查询按钮
+	//条件查询
 	$("#btn_query").click(function() {
 		azbj_bjxzxx.refresh();
 	});
-	//人员新增按钮
+	//新增
 	$('#btn_add').click(function() {
 		azbj_form.enable();
 		azbj_form.clear();
-		findRy();
+		findRy(null);
 		$("#btn_save").show();
-		$("#azbj_modal").modal({backdrop : 'static'});
+		$("#azbj_modal").modal({
+			backdrop : 'static'
+			});
 	});
-	//模态框新增人员信息事件
-	function findRy(){
-		azbj.findJz(new Eht.Responder({
-			success:function(data){
-				$("#azbjryid").empty();
-				$("#azbjryid").append('<option></option>');
-				for(var i=0;i<data.length;i++){
-					if(data[i].id == v){
-						$("#azbjryid").append("<option value=" + data[i].id+" selected>" + data[i].xm + data[i].grlxdh + "</option>");
-					}else{
-						$("#azbjryid").append("<option value=" + data[i].id+">" + data[i].xm + data[i].grlxdh + "</option>");
-					}
-				}
-				$("#azbjryid").comboSelect();
-			}
-		}))
-	}
-	
-	//确认添加人员
+	//查看一条数据
+	$("#btn_view").click(function() {
+		if($("#azbj_bjxzxx :checkbox:checked").length == 1){
+			checked_id = $("#azbj_bjxzxx :checkbox:checked").data().aid;
+			findRy(checked_id);
+			$("#azbj_modal").modal({
+				backdrop : 'static'
+				});
+			$("#btn_save").hide();
+			azbj_form.disable();
+			azbj_form.fill($("#azbj_bjxzxx :checkbox:checked").data());
+		}else{
+			var ale = new Eht.Alert();
+			ale.show("请选中一条数据进行操作!");
+		}
+	});
+	//编辑
+	$("#btn_update").click(function() {
+		if($("#azbj_bjxzxx :checkbox:checked").length == 1){
+			checked_id = $("#azbj_bjxzxx :checkbox:checked").data().aid;
+			findRy(checked_id);
+			azbj_form.enable();
+			$("#btn_save").show();
+			$("#azbj_modal").modal({
+				backdrop : 'static'
+				});
+			azbj_form.fill($("#azbj_bjxzxx :checkbox:checked").data());
+		}else{
+			var ale = new Eht.Alert();
+			ale.show("请选中一条数据进行操作!");
+		}
+	});
+	//保存
 	$("#btn_save").click(function() {
 		if (azbj_form.validate()) {
 			var data = azbj_form.getData();
@@ -58,49 +80,46 @@ $(function() {
 					azbj_bjxzxx.refresh();
 				}
 			}));
+		}else {
+			new Eht.Tips().show("保存失败");
 		}
 	});
-	
-	//人员编辑按钮
-	$("#btn_update").click(function() {
-		if($(":checkbox:checked").length==1){
-			v = $(':checkbox:checked').data().aid;
-			findRy();
-			azbj_form.enable();
-			$("#btn_save").show();
-			$("#azbj_modal").modal({backdrop : 'static'});
-			azbj_form.fill($(":checkbox:checked").data());
-		}
-	});
-	
-	//查看人员按钮
-	$("#btn_view").click(function() {
-		if($(":checkbox:checked").length==1){
-			v = $(':checkbox:checked').data().aid;
-			findRy();
-			$("#azbj_modal").modal({backdrop : 'static'});
-			$("#btn_save").hide();
-			azbj_form.disable();
-			azbj_form.fill($(":checkbox:checked").data());
-		}
-	});
-	
-	//人员删除按钮
+	//删除
 	$("#btn_delete").click(function(){
-		if($(":checkbox:checked").length==1){
+		if($("#azbj_bjxzxx :checkbox:checked").length == 1){
 			var c = new Eht.Confirm();
-			c.show("请确认是否删除！");
+			c.show("此操作不可恢复，确定要删除选中记录吗！");
 			c.onOk(function(){
-				azbj.removeOne($(":checkbox:checked").data(),new Eht.Responder({
+				azbj.removeOne($("#azbj_bjxzxx :checkbox:checked").data(),new Eht.Responder({
 					success:function(){
 						azbj_bjxzxx.refresh();
 						c.close();
-						new Eht.Tips().show();
+						new Eht.Tips().show("删除成功");
 					}
 				}));
 			});
+		}else{
+			var ale = new Eht.Alert();
+			ale.show("请选中一条数据进行操作!");
 		}
-	})
+	});
+	//帮教人员姓名
+	function findRy(lvl){
+		azbj.findJz(lvl,new Eht.Responder({
+			success:function(data){
+				$("#azbjryid").empty();
+				$("#azbjryid").append('<option></option>');
+				for(var i = 0;i < data.length;i++){
+					if(data[i].id == lvl){
+						$("#azbjryid").append("<option value=" + data[i].id + " selected >" + data[i].xm + data[i].grlxdh + "</option>");
+					}else{
+						$("#azbjryid").append("<option value=" + data[i].id + ">" + data[i].xm + data[i].grlxdh + "</option>");
+					}
+				}
+				$("#azbjryid").comboSelect();
+			}
+		}))
+	}	
 });
 </script>
 </head>
@@ -132,7 +151,7 @@ $(function() {
 	</div>
 </form>
 <div id="azbj_bjxzxx">
-	<div field="id" label="选项" checkbox="true" width="60"></div>
+	<div field="id" label="选项" checkbox="true" width="80"></div>
 	<div field="axm" label="安置帮教人员姓名" ></div>
 	<div field="xm" label="姓名" ></div>
 	<div field="xb" label="性别" code="SYS000"></div>
@@ -140,7 +159,6 @@ $(function() {
 	<div field="gzdwjzw" label="工作单位及职务"></div>
 	<div field="dh" label="电话"></div>
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="azbj_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
@@ -151,15 +169,14 @@ $(function() {
 				</button>
 				<h4 class="modal-title" id="myModalLabel">帮教小组信息</h4>
 			</div>
-			<div class="modal-body">
-				<div id="azbj_form">
-					<select id="azbjryid" name="azbjryid" label="安置帮教人员姓名" style="max-width:none"></select>
+			<div class="modal-body" id="azbj_form">
+					<select id="azbjryid" disabled="true" name="azbjryid" label="安置帮教人员姓名" valid="{required:true}" style="max-width:none">
+					</select>
 					<input type="text" name="xm" label="姓名" valid="{required:true}" /> 
 					<input type="text" name="xb" label="性别" valid="{required:true}" code="SYS000" /> 
 					<input type="text" name="nl" label="年龄" valid="{required:true,number:true}" /> 
 					<input type="text" name="gzdwjzw" label="工作单位及职务" valid="{required:true}" /> 
 					<input type="text" name="dh" label="电话" valid="{required:true,mobile:true}" />
-				</div>
 			</div>
 			<div class="modal-footer" id="modal-footer">
 				<button type="button" id="btn_save" class="btn btn-primary">保存</button>

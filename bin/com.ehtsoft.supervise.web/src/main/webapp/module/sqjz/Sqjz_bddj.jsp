@@ -58,25 +58,38 @@
 						$('<button  class="btn btn-default btn-sm" style="margin-left: 15px;"><span class="glyphicon glyphicon-briefcase" ></span>&nbsp;退回</button>'));
 				button[0].unbind("click").bind("click",function(){//委托书id
 					$("#dagl_list_btn_primary").show();
-					$("#close").hide();
+					
 					$("#bdjj_title").text("人员登记");
 					$('#myModal_bddj').modal({backdrop:'static'});
-					$("#Sqjz_bddj #bddj_jbxx").load("${localCtx}/module/sqjz/form_bddj.jsp?load=load&id="+data.id);
+					$("#Sqjz_bddj #bddj_jbxx").load("${localCtx}/module/sqjz/form_jzxj_djjs.jsp?load=load&id="+data.id);
 					
 					return false;
 				})
 				button[1].unbind("click").bind("click",function(){//委托书id
-					
+					tableView.clickRow(function(data){
 						json=data;
-					
-					$("#Sqjz_bddj #hideDivCj").show();
+						
+					});
+					var cf=new Eht.Confirm();
+					cf.show("材料即将退回，确认操作吗？");
+					cf.onOk(function(){
+						service.removeBd(json.id,new Eht.Responder({
+							success : function() {
+								
+								cf.close();
+								tableView.refresh();
+								new Eht.Tips().show();
+							}
+						}))
+					})
+					/* $("#Sqjz_bddj #hideDivCj").show(); */
 				})
 				return button;
-			}else if(data.sfjs == "1"&& data.bdqk != "03"){
+			}else if(data.sfjs == "1"&& data.bdqk != "03"&&data.bdqk !=""){
 				var button =$('<button  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;查看</button>')
 				button.unbind("click").bind("click",function(){
 					$("#dagl_list_btn_primary").hide();
-					$("#close").show();
+					
 					$("#bdjj_title").text("查看详情");
 					$('#myModal_bddj').modal({backdrop:'static'});
 					$("#Sqjz_bddj #bddj_jbxx").load("${localCtx}/module/sqjz/view_bddj.jsp?load=load&id="+data.id);
@@ -84,15 +97,13 @@
 					return false;
 				})
 				return button;
-			}else if( data.bdqk == "03" || data.bdqk == ""){
+			}else if( data.bdqk == "03"||data.bdqk ==""){
 				
 				var button =$('<button  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;报到</button>');
 				button.click(function(){
-					$("#dagl_list_btn_primary").show();
-					$("#close").hide();
-					$("#bdjj_title").text("人员报到");
+					
 					$('#myModal').modal({backdrop:'static'});
-					$("#Sqjz_bddj #jbxx").load("${localCtx}/module/sqjz/form_bddj.jsp?load=load&id="+data.id);
+					$("#Sqjz_bddj #jbxx").load("${localCtx}/module/sqjz/form_jzxj_bddj.jsp?load=load&id="+data.id);
 				})
 				return button;
 				
@@ -101,20 +112,19 @@
 		});
 		
 		tableView.transColumn("bdsyts",function(data){
-			
-			
-			if(data.sqjzryjsrq!="" && data.sqjzryjsrq!=null){
-				var iDays=datedifference(data.sqjzryjsrq,new Date());
-				if(iDays<=10){
-					var button = $('<span>剩余'+(10-iDays)+'天</span>');
-				}else{
-					var button = $('<span style="color:red;">逾期'+(iDays-10)+'天</span>');
-				}
-				return button;
-				
+			if(data.bdqk==""||data.bdqk=="03"){	
+				if(data.sqjzryjsrq!="" && data.sqjzryjsrq!=null){
+					var iDays=datedifference(data.sqjzryjsrq,new Date());
+					if(iDays<=10){
+						var button = $('<span>剩余'+(10-iDays)+'天</span>');
+					}else{
+						var button = $('<span style="color:red;">逾期'+(iDays-10)+'天</span>');
+					}
+					return button;
+				}		
 			}else{
-				var button = $('<span></span>');
-				return button;
+					var button = $('<span></span>');
+					return button;
 			}
 		
 		});
@@ -138,21 +148,15 @@
 			}));
 		})
 		
-		$("#baod").click(function(){
-			var iDays=datedifference(data.sqjzryjsrq,new Date());
-			if(iDays<10){
-				json.bdqk="01";
-			}else if(iDays>=10){
-				json.bdqk="02";
-			}
-			service.saveBd(json,new Eht.Responder({
+		$("#Xfzx_btn").click(function(){
+			service.saveOne(json,new Eht.Responder({
 				success:function(){
 					$('#myModal_bddj').modal('hide');
 					tableView.refresh();
 					new Eht.Tips().show();
 				}
 			}));
-		})
+		}) 
 		
 		$("#yes").click(function(){
 				
@@ -167,10 +171,14 @@
 		$("#Sqjz_bddj #quxiaobtnCj").click(function(){//单击取消按钮
 			$("#Sqjz_bddj #hideDivCj").hide();
 		});
-		$("#close").hide();
+		
 		$("#close").click(function(){
 			 $(".modal-backdrop").remove();
 			$('#myModal_bddj').modal('hide');
+		})
+		$("#gb").click(function(){
+			 $(".modal-backdrop").remove();
+			$('#myModal').modal('hide');
 		})
 		
 		//两个时间相差天数 兼容firefox chrome
@@ -229,7 +237,7 @@
 						
 					</div>
 					<div class="modal-footer">
-						<button id="dagl_list_btn_primary" type="button" class="btn btn-default register">登记</button>
+						<button id="Xfzx_btn" type="button" class="btn btn-default register">登记</button>
 						<button id="close" type="button" class="btn btn-default" >关闭</button>
 					</div>
 				</div>
@@ -244,13 +252,14 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="false">
 							&times;
 						</button>
-						<h4 class="modal-title" id=title>人员登记</h4>
+						<h4 class="modal-title" id=title>报到补录</h4>
 					</div>
-					<div class="modal-body" id="jbxx" style="overflow: hidden;">
+					<div class="modal-body" id="jbxx" style="height:510px;overflow-y:auto;overflow-x:hidden;">
 						
 					</div>
 					<div class="modal-footer">
 						<button id="baod" type="button" class="btn btn-default">登记</button>
+						<button id="gb" type="button" class="btn btn-default" >关闭</button>
 					</div>
 				</div>
 			</div>

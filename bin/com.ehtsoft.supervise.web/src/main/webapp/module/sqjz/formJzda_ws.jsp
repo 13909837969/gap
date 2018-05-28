@@ -52,29 +52,29 @@
 							<tr>
 								<td >社区矫正决定机关</td>
 								<td colspan="3">
-										<input radio="true"  name="sqjzjdjg"  code="sys055"/>
+										<input radio="true" label="社区矫正决定机关" valid="{required:true}" name="sqjzjdjg"  code="sys055"/>
 									</td>
 								<td >社区矫正决定机关名称</td>
-								<td><input style="height: 46px;width: 100%;" name="sqjzjdjgmc" class="td1"></td>
+								<td><input style="height: 46px;width: 100%;"label="社区矫正决定机关名称" valid="{required:true}" name="sqjzjdjgmc" class="td1"></td>
 							</tr>
 							<tr>
 								<td>执行通知文书号</td>
-								<td colspan="2" ><input style="height: 46px;width: 100%;" name="zxtzswh" class="td1"></td>
+								<td colspan="2" ><input style="height: 46px;width: 100%;"label="执行通知文书号" valid="{required:true}" name="zxtzswh" class="td1"></td>
 								<td>执行通知文书日期</td>
-								<td colspan="2" ><input name="zxtzsrq" style="cursor: pointer;" class="form_date" readonly="readonly"/><span class="glyphicon glyphicon-list-alt"></span></td>
+								<td colspan="2" ><input name="zxtzsrq" style="cursor: pointer;"label="执行通知文书日期" valid="{required:true}" class="form_date" readonly="readonly"/><span class="glyphicon glyphicon-list-alt"></span></td>
 							</tr>
 							<tr>
 								<td>交付执行日期</td>
-								<td colspan="2"><input name="jfzxrq" style="cursor: pointer;"  class="form_date"  readonly="readonly"/><span class="glyphicon glyphicon-list-alt"></span></td>
+								<td colspan="2"><input name="jfzxrq" style="cursor: pointer;"label="交付执行日期" valid="{required:true}"  class="form_date"  readonly="readonly"/><span class="glyphicon glyphicon-list-alt"></span></td>
 								<td>移交罪犯机关</td>
 								<td colspan="2">
-									<input  radio="true" name="yjzfjg"  code="sys056"/>
+									<input  radio="true" name="yjzfjg" label="移交罪犯机关" valid="{required:true}" code="sys056"/>
 								
 								</td>
 							</tr>
 							<tr>
 								<td>移交罪犯机关名称</td>
-								<td colspan="5"><input style="height: 46px;width: 100%;" name="yjzfjgmc" class="td1"></textarea>
+								<td colspan="5"><input style="height: 46px;width: 100%;"label="移交罪犯机关名称" valid="{required:true}" name="yjzfjgmc" class="td1"></textarea>
 							<tr>
 								<td>是否有前科</td>
 								<td id="sfyqk">
@@ -91,7 +91,7 @@
 							</tr>
 							<tr>
 								<td >主要犯罪事实</td>
-								<td colspan="5"><textarea name="zyfzss" style="width:100%;height:100%;border: none;resize: none;overflow: hidden;outline: none;padding: 0px;"></textarea></td>
+								<td colspan="5"><textarea name="zyfzss"label="主要犯罪事实" valid="{required:true,hasChinese:true}" style="width:100%;height:100%;border: none;resize: none;overflow: hidden;outline: none;padding: 0px;"></textarea></td>
 							</tr>
 						
 						

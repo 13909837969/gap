@@ -530,7 +530,7 @@
 						<table border="1" cellspacing="0" id="table_view" align="center">
 							<tr>
 								<td>被告人</td>
-								<td colspan="1"><input name="bgrxm" label="被告人" type="text" class="input_1" valid="{required:true,onlyChinese : true}"></td>
+								<td colspan="1"><input name="bgrxm" label="被告人" type="text" class="input_1" valid="{required:true,onlyChinese:true}"></td>
 								<td>性别</td>
 								<td colspan="2">
 								<input  name="bgrxb" code="sys000" label="性别"  radio="true" valid="{required:true}"/>
@@ -552,24 +552,30 @@
 							</tr>
 							<tr>
 								<td>身份证号码</td>
-								<td colspan="2"><input id="bgrsfzh"label="身份证号码" name="bgrsfzh" type="text" class="input_1"valid="{required:true, cardNo:true}"></td>
+								<td colspan="2"><input id="bgrsfzh"label="身份证号码" name="bgrsfzh" type="text" class="input_1"valid="{required:true,cardNo:true}"></td>
 								<td >出生日期</td>
-								<td ><input id="bgrcsrq" name="bgrcsrq"label="" type="text" class="input_1" ></td>
+								<td ><input id="bgrcsrq" name="bgrcsrq"label="出生日期" type="text" valid="{required:true,date:true}"class="input_1" ></td>
+							</tr>
+							<tr>
+								
+								<td>拟适用社区矫正人员类型</td>
+								<td colspan="4"><input name="nsysqjzrylx" id="nsysqjzrylx" radio="true" type="text" code="sys008"valid="{required:true}"></td>
+								
 							</tr>
 							<tr>
 								<td>居住地地址</td>
-								<td colspan="4"><input name="bgrjzddz"label="" class="input_1" type="text"></td>
+								<td colspan="4"><input name="bgrjzddz"label="居住地地址" valid="{required:true,hasChinese:true}"class="input_1" type="text"></td>
 							</tr>
 							<tr>
 								<td >罪名</td>
-								<td><input name="zm"  class="input_1"label="罪名" valid="{required:true,onlyChinese:true}"></td>
+								<td colspan="2"><input name="zm"  class="input_1"label="罪名" valid="{onlyChinese:true}"></td>
 								<td >工作单位</td>
-								<td colspan="2"><input name="bgrgzdw" label=""class="input_1"></td>
+								<td colspan="2"><input name="bgrgzdw" label="工作单位"valid="{onlyChinese:true}label=""class="input_1"></td>
 							</tr>
 							<tr>
 								<td>原判刑罚</td>
 								<td colspan="5">
-									<input radio="true" name="ypxf" label="原判刑罚"type="text" code="sys012" getdis="true"valid="{required:true}"/>
+									<input radio="true" name="ypxf" label="原判刑罚"type="text" code="sys012" getdis="true"/>
 								</td>
 								<!-- <td >与被告人（罪犯）关系</td>
 								<td><input name="ybgrgx" type="text" code="sys097"></td> -->
@@ -582,19 +588,19 @@
 							</tr>
 							<tr>
 								<td >判决机关</td>
-								<td><input name="pjjg" label="判决机关"type="text" class="input_1" style="height: 45px;"valid="{required:true}"></td>
+								<td><input name="pjjg" label="判决机关"type="text" class="input_1" style="height: 45px;"></td>
 								<td >原判刑期起止日</td>
 								<td >
-									自<input type="text" label="原判刑期起止日"name="ypxqksrq" id="ypxqksrq"  class="form_date" style="width: 75px;text-align: center;cursor: pointer;" readonly="readonly"getdis="true"valid="{required:true}"/>起&nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span><br/>
-									至<input type="text" label="原判刑期起止日"name="ypxqjsrq" id="ypxqjsrq"  class="form_date" style="width: 75px;text-align: center;cursor: pointer;"readonly="readonly"getdis="true"valid="{required:true}"/>止&nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span>
+									自<input type="text" label="原判刑期起止日"name="ypxqksrq" id="ypxqksrq"  class="form_date" style="width: 75px;text-align: center;cursor: pointer;" readonly="readonly"getdis="true"valid="{date:true}"/>起&nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span><br/>
+									至<input type="text" label="原判刑期起止日"name="ypxqjsrq" id="ypxqjsrq"  class="form_date" style="width: 75px;text-align: center;cursor: pointer;"readonly="readonly"getdis="true"valid="{date:true}"/>止&nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span>
 								</td>
 								<td>原判刑期</td>
-								<td><input getdis="true"label="原判刑期" name="ypxq" id="ypxq" type="text" class="input_1"style="height: 45px;" ></td>
+								<td><input getdis="true"label="原判刑期" name="ypxq" id="ypxq" type="text" class="input_1"style="height: 45px;" readonly="readonly" ></td>
 							</tr>
 							
 							<tr>
 								<td >判决日期</td>
-								<td colspan="1"><input label="判决日期"name="pjrq" type="text" class="form_date input_2" readonly="readonly"valid="{required:true}"><span class="glyphicon glyphicon-list-alt"></span></td>
+								<td colspan="1"><input label="判决日期"name="pjrq" type="text" class="form_date input_2" readonly="readonly"valid="{date:true}"><span class="glyphicon glyphicon-list-alt"></span></td>
 								<td>委托机构类别</td>
 								<td colspan="3"><input label="委托机构类别"type="text" name="wtjglb" code="sys206" radio="true"valid="{required:true}">
 							</tr>
@@ -616,8 +622,8 @@
 								<td colspan="5">
 									<form id="listDcpg_wtsfj_uploadForm"  method="post" enctype="multipart/form-data" target="importFrame" style="margin:0px;padding:0px;">
 										<!-- 文件上传成功或失败的回调方法 -->
-										<input type="file"  accept="image/jpg,image/png,application/pdf,application/msword" name="fname" id="listDcpg_wtsfj" style="margin-left:50px;">
-										<iframe id="attachment"  name="importFrame" style="width:0;height:0;display:none;"></iframe>
+										<input type="file"  accept="image/jpg,image/png,application/pdf,application/msword" name="fname" id="listDcpg_wtsfj" style="margin-left:50px;" valid="{required:true}">
+										<iframe id="attachment" label="委托调查书" name="importFrame" style="width:0;height:0;display:none;"></iframe>
 									</form>
 								</td>
 							</tr>	

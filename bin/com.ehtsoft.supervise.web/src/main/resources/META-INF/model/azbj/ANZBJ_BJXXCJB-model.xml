@@ -3,10 +3,10 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_BJXXCJB" label="帮教信息采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="JZ_JZRYJBXX.ID"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
     <column field="SFBJ" type="string" length="2" label="是否帮教" remark="编码见 6.82"/>
     <column field="BJSJ" type="string" length="20" label="帮教时间" remark="自填，格式按照 GB/T 7408 中规定"/>
-    <column field="BJBX" type="string" length="10" label="帮教表现" remark="编码见 6.38"/>
+    <column field="BJBX" type="string" length="10" label="帮教表现" remark="编码见 6.38(SYS159)"/>
     <column field="SFSHZZCYBJ" type="string" length="2" label="是否社会组织参与帮教" remark="编码见 6.82"/>
     <column field="del" type="integer" length="1" defaultValue="0" label="删除标记" remark="0 没有删除   1 已经被删除"/>
     <column field="audit" type="integer" length="1" defaultValue="0" label="审核标记" remark="0、未审核状态 1、通过"/>

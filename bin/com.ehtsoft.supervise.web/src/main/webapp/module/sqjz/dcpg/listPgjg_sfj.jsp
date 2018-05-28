@@ -111,49 +111,13 @@
 					service.findPgwc(querySearch, page, res);
 				});
 
-				//查看附件按钮事件
-				tableView
-						.transColumn(
-								"ckfj",
-								function(data) {
-
-									var button = $('<button  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看</button>');
-									button
-											.unbind("click")
-											.bind(
-													"click",
-													function() {
-														$(
-																"#myModal_fjxx #listPgjg_fjxxIMG")
-																.attr(
-																		"src",
-																		"${localCtx}/image/RMIImageService?_table_name=JZ_WTSJLB_FJ&id="
-																				+ data.id);
-														//上传文件事件
-														if (data.id != null) {
-															var callbackJzryjbxxImg = function(
-																	msg) {
-																new Eht.Tips()
-																		.show(msg);
-																return false;
-															};
-														}
-														$('#myModal_fjxx')
-																.modal(
-																		{
-																			backdrop : 'static'
-																		});
-
-														return false;
-													})
-									return button;
-								});
+				
 				//生成评估意见按钮事件
 				var query = {};
 				var json={};
 				tableView.clickRow(function(data){
 					json=data;
-					
+					debugger;
 				});
 				
 				tableView.transColumn("cz",function(data) {
@@ -165,13 +129,7 @@
 							json=data;
 							formJs.fill(json);
 							$("#form_id").val(data.id);
-							console.log(data.id);
-							service.findSfj(json.sfsid,new Eht.Responder({
-								success : function(data) {
-									
-									$("#dcdwxqj").text(data.jgmc);
-								}
-							}));
+							
 							$("#listDcpg_wtsfj_uploadForm").attr("action","${localCtx}/upload/RMIImageService?_table_name=JZ_WTSJLB_FJ&id="+data.id);
 							$("#zp").attr("src","${localCtx}/image/RMIImageService?_table_name=SYS_FACE_IMG&imgid="+data.id+"&icon=per"); 
 							
@@ -191,7 +149,7 @@
 												$("#span2").html(data.dcsj);
 												$("#span3").html(new Date().format("yyyy-MM-dd"));
 												$("#span9").html(data.dcsx);//调查内容
-												$("#span10").html(data.pgyj);//评估意见
+												$("#span10").html(data.remark);//评估意见
 												$("#span1").html(data.wtdw);//委托机构
 												$("#span8").html(data.bgrxm);//被调查人
 											}
@@ -220,43 +178,21 @@
 									success : function() {
 										$('#listPgjg #myModal_SfsTjwtxx').modal('hide');
 										tableView.refresh();
-
+										new Eht.Tips().show();
 									}
 
 								}))
 					}		
 				})
 
-				var textareaName2 = "#pgyj_sfj";//备注输入框id
-				var spanName2 = "#text-count2";//计数span的id
-				$(textareaName2).click(function() {
-					countChar2(textareaName2, spanName2);
-				});
-				$(textareaName2).keyup(function() {
-					countChar2(textareaName2, spanName2);
-				});
-				$(textareaName2).keydown(function() {
-					countChar2(textareaName2, spanName2);
-				});
-				function countChar2(textareaName2, spanName2) {
-					if ($(textareaName2).val() != "") {
-						$(spanName2).text(
-								"" + $(textareaName2).val().length + "/100");
-						if ($(textareaName2).val().length > 0) {
-							$(spanName2).css("color", "#3F51B5");
-						}
-						;
-						if ($(textareaName2).val().length > 50) {
-							$(spanName2).css("color", "#FF0000");
-						}
-					} else {
-						$(spanName2).text("0/100");
-					}
-				}
+			
 				
 				$("#listPgjg #listDcpg_wtsfj").change(function(){
 					$("#listDcpg_wtsfj_uploadForm").submit(); 
 			
+				})
+				$("#close").click(function(){
+					$('#listPgjg #myModal_SfsTjwtxx').modal('hide');
 				})
 				
 				
@@ -430,9 +366,9 @@
 							
 							<tr>
 								<td >调查人</td>
-								<td colspan="2"><div fidld="dcr" class="input_1" ></div></td>
+								<td colspan="2"><div field="dcr" class="input_1" style="line-height: 37px;"></div></td>
 								<td >调查意见审核人 </td>
-								<td colspan="2"><div field="dcyjshr" class="input_1"></div></td>
+								<td colspan="2"><div field="dcyjshr" class="input_1" style="line-height: 37px;"></div></td>
 								
 							</tr> 
 							<tr>
@@ -440,19 +376,27 @@
 								<td colspan="2"><div field="dcdwsfs" ></div></td>
 								<td >调查单位（县区局） </td>
 								<td colspan="2"><div field="dcdwxqj" id="dcdwxqj"></div></td>
-							</tr> 
+							</tr>
+							<tr>
+								<td>司法所评估意见</td>
+								<td colspan="5">
+									<div  field="pgyj"></div>
+								</td>
+							</tr>
 							<tbody id="form_pgjg">
-								
+								<tr>
+									<td colspan="6" style="font-size: 18px;">司&nbsp;&nbsp;法&nbsp;&nbsp;局&nbsp;&nbsp;审&nbsp;&nbsp;核</td>
+								</tr>
 								<input id="form_id" name="id" type="hidden">
 								
 								<tr>
-									<td>拟适用社区矫正人员类型</td>
-									<td colspan="5"><input name="nsysqjzrylx" id="nsysqjzrylx" radio="true" type="text" code="sys008"valid="{required:true}"></td>
+									<td>拟适用矫正类别</td>
+									<td colspan="5"><input name="nsysqjzrylx" id="nsyjzlb" radio="true" type="text" code="sys017"valid="{required:true}"></td>
 								</tr>
 								<tr>
-									<td>评估意见</td>
+									<td>司法局审核意见</td>
 									<td colspan="5">
-										<textarea rows="3" name="pgyj" style="border:none; resize: none;overflow: hidden; width: 100%;height: 50px;outline: none;"valid="{required:true}"></textarea>
+										<textarea rows="3" name="remark" style="border:none; resize: none;overflow: hidden; width: 100%;height: 50px;outline: none;"valid="{required:true}"></textarea>
 									</td>
 								</tr>
 							<tr>
@@ -470,8 +414,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button id="sure" type="button" class="btn btn-default"
-							style="margin-right: 30px; background: transparent;">提交</button>
+						<button id="sure" type="button" class="btn btn-default"style="margin-right: 30px; background: transparent;">提交</button>
+						<button id="close" type="button" class="btn btn-default"style="margin-right: 30px; background: transparent;">关闭</button>
 					</div>
 				</div>
 			</div>

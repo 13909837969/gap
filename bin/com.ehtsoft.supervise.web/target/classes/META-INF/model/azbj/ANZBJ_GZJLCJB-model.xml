@@ -4,12 +4,12 @@
   <table name="ANZBJ_GZJLCJB" label="工作记录采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
     <column field="AZBJRYID" type="uuid" length="36" label="帮教对象ID" remark="矫正人员ID"/>
-    <column field="XSBX" type="string" length="50" label="现实表现" remark="编码见 6.51"/>
-    <column field="GZQK" type="string" length="50" label="工作情况" remark="编码见 6.52"/>
-    <column field="JJZK" type="string" length="50" label="经济状况" remark="编码见 6.53"/>
-    <column field="JTQK" type="string" length="50" label="家庭情况" remark="编码见 6.54"/>
-    <column field="HDCS" type="string" length="50" label="活动场所" remark="编码见 6.55"/>
-    <column field="SHJW" type="string" length="50" label="社会交往" remark="编码见 6.56"/>
+    <column field="XSBX" type="string" length="50" label="现实表现" remark="编码见 6.51(sys149)"/>
+    <column field="GZQK" type="string" length="50" label="工作情况" remark="编码见 6.52(sys150)"/>
+    <column field="JJZK" type="string" length="50" label="经济状况" remark="编码见 6.53(sys240)"/>
+    <column field="JTQK" type="string" length="50" label="家庭情况" remark="编码见 6.54(sys151)"/>
+    <column field="HDCS" type="string" length="50" label="活动场所" remark="编码见 6.55(sys152)"/>
+    <column field="SHJW" type="string" length="50" label="社会交往" remark="编码见 6.56(sys153)"/>
     <column field="KNHWT" type="string" length="200" label="困难和问题" remark="自填"/>
     <column field="ZRQMJ" type="string" length="50" label="责任区民警" remark="自填"/>
     <column field="SJ" type="string" length="20" label="时间" remark="自填，格式按照 GB/T"/>

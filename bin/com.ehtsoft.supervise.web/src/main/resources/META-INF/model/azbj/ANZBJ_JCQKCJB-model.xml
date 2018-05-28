@@ -3,7 +3,7 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_JCQKCJB" label="奖惩情况采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="AZBJRYID" type="string" length="36" label="安置帮教人员编号" remark="编码见 6.3"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
     <column field="SJ" type="string" length="20" label="时间" remark="自填，格式按照 GB/T7408 中规定"/>
     <column field="BM" type="string" length="100" label="部门" remark="自填"/>
     <column field="SY" type="string" length="200" label="事由" remark="自填"/>

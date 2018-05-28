@@ -86,7 +86,7 @@ var sqjzry_yzqkForm = $(function(){
 				<hr style="width: 93%;clear: both;border-color: #aaa;border-width: 1px;border-style: solid;"/>
 					<input id="sszm" name="sszm" type="text" label="所涉罪名" code="sys014" valid="{required:true}"/>
 					<input  name="zcjg" type="text" label="侦查机关" valid="{required:true}" >
-					<input id="bcqqzcssj" name="bcqqzcssj" type="text" label="被采取强制措施时间" code="sys083" class="form_date" data-date-format="yyyy-MM-dd"/>
+					<input id="bcqqzcssj" name="bcqqzcssj" type="text" label="被采取强制措施时间" class="form_date" data-date-format="yyyy-MM-dd"/>
 					<input  name="spjg" type="text" label="审判机关" valid="{required:true}" >
 					<input  name="zm" type="text" label="罪名" valid="{required:true}" >
 					<input  name="xq" type="text" label="刑期" valid="{required:true}" >

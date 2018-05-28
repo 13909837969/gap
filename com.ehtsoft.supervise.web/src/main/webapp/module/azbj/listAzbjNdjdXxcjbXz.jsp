@@ -101,7 +101,7 @@ $(function() {
 	});
 	//模态框查询矫正人员信息事件
 	function huixian(){
-		service.findJz(new Eht.Responder({
+		conmmonService.findYxjry(new Eht.Responder({
 			success:function(data){
 			$("#jzryxx_xmajglx").empty();
 			$("#jzryxx_xmajglx").append('<option></option>');
@@ -177,7 +177,7 @@ $(function() {
 						<input type="hidden" name="id"> 
 						<select id="jzryxx_xmajglx" name="azbjryid" label="安置帮教人员编号"></select>
 						<!-- 添加信息-->
-						<input name="nd" type="text" label="年度" valid="{required:true,number:true}" > 
+						<input name="nd" type="text" label="年度" valid="{required:true}" > 
 						<input name="dqzfthqk" type="text" label="定期走访谈话情况"valid="{required:true}">
 						<input name="bjxzcylsqk" type="text" label="帮教小组成员落实情况"valid="{required:true}"> 
 						<input name="jzjzqk" type="text" label="卷宗记载情况"valid="{required:true}">

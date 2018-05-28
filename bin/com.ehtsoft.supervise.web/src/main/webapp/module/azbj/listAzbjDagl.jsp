@@ -44,9 +44,10 @@ $(function() {
 		var sd_ry = table.getSelectedData();
 		if (sd_ry.length == 1) {
 		$('#myModal').modal();
-		moed.fill($(":checkbox:checked").data());
+		moed.fill($("#azbj_table :checkbox:checked").data());
 		form.disable();
-		formx.disable();}
+		formx.disable();
+		$("#btn_submit").hide();}
 		else{
 			var ale = new Eht.Alert();
 			ale.show("请选中一条数据进行操作!");
@@ -57,9 +58,10 @@ $(function() {
 		var sd_ry = table.getSelectedData();
 		if (sd_ry.length == 1) {
 		$('#myModal').modal({backdrop:'static'});
-		moed.fill($(":checkbox:checked").data());
+		moed.fill($("#azbj_table :checkbox:checked").data());
 		form.disable();
-		formx.enable();} 
+		formx.enable();
+		$("#btn_submit").show();} 
 		else{
 			var ale = new Eht.Alert();
 			ale.show("请选中一条数据进行操作!");
@@ -77,6 +79,8 @@ $(function() {
 					table.refresh();
 					}
 				}))
+			}else{
+				new Eht.Tips().show("保存失败");
 			}
 		})
 	});	
@@ -96,10 +100,6 @@ $(function() {
 		<div class="form-group">
 			<label for="xm">姓名</label>
 			<input type="text" class="form-control" name="xm[like]"  placeholder="姓名">
-		</div>
-		<div class="form-group" style="margin-left:10px;">
-			<label for="sfzh">身份证号</label>
-			<input type="text" class="form-control" name="sfzh[like]"  placeholder="身份证号">
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="xb">性别</label>
@@ -164,40 +164,31 @@ $(function() {
 						<input type="hidden" name="azbjryid"/>							
 					</div>
 						<input type="text" name="tiqian"   label="是否减刑提前释放" valid="{required:true}"  code="sys247" />						
-						<input type="text" name="tq_reason" label="减刑提前释放原因"  /> 
+						<input type="text" name="tq_reason" label="减刑提前释放原因" valid="{required:true}" /> 
 						<input type="text" name="critype" label="罪名"   code="sys096"   valid="{required:true}"/>
-						<input type="text" name="pritime" label="刑期"   code="sys220" />
-						<input type="text" name="drughis" label="吸毒史"   code="sys222" />
-						<input type="text" name="precri" label="是否累犯"   code="sys221" />
-						<input type="text" name="addition" label="附加刑"   code="sys013" />
-						<input type="text" name="peixun" label="是否参加职业技能培训"   code="sys223" />
-						<input type="text" name="jineng" label="是否获得职业技能证书"   code="sys224" />
-						<input type="text" name="xinli" label="是否心理健康"   code="sys225" />
-						<input type="text" name="lianxi" label="家庭联系情况"   code="sys044" />
-						<input type="text" name="sanwu" label="是否三无人员"   code="sys226" />
-						<input type="text" name="pinggu" label="危险性评估"   code="sys043" />
-						<input type="text" name="gaizao" label="改造表现"   code="sys165" />
-						
-						<input type="text" name="renzui" label="认罪态度"   code="sys042" />
-						
-						<!-- <input type="text" name="remark" label="服刑期间特殊情况备注及帮教建议"    /> -->
-						<input type="text" name="jiuyi" label="是否办理保外就医"   code="sys247" />
-						<input type="text" name="siwang" label="是否死亡"   code="sys247" />
-						
-						<input type="text" name="sw_reason" label="死亡原因"   code="sys248" />
+						<input type="text" name="pritime" label="刑期"   code="sys220"  valid="{required:true}"/>
+						<input type="text" name="drughis" label="吸毒史"   code="sys222"   valid="{required:true}"/>
+						<input type="text" name="precri" label="是否累犯"   code="sys221"   valid="{required:true}"/>
+						<input type="text" name="addition" label="附加刑"   code="sys013"   valid="{required:true}"/>
+						<input type="text" name="peixun" label="是否参加职业技能培训"   code="sys223"   valid="{required:true}"/>
+						<input type="text" name="jineng" label="是否获得职业技能证书"   code="sys224"   valid="{required:true}"/>
+						<input type="text" name="xinli" label="是否心理健康"   code="sys225"   valid="{required:true}"/>
+						<input type="text" name="lianxi" label="家庭联系情况"   code="sys044"  valid="{required:true}"/>
+						<input type="text" name="sanwu" label="是否三无人员"   code="sys226"   valid="{required:true}"/>
+						<input type="text" name="pinggu" label="危险性评估"   code="sys043"   valid="{required:true}"/>
+						<input type="text" name="gaizao" label="改造表现"   code="sys165"   valid="{required:true}"/>						
+						<input type="text" name="renzui" label="认罪态度"   code="sys042"   valid="{required:true}"/>						
+						<input type="text" name="jiuyi" label="是否办理保外就医"   code="sys247"   valid="{required:true}"/>
+						<input type="text" name="siwang" label="是否死亡"   code="sys247"  valid="{required:true}"/>						
+						<input type="text" name="sw_reason" label="死亡原因"   code="sys248"  />
 						<textarea  rows="8" name="remark"  id="remark" type="text" maxlength="250" label="服刑期间特殊情况备注及帮教建议" ></textarea>
-												<textarea  rows="8" name="sw_shuoming"  id="sw_shuoming" type="text" maxlength="250" label="死亡说明" ></textarea>
-						<!-- <input type="text" name="" label=""    /> -->
-						
-						<!-- <input type="text" name="tongzhishu" label="刑满释放（解除社区矫正）人员通知书"    />	 -->	
-					  
+						<textarea  rows="8" name="sw_shuoming"  id="sw_shuoming" type="text" maxlength="250" label="死亡说明" ></textarea>											  
 					</div>
 				</div>
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer" id="modal-footer">
 				<button id="btn_submit" class="btn btn-primary" type="button">保存</button>
 				<button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
-				
 			</div>
 		</div>
 	</div>

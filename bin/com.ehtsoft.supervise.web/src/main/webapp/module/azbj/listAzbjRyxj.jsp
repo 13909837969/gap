@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>	
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -14,6 +13,11 @@ $(function() {
 	var jzryjbxx_form = new Eht.Form({
 		formCol : 2,
 		selector : "#jzryjbxx_form",
+		autolayout : true
+	});
+	var azbj_ryxj_form_tow = new Eht.Form({
+		formCol : 2,
+		selector : "#azbj_ryxj_form_tow",
 		autolayout : true
 	});
 	//人员衔接查询
@@ -31,8 +35,11 @@ $(function() {
 		selector : "#azbj_ryxj_table",
 		multable : false
 	});
+	var xjpanduan = null;
 	//增加
 	$("#btn_add").click(function() {
+		xjpanduan = 2;
+		$("#btn_save").show();
 		azbj_ryxj_form.enable();
 		azbj_ryxj_form.clear();
 		$("#jzryjbxx_form").show();
@@ -44,15 +51,32 @@ $(function() {
 	//保存
 	$("#btn_save").click(function(res) {
 		var azbj_data = azbj_ryxj_form.getData();
-		if (azbj_ryxj_form.validate()) {
-			azbjRyxj.saveAzbj(azbj_data, new Eht.Responder({
-				success : function() {
-					$("#azbj_ryxj_modal").modal("hide");
-					new Eht.Tips().show("保存成功");
-					azbj_ryxj_table.refresh();
-				}
-			}))
-		} else {
+		var ryxjw = azbj_ryxj_form_tow.getData();
+		if(xjpanduan == 1){
+			if(azbj_ryxj_form_tow.validate()){
+				azbjRyxj.saveAzbj(ryxjw, new Eht.Responder({
+					success : function() {
+						$("#azbj_ryxj_modal").modal("hide");
+						new Eht.Tips().show("保存成功");
+						azbj_ryxj_table.refresh();
+					}
+				}))
+			}else{
+				new Eht.Tips().show("保存失败");
+			}
+		}else if(xjpanduan == 2){
+			if (azbj_ryxj_form.validate()) {
+				azbjRyxj.saveAzbj(azbj_data, new Eht.Responder({
+					success : function() {
+						$("#azbj_ryxj_modal").modal("hide");
+						new Eht.Tips().show("保存成功");
+						azbj_ryxj_table.refresh();
+					}
+				}))
+			} else {
+				new Eht.Tips().show("保存失败");
+			}
+		}else{
 			new Eht.Tips().show("保存失败");
 		}
 	})
@@ -60,6 +84,7 @@ $(function() {
 	$("#btn_deitor").click(function() {
 		var sd_ry = azbj_ryxj_table.getSelectedData();
 		if (sd_ry.length == 1) {
+			$("#btn_save").show();
 			azbj_ryxj_form.enable();
 			$("#jzryjbxx_form").hide();
 			$("#azbj_ryxj_form").show();
@@ -73,9 +98,10 @@ $(function() {
 		}
 	})
 	//查看一条数据
-	$("#btn_check").click(function() {
+	$("#btn_search").click(function() {
 		var sd_ry = azbj_ryxj_table.getSelectedData();
 		if (sd_ry.length == 1) {
+			$("#btn_save").hide();
 			$("#jzryjbxx_form").hide();
 			$("#azbj_ryxj_form").show();
 			$("#azbj_ryxj_modal").modal({
@@ -90,6 +116,7 @@ $(function() {
 	})
 	//衔接
 	$("#btn_xjan").click(function() {
+		xjpanduan = 1;
 		var sd_ry = azbj_ryxj_table.getSelectedData();
 		if (sd_ry.length == 1) {
 			azbj_ryxj_form.enable();
@@ -120,14 +147,14 @@ $(function() {
 			$("#query_xjtj").enable();
 			$("#query_xjsj").enable();
 			$("#btn_add").attr("disabled", false);
-			$("#btn_check").attr("disabled", false);
+			$("#btn_search").attr("disabled", false);
 			$("#btn_deitor").attr("disabled", false);
 			$("#btn_xjan").attr("disabled", true);
 		} else {
 			$("#query_xjtj").disable();
 			$("#query_xjsj").disable();
 			$("#btn_add").attr("disabled", true);
-			$("#btn_check").attr("disabled", true);
+			$("#btn_search").attr("disabled", true);
 			$("#btn_deitor").attr("disabled", true);
 			$("#btn_xjan").attr("disabled", false);
 		}
@@ -140,7 +167,7 @@ $(function() {
 		<button type="button" id="btn_add" class="btn btn-default" style="margin-left: 10px;">
 			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 		</button>
-		<button type="button" id="btn_check" class="btn btn-default" style="margin-left: 10px;">
+		<button type="button" id="btn_search" class="btn btn-default" style="margin-left: 10px;">
 			<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看
 		</button>
 		<button type="button" id="btn_deitor" class="btn btn-default" style="margin-left: 10px;">
@@ -162,7 +189,7 @@ $(function() {
 			</div>
 			<div class="form-group" style="margin-left: 10px;">
 				<label for="xjsj">衔接时间</label> 
-				<input id="query_xjsj" type="text" name="xjsj[like]" valid="{required:true}" class="form_date form-control" data-date-format="yyyy-MM-dd" />
+				<input id="query_xjsj" type="text" name="xjsj[like]" class="form_date form-control" data-date-format="yyyy-MM-dd" />
 			</div>
 			<div class="form-group" style="margin-left: 10px;">
 				<label for="xjsj">衔接</label> 
@@ -199,12 +226,12 @@ $(function() {
 				<div class="modal-body">
 					<div id="azbj_ryxj_form" class="tab-pane active">
 						<div id="jzryjbxx_form" class="tab-pane active">
-							<input type="text" id="xm" autoComplete="off" name="xm" label="姓名" valid="{required:true}" /> 
+							<input type="text" id="xm" name="xm" label="姓名" valid="{required:true}" /> 
 							<input type="text" name="cym" id="cym" label="曾用名" valid="{required:true}" /> 
 							<input type="text" name="xb" id="xb" label="性别" valid="{required:true}" code="sys000" /> 
 							<input type="text" name="mz" id="mz" label="民族" valid="{required:true}" code="sys003" /> 
 							<input type="text" name="sfzh" id="sfzh" label="身份证号" valid="{required:true,cardNo:true}" /> 
-							<input type="text" name="csrq" id="csrq" label="出生日期" placeholder="出生日期" valid="{required:true}" class="form_date" data-date-format="yyyy-MM-dd"/> 
+							<input type="text" name="csrq" id="csrq" label="出生日期" valid="{required:true}" class="form_date form-control" data-date-format="yyyy-MM-dd"/> 
 							<input type="text" name="grlxdh" label="手机号" id="grlxdhsjh" valid="{mobile:true}" /> 
 							<input type="text" name="sfcn" id="sfcn" label="是否成年" code="sys001" valid="{required:true}"/> 
 							<input type="text" name="wcn" id="wcn" label="未成年" code="sys035" valid="{required:true}"/> 
@@ -220,16 +247,18 @@ $(function() {
 							<input type="text" name="jyjxqk" label="就业就学情况" id="jyjxqk" code="sys031" valid="{required:true}" /> 
 							<input type="text" name="sbqsf" label="搜捕前身份" valid="{required:true}" code="SYS137" />
 						</div>
-						<input type="text" name="ygzdw" label="原工作单位" valid="{required:true}" /> 
-						<input type="text" name="ch" label="绰号" valid="{required:true}" /> 
-						<input type="text" name="xjsj" label="衔接时间" valid="{required:true}" class="form_date" data-date-formate="yyyy-MM-dd" /> 
-						<input type="text" name="hyzk" label="婚姻状况" valid="{required:true}" code="SYS030" /> 
-						<input type="text" name="xjtj" label="衔接途径" valid="{required:true}" code="SYS134" /> 
-						<input type="text" name="bjlx" label="帮教类型" valid="{required:true}" code="SYS043" />
-						<input type="text" name="gajgsflsgkcs" label="公安机关是否落实管控措施" valid="{required:true}" code="SYS001" /> 
-						<input type="text" name="ybbjdxxjfs" label="一般帮教对象衔接方式" valid="{required:true}" code="SYS135" /> 
-						<input type="text" name="zdbjdxxjfs" label="重点帮教对象衔接方式" valid="{required:true}" code="SYS136" /> 
-						<input type="hidden" name="xjid">
+						<div id="azbj_ryxj_form_tow" class="tab-pane active">
+							<input type="text" name="ygzdw" label="原工作单位" valid="{required:true}" /> 
+							<input type="text" name="ch" label="绰号" valid="{required:true}" /> 
+							<input type="text" name="xjsj" label="衔接时间" valid="{required:true}" class="form_date form-control" data-date-formate="yyyy-MM-dd" /> 
+							<input type="text" name="hyzk" label="婚姻状况" valid="{required:true}" code="SYS030" /> 
+							<input type="text" name="xjtj" label="衔接途径" valid="{required:true}" code="SYS134" /> 
+							<input type="text" name="bjlx" label="帮教类型" valid="{required:true}" code="SYS043" />
+							<input type="text" name="gajgsflsgkcs" label="公安机关是否落实管控措施" valid="{required:true}" code="SYS001" /> 
+							<input type="text" name="ybbjdxxjfs" label="一般帮教对象衔接方式" valid="{required:true}" code="SYS135" /> 
+							<input type="text" name="zdbjdxxjfs" label="重点帮教对象衔接方式" valid="{required:true}" code="SYS136" /> 
+							<input type="hidden" name="xjid">
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer" id="modal-footer">

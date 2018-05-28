@@ -15,10 +15,9 @@
 				var view = "";
 				//e70d4c49-7a7b-4416-b4d4-91d7d03e805b
 				//${param.id}
-				
+				//alert("${param.id}");
 				service.findOne("${param.id}",new Eht.Responder({//根据ID查询个人基本信息
 					success:function(data){
-						
 						view = new Eht.View({selector:"#sqjz_formJzdbg_all",fieldname:"field"});
 						view.fill(data);//个人基本信息
 						if(data.jzdbg.length){
@@ -53,8 +52,8 @@
     	<div id="sqjz_formJzdbg_all">
 	    	<div class="all">
 	    	社区矫正人员编号:<span field="sqjzrybh" label="社区矫正人员编号"></span>
-	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;申请日期:<span field="sqjzrybh" label="社区矫正人员编号"></span>
-				<div style="font-size:20px;text-align:center"><b>社区服刑人员居住地变更审批表</b></div>
+	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;申请日期:<span field="sqsj" label="社区矫正人员编号"></span>
+				<div style="font-size:20px;text-align:center"><b>社区服刑人员居住地变更审批信息表</b></div>
 				<table border="1" cellspacing="0" align="center" style="border-collapse:collapse;"><br>
 					<tr>
 						<td>姓名</td>
@@ -104,7 +103,7 @@
 					</tbody>
 					<tr>
 						<td>备注</td>
-						<td colspan="7"></td>
+						<td colspan="7"><div><span field="remark"></span></div></td>
 					</tr>
 				</table>
 				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：用于居住地变更时，抄送现居住地县级人民检察院、公安(分)局；变更后，复印送新居住地县级人民检察院、公安(分)局。

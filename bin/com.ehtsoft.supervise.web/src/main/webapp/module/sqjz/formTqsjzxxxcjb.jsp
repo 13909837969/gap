@@ -47,8 +47,8 @@ $(function(){
 		selector:"#sqjz_Tqsjzx #tableview"
 	});
 	//审核记录
-	var tableViewshjl = new Eht.TableView({
-		selector:"#sqjz_Tqsjzx #tableview_shjl",
+	var tableViews = new Eht.TableView({
+		selector:"#tableview_shjl",
 		paginate:null
 	});
 	
@@ -116,8 +116,9 @@ $(function(){
 			}
 		})); 
 		$("#sfssqsj").val(nowTime);		
-			
+		
 		$("#sfssqr").val("${CURRENT_USER_SESSION.name}");
+	
 		$('#sjzxxx_myModal').modal({backdrop:'static'});
 	});
 	//提交收监执行信息
@@ -136,7 +137,7 @@ $(function(){
 	     success:function(data){
 	    	
 	           for(var i =0;i<data.length;i++){
-	        	   debugger;
+	        
 	                var tr = $('<span value="sfssqr" class="shenheliucheng">'+data[i].name+'</span><span class="glyphicon glyphicon-arrow-right"></span>')	
 	                $("#shenqingrenHm").append(tr);
 	              }
@@ -147,8 +148,9 @@ $(function(){
 	  tableview.transColumn("xiangxi",function(data){
 		   var orgStyle="${CURRENT_USER_SESSION.orgType}";
 		   var dv = $("<div></div>");
-		  var btn1 = $('<button  class="btn btn-default btn-sm "><span class="glyphicon glyphicon-edit"></span>&nbsp;查看</button>');
+		  var btn1 = $('<button  class="btn btn-default btn-sm "><span class="glyphicon glyphicon-edit"></span>&nbsp;可查看</button>');
 		  var btn2 = $('<button  class="btn btn-default btn-sm" style="margin-left:10px;"><span class="glyphicon glyphicon-print"></span>&nbsp;审核</button>');
+		  var btn3 = $('<button  class="btn btn-default btn-sm" style="margin-left:10px;"><span class="glyphicon glyphicon-print"></span>&nbsp;提请</button>');
 			   btn1.data(data);
 			   btn2.data(data);
 				//查看按钮
@@ -159,12 +161,12 @@ $(function(){
 				  	 $("#shenqingren").html(ds.sfssqr); 
 					 $("#shenqingrenHm").empty();
 					 var jsonSqr = {}; 
-					 service.findApprover(ds.id,resul);
-					// tableViewshjl.clear();
+					// service.findApprover(ds.id,resul);
+					// tableViews.clear();
 		        	//将数据填充到审核记录
-		   			tableViewshjl.loadData(function(page,res){
-		   				service.getAuditHistory(ds.f_id,res);//参数
-		   			});
+		   			/* tableViews.loadData(function(page,res){
+		   				service.getHistory(ds.id,res);//参数
+		   			}); */
 				  	
 				});
 				//审核按钮
@@ -172,51 +174,43 @@ $(function(){
 					$('#sjzx_sh_modal').modal({backdrop:'static'});
 				  	form2.fill(data);
 					$("#xsfjspsj").val(nowTime);
+					$("#xsfjspr").val("${CURRENT_USER_SESSION.name}");
 				});
-		   if(orgStyle == 3){
-			   dv.append(btn1,btn2);
-		   }else if(orgStyle == 4){
-			   dv.append(btn1);
-			}
+			
+				var orgidPd="${CURRENT_USER_SESSION.orgid}";
+				if(orgStyle == 3 && data.audit == 1){
+				   dv.append(btn3);
+		  		}else if(orgStyle == 3 && data.audit == 0){
+				   dv.append(btn2);
+		  		}else if(orgStyle == 4 && data.xsfjspsj != null){
+				   dv.append(btn1);
+				}
 			return dv;
 		});
 		
-
-	
 	//修改审核状态
     tableview.transColumn("audit",function(data){
     	var rtn = "";
-		if(data.audit==1){
-			rtn="通过";
-		}
-		if(data.audit==2){
-			rtn="未通过";
-		}
 		if(data.audit==0){
 			rtn="待审核";
 		}
+		if(data.audit==1){
+			rtn="旗县司法局通过";
+		}
+	
+		if(data.audit==3){
+			rtn="旗县司法局退回";
+		}
+	
     	return rtn;
     });
 	
-    tableViewshjl.transColumn("audit",function(data){
-    	var rtn = "";
-		if(data.audit==1){
-			rtn="通过";
-		}
-		if(data.audit==2){
-			rtn="未通过";
-		}
-		if(data.audit==0){
-			rtn="待审核";
-		}
-    	return rtn;
-    });
+    
 
 
 	//提交审批信息
 	$("#btn_sh_submit").click(function(){
 		if(form2.validate()){
-	
 			service.auditSh(form2.getData(),new Eht.Responder({	
 				success:function(){
 					tableview.refresh();
@@ -233,7 +227,7 @@ $(function(){
 	//关闭按钮事件  清除未选择的数据
 	$("#sqjz_Tqsjzx #close #zaxx_modal_form").click(function(){
 	       form.clear();
-	       tableViewshjl.refresh();
+	       tableViews.refresh();
 	       tableview.refresh();	       
 	});
 	
@@ -337,8 +331,8 @@ $(function(){
 				<label>审核状态</label>
 				<select class="btn btn-default" type="text" label="审批状态" id="listJgxxcjbSelt">
 					<option value="">全部</option>
-					<option value="1">通过</option>
-					<option value="2">未通过</option>
+					<option value="1">旗县通过</option>
+					<option value="3">旗县未通过</option>
 					<option value="0">待审核</option>
 				</select>
 				<span>
@@ -355,7 +349,9 @@ $(function(){
 				<div field="xb" label="性别" code="SYS000"></div>
 				<div field="grlxdh" label="联系方式"></div>
 				<div field="sfzh" label="身份证号码"></div>
-				<div field="sfssqr" label="司法所申请人"></div>
+				<div field="tqly" label="提请理由"></div>
+				<div field="tqyj" label="提请依据"></div>
+				<div field="sfssqr" label="申请人"></div>
 				<div field="audit" label="是否审批"></div>
 				<div field="xiangxi" align = "center" label="详细"></div>	
 			</div>
@@ -377,12 +373,12 @@ $(function(){
 								<div class="text-right"><span id="count" style="color: #3F51B5;margin-right: 40px;"></span></div>
 								<textarea rows="5" name="tqyj" id="floor2" type="text" maxlength="500" valid="{required:true}" label="提请依据"></textarea>
 								<div class="text-right"><span id="count2"  style="color: #3F51B5;margin-right: 40px;"></span></div>
-								<input name="sfssqsj" label="申请时间" class="form_date" id="sfssqsj" fixedValue="true">
+								<input name="sfssqsj" label="申请时间" class="form_date" readonly id="sfssqsj" fixedValue="true">
 								<input name="sfssqr" type="text" label="申请人" id="sfssqr" value="${CURRENT_USER_SESSION.name}" readonly="true" fixedValue="true">
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" id="close">关闭</button>
+						<button type="button"  class="btn btn-default" data-dismiss="modal" id="close">关闭</button>
 						<button type="button" class="btn btn-primary" id="btn_submit">提交</button>
 					</div>
 				</div>
@@ -397,16 +393,13 @@ $(function(){
 							aria-hidden="false" id="xxx"></button>
 						<h4 class="modal-title" id="myModalLabel">提请详细信息</h4>
 					</div>
-					<div class="modal-body" id="modal-body" style="height: 400px; overflow: auto">
+					<div class="modal-body" id="modal-body" style="height: 265px; overflow: auto">
 						<div id="modal_form_tqly">     
-								<textarea name="tqly" rows="8" type="text" valid="{required:true}" disabled label="提请理由";></textarea>
-								<div class="text-right"><span style="color: #3F51B5"></span></div>
-								<textarea rows="8" name="tqyj" type="text"  valid="{required:true}" disabled label="提请依据";></textarea>
-								<div class="text-right"><span style="color: #3F51B5"></span></div>						
-								<input type="text" label="申请人" name="sfssqr" disabled getdis="true"/>
-								<input type="text" label="申请时间" name="sfssqsj" disabled getdis="true"/>
+								<textarea name="xsfjshyj" rows="8" type="text" valid="{required:true}" disabled label="司法局审核审核意见";></textarea>
+								
 						</div>
-						 <h3>审批流程</h3>
+						<button type="button" style ="float:right" class="btn btn-default" data-dismiss="modal" id="close">关闭</button>
+						 <!-- <h3>审批流程</h3>
 					<div id="shenpiLc">
 						<span id="shenqingren" class="Shenheliucheng">申请人</span><span class="glyphicon glyphicon-arrow-right" id="shenqingrenHm"></span>
 						<span  class="Shenheliucheng">流程结束</span>
@@ -414,15 +407,16 @@ $(function(){
 						<h3>审核信息</h3>
 					 <div class="panel-body" data-spy="scroll" data-target="#navbar-example" data-offset="0" style="height:200px;overflow:auto; position: relative;">
 		       			 <div id="tableview_shjl" class="table-responsive">
-							<div field="name" label="审批人"></div>
-							<div field="remark" label="审核意见"></div>
+							<div field="xsfjspr" label="审批人"></div>
+							<div field="xsfjshyj" label="审核意见"></div>
 							<div field="audit" label="审核状态"></div>
-							<div field="cts" label="审核时间"></div>
+							<div field="xsfjspsj" label="审核时间"></div>
 						</div>
+						 -->
 		           </div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" id="close">关闭</button>
+						
 					</div>
 				</div>
 			</div>
@@ -436,16 +430,9 @@ $(function(){
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="false" id="xxx"></button>
 						<h4 class="modal-title" id="myModalLabel">审核</h4>
 					</div>
-					<div class="modal-body" id="modal-sh-body" style="height: 400px; overflow: auto">
+					<div class="modal-body" id="modal-sh-body" style="height: 345px;">
 						<div id="modal_sh_form_tqly">     
-								<textarea name="tqly" rows="5" type="text" valid="{required:true}" disabled label="提请理由";></textarea>
-								<div class="text-right"><span style="color: #3F51B5"></span></div>
-								<textarea rows="5" name="tqyj" type="text"  valid="{required:true}" disabled label="提请依据";></textarea>
-								<div class="text-right"><span style="color: #3F51B5"></span></div>						
-								<input type="text" label="申请人" name="sfssqr" disabled getdis="true"/>
-								<input type="text" label="申请时间" name="sfssqsj" disabled getdis="true"/>
-								<input type="text" label="司法所审核意见" name="sfsshyj" disabled getdis="true"/>
-								<input type="text" label="司法局审核人" name="xsfjshr" value="${CURRENT_USER_SESSION.name}" disabled getdis="true"/>
+								<input type="text" label="司法局审核人" name="xsfjspr" id="xsfjspr" value="${CURRENT_USER_SESSION.name}" disabled getdis="true"/>
 								<textarea rows="5" name="xsfjshyj" id="floor3" type="text"  valid="{required:true}"  label="司法局审核意见";></textarea>
 								<div class="text-right"><span id="count3"  style="color: #3F51B5;margin-right: 40px;"></span></div>
 								<input type="text" label="司法局审核时间" name="xsfjspsj" id="xsfjspsj" disabled getdis="true"/>

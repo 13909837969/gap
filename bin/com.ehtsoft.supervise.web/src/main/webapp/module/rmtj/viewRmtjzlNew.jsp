@@ -22,6 +22,30 @@
 
 <script type="text/javascript">
 $(function(){
+	
+	var monthNames = [ "1月", "2月", "3月", "4月", "5月", "6月", "47月", "8月", "9月", "10月", "11月", "12月" ]; 
+	var newDate = new Date();
+	newDate.setDate(newDate.getDate());
+	$('#Date').html(newDate.getFullYear() + '年' + monthNames[newDate.getMonth()]+newDate.getDate()+ '日');
+	setInterval( function() {
+		var seconds = new Date().getSeconds();
+		$("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+		},1000);
+		
+	setInterval( function() {
+		var minutes = new Date().getMinutes();
+		$("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
+	    },1000);
+		
+	setInterval( function() {
+		var hours = new Date().getHours();
+		$("#hours").html(( hours < 10 ? "0" : "" ) + hours);
+	    }, 1000);
+	
+	
+	
+	
+	
 	var rmtjzl = new RmtjzlNewService();
 	
 	
@@ -47,7 +71,7 @@ $(function(){
 	
 	var lxqk_list = [];
 	var query_lxqk = {};
-	//query_lxqk["provinceid[eq]"] = '150000';
+	query_lxqk["provinceid = "] = '150000';
 	rmtjzl.find_lxqk(query_lxqk,new Eht.Responder({
 		success:function(data){
 			lxqk_list = data;
@@ -58,7 +82,9 @@ $(function(){
 	}));
 	
 	var ajly_list = [];
-	rmtjzl.find_ajly(new Eht.Responder({
+	var query_ajly = {};
+	query_ajly["provinceid = "] = '150000';
+	rmtjzl.find_ajly(query_ajly,new Eht.Responder({
 		success:function(data){
 			ajly_list = data;
 			if(ajly_list != null){
@@ -78,7 +104,9 @@ $(function(){
 	}));
 	
 	var ajny_list = [];
-	rmtjzl.find_ajny(new Eht.Responder({
+	var query_ajny = {};
+	query_ajny["provinceid = "] = '150000';
+	rmtjzl.find_ajny(query_ajny,new Eht.Responder({
 		success:function(data){
 			ajny_list = data;
 			if(ajny_list != null){
@@ -88,7 +116,9 @@ $(function(){
 	}));
 	
 	var ajjf_list = [];
-	rmtjzl.find_ajjf(new Eht.Responder({
+	var query_ajjf = {};
+	query_ajjf["provinceid = "] = '150000';
+	rmtjzl.find_ajjf(query_ajjf,new Eht.Responder({
 		success:function(data){
 			ajjf_list = data;
 			if(ajjf_list != null){
@@ -98,7 +128,9 @@ $(function(){
 	}));
 	
 	var tjjg_list = [];
-	rmtjzl.find_tjjg(new Eht.Responder({
+	var query_tjjg = {};
+	query_tjjg["provinceid = "] = '150000';
+	rmtjzl.find_tjjg(query_tjjg,new Eht.Responder({
 		success:function(data){
 			tjjg_list = data;
 			if(tjjg_list != null){
@@ -122,7 +154,7 @@ function lxqk(lxqk_list){
 	
 	if(lxqk_list != null){
 		for(var i=0; i<lxqk_list.length; i++){
-			x_data.push(lxqk_list[i].city);
+			x_data.push(lxqk_list[i].rq);
 			leg_city1.push(lxqk_list[i].cnt1);
 			leg_city2.push(lxqk_list[i].cnt2);
 			leg_city3.push(lxqk_list[i].cnt3);
@@ -134,7 +166,9 @@ function lxqk(lxqk_list){
 	option = {
 		    title: {
 		        text: '履行情况',
+		        link: 'javascript:void(0)',
 		        textStyle: {
+		        	width: 60,
 		        	fontSize: 12,
 		        	align: 'left',
 		        	color: '#fff'
@@ -155,8 +189,8 @@ function lxqk(lxqk_list){
 		    	pageTextStyle: {
 		    		color: '#fff'
 		    	},
-		    	right:25,
-		    	left:60,
+		    	right:5,
+		    	left: 60,
 		    	textStyle: {
 		            color: '#fff'
 		        },
@@ -193,7 +227,13 @@ function lxqk(lxqk_list){
 		    yAxis : [
 		        {
 		            type : 'value',
-		            splitLine: {show: false},
+		            splitLine: {
+		            	show: true,
+		            	lineStyle: {
+		            		color: '#005eaa',
+		            		type: 'dotted'
+		            	}
+		            },
 		            axisLine: {
 		                lineStyle: {
 		                    color: '#fff'
@@ -215,56 +255,56 @@ function lxqk(lxqk_list){
 		        {
 		            name:'协议已履行',
 		            type:'bar',
-		            markLine: {
+		            /* markLine: {
 		                data: [{
 		                    type: 'average',
 		                    name: '平均值'
 		                }]
-		            },
+		            }, */
 		            data:[120, 132, 101, 134, 90]  //leg_city1
 		        },
 		        {
 		            name:'司法确认',
 		            type:'bar',
-		            markLine: {
+		            /* markLine: {
 		                data: [{
 		                    type: 'average',
 		                    name: '平均值'
 		                }]
-		            },
+		            }, */
 		            data:[220, 182, 191, 234, 290]
 		        },
 		        {
 		            name:'达成协议后起诉',
 		            type:'bar',
-		            markLine: {
+		            /* markLine: {
 		                data: [{
 		                    type: 'average',
 		                    name: '平均值'
 		                }]
-		            },
+		            }, */
 		            data:[150, 232, 201, 154, 190]
 		        },
 		        {
 		            name:'法院判决维持',
 		            type:'bar',
-		            markLine: {
+		            /* markLine: {
 		                data: [{
 		                    type: 'average',
 		                    name: '平均值'
 		                }]
-		            },
+		            }, */
 		            data:[320, 332, 301, 334, 390]
 		        },
 		        {
 		            name:'其他',
 		            type:'bar',
-		            markLine: {
+		            /* markLine: {
 		                data: [{
 		                    type: 'average',
 		                    name: '平均值'
 		                }]
-		            },
+		            }, */
 		            data:[20, 32, 1, 34, 90]
 		        }
 		    ]
@@ -298,6 +338,7 @@ function ajly(ajly_list){
 	option = {
 		    title: {
 		        text: '案件来源',
+		        link: 'javascript:void(0)',
 		        textStyle: {
 		        	fontSize: 12,
 		        	align: 'left',
@@ -315,8 +356,8 @@ function ajly(ajly_list){
 		    	pageTextStyle: {
 		    		color: '#fff'
 		    	},
-		        right: 15,
-		        top: 40,
+		        right: 5,
+		        top: 20,
 		        textStyle: {
 		            color: '#fff'
 		        },
@@ -329,7 +370,7 @@ function ajly(ajly_list){
 		            name:'案件来源',
 		            type:'pie',
 		            radius: ['40%', '60%'],
-		            center: ['36%', '60%'],
+		            center: ['27%', '55%'],
 		            avoidLabelOverlap: false,
 		            label: {
 		                normal: {
@@ -495,7 +536,9 @@ function ajny(ajny_list){
 	option = {
 		    title: {
 		        text: '案件难易级别',
+		        link: 'javascript:void(0)',
 		        textStyle: {
+		        	width: 90,
 		        	fontSize: 12,
 		        	align: 'left',
 		        	color: '#fff'
@@ -508,7 +551,13 @@ function ajny(ajny_list){
 		        }
 		    },
 		    legend: {
-		    	right:25,
+		    	type: 'scroll',
+		    	pageIconColor: '#fff',
+		    	pageTextStyle: {
+		    		color: '#fff'
+		    	},
+		    	right: 5,
+		    	left: 90,
 		    	textStyle: {
 		            color: '#fff'
 		        },
@@ -540,12 +589,19 @@ function ajny(ajny_list){
 		                }
 		            },
 		            data : x_data
+		            	//['呼和浩特市','包头市','乌海市','赤峰市','通辽市','鄂尔多斯市','呼伦贝尔市','巴彦淖尔市','乌兰察布市','兴安盟','锡林郭勒盟','阿拉善盟']
 		        }
 		    ],
 		    yAxis : [
 		        {
 		            type : 'value',
-		            splitLine: {show: false},
+		            splitLine: {
+		            	show: true,
+		            	lineStyle: {
+		            		color: '#005eaa',
+		            		type: 'dotted'
+		            	}
+		            },
 		            axisLine: {
 		                lineStyle: {
 		                    color: '#fff'
@@ -569,6 +625,7 @@ function ajny(ajny_list){
 		            name:"简单纠纷",
 		            type:'bar',
 		            stack: '总值',
+		            barWidth: '7%',
 		            data:leg_city1
 		        },
 		        {
@@ -621,16 +678,19 @@ function ajjf(ajjf_list){
 	option = {
 		    title: {
 		        text: '案件纠纷情况',
+		        link: 'javascript:void(0)',
 		        textStyle: {
 		        	fontSize: 12,
 		        	align: 'left',
 		        	color: '#fff'
-	            }
+	            },
+	            shadowBlur: 10  //设置阴影大小
 		    },
 		    tooltip : {
 		        trigger: 'axis',
 		        axisPointer: {
-		            type: 'shadow'
+		            type: 'shadow',
+		            width: '30%'
 		        }
 		    },
 		    grid: {
@@ -643,6 +703,13 @@ function ajjf(ajjf_list){
 		        {
 		        	type: 'value',
 		        	boundaryGap : true,
+		        	splitLine: {
+		            	show: true,
+		            	lineStyle: {
+		            		color: '#005eaa',
+		            		type: 'dotted'
+		            	}
+		            },
 		        	axisLine: {
 		                lineStyle: {
 		                    color: '#fff'
@@ -652,14 +719,6 @@ function ajjf(ajjf_list){
 		                textStyle: {
 		                    color: '#fff'
 		                }
-		            },
-		            axisTick: {
-		                lineStyle: {
-		                    color: '#fff'
-		                }
-		            },
-		            splitLine: {
-		                show: false
 		            }
 		        }
 		    ],
@@ -679,11 +738,6 @@ function ajjf(ajjf_list){
 		                textStyle: {
 		                    color: '#fff'
 		                }
-		            },
-		            axisTick: {
-		                lineStyle: {
-		                    color: '#fff'
-		                }
 		            }
 		        }
 		    ],
@@ -701,6 +755,7 @@ function ajjf(ajjf_list){
 		                    }
 		                }
 		            },
+		            barWidth: '30%',
 		            data:lx_data
 		        }
 		    ]
@@ -723,7 +778,7 @@ function tjjg(tjjg_list){
 	
 	if(tjjg_list != null){
 		for(var i=0; i<tjjg_list.length; i++){
-			x_data.push(tjjg_list[i].tjrq);
+			x_data.push(tjjg_list[i].rq);
 			leg_data1.push(tjjg_list[i].cnt1);
 			leg_data2.push(tjjg_list[i].cnt2);
 			leg_data3.push(tjjg_list[i].cnt3);
@@ -735,7 +790,9 @@ function tjjg(tjjg_list){
 	option = {
 		    title: {
 		        text: '调解结果',
+		        link: 'javascript:void(0)',
 		        textStyle: {
+		        	width: 60,
 		        	fontSize: 12,
 		        	align: 'left',
 		        	color: '#fff'
@@ -750,8 +807,9 @@ function tjjg(tjjg_list){
 		    	pageTextStyle: {
 		    		color: '#fff'
 		    	},
-		    	right:25,
-		    	left:60,
+		    	//align: left,
+		    	left: 60,
+		    	right:5,
 		    	textStyle: {
 		            color: '#fff'
 		        },
@@ -792,7 +850,13 @@ function tjjg(tjjg_list){
 		            min: 0,
 		            max: 50,
 		            interval: 10,
-		            splitLine: {show: false},
+		            splitLine: {
+		            	show: true,
+		            	lineStyle: {
+		            		color: '#005eaa',
+		            		type: 'dotted'
+		            	}
+		            },
 		            axisLine: {
 		                lineStyle: {
 		                    color: '#fff'
@@ -804,6 +868,7 @@ function tjjg(tjjg_list){
 		                }
 		            },
 		            axisTick: {
+		            	alignWithLabel: true,
 		                lineStyle: {
 		                    color: '#fff'
 		                }
@@ -849,10 +914,13 @@ body{height:100%;background-image: url(bg.png);color: #fff;}
 </head>
 <body>
 <div>  <!--background-color:#191970;  color: #fff;text-shadow: 1px 1px 2px #333;-->
+	<div style="width:100%;height:50px;background: url(nav_bg.png) no-repeat center;margin:0px;position:absolute;top: -15px;">
+		<div class="ltrhao-spsSqjz-body-rightSel-opacity"></div><label style="font-size:16px;line-height:18px;margin:24px 45% 9px 45%;">人民调解总览界面</label>
+	</div>
 	<div id="left" style="float:left;margin:10px;width:29%;margin-top:40px;">
 		<div id="l_top" class="left_div">
 			<div> <!-- 图标 --><span>调解案件总数</span>
-				<div style="padding:30px;font-size: 16px;line-height: 20px;">
+				<div style="padding:30px;font-size: 14px;line-height: 18px;">
 				  &nbsp;&nbsp;截至<label id="top_01"></label>,全区调解案件总数<label id="top_02"></label>件,其中调解成功<label id="top_03"></label>件,调解不成功<label id="top_04"></label>件.
 				</div>
 			</div>
@@ -867,7 +935,7 @@ body{height:100%;background-image: url(bg.png);color: #fff;}
 					<label id="cen_01" style="padding:2px;color:#c12e34;"></label><br/>
 					<label>调解案件总数</label>
 				</div>
-				<div style="padding:2px 0px;text-align:center;width:20%;float:left;font-size:14px;line-height:18px;">
+				<div style="padding:2px 2px;text-align:center;width:20%;float:left;font-size:14px;line-height:18px;">
 					<label id="cen_02" style="padding:2px;color:#e87c25;"></label><br/><label>人民调解员总数</label>
 				</div>
 				<div style="padding:2px 2px;text-align:center;width:20%;float:left;font-size:14px;line-height:18px;">

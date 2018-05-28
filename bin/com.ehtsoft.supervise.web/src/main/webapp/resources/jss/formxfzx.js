@@ -1,33 +1,41 @@
-var callbackJzryjbxxImg=function(msg){
-	new Eht.Tips().show(msg);
-	var src = $("#jzryjbxx_photo").attr("osrc")+"&"+Math.random();
-	$("#jzryjbxx_photo").attr("src",src);
-	return false;
-}; 
-
+//两个时间相差天数 兼容firefox chrome
+    function datedifference(sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式  
+        var dateSpan,
+            tempDate,
+            iDays;
+        sDate1 = Date.parse(sDate1);
+        sDate2 = Date.parse(sDate2);
+        dateSpan = sDate2 - sDate1;
+        dateSpan = Math.abs(dateSpan);
+        iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
+        return iDays
+    };
 $(function(){
-	var dagl = new XfzxService();
+	var service = new XfzxService();
+	var service_bddj=new BddjService();
 	/*var region = new RegionService();//省市区后台
 */	var count = 0;
-	var tabCnt = $("#fromXfzx").children().size();
-	$("#fromXfzx").children().each(function(){
+	var tabCnt = $("#form_jzxj_bddj").children().size();
+	$("#form_jzxj_bddj").children().each(function(){
 		$(this).load($(this).attr("load"),function(){
 			count++;
 			initJzryjbxxForm();
+			
 		});
 	});
+	
 	
 	 var initJzryjbxxForm = function(){
 		if(count!=tabCnt){
 			return;
 		}
-		var id=$("#form_sqjzryxfzx_param_id").val();
+		var id=$("#form_jzxj_param_id").val();
 		var xfzx = new Eht.Form({selector:"#sqjzryxfzx_form_jbxx"});
 		var jcjz=  new Eht.Form({selector:"#sqjzryxfzx_form_jzjc"});
 		//修改信息
 		if(id!=""){
 			
-			dagl_xfzx.findXfzx(id,new Eht.Responder({
+			service.findXfzx(id,new Eht.Responder({
 				success:function(data){
 					xfzx.fill(data.xfzx);
 					jcjz.fill(data.jcjz);
@@ -36,28 +44,39 @@ $(function(){
 			}));
 		}
 		 //模态框单击提交按钮提交数据到数据库 
-		$("#Xfzx_btn").unbind("click").bind("click",function() {//此按钮为父页-模态框【提交】按钮
-					var id = $("#sqjzryxfzx_form_jbxx #id").val();
+		$("#baod").unbind("click").bind("click",function() {//此按钮为父页-模态框【提交】按钮
 					
 					
+					if(xfzx.validate()){
 						var jcxxdata=sqjzry_jcqkForm.getJcqkData();
 						var yzqk=sqjzry_yzqkForm.getYzqkData();
 						var dataxfzx=xfzx.getData();
 						var datajcjz=jcjz.getData();
-						debugger;
-						dagl_xfzx.saveXfzx(dataxfzx,datajcjz,yzqk,jcxxdata,new Eht.Responder({
+						
+						service.saveXfzx(dataxfzx,datajcjz,yzqk,jcxxdata,new Eht.Responder({
 							success : function() {
-								$("#sqjz_listDagl_all #dagl_listtable").refreshTable();
-								$("#sqjz_listDagl_all #myModalAdd").modal('hide');
+								if(dataxfzx.sqjzryjsrq!=""){
+									var iDays=datedifference(dataxfzx.sqjzryjsrq,new Date());
+									if(iDays<10){
+										dataxfzx.bdqk="01";
+									}else if(iDays>=10){
+										dataxfzx.bdqk="02";
+									}
+									service_bddj.saveBd(dataxfzx,new Eht.Responder({
+										success:function(){
+										}
+									}));
+								}
+								$("#Sqjz_bddj #listBddj_tableView").refreshTable();
+								$("#Sqjz_bddj #myModal").modal('hide');
+								new Eht.Tips().show();
 							}
 						}));
-					
+					}
 				
 		});
 		//-------------------------------------------填写逻辑-------------------------------------------------------------
-		$("#xb input[name='xb']").attr("disabled","disabled");
-		$("#mz select[name='mz']").attr("disabled","disabled");
-		$("#sqjzryxfzx_form_jbxx .form_date").datetimepicker({
+		$(".form_date").datetimepicker({
 		       format: "yyyy-mm-dd",
 		       autoclose: true,
 		       todayBtn: true,
@@ -67,12 +86,6 @@ $(function(){
 		       language: 'zh-CN',//中文，需要引用zh-CN.js包
 		        startView: 2,//月视图
 		        minView: 2//日期时间选择器所能够提供的最精确的时间选择视图
-		});
-		
-		
-		//上传照片
-		$("#jbxxfile").change(function(){
-			$("#jzryjbxxuploadForm").submit();
 		});
 		//日期自动获取
 		$("#formSimple-body #sfzh").change(function(){
@@ -107,87 +120,20 @@ $(function(){
          }
         
 	 })
+	 $("#jzlb input[name='jzlb']").attr("disabled",true);
 	 if($("#jzlb input[name='jzlb']:checked").val()=='03'||$("#jzlb input[name='jzlb']:checked").val()=='04'){
-			$("#ypxf input[name='ypxf']").attr("disabled",false);
-			$("#ypxqksrq").attr("disabled",false);
-			$("#ypxqjsrq").attr("disabled",false);
-			$("#sfbxgjzl input").attr("disabled",true);
-			$("#jzlnr").attr("disabled",true);
+			$("#ypnr").attr("display","none");
+			$("#jzl").attr("display","none");
 			$("#jzqxksrq").attr("disabled",true);
 			$("#jzqxjsrq").attr("disabled",true);
 		}else{
-			$("#ypxf input[name='ypxf']").attr("disabled",true);
-			$("#ypxqksrq").attr("disabled",true);
-			$("#ypxqjsrq").attr("disabled",true);
-			$("#sfbxgjzl input").attr("disabled",false);
-			$("#jzlnr").attr("disabled",false);
+			$("#ypnr").attr("display","");
+			$("#jzl").attr("display","");
 			$("#jzqxksrq").attr("disabled",false);
 			$("#jzqxjsrq").attr("disabled",false);
 		}
-		if($("#jzlb input[name='jzlb']:checked").val()=='02'){
-			$("#sjzxlx input[name='sjzxlx']").each(function(){
-				if($(this).val()=="01"){
-					$(this).attr("checked",true);
-				}
-			})
-		}else if($("#jzlb input[name='jzlb']:checked").val()=='03'){
-			$("#sjzxlx input[name='sjzxlx']").each(function(){
-				if($(this).val()=="02"){
-					$(this).attr("checked",true);
-				}
-			})
-		}else if($("#jzlb input[name='jzlb']:checked").val()=='04'){
-			$("#sjzxlx input[name='sjzxlx']").each(function(){
-				if($(this).val()=="03"){
-					$(this).attr("checked",true);
-				}
-			})
-		}else if($("#jzlb input[name='jzlb']:checked").val()=='99'){
-			$("#sjzxlx input[name='sjzxlx']").each(function(){
-				if($(this).val()=="04"){
-					$(this).attr("checked",true);
-				}
-			})
-		}
-	//矫正类别
-	$("#jzlb input").change(function(){
-		if($("#jzlb input[name='jzlb']:checked").val()=='03'||$("#jzlb input[name='jzlb']:checked").val()=='04'){
-			$("#ypxf input[name='ypxf']").attr("disabled",false);
-			$("#ypxqksrq").attr("disabled",false);
-			$("#ypxqjsrq").attr("disabled",false);
-			$("#jzl").css("display","none");
-		}else{
-			$("#ypxf input[name='ypxf']").attr("disabled",true);
-			$("#ypxqksrq").attr("disabled",true);
-			$("#ypxqjsrq").attr("disabled",true);
-			$("#jzl").css("display","table-row");
-		}
-		if($("#jzlb input[name='jzlb']:checked").val()=='02'){
-			$("#sjzxlx input[name='sjzxlx']").each(function(){
-				if($(this).val()=="01"){
-					$(this).attr("checked",true);
-				}
-			})
-		}else if($("#jzlb input[name='jzlb']:checked").val()=='03'){
-			$("#sjzxlx input[name='sjzxlx']").each(function(){
-				if($(this).val()=="02"){
-					$(this).attr("checked",true);
-				}
-			})
-		}else if($("#jzlb input[name='jzlb']:checked").val()=='04'){
-			$("#sjzxlx input[name='sjzxlx']").each(function(){
-				if($(this).val()=="03"){
-					$(this).attr("checked",true);
-				}
-			})
-		}else if($("#jzlb input[name='jzlb']:checked").val()=='99'){
-			$("#sjzxlx input[name='sjzxlx']").each(function(){
-				if($(this).val()=="04"){
-					$(this).attr("checked",true);
-				}
-			})
-		}
-	})
+		
+	
 	//原判刑期
 	$("#ypxqjsrq,#ypxqksrq").change(function(){
 		var a = new Date($("#ypxqjsrq").val());
@@ -223,36 +169,36 @@ $(function(){
 		       }
         }
 	})
-	
 	//报道情况
+	
+	if($("input[name='bdqk']:checked").val()=='03'|| $("input[name='bdqk']:checked").val()==undefined){
+		$("#wasbdqksm").css("display","");
+		$("#sqjs").css("display","none");
+		
+	}else{
+		$("#wasbdqksm").css("display","none");
+		$("#sqjs").css("display","");
+	}
 	$("#bdqk").change(function(){
 		if($("#bdqk input[name='bdqk']:checked").val()=='03'){
-			$("#wasbdqksm").attr("disabled",false);
+			$("#wasbdqksm").css("display","");
 			$("#sqjs").css("display","none");
-			$("#jzxz").css("display","none");
-			$("#dwgl").css("display","none");
-			/*$("#sqjzryjsfs input[name='sqjzryjsfs']").attr("disabled",true);
-			$("#sqjzryjsrq").attr("disabled",true);
-			$("#sfjljzxz input[name='sfjljzxz']").attr("disabled",true);
-			$("#jzxzryzcqk input[name='jzxzryzcqk']").attr("disabled",true);
-			$("#sfcqdzdwgl input[name='sfcqdzdwgl']").attr("disabled",true);
-			$("#dzdwfs input[name='dzdwfs']").attr("disabled",true);
-			$("#dwhm").attr("disabled",true);*/
+		/*	$("input[name='sqjzryjsfs']").removeAttr("valid");
+			$("input[name='sfjljzxz']").removeAttr("valid");
+			$("input[name='sfcqdzdwgl']").removeAttr("valid");*/
 		}else{
-			$("#wasbdqksm").attr("disabled",true);
-			$("#sqjs").css("display","table-row");
-			$("#jzxz").css("display","table-row");
-			$("#dwgl").css("display","table-row");
-			/*$("#wasbdqksm").attr("disabled",true);
-			$("#sqjzryjsfs input[name='sqjzryjsfs']").attr("disabled",false);
-			$("#sqjzryjsrq").attr("disabled",false);
-			$("#sfjljzxz input[name='sfjljzxz']").attr("disabled",false);
-			$("#jzxzryzcqk input[name='jzxzryzcqk']").attr("disabled",false);
-			$("#sfcqdzdwgl input[name='sfcqdzdwgl']").attr("disabled",false);
-			$("#dzdwfs input[name='dzdwfs']").attr("disabled",false);
-			$("#dwhm").attr("disabled",false);*/
+			$("#wasbdqksm").css("display","none");
+			$("#sqjs").css("display","");
+			/*$("#js").attr("valid","{required:true}");
+			$("#jl").attr("valid","{required:true}");
+			$("#cq").attr("valid","{required:true}");*/
 		}
 	})
+	if($("#sfjljzxz input[name='sfjljzxz']:checked").val()=='0'){
+		$("#jzxzryzcqk select[name='jzxzryzcqk']").attr("disabled",true);
+	}else{
+		$("#jzxzryzcqk select[name='jzxzryzcqk']").attr("disabled",false);
+	}
 	$("#sfjljzxz").change(function(){
 		if($("#sfjljzxz input[name='sfjljzxz']:checked").val()=='0'){
 			$("#jzxzryzcqk select[name='jzxzryzcqk']").attr("disabled",true);
@@ -260,7 +206,21 @@ $(function(){
 			$("#jzxzryzcqk select[name='jzxzryzcqk']").attr("disabled",false);
 		}
 	})	
-	
+	if($("#sfbxgjzl input[name='sfbxgjzl']:checked").val()=="0"|| $("#sfbxgjzl input[name='sfbxgjzl']:checked").val()==undefined){
+		$("#jzlnr").attr("disabled",true);
+		$("#jzqxksrq").attr("disabled",true);
+		$("#jzqxjsrq").attr("disabled",true);
+		$("#sjzxyy input").each(function(){
+			$(this).show();
+			if($(this).val()=="02"){
+				$(this).hide();
+			}
+		})
+	}else{
+		$("#jzlnr").attr("disabled",false);
+		$("#jzqxksrq").attr("disabled",false);
+		$("#jzqxjsrq").attr("disabled",false);
+	}
 	//是否被宣告禁止令
 	$("#sfbxgjzl").change(function(){
 		if($("#sfbxgjzl input[name='sfbxgjzl']:checked").val()=="0"){
@@ -279,72 +239,87 @@ $(function(){
 			$("#jzqxjsrq").attr("disabled",false);
 		}
 	})
-	
+	if($("input[name='sfcqdzdwgl']:checked").val()=="0"){
+		$("#dzdwfs input[name='dzdwfs']").attr("disabled",true);
+		$("#dwhm").attr("disabled",true)
+	}else{
+		$("#dzdwfs input[name='dzdwfs']").attr("disabled",false);
+		$("#dwhm").attr("disabled",false);
+	}
 	$("#sfcqdzdwgl").change(function(){
 		if($("input[name='sfcqdzdwgl']:checked").val()=="0"){
 			$("#dzdwfs input[name='dzdwfs']").attr("disabled",true);
+			$("#dwhm").attr("disabled",true)
 		}else{
 			$("#dzdwfs input[name='dzdwfs']").attr("disabled",false);
+			$("#dwhm").attr("disabled",false);
 		}
 	})
 	//矫正解除
-	$("#jzbx").hide();
-	$("#sjzx,#sjzx_2").hide();
+	if($("#jjlx input[name='jjlx']:checked").val()=="01"){
+		$("#jjrq").val($("#sqjzjsrq").val());
+		$("#sjzx").css("display","none");
+		$("#swxx").css("display","none");
+		$("#jzdxx").css("display","none");
+		$("#jzbx").css("display","");
+		$("#remark").css("display","none");
+	}else if($("#jjlx input[name='jjlx']:checked").val()=="02"){
+		$("#sjzx").css("display","");
+		$("#swxx").css("display","none");
+		$("#jzdxx").css("display","none");
+		$("#jzbx").css("display","none")
+		$("#remark").css("display","none");
+	}else if($("#jjlx input[name='jjlx']:checked").val()=="03"){
+		$("#sjzx").css("display","none");
+		$("#swxx").css("display","");
+		$("#jzdxx").css("display","none");
+		$("#jzbx").css("display","none")
+		$("#remark").css("display","none");
+	}else if($("#jjlx input[name='jjlx']:checked").val()=="04"){
+		$("#sjzx").css("display","none");
+		$("#swxx").css("display","none");
+		$("#jzdxx").css("display","");
+		$("#jzbx").css("display","none")
+		$("#remark").css("display","none");
+	}else{
+		$("#sjzx").css("display","none");
+		$("#swxx").css("display","none");
+		$("#jzdxx").css("display","none");
+		$("#jzbx").css("display","none")
+		$("#remark").css("display","");
+	}
 	$("#jjlx").change(function(){
 		if($("#jjlx input[name='jjlx']:checked").val()=="01"){
 			$("#jjrq").val($("#sqjzjsrq").val());
-			$("#jzbx").show();
-			$("#sjzxlx").val("");
-			$("#sjzx,#sjzx_2").hide();
-			$("#swsj").attr("disabled",true);
-			$("#swyy input[name='swyy']").attr("disabled",true);
-			$("#jtsy").attr("disabled",true);
-			$("#jzdbgrq").attr("disabled",true);
-			$("#xjzddz").attr("disabled",true);
+			$("#sjzx").css("display","none");
+			$("#swxx").css("display","none");
+			$("#jzdxx").css("display","none");
+			$("#jzbx").css("display","");
+			$("#remark").css("display","none");
 		}else if($("#jjlx input[name='jjlx']:checked").val()=="02"){
-			$("#sjzx,#sjzx_2").show();
-			$("#jzbx").hide();
-			$("#swsj").attr("disabled",true);
-			$("#swyy input[name='swyy']").attr("disabled",true);
-			$("#jtsy").attr("disabled",true);
-			$("#jzdbgrq").attr("disabled",true);
-			$("#xjzddz").attr("disabled",true);
-			if($("#jjlx input[name='jjlx']:checked").val()=='02'){
-				$("#sjzxlx").val("01");
-			}else if($("#jjlx input[name='jjlx']:checked").val()=='03'){
-				$("#sjzxlx").val("02");
-			}else if($("#jjlx input[name='jjlx']:checked").val()=='04'){
-				$("#sjzxlx").val("03");
-			}else if($("#jjlx input[name='jjlx']:checked").val()=='99'){
-				$("#sjzxlx").val("99");
-			}
+			$("#sjzx").css("display","");
+			$("#swxx").css("display","none");
+			$("#jzdxx").css("display","none");
+			$("#jzbx").css("display","none")
+			$("#remark").css("display","none");
 		}else if($("#jjlx input[name='jjlx']:checked").val()=="03"){
-			$("#sjzxlx").val("");
-			$("#sjzx,#sjzx_2").hide();
-			$("#jzbx").hide();
-			$("#swsj").attr("disabled",false);
-			$("#swyy input[name='swyy']").attr("disabled",false);
-			$("#jtsy").attr("disabled",false);
-			$("#jzdbgrq").attr("disabled",true);
-			$("#xjzddz").attr("disabled",true);
+			$("#sjzx").css("display","none");
+			$("#swxx").css("display","");
+			$("#jzdxx").css("display","none");
+			$("#jzbx").css("display","none")
+			$("#remark").css("display","none");
 		}else if($("#jjlx input[name='jjlx']:checked").val()=="04"){
-			$("#sjzxlx").val("");
-			$("#sjzx,#sjzx_2").hide();
-			$("#jzbx").hide();
-			$("#swsj").attr("disabled",true);
-			$("#swyy input[name='swyy']").attr("disabled",true);
-			$("#jtsy").attr("disabled",true);
-			$("#jzdbgrq").attr("disabled",false);
-			$("#xjzddz").attr("disabled",false);
+			$("#sjzx").css("display","none");
+			$("#swxx").css("display","none");
+			$("#jzdxx").css("display","");
+			$("#jzbx").css("display","none")
+			$("#remark").css("display","none");
 		}else{
-			$("#swsj").attr("disabled",true);
-			$("#swyy input[name='swyy']").attr("disabled",true);
-			$("#jtsy").attr("disabled",true);
-			$("#jzdbgrq").attr("disabled",true);
-			$("#xjzddz").attr("disabled",true);
-			$("#sjzx,#sjzx_2").hide();
-			$("#jzbx").hide();
-			
+			$("#sjzx").css("display","none");
+			$("#swxx").css("display","none");
+			$("#jzdxx").css("display","none");
+			$("#jzbx").css("display","none")
+			$("#remark").css("display","");
 		}
 	})	
 	

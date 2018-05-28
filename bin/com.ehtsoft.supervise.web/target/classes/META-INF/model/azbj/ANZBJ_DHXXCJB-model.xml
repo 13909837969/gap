@@ -2,8 +2,8 @@
 
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_DHXXCJB" label="对话信息采集表">
-    <column field="DHXXCJB01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="FXRYBH" type="string" length="20" label="服刑人员编号" remark="编码见 6.4"/>
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="AZBJRYID" type="uuid" length="36" label="安置帮教人员ID" remark="编码见 6.4"/>
     <column field="HFDHDBH" type="string" length="20" label="回复对话的编号" remark="自填"/>
     <column field="DHBT" type="string" length="50" label="对话标题" remark="自填"/>
     <column field="DHNR" type="string" length="500" label="对话内容" remark="自填"/>
@@ -19,6 +19,6 @@
     <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
     <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
     <column field="remark" type="string" length="500" label="备注"/>
-    <primary name="PK_ANZBJ_DHXXCJB" field="DHXXCJB01"/>
+    <primary name="PK_ANZBJ_DHXXCJB" field="ID"/>
   </table>
 </model>

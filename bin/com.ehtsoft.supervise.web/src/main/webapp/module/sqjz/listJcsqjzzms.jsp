@@ -38,6 +38,7 @@
 		}else{
 			$("#grant").enable();
 		}
+		$("#id").val(data.id);
 	});
 	//点击下发解除证明书弹出模态框
 	$("#listJcsqjzzms #grant").click(function(){
@@ -57,7 +58,7 @@
 	});
 	//解除矫正证明书
 	tableView.transColumn("jcjzzms",function(data) {
-		if(data.sfff){
+		if(data.audit == 1 ){
 			var button = $('<button  class="btn btn-default btn-sm" style="border-color:#128ef6;color:#128ef6;"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;已经下发证明书</button>');
 			button.unbind("click").bind("click",function() {
 				$('myModal_grant').modal();
@@ -102,6 +103,17 @@
 		}
 		
 	});
+	tableView.transColumn("audit",function(data) {
+		if(data.audit == 0){
+			return "未解除"
+		}
+		if(data.audit == 1){
+			return "已解除"
+		}
+		if(data.audit== 2){
+			return "待解除"
+		}
+	})
 	
 	
 	
@@ -130,6 +142,7 @@
 			<div field="pcxx" 	label="判处信息"></div>
 			<div field="PJRQ" 	label="判决日期"></div>
 			<div field="SQJZJSRQ" 	label="社区矫正结束日期"></div>
+			<div field="audit" label="解除状态"></div>
 			<div field="jcjzzms" label="解除矫正证明书"></div>
 		</div>
 	</div>
@@ -143,10 +156,12 @@
 				</div >
 				<div class="modal-body" style="height: 400px; overflow: auto">
 					<div class="modal-body" id="listJcsqjzzms_modal_disabled">
+						 
 						<input 	type="text" 	name="xm" 	 id="xm"	label="社区矫正人员姓名" disabled />
 						<input 	type="text" 	name="sfzh"  id="sfzh"	label="身份证号" disabled />
 					</div>
 					<div class="modal-body" id="listJcsqjzzms_modal">
+						<input name="id" id="id" type="hidden">
 						<!-- <textarea 	name="HJD" 		label="固定户籍地"  rows="2" style="resize: none;" valid="{required:true}"  maxlength="100"></textarea> -->
 						<textarea   name="hjd" label="固定户籍地"  maxlength="100" rows="2"  style="resize: none;" valid="{required:true}"></textarea>
 							<div class="text-right"><span id="count"  style="color: #3F51B5"></span></div>
@@ -156,7 +171,7 @@
 						<input 	type="text" 	name="PJRQ" 	label="判决日期"   class="form_date" data-date-formate="yyyy-MM-dd" valid="{date:true,required:true}"  />
 						<textarea 	name="rmfymc" 	label="法院名称" rows="2" style="resize: none;"  valid="{required:true}" maxlength="100"></textarea>
 						<textarea 	name="pcxx" 	label="判处信息"  rows="2" style="resize: none;"  valid="{required:true}" maxlength="200" ></textarea>
-						<textarea 	name="sfjg" 	label="司法机构"  rows="2" style="resize: none;"  valid="{required:true}" maxlength="100" code="sys055"></textarea>
+						<textarea 	name="sfjg" 	label="社区矫正决定机关"  rows="2" style="resize: none;"  valid="{required:true}" maxlength="100" code="sys055"></textarea>
 						<input 	type="text" 	name="zxtzswh" 	label="执行通知书文号"   valid="{required:true}" />
 						<input 	type="text" 	name="sqjzjsrq" label="社区矫正结束日期"   class="form_date" data-date-formate="yyyy-MM-dd"  valid="{date:true,required:true}"  />
 					</div>

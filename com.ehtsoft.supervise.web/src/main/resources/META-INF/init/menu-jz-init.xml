@@ -241,7 +241,6 @@
 				<menu menucode="JZ1301" menuname="社区矫正工作状况监管" actionuri="module/sqjz/Sqjz_gzjg.jsp"/>
 				<menu menucode="JZ1302" menuname="矫正人员日常报告情况监管" actionuri="module/sps/listJdglDqbgqkTest.jsp"/>
 				<menu menucode="JZ1304" menuname="矫正人员落实帮扶情况监管" actionuri="module/sqjz/listBfxx.jsp"/>
-				<menu menucode="JZ1305" menuname="矫正人员违法违规情况监管" actionuri="module/sqjz/listjzWggl.jsp"/>
 				<menu menucode="JZ1306" menuname="矫正人员外出情况监管" actionuri="module/sqjz/listJzrywcjg.jsp"/>
 				<menu menucode="JZ1307" menuname="矫正人员居住地变更情况监管" actionuri="module/sqjz/listJzdbgcjb.jsp"/>
 				

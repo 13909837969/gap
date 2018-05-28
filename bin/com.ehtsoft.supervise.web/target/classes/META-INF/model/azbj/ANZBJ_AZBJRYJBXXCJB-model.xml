@@ -2,7 +2,7 @@
 
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_AZBJRYJBXXCJB" label="安置帮教人员基本信息采集表">
-    <column field="AZBJRYJBXXCJB01" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
+    <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
     <column field="AZBJRYBH" type="string" length="20" label="安置帮教人员编号" remark="编码见 6.3"/>
     <column field="SFSJ" type="string" length="20" label="释放时间" remark="自填，格式按照 GB/T 7408 中规定"/>
     <column field="AZBJRYLB" type="string" length="20" label="安置帮教人员类别" remark="编码见 6.37"/>
@@ -37,6 +37,6 @@
     <column field="uaid" type="uuid" length="36" label="当前更新账号" remark="当前更新的账号ID :user.getAid() (core_account.sysid)"/>
     <column field="orgid" type="uuid" length="36" label="当前机构" remark="当前登录人机构ID: user.getOrgid()(core_organization.sysid)"/>
     <column field="remark" type="string" length="500" label="备注"/>
-    <primary name="PK_ANZBJ_AZBJRYJBXXCJB" field="AZBJRYJBXXCJB01"/>
+    <primary name="PK_ANZBJ_AZBJRYJBXXCJB" field="ID"/>
   </table>
 </model>

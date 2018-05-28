@@ -1,55 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="jz_xfzxxx" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1f667339-13a4-4005-9db4-e4d83d490e68">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ltData"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ltrhao"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="324"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="669"/>
 	<parameter name="aid" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
-	A .*, B.F_AID,
-	B.ZM,
-	B.FZLX,
-	B.GZQX,
-	B.HXKYQX,
-	B.SFSZBF,
-	B.YPXF,
-	B.YPXQKSRQ,
-	B.YPXQJSRQ,
-	B.YPXQ,
-	B.YQTXQX,
-	B.FJX,
-	B.SFWD,
-	B.SFWS,
-	B.SFYSS,
-	B.SFBXGJZL,
-	B.JZLNR,
-	B.JZJSRQ,
-	B.BDQK,
-	B.WASBDQKSM,
-	B.SQJZRYJSFS,
-	B.SQJZRYJSRQ,
-	B.SFJLJZXZ,
-	B.JZXZRYZCQK,
-	B.SFCQDZDWGL,
-	B.DZDWFS,
-	B.DWHM,
-	B.SFTG,
-	B.FXTGSJ,
-	B.ZZCZQK,
-	B.CZJG,
-	B.TQSJJYRQ,
-	B.JCQK,
-	B.JCLB,
-	B.JCSJ,
-	B.JCRY,
-	C .JZLB,
-	C .SQJZKSRQ,
-	C .SQJZJSRQ,
-	C .SQJZQX
-FROM
-	jz_jzryjbxx A
-LEFT JOIN JZ_XFZXXXB B ON B.F_AID = A . ID
-LEFT JOIN JZ_JZRYJBXX_JZ C ON C . ID = A . ID
+A.*,
+B.JZLB,B.SQJZKSRQ,B.SQJZJSRQ,B.SQJZQX,
+C.ZM,C.FZLX,C.GZQX,C.HXKYQX,C.SFSZBF,C.YPXF,C.YPXQKSRQ,C.YPXQJSRQ,
+C.YPXQ,C.YQTXQX,C.FJX,C.SFWD,C.SFWS,C.SFYSS,C.JZLNR,C.JZKSRQ,
+C.JZJSRQ,C.SQJZRYJSFS,C.SQJZRYJSRQ,
+C.JZXZRYZCQK,C.SFCQDZDWGL,C.DZDWFS,C.DWHM,C.SFTG,C.FXTGSJ,C.ZZCZQK,C.CZJG,C.TQSJJYRQ,
+C.JCQK,C.JCLB,C.JCSJ,C.JCRY 
+FROM JZ_JZRYJBXX A
+LEFT JOIN JZ_JZRYJBXX_JZ B ON B.ID=A.ID
+LEFT JOIN JZ_XFZXXXB c ON C.F_AID=A.ID
 where  A.ID=$P{aid}]]>
 	</queryString>
 	<field name="id" class="java.lang.String">
@@ -199,8 +167,17 @@ where  A.ID=$P{aid}]]>
 	<field name="lydwlx" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="lydwlx"/>
 	</field>
-	<field name="f_aid" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="f_aid"/>
+	<field name="jzlb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jzlb"/>
+	</field>
+	<field name="sqjzksrq" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sqjzksrq"/>
+	</field>
+	<field name="sqjzjsrq" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sqjzjsrq"/>
+	</field>
+	<field name="sqjzqx" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sqjzqx"/>
 	</field>
 	<field name="zm" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="zm"/>
@@ -244,29 +221,20 @@ where  A.ID=$P{aid}]]>
 	<field name="sfyss" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="sfyss"/>
 	</field>
-	<field name="COLUMN_65" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="sfbxgjzl"/>
-	</field>
 	<field name="jzlnr" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="jzlnr"/>
 	</field>
+	<field name="jzksrq" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="jzksrq"/>
+	</field>
 	<field name="jzjsrq" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="jzjsrq"/>
-	</field>
-	<field name="COLUMN_68" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="bdqk"/>
-	</field>
-	<field name="COLUMN_69" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="wasbdqksm"/>
 	</field>
 	<field name="sqjzryjsfs" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="sqjzryjsfs"/>
 	</field>
 	<field name="sqjzryjsrq" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="sqjzryjsrq"/>
-	</field>
-	<field name="COLUMN_72" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="sfjljzxz"/>
 	</field>
 	<field name="jzxzryzcqk" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="jzxzryzcqk"/>
@@ -306,18 +274,6 @@ where  A.ID=$P{aid}]]>
 	</field>
 	<field name="jcry" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="jcry"/>
-	</field>
-	<field name="jzlb" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="jzlb"/>
-	</field>
-	<field name="sqjzksrq" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="sqjzksrq"/>
-	</field>
-	<field name="sqjzjsrq" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="sqjzjsrq"/>
-	</field>
-	<field name="sqjzqx" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="sqjzqx"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -707,35 +663,35 @@ where  A.ID=$P{aid}]]>
 			</staticText>
 			<textField>
 				<reportElement x="180" y="0" width="100" height="38" uuid="39865622-925d-484a-9aff-53d2519dfc66"/>
-				<textFieldExpression><![CDATA[com.ehtsoft.fw.utils.StringUtil.toEmptyString($F{jzlb})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{jzlb}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="371" y="0" width="109" height="20" uuid="9c65cdba-0520-42b5-a34d-cc0cee7d8bee"/>
-				<textFieldExpression><![CDATA[com.ehtsoft.fw.utils.DateUtil.format（$F{sqjzksrq},null)]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sqjzksrq}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="590" y="0" width="210" height="38" uuid="0b6ddc78-cb58-4567-adca-003a494e4a44"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sqjzqx}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="280" y="40" width="520" height="38" uuid="bee0331c-ba7f-4146-9f6c-7c2f5f761b2f"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fzlx}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="40" width="50" height="38" uuid="c1b194c6-edcd-4774-8e29-885a9f99f9cf"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{zm}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="80" width="100" height="38" uuid="5afc15cd-a78e-413e-9d5c-4c3e4f518732"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{gzqx}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="371" y="80" width="429" height="38" uuid="3a614a4e-326e-42ec-aa76-31ae7301034d"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{hxkyqx}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="120" width="50" height="38" uuid="cdc18906-dbde-4381-8eb5-8ceed3f919d4"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sfszbf}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="159" width="49" height="38" uuid="558ed03e-6fd1-4ef1-adb1-c1b5e553b460"/>
@@ -819,7 +775,7 @@ where  A.ID=$P{aid}]]>
 			</textField>
 			<textField>
 				<reportElement x="370" y="20" width="109" height="18" uuid="7ffb2388-586a-4a87-85de-bb19a0d35073"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sqjzjsrq}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="337">

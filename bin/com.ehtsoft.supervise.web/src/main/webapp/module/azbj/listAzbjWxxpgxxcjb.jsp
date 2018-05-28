@@ -13,61 +13,65 @@ $(function(){
 	var form = new Eht.Form({selector:'#jcflfwsForm',autolayout:true,formCol:2});
 	var tableview = new Eht.TableView({selector:'#tableview'});
 	var qf = new Eht.Form({selector:"#divcx",codeEmpty:true,codeEmptyLabel:"全部"});
+	var v = null;
 	//展示页面信息
 	tableview.loadData(function(page,res){
 		service.findAll(qf.getData(), page, res);
 	});
 	//新增按钮触发事件
-	$('#btn_add').click(function(){
+	$("#btn_add").click(function(){
 		form.clear();
-		$('#myModal').modal({backdrop:'static'});
-		$('#btn_submit').show();
-		$('#btn_close').show();
+		v = null;
+		findRy();
+		$("#myModal").modal({backdrop:'static'});
+		$("#btn_submit").show();
 		form.enable();
 	});
 	//查看按钮触发事件
-	$('#btn_view').click(function(){
-		if($(":checkbox:checked").length == 1){
-			$('#btn_submit').hide();
-			$('#btn_close').hide();
-			$('#myModal').modal({backdrop:'static'});
-			form.fill($(":checkbox:checked").data());
+	$("#btn_view").click(function(){
+		if($("#tableview :checkbox:checked").length == 1){
+			v = $("#tableview :checkbox:checked").data().aid;
+			findRy();
+			$("#btn_submit").hide();
+			$("#myModal").modal({backdrop:'static'});
+			form.fill($("#tableview :checkbox:checked").data());
 			form.disable();
 		}else{
 			var ale = new Eht.Alert();
-			ale.show("请选中其中一条数据进行操作！");
+			ale.show("请选中其中一条数据进行操作!");
 		}
 	}); 
 	//删除按钮事件
-	$("#btn_delete").click(
-			function() {
-				var sd_ry = tableview.getSelectedData();
-				if (sd_ry.length == 1) {
-					if (confirm("确定删除数据")==true) {
-						service.removeOne($(":checkbox:checked").data().id);
-						new Eht.Tips().show("删除成功");
+	$('#btn_delete').click(function(){
+		if($("#tableview :checkbox:checked").length == 1){
+			var c = new Eht.Confirm();
+			c.show("此操作不可恢复，确定要删除选中记录吗！");
+			c.onOk(function(){
+				service.removeOne($("#tableview :checkbox:checked").data(),new Eht.Responder({
+					success:function(){
 						tableview.refresh();
-					} else {
-						new Eht.Tips().show("删除失败");
+						c.close();
+						new Eht.Tips().show("删除成功");
 					}
-				}else{
-					var ale = new Eht.Alert();
-					ale.show("请选中一条数据进行操作!");
-					tableview.refresh();
-				}
+				}));
 			});
-	
+		}else{
+			var ale = new Eht.Alert();
+			ale.show("请选中一条数据进行操作!");
+		}
+	});
 	//查询按钮事件
-	$('#btn_search').click(function(){
+	$("#btn_search").click(function(){
 		tableview.refresh();
 	});	
-	//修改按钮事件
-	$('#btn_edit').click(function(){
-		if($(":checkbox:checked").length == 1){
-			$('#myModal').modal({backdrop:'static'});
-			form.fill($(":checkbox:checked").data());
-			$('#btn_submit').show();
-			$('#btn_close').show();
+	//编辑按钮事件
+	$("#btn_edit").click(function(){
+		if($("#tableview :checkbox:checked").length == 1){
+			v = $("#tableview :checkbox:checked").data().aid;
+			findRy();
+			$("#myModal").modal({backdrop:'static'});
+			form.fill($("#tableview :checkbox:checked").data());
+			$("#btn_submit").show();
 			form.enable();
 		}else{
 			var ale = new Eht.Alert();
@@ -75,27 +79,36 @@ $(function(){
 		}
 	});
 	//模态框保存并且隐藏
-	$('#btn_submit').click(function(){
+	$("#btn_submit").click(function(){
 		if(form.validate()){
 			service.saveOne(form.getData(),new Eht.Responder({
 				success:function(data){
-					$('#myModal').modal('hide');
+					$('#myModal').modal("hide");
 					tableview.refresh();
+					new Eht.Tips().show("保存成功");
 				}
 			}));
+		}else{
+			new Eht.Tips().show("保存失败");
 		}
 	});
-	//模态框查询危险性评估信息事件
-	service.findJz(new Eht.Responder({
-		success:function(data){
-			$("#wxxpg_xmajglx").empty();
-			$("#wxxpg_xmajglx").append('<option selected="selected"></option>');
-			for(var i=0;i<data.length;i++){
-				$("#wxxpg_xmajglx").append("<option value="+data[i].id+">"+data[i].xm +data[i].grlxdh+"</option>");
+	//模态框新增人员信息事件
+	function findRy(){
+		service.findJz(new Eht.Responder({
+			success:function(data){
+				$("#wxxpg_xmajglx").empty();
+				$("#wxxpg_xmajglx").append('<option></option>');
+				for(var i=0;i<data.length;i++){
+					if(data[i].id == v){
+						$("#wxxpg_xmajglx").append("<option value=" + data[i].id+" selected>" + data[i].xm + data[i].grlxdh + "</option>");
+					}else{
+						$("#wxxpg_xmajglx").append("<option value=" + data[i].id+">" + data[i].xm + data[i].grlxdh + "</option>");
+					}
+				}
+				$("#wxxpg_xmajglx").comboSelect();
 			}
-			$("#wxxpg_xmajglx").comboSelect();
-		}
-	}))	
+		}))
+	}
 });
 </script>
 </head>
@@ -107,7 +120,7 @@ $(function(){
 	<button id="btn_view" type="button" class="btn btn-default" style="margin-left:10px;">
 	<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>
 	<button id="btn_edit" type="button" class="btn btn-default" style="margin-left:10px;">
-	<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</button>
+	<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑</button>
 	<button id="btn_delete" type="button" class="btn btn-default" style="margin-left:10px;">
 	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除</button>			
 </div>
@@ -116,23 +129,23 @@ $(function(){
 	<div id="divcx">
 		<div class="form-group">
 			<label for="xm">姓名</label>
-			<input type="text" class="form-control" name="xm[like]" id="xm" placeholder="姓名">
+			<input type="text" class="form-control" name="xm[like]" placeholder="姓名">
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="jyqk">就业情况</label>
-			<input type="text" class="form-control" name="jyqk[eq]" id="jyqk" placeholder="就业情况" code="SYS175">
+			<input type="text" class="form-control" name="jyqk[eq]" placeholder="就业情况" code="SYS175">
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="shly">生活来源</label>
-			<input type="text" class="form-control" name="shly[eq]" id="shly" placeholder="生活来源" code="sys176">
+			<input type="text" class="form-control" name="shly[eq]" placeholder="生活来源" code="sys176">
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="rzfftd">认罪服法态度</label>
-			<input type="text" class="form-control" name="rzfftd[eq]" id="rzfftd" placeholder="认罪服法态度" code="sys188">
+			<input type="text" class="form-control" name="rzfftd[eq]" placeholder="认罪服法态度" code="sys188">
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="dazbjtd">对安置帮教态度</label>
-			<input type="text" class="form-control" name="dazbjtd[eq]" id="dazbjtd" placeholder="对安置帮教态度" code="sys193">
+			<input type="text" class="form-control" name="dazbjtd[eq]" placeholder="对安置帮教态度" code="sys193">
 		</div>
 		<button type="button" id="btn_search" class="btn btn-primary" style="margin-left:10px;">
 			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
@@ -165,7 +178,7 @@ $(function(){
 			</div>
 			<div class="modal-body" style="overflow: auto;height:450px;">
 				<div id="jcflfwsForm">
-					<input type="hidden" name="id"/> 
+					<input type="hidden" name="id"/>
 					<select id="wxxpg_xmajglx" name="azbjryid" label="服刑人员姓名" style="max-width:none">
 					</select>
 					<input id="sfzh" name="sfzh" label="身份证号" code="SYS241" valid="{required:true}">
@@ -194,7 +207,8 @@ $(function(){
 					<input id="rzfftd" name="rzfftd" label="认罪服法态度" code="SYS188" valid="{required:true}">
 					<input id="gzbx" name="gzbx" label="改造表现" code="SYS189" valid="{required:true}">
 					<input id="zyjn" name="zyjn" label="职业技能" code="SYS190" valid="{required:true}"> 
-					<input id="jspg" name="jspg" label="监所评估" code="SYS248" valid="{required:true}"> 
+					<!-- <input id="jspg" name="jspg" label="监所评估" code="SYS248" valid="{required:true}">  -->
+					<input id="jspg" type="text" name="jspg" label="监所评估" placeholder="监所评估" valid="{required:true}">
 					<input id="hgqx" name="hgqx" label="回归去向" code="SYS192" valid="{required:true}">
 					<input id="dazbjtd" name="dazbjtd" label="对安置帮教态度" code="SYS193" valid="{required:true}">
 					<input id="sfswry" name="sfswry" label="是否三无人员" code="SYS226" valid="{required:true}">

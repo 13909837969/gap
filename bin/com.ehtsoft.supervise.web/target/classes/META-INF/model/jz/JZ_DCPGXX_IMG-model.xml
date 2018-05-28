@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
+  <table name="JZ_DCPGXX_IMG" label="调查记录附件信息表" base="true">
+    <column field="IMGID" type="uuid" length="36" label="主键" required="true" remark=" 关联数据 JZ_DCPGXX.ID"/>
+     <column field="FJMC" type="String"  length="36" remark="附件名称"/>
+    <column field="LX" type="String" length="2" label="附件类型" remark="1.委托调查书  2.调查评估意见书" />
+    <column field="data" type="binary" label="附件数据"/>
+    <column field="mimetype" type="string" length="20" label="附件类型" remark="类型如：word/pdf"/>
+    <column field="remark" type="string" length="500" label="备注"/>
+    <primary name="PK_JZ_DCPGXX_IMG" field="IMGID"/>
+  </table>
+</model>

@@ -1,177 +1,199 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
-<html >
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%-- 牛新宇 --%>
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <title>安置信息管理</title>
 <jsp:include page="../ltrhao-common.jsp"></jsp:include>
 <script type="text/javascript" src="${localCtx}/json/AzbjAzxxglService.js"></script>
+<script type="text/javascript" src="${localCtx}/json/AzbjCommonService.js"></script>
 <script type="text/javascript">
-//未选中提示
-function wxzts(){
-	var ale = new Eht.Alert();
-	ale.show("请选中一条数据进行操作!");
-}
 $(function(){
-	var azxxgl=new AzbjAzxxglService();
-	var query_ry = new Eht.Form({selector:"#azxx_query",codeEmpty:true,codeEmptyLabel:"全部"});//人员信息查询条件
-	var table_ry = new Eht.TableView({selector:"#azxx_table_ry",multable:false});//人员信息显示表格
-	var azbj_form = new Eht.Form({selector:"#azbj_form",autolayout:true});//安置人员模态框
+	var dataService = new AzbjAzxxglService();
+	var commonService = new AzbjCommonService();
+	//判断是否多次加载数据
+	var findFlag = false;
+	//查询条件表单Form
+	var form_search = new Eht.Form({selector:"#form_search",codeEmpty:true,codeEmptyLabel:"全部"});
+	//列表数据显示table
+	var list_table = new Eht.TableView({selector:"#list_table",multable:false});
+	//安置人员明细操作页面
+	var form_add = new Eht.Form({selector:"#form_add",autolayout:true});
 	//加载页面信息
-	table_ry.loadData(function(page,res){	
-		azxxgl.find_ry(query_ry.getData(),page,res);	
-	});
+	list_table.loadData(function(page,res){dataService.findAll(form_search.getData(),page,res);});
 	//条件查询刷新
-	$("#btn_query").click(function() {
-		table_ry.refresh();
-	}); 
-	//增加按钮触发事件
+	$("#btn_search").click(function(){list_table.refresh();});	
+	//增加按钮操作
 	$("#btn_add").click(function() {
-		azbj_form.clear();
-		$('#azbj_azxx').modal({backdrop:'static'});
-		azbj_form.enable();
+		form_add.clear();
+		form_add.enable();
+		check_id=null;
+		findYxjry('-1');
+		$("#btn_save").show();
+		$("#modal_pop").modal({backdrop:'static'});
 	});
-	//查看按钮触发事件
-	$("#btn_search").click(function(){
-		if($(":checkbox:checked").length==1){
-			$("#azbj_azxx").modal({backdrop:'static'});
+	
+	//判断是否选中的公用方法
+	function checkSelected(){
+		if($("#list_table :checkbox:checked").length==1){
+			return true;
+		}else{
+			new Eht.Alert().showNotSelected();
+			return false;
+		}
+	}
+	
+	//查看按钮操作
+	$("#btn_view").click(function(){
+		if(checkSelected()){
+			debugger;
+			$("#modal_pop").modal({backdrop:'static'});
 			$("#btn_save").hide();
-			azbj_form.disable();
-			azbj_form.fill($(":checkbox:checked").data());
-		}else{
-			wxzts();
+			form_add.disable();
+			form_add.fill($("#list_table :checkbox:checked").data());
+			findYxjry($("#list_table :checkbox:checked").data().aid);
 		}
 	});
-	//编辑按钮触发事件
+	//编辑按钮操作
 	$("#btn_edit").click(function(){
-		if($(":checkbox:checked").length==1){
-			azbj_form.enable();
-			azbj_form.clear();
-			$("#azbj_azxx").modal({backdrop:'static'});
-			azbj_form.fill($(":checkbox:checked").data());
-		}else{
-			wxzts();
+		if(checkSelected()){	
+			form_add.enable();
+			$("#btn_save").show();
+			$("#modal_pop").modal({backdrop:'static'});
+			form_add.fill($("#list_table :checkbox:checked").data());
+			findYxjry($("#list_table :checkbox:checked").data().aid);
 		}
 	});
-	//删除按钮触发事件
-	$('#btn_delete').click(function(){
-		if(table_ry.getSelectedData().length==1){
-			if (confirm("此操作不可恢复，确定要删除选中记录吗！")) {
-				azxxgl.removeOne($(":checkbox:checked").data().id);
-				new Eht.Tips().show("删除成功");
-				table_ry.refresh();
-			} 
-		}else{
-			wxzts();
-			table_ry.refresh();
+	//删除按钮操作
+	$("#btn_delete").click(function(){
+		if(checkSelected()){
+			var confirm = new Eht.Confirm();
+			confirm.showDelete();
+			confirm.onOk(function(){
+				dataService.removeOne($("#list_table :checkbox:checked").data(),new Eht.Responder({
+					success:function(){
+						list_table.refresh();
+						confirm.close();
+						new Eht.Tips().show();
+					}
+				}));
+			});
 		}
 	}); 
-	//模态框安置人员姓名
-	azxxgl.findAz(new Eht.Responder({
-		success:function(data){
-			$("#azbjryid").empty();
-			$("#azbjryid").append('<option selected="selected"></option>');
-			for(var i=0;i<data.length;i++){
-					$("#azbjryid").append("<option value="+data[i].id+"selected>"+data[i].xm +"   "+ data[i].grlxdh + "</option>");			
-					$("#azbjryid").append("<option value="+data[i].id+">"+data[i].xm +"   "+ data[i].grlxdh + "</option>");		
-			}
-			$("#azbjryid").comboSelect();
-		}
-	}));
-	//保存按钮
-	$("#btn_submit").click(function(){
-		if(azbj_form.validate()){
-    		azxxgl.saveOne(azbj_form.getData(),new Eht.Responder({
-    			success:function(data){
-    				azbj_form.clear();
-    				$("#azbj_azxx").modal("hide");
-    				new Eht.Tips().show("保存成功");
-    				table_ry.refresh();
+	//保存按钮触发事件
+	$("#btn_save").click(function(){
+		if(form_add.validate()){
+    		dataService.saveOne(form_add.getData(),new Eht.Responder({
+    			success:function(){
+    				$("#modal_pop").modal("hide");
+    				new Eht.Tips().show();
+    				list_table.refresh();
     			}
     		}));
 		}
 	});
+	//已衔接人员姓名检索框
+	function findYxjry(ryid){
+		if (!findFlag){
+			commonService.findYxjry(new Eht.Responder({
+				success:function(data){
+					$("#azbjryid").empty();
+					$("#azbjryid").append('<option selected="selected"></option>');
+					for(var i=0;i<data.length;i++){
+						$("#azbjryid").append("<option value="+data[i].id+">"+data[i].xm +"   "+ data[i].grlxdh + "</option>");
+					}
+					$("#azbjryid").comboSelect();
+					findFlag = true;
+				}
+			}));
+		}else{
+			debugger;
+			if(ryid!='-1'){
+				$("#azbjryid option[value="+ryid+"]").attr("selected", "selected");
+			}
+		}
+	}	
 });
-
 </script> 
 </head>
-<body>	
+<body>
+<!-- 操作工具条 -->
 <div class="toolbar">
 	<button type="button" id="btn_add" class="btn btn-default" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</button>
-	<button type="button" id="btn_search" class="btn btn-default" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增	</button>
+	<button type="button" id="btn_view" class="btn btn-default" style="margin-left:10px;">
+		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>
 	<button type="button" id="btn_edit" class="btn btn-default" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</button>
+		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑</button>
 	<button type="button" id="btn_delete" class="btn btn-default" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除</button>			
+		<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除</button>			
 </div>
 <!-- 查询条件部分 -->
 <form class="form-inline" style="margin:10px;">
-	<div id="azxx_query">
+	<div id="form_search">
 		<div class="form-group">
 			<label for="xm">姓名</label>
-			<input type="text" class="form-control" name="xm[like]" id="xm" placeholder="姓名">
+			<input type="text" class="form-control" name="xm[like]" placeholder="姓名"/>
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="azfs">安置方式</label>
-			<input type="text" class="form-control" name="azfs[eq]" id="azfs" placeholder="安置方式" code="SYS154">
+			<input type="text" class="form-control" name="azfs[eq]" placeholder="安置方式" code="SYS154"/>
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="azsj">安置时间</label>
-			<input type="text" class="form_date" name="azsj[eq]" id="azsj" placeholder="安置时间" data-date-formate="yyyy-MM-dd">
+			<input type="text" class="form_date form-control" name="azsj[eq]" placeholder="安置时间" data-date-formate="yyyy-MM-dd"/>
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="hdshjzfs">获得社会救助方式</label>
-			<input type="text" class="form-control" name="hdshjzfs[eq]" id="hdshjzfs" placeholder="获得社会救助方式" code="SYS160">
+			<input type="text" class="form-control" name="hdshjzfs[eq]" placeholder="获得社会救助方式" code="SYS160"/>
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="hdjyfwfs">获得就业服务方式</label>
-			<input type="text" class="form-control" name="hdjyfwfs[eq]" id="hdjyfwfs" placeholder="获得就业服务方式" code="SYS161">
+			<input type="text" class="form-control" name="hdjyfwfs[eq]" placeholder="获得就业服务方式" code="SYS161"/>
 		</div>
-		<button type="button" id="btn_query" class="btn btn-primary" style="margin-left:10px;">
+		<button type="button" id="btn_search" class="btn btn-primary" style="margin-left:10px;">
 			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
 	</div>
 </form>
- <div id="azxx_table_ry" class="table_responsive">
+<!-- 列表数据 -->
+<div id="list_table" class="table_responsive">
 	<div field="id" label="选择" checkbox="true" width="60"></div>
-	<div field="xm" label="姓名" width="100"></div>
-	<div field="azfs" label="安置方式" code="SYS154" ></div>
-	<div field="azsj" label="安置时间" ></div>		
+	<div field="xm" label="姓名"></div>
+	<div field="azfs" label="安置方式" code="SYS154"></div>
+	<div field="azsj" label="安置时间"></div>
 	<div field="hdshjzfs" label="获得社会救助方式" code="SYS160"></div>
 	<div field="hdjyfwfs" label="获得就业服务方式" code="SYS161"></div>		
-</div> 
+</div>
 <!-- 模态安置人员信息 -->
-<div class="modal fade" id="azbj_azxx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document" style="width:800px">
+<div class="modal fade" id="modal_pop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document" style="width:600px">
 		<div class="modal-content">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
  			  <h4 class="modal-title" id="myModalLabel">安置人员信息</h4>
 			</div>
-            <div class="modal-body" style="overflow: auto;height:400px;">
-		      	<div id="azbj_form">
-		      		<input type="hidden" name="id"> 
-					<select id="azbjryid" name="azbjryid" label="安置人员" valid="{required:true}" style="max-width:none"></select> 		
+            <div class="modal-body" style="overflow:auto;height:400px;">
+		      	<div id="form_add">
+		      		<input type="hidden" name="id">
+		      		<select id="azbjryid" name="azbjryid" label="安置人员" style="max-width:none" valid="{required:true}"></select> 		
 		         	<input type="text" name="azfs" label="安置方式" code="SYS154" valid="{required:true}"/>
-		         	<input type="date" name="azsj" label="安置时间" class="class_form" data-date-formate="yyyy-MM-dd" valid="{required:true}"/>
+		         	<input type="text" name="azsj" label="安置时间" class="form_date" data-date-formate="yyyy-MM-dd" valid="{required:true}" /> 
 		         	<input type="text" name="hdshjzfs" label="获得社会救助方式" code="SYS160" />
 		         	<input type="text" name="hdjyfwfs" label="获得就业服务方式" code="SYS161" />  	
-		         	<input type="text" name="sfxzblshbx" label="是否协助办理社会保险 " code="SYS001" />     	
-		         	<input type="text" name="zzcysflsjmszc" label="自主创业是否落实减免税政策" code="SYS001" />     	
-		         	<input type="text" name="csgtjysflsjmszc" label="从事个体经营是否落实减免税政策" code="SYS001" />     	
+		         	<input type="text" name="sfxzblshbx" label="是否协助办理社会保险 " code="SYS001"/>     	
+		         	<input type="text" name="zzcysflsjmszc" label="自主创业是否落实减免税政策" code="SYS001"/>     	
+		         	<input type="text" name="csgtjysflsjmszc" label="从事个体经营是否落实减免税政策" code="SYS001"/>     	
 		         	<input type="text" name="qyhjjsflsjmszc" label="企业和经济是否落实减免税政策" code="SYS001" />     	
-		         	<textarea name="remark" id="floor" type="text"  label="备注" maxlength="500"  rows="4"></textarea>
-     	    	
+		         	<textarea name="remark" id="floor" type="text" label="备注" maxlength="500" rows="4"></textarea>
 		         </div>	     			
 		  	</div>
-		  <div class="modal-footer">
-       		 <button type="button" id="btn_submit" class="btn btn-primary">保存</button>
-       		 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button> 
-		  </div>
-	  </div>
-	</div>	
+			<div class="modal-footer">
+	       		 <button type="button" id="btn_save" class="btn btn-primary">保存</button>
+	       		 <button type="button" id="btn_close" class="btn btn-default" data-dismiss="modal">取消</button> 
+			</div>
+		 </div>
+	</div>
 </div>
 </body>
 </html>

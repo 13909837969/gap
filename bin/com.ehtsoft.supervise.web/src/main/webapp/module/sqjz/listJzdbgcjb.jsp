@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -16,6 +17,13 @@ td{
    	height:60px;
    	
    }
+textarea{
+	resize:none;
+}
+.combo-select{
+    max-width:500px;
+}   
+
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -27,23 +35,17 @@ td{
 			for (var i = 0; i < data.length; i++) {
 				$("#qrdszs").append('<option value="'+data[i].regionid+'">'+data[i].region_name+'</option>');
 			}
-			
-			$("#qrdszs").change();
 		}
 	}));  
-	
-	$("#qrdszs").change(function(){
-		
+	$("#qrdszs").blur(function(){
 		region.find(2,$("#qrdszs").val(),new Eht.Responder({
 		success:function(data){
-			
-			$("#qrdszd").empty();
 			for (var i = 0; i < data.length; i++) {
 				$("#qrdszd").append('<option value="'+data[i].regionid+'">'+data[i].region_name+'</option>');
 			}
 		}
 	}));
-	$("#qrdszd").change(function(){	
+	$("#qrdszd").blur(function(){	
 		region.find(3,$("#qrdszd").val(),new Eht.Responder({
 			success:function(data){
 			$("#qrdszx").empty();
@@ -72,7 +74,8 @@ td{
 		formModelsq.charValid(function(name,min,max){
 			if(name=="jzdbgsy"){
 				$("#count").html(min+"/"+max);
-				if( min/max > 3/4 ){
+				var dl =min/max;
+				if( dl> 3/4 ){
 					$("#count").css("color","#f00");
 				}else{
 					$("#count").css("color","#00f");
@@ -86,9 +89,10 @@ td{
 		});
 		
 		formModelsp.charValid(function(name,min,max){
+			var dc =min/max;
 			if(name=="sfsshyj"){
 				$("#count2").html(min+"/"+max);
-				if( min/max > 3/4 ){
+				if( dc > 3/4 ){
 					$("#count2").css("color","#f00");
 				}else{
 					$("#count2").css("color","#00f");
@@ -96,7 +100,7 @@ td{
 			}
 			if(name=="xsfjspyj"){
 				$("#count3").html(min+"/"+max);
-				if( min/max > 3/4 ){
+				if( dc > 3/4 ){
 					$("#count3").css("color","#f00");
 				}else{
 					$("#count3").css("color","#00f");
@@ -185,9 +189,6 @@ td{
 	     };
 		if(orgType ==4){
 			$("#addbtn").attr("type","button");
-			$("#addbtn").attr("type","button");
-		 	$("#xsfjspsj").attr("disabled","disabled");
-			$("#xsfjspyj").attr("disabled","disabled");
 			$("#sfsshr").val("${CURRENT_USER_SESSION.name}");
 		};
 		
@@ -230,7 +231,7 @@ td{
 				<select class="btn btn-default" type="text" label="审批状态" id="spzt">
 					<option value="">全部</option>
 					<option value="1">通过</option>
-					<option value="2">未通过</option>
+					<option value="3">未通过</option>
 					<option value="0">待审核</option>
 				</select>
 				<span>
@@ -263,13 +264,13 @@ td{
 				<div class="modal-body" id="modal-bodyAdd" style="height:510px;overflow-y:auto;overflow-x:hidden;">
 					<div id="jzdbg_model_field">
 						<select id="jzdbgform_jzrybhAndxm" name="f_aid" label="服刑人员" ></select>
-		    			<input name="sqsj"    label="申请时间"  class="form_date" id="sqsj" fixedValue="true">
+		    			<input name="sqsj"    label="申请时间"  class="form_date" id="sqsj" fixedValue="true" readonly="readonly">
 		    			<select name="qrdszs"  label="迁入地所在省(区、市)"  id="qrdszs" ></select>
 		    			<select name="qrdszd"  label="迁入地所在地(市、州)"  id="qrdszd"></select>
 		    			<select name="qrdszx"  label="迁入地所在县(市、区)"  id="qrdszx" ></select>
 		    			<input name="qrdxz"  label="迁入地(乡镇、街道)"  id="qrdxz" >
 		    			<input name="qrdmx"  label="迁入地明细"  id="qrdmx" >
-		    			<textarea name="jzdbgsy"    label="居住地变更理由"  id="jzdbgsy"  maxlength="500"  getdis="true" ></textarea>
+		    			<textarea rows="8" name="jzdbgsy"    label="居住地变更理由"  id="jzdbgsy"  maxlength="500"  getdis="true" ></textarea>
 		    			<div class="text-right"><span id="count" style="color: #3F51B5;margin-right: 40px;"></span></div>
 		    		</div>
 				</div>
@@ -357,7 +358,7 @@ td{
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="false" id="xxx"></button>
+							aria-hidden="false" id="xxx">x</button>
 						<h4 class="modal-title" id="myModalLabel">居住地变更审批</h4>
 					</div>
 					<div class="modal-body" id="modal-body" style="height: 510px; overflow: auto">
@@ -366,16 +367,17 @@ td{
 								<input name="qrdxz"  label="迁入地(乡镇、街道)" readonly="true" >
 				    			<input name="qrdmx"  label="迁入地明细" readonly="true" >
 				    			<textarea name="jzdbgsy"    label="变更理由"  id="jzdbgsy"  maxlength="500" readonly="true" ></textarea>
-				    			<input name="sfsshsj"    label="司法所审核时间"  class="form_date" id="sfsshsj" fixedValue="true">
+				    			<input name="sfsshsj"    label="司法所审核时间"  class="form_date" id="sfsshsj" readonly="readonly" fixedValue="true">
 				    			<input type="text" id="sfsshr" name="sfsshr"  readonly="true" fixedValue="true" label="审核人">					
-								<textarea id="sfsshyj" name="sfsshyj"  rows="4" type="text" label="司法所审核意见" maxlength="200"></textarea>
+								<textarea id="sfsshyj" name="sfsshyj"  rows="8" type="text" label="司法所审核意见" maxlength="200"></textarea>
 								<div class="text-right"><span id="count2" style="color: #3F51B5;margin-right: 40px;"></span></div>
-								<input name="xsfjspsj" type="text"   label="县(市、区)司法局审批时间"  class="form_date" id="xsfjspsj" fixedValue="true">
-				    			<input  id="xsfjspr" name="xsfjspr"  readonly="true" fixedValue="true" label="县(市、区)司法局审批人">					
-								<textarea id="xsfjspyj" name="xsfjspyj"  rows="4"  label="县(市、区)司法局审批意见" maxlength="200"></textarea>
-								<div class="text-right"><span id="count3" style="color: #3F51B5;margin-right: 40px;"></div>
-								
-								<select id="audit" name="audit" label="审批意见" code="SYS171"></select>
+								<c:if test="${CURRENT_USER_SESSION.orgType == 2}">
+								<input name="xsfjspsj" type="text"   label="县(市、区)司法局审批时间"  class="form_date" id="xsfjspsj" readonly="readonly" fixedValue="true">
+					    			<input  id="xsfjspr" name="xsfjspr"  readonly="true" fixedValue="true" label="县(市、区)司法局审批人">					
+									<textarea id="xsfjspyj" name="xsfjspyj"  rows="8"  label="县(市、区)司法局审批意见" maxlength="200"></textarea>
+									<div class="text-right"><span id="count3" style="color: #3F51B5;margin-right: 40px;"></div>
+								</c:if>
+								<select id="audit" name="audit" label="最终意见" code="SYS171"></select>
 						</div>	
 					</div>
 					<div class="modal-footer">

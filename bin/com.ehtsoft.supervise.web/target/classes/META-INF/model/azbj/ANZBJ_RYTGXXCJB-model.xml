@@ -3,7 +3,7 @@
 <model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema.xsd">
   <table name="ANZBJ_RYTGXXCJB" label="人员托管信息采集表">
     <column field="ID" type="uuid" length="36" label="主键" required="true" remark="系统自动生成"/>
-    <column field="AID" type="string" length="20" label="安置帮教人员编号" remark="编码见 6.3"/>
+    <column field="AZBJRYID" type="string" length="20" label="安置帮教人员编号" remark="编码见 6.3"/>
     <column field="SFTG" type="string" length="20" label="是否脱管" remark="自填"/>
     <column field="TGSJ" type="string" length="20" label="脱管时间" remark="自填，格式按照 GB/T7408 中规定"/>
     <column field="TGYY" type="string" length="200" label="脱管原因" remark="自填"/>

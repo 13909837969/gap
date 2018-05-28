@@ -526,7 +526,7 @@
 				</select> 
 				<input class="btn btn-default" type="button" id="listJzsf_find"	value="查询"> 
 				<input class="btn btn-default" type="button" id="listTjdaxx_send" value="添加档案数据"> 
-				<input class="btn btn-default" type="button" id="listPlFsXx_send" value="批量发送信息">
+				<!-- <input class="btn btn-default" type="button" id="listPlFsXx_send" value="批量发送信息"> -->
 			</fieldset>
 		</div>
 		<div class="container-fluid">
