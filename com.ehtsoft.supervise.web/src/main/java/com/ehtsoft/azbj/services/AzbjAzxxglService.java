@@ -1,9 +1,7 @@
 package com.ehtsoft.azbj.services;
 
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
-
 import com.ehtsoft.common.services.SSOService;
 import com.ehtsoft.fw.core.db.SQLAdapter;
 import com.ehtsoft.fw.core.db.SqlDbClient;
@@ -23,13 +21,13 @@ import com.ehtsoft.supervise.api.SupConst;
 
 @Service("AzbjAzxxglService")
 public class AzbjAzxxglService extends AbstractService {
-	
+    	
 	@Resource(name = "sqlDbClient")
 	private SqlDbClient dbClient;
-	
+
 	@Resource(name = "SSOService")
 	private SSOService ssoService;
-	
+
 	/**
 	 * 安置帮教_分页列表已安置人员的信息查询 
 	 * @param query 网页端已通过name的形式对查询条件进行处理
@@ -45,6 +43,7 @@ public class AzbjAzxxglService extends AbstractService {
 			sqlFilter.eq("c.jcbj", "0");
 			sqlFilter.in("a.orgid", user.getOrgidSet());
 			SQLAdapter sqlAdapter = new SQLAdapter(sqlStr);
+			
 			sqlAdapter.setFilter(sqlFilter);
 			rtnLt = dbClient.find(sqlAdapter, paginate);
 		}

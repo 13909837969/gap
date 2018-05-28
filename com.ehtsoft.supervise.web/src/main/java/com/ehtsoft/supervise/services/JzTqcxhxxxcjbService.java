@@ -1,5 +1,6 @@
 package com.ehtsoft.supervise.services;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -60,9 +61,13 @@ public class JzTqcxhxxxcjbService extends AbstractService{
 		if(Util.isNotEmpty(data.get("audit"))){
 			filter.eq("a.AUDIT", NumberUtil.toInt(data.get("audit")));
 		}
+		Set audits=new HashSet<>();
+		audits.add(1);
+		audits.add(2);
+		audits.add(4);
 		//地司法局审批信息筛选
 		if(user.getOrgType()==2) {
-			filter.eq("a.audit", 1);
+			filter.in("a.audit", audits);
 		}
 		
 		filter.eq("JCJZ", "0");
@@ -75,14 +80,6 @@ public class JzTqcxhxxxcjbService extends AbstractService{
 			public void processData(BasicMap<String, Object> rowData) {
 				 rowData.put("sqsj", DateUtil.format(rowData.get("sqsj"), "yyyy-MM-dd "));
 				 rowData.put("xsfjspsj", DateUtil.format(rowData.get("xsfjspsj"), "yyyy-MM-dd "));
-			
-				 if (Util.isNotEmpty(rowData.get("dsfjshyj"))) {
-						rowData.put("spyj", rowData.get("dsfjshyj"));
-					}else if (Util.isNotEmpty(rowData.get("xsfjshyj"))) {
-						rowData.put("spyj", rowData.get("xsfjshyj"));
-					} else {
-						rowData.put("spyj", "待县司法局审核");
-					}
 			}
 		});
 		
@@ -141,9 +138,10 @@ public class JzTqcxhxxxcjbService extends AbstractService{
 	public BasicMap<String, Object> findOne(String id) {
 		String sqlstr = "select b.xm,b.xb,b.sfzh,b.sqjzrybh,c.jzlb,c.sqjzqx,c.jzsssq,c.sqjzksrq,c.sqjzjsrq,c.jtzm,c.ypxq,a.*,"
 				+ "d.hjszdmx,d.gdjzdmx " + "FROM JZ_TQCXHXXXCJB a "
-				+ "inner join JZ_JZRYJBXX b on b.id=a.aid "
-				+ "inner join JZ_JZRYJBXX_JZ c on c.id=a.aid "
-				+ "inner join JZ_JZRYJBXX_DZ d on d.id=a.aid and a.id='" + id + "'";// sql
+				+ "left join JZ_JZRYJBXX b on b.id=a.aid "
+				+ "left join JZ_JZRYJBXX_JZ c on c.id=a.aid "
+				+ "left join JZ_JZRYJBXX_DZ d on d.id=a.aid "
+				+ "where a.id='" + id + "'";// sql
 		SQLAdapter sql = new SQLAdapter(sqlstr);
 		// String sqlstr1 = "select * from JZ_JZRYJBXX_JZ where id=?";//sql
 		BasicMap<String, Object> basicMap = dbclient.findOne(sql);// 根据ID获取个人基本信息

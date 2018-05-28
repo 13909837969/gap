@@ -6,10 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 <title>年度鉴定信息采集表(乡镇)</title>
 <jsp:include page="../ltrhao-common.jsp"></jsp:include>
-<script type="text/javascript" src="${localCtx }/json/AzbjNdjdXxcjbXzService.js"></script>
+<script type="text/javascript" src="${localCtx}/json/AzbjNdjdXxcjbXzService.js"></script>
 <script type="text/javascript" src="${localCtx}/json/AzbjCommonService.js"></script>
 <script type="text/javascript">
-$(function() {
+$(function(){
 	var dataService = new AzbjNdjdXxcjbXzService();
 	var commonService = new AzbjCommonService();
 	//判断是否多次加载
@@ -133,19 +133,19 @@ $(function() {
 	<div id="form_search">
 		<div class="form-group" style="max-width:none">
 			<label for="xm">姓名</label>
-			<input type="text" class="form-control" name="xm[like]" placeholder="姓名" style="width:100px">
+			<input type="text" class="form-control" name="xm[like]" placeholder="姓名"/>
 		</div>
 		<div class="form-group" style="margin-left:10px">
 			<label for="khfzr">考核负责人</label>
-			<input type="text" class="form-control" name="khfzr[like]" placeholder="考核负责人" style="width:100px">
+			<input type="text" class="form-control" name="khfzr[like]" placeholder="考核负责人"/>
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="nd">年度</label>
-			<input type="text" class="form-control" name="nd[like]" placeholder="年度" style="width:100px">
+			<input type="text" class="form-control" name="nd[like]" placeholder="年度"/>
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="qzrq">签字日期</label>
-			<input type="text" name="qzrq[like]" class="form-control form_date" data-date-formate="yyyy-MM-dd" placeholder="签字日期" style="width:100px">
+			<input type="text" name="qzrq[like]" class="form-control form_date" data-date-formate="yyyy-MM-dd" placeholder="签字日期"/>
 		</div>
 		<button type="button" class="btn btn-primary" id="btn_search" style="margin-left:10px;">
 			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
@@ -171,15 +171,15 @@ $(function() {
 				<div class="modal-body-div">
 					<div id="form_add">
 					<!-- 添加信息-->
-						<input type="hidden" name="id"> 
+						<input type="hidden" name="id"/> 
 						<select id="sel_azbjryid" name="azbjryid" label="安置帮教人员编号"></select>
-						<input name="nd" type="text" label="年度" valid="{required:true}"> 
-						<input name="dqzfthqk" type="text" label="定期走访谈话情况" valid="{required:true}">
-						<input name="bjxzcylsqk" type="text" label="帮教小组成员落实情况" valid="{required:true}"> 
-						<input name="jzjzqk" type="text" label="卷宗记载情况" valid="{required:true}">
-						<input name="fzjyqk" type="text" label="法制教育情况" valid="{required:true}"> 
-						<input name="khfzr" type="text" label="考核负责人" valid="{required:true}">
-						<input name="qzrq" type="text" class="form_date" data-date-formate="yyyy-MM-dd" label="签字日期" valid="{required:true}">
+						<input name="nd" type="text" label="年度" valid="{required:true}"/> 
+						<input name="dqzfthqk" type="text" label="定期走访谈话情况" valid="{required:true}"/>
+						<input name="bjxzcylsqk" type="text" label="帮教小组成员落实情况" valid="{required:true}"/> 
+						<input name="jzjzqk" type="text" label="卷宗记载情况" valid="{required:true}"/>
+						<input name="fzjyqk" type="text" label="法制教育情况" valid="{required:true}"/> 
+						<input name="khfzr" type="text" label="考核负责人" valid="{required:true}"/>
+						<input name="qzrq" type="text" class="form_date" data-date-formate="yyyy-MM-dd" label="签字日期" valid="{required:true}"/>
 					</div>
 				</div>
 			</div>

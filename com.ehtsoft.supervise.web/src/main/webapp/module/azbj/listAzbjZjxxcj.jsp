@@ -1,188 +1,171 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- 牛新宇 --%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <title>转监信息采集</title>
 <jsp:include page="../ltrhao-common.jsp"></jsp:include>
 <script type="text/javascript" src="${localCtx}/json/AzbjZjxxcjService.js"></script>
+<script type="text/javascript" src="${localCtx}/json/AzbjCommonService.js"></script>
 <script type="text/javascript">
 $(function(){
-	var zjxxcj = new AzbjZjxxcjService();
-	//模糊查询数据
-	var query_ry = new Eht.Form({
-		selector:"#zjxx_query",
-		codeEmpty:true,
-		codeEmptyLabel:"全部"
-	});
-	//人员信息显示
-	var table_ry = new Eht.TableView({
-		selector:"#zjxx_table_ry",
-		multable:false
-	});	
-	//转监人员模态框
-	var zjxx_form = new Eht.Form({
-		selector:"#zjxx_form",
-		autolayout:true
-	});
-	//获取选中标签的主表ID
-	var check_id=null;
+	var dataService = new AzbjZjxxcjService();
+	var commonService = new AzbjCommonService();
+	//判断是否多次加载数据
+	var findFlag = false;
+	//查询条件表单Form
+	var form_search = new Eht.Form({selector:"#form_search",codeEmpty:true,codeEmptyLabel:"全部"});
+	//列表数据显示table
+	var list_table = new Eht.TableView({selector:"#list_table",multable:false});
+	//安置人员明细操作页面
+	var form_add = new Eht.Form({selector:"#form_add",autolayout:true});
 	//加载页面信息
-	table_ry.loadData(function(page,res){
-		zjxxcj.find_ry(query_ry.getData(),page,res);
-	});
+	list_table.loadData(function(page,res){dataService.findAll(form_search.getData(),page,res);});
 	//条件查询刷新
-	$("#btn_query").click(function(){
-		table_ry.refresh();
-	});
-	//增加按钮触发事件
- 	$("#btn_add").click(function(){
- 		check_id=null;
-		zjxx_form.clear();
-		zjxx_form.enable();
-		findRy();
+	$("#btn_search").click(function(){list_table.refresh();});	
+	//增加按钮操作
+	$("#btn_add").click(function() {
+		form_add.clear();
+		form_add.enable();
+		findYxjry('-1');
 		$("#btn_save").show();
-		$("#myModal").modal({backdrop:'static'});
+		$("#modal_pop").modal({backdrop:'static'});
 	});
-	//查看按钮触发事件
-	$("#btn_search").click(function(){
-		if($("#zjxx_table_ry :checkbox:checked").length==1){
-			check_id = $("#zjxx_table_ry :checkbox:checked").data().aid;
-			findRy();
-			$("#myModal").modal({backdrop:'static'});
+	//判断是否选中的公用方法
+	function checkSelected(){
+		if($("#list_table :checkbox:checked").length==1){
+			return true;
+		}else{
+			new Eht.Alert().showNotSelected();
+			return false;
+		}
+	}
+	//查看按钮操作
+	$("#btn_view").click(function(){
+		if(checkSelected()){
+			$("#modal_pop").modal({backdrop:'static'});
 			$("#btn_save").hide();
-			zjxx_form.disable();
-			zjxx_form.fill($("#zjxx_table_ry :checkbox:checked").data());
-		}else{
-			wxzts();
+			form_add.disable();
+			form_add.fill($("#list_table :checkbox:checked").data());
+			findYxjry($("#list_table :checkbox:checked").data().aid);
 		}
 	});
-	//编辑按钮触发事件
+	//编辑按钮操作
 	$("#btn_edit").click(function(){
-		if($("#zjxx_table_ry :checkbox:checked").length==1){
-			check_id = $("#zjxx_table_ry :checkbox:checked").data().aid;
-			findRy();
-			zjxx_form.enable();
+		if(checkSelected()){	
+			form_add.enable();
 			$("#btn_save").show();
-			$("#myModal").modal({backdrop:'static'});
-			zjxx_form.fill($("#zjxx_table_ry :checkbox:checked").data());
-		}else{
-			wxzts();
+			$("#modal_pop").modal({backdrop:'static'});
+			form_add.fill($("#list_table :checkbox:checked").data());
+			findYxjry($("#list_table :checkbox:checked").data().aid);
 		}
 	});
-	//删除按钮触发事件
+	//删除按钮操作
 	$("#btn_delete").click(function(){
-		if($("#zjxx_table_ry :checkbox:checked").length==1){
-			var c = new Eht.Confirm();
-			c.show("此操作不可恢复，确定要删除选中记录吗！");
-			c.onOk(function(){
-				zjxxcj.removeOne($("#zjxx_table_ry :checkbox:checked").data(),new Eht.Responder({
+		if(checkSelected()){
+			var confirm = new Eht.Confirm();
+			confirm.showDelete();
+			confirm.onOk(function(){
+				dataService.removeOne($("#list_table :checkbox:checked").data(),new Eht.Responder({
 					success:function(){
-						table_ry.refresh();
-						c.close();
-						new Eht.Tips().show("删除成功");
+						list_table.refresh();
+						confirm.close();
+						new Eht.Tips().show();
 					}
 				}));
 			});
-		}else{
-			wxzts();
-			table_ry.refresh();
 		}
 	});
-	//保存按钮触发事件
+	//保存按钮操作
 	$("#btn_save").click(function(){
-		if(zjxx_form.validate()){
-			zjxxcj.saveOne(zjxx_form.getData(),new Eht.Responder({
+		if(form_add.validate()){
+			dataService.saveOne(form_add.getData(),new Eht.Responder({
 				success:function(data){
-					$("#myModal").modal("hide");
-					new Eht.Tips().show("保存成功");
-					table_ry.refresh();
+					$("#modal_pop").modal("hide");
+					new Eht.Tips().show();
+					list_table.refresh();
 				}
 			}));
-		}else{
-			new Eht.Tips().show("保存失败");
 		}
 	}); 
-	//未选中提示
-	function wxzts(){
-		var ale = new Eht.Alert();
-		ale.show("请选中一条数据进行操作!");
-	}
-	//模态框人员姓名信息
-	function findRy(){
-		zjxxcj.findZj(new Eht.Responder({
-			success:function(data){
-				$("#azbjryid").empty();
-				$("#azbjryid").append('<option selected="selected"></option>');
-				for(var i=0;i<data.length;i++){
-					if(data[i].id==check_id){
-						$("#azbjryid").append("<option value="+data[i].id+" selected>"+data[i].xm +"   "+ data[i].grlxdh + "</option>");
-					}else{
-						$("#azbjryid").append("<option value="+data[i].id+">"+data[i].xm +"   "+ data[i].grlxdh + "</option>");
-					}				
+	//已衔接人员姓名检索框
+	function findYxjry(ryid){
+		if (!findFlag){
+			commonService.findYxjry(new Eht.Responder({
+				success:function(data){
+					$("#sel_azbjryid").empty();
+					$("#sel_azbjryid").append('<option selected="selected"></option>');
+					for(var i=0;i<data.length;i++){
+						$("#sel_azbjryid").append("<option value="+data[i].id+">"+data[i].xm +"  "+ data[i].grlxdh + "</option>");
+					}
+					$("#sel_azbjryid").comboSelect();
+					findFlag = true;
 				}
-				$("#azbjryid").comboSelect();
-			}
-		}));
-	}	
+			}));
+		}
+		if(ryid!='-1'){
+			$("#sel_azbjryid option[value="+ryid+"]").attr("selected","selected");
+		}
+	}		
 });
-
 </script>
 </head>
 <body>
+<!-- 操作工具条 -->
 <div class="toolbar">
 	<button type="button" id="btn_add" class="btn btn-default" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</button>
-	<button type="button" id="btn_search" class="btn btn-default" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</button>
+	<button type="button" id="btn_view" class="btn btn-default" style="margin-left:10px;">
+		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>
 	<button type="button" id="btn_edit" class="btn btn-default" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑</button>
+		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑</button>
 	<button type="button" id="btn_delete" class="btn btn-default" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除</button>			
+		<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除</button>			
 </div>
 <!-- 查询条件部分 -->
 <form class="form-inline" style="margin:10px;">
-	<div id="zjxx_query">
+	<div id="form_search">
 		<div class="form-group">
 			<label for="xm">姓名</label>
-			<input type="text" class="form-control" name="xm[like]" id="xm" placeholder="姓名">
+			<input type="text" class="form-control" name="xm[like]" placeholder="姓名"/>
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="zrjs">转入监所</label>
-			<input type="text" class="form-control" name="zrjs[like]" id="zrjs" placeholder="转入监所" >
+			<input type="text" class="form-control" name="zrjs[like]" placeholder="转入监所"/>
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="zcjs">转出监所</label>
-			<input type="text" class="form-control" name="zcjs[like]" id="zcjs" placeholder="转出监所">
+			<input type="text" class="form-control" name="zcjs[like]" placeholder="转出监所"/>
 		</div>
 		<div class="form-group" style="margin-left:10px;">
 			<label for="sqzt">申请状态</label>
-			<input type="text" class="form-control" name="sqzt[eq]" id="sqzt" placeholder="申请状态" code="SYS155">
+			<input type="text" class="form-control" name="sqzt[eq]" placeholder="申请状态" code="SYS155"/>
 		</div>
-		<button type="button" id="btn_query" class="btn btn-primary" style="margin-left:10px;">
+		<button type="button" id="btn_search" class="btn btn-primary" style="margin-left:10px;">
 			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
 	</div>
 </form>
-<div id="zjxx_table_ry" class="table_responsive">
-	<div field="id" label="选择" checkbox="true" width="60" ></div>
-	<div field="xm" label="姓名" width="100" ></div>
-	<div field="zrjs" label="转入监所" ></div>
-	<div field="zcjs" label="转出监所" ></div>		
-	<div field="sqzt" label="申请状态" code="SYS155" ></div>
+<!-- 列表数据 -->
+<div id="list_table" class="table_responsive">
+	<div field="id" label="选择" checkbox="true" width="60"></div>
+	<div field="xm" label="姓名"></div>
+	<div field="zrjs" label="转入监所"></div>
+	<div field="zcjs" label="转出监所"></div>		
+	<div field="sqzt" label="申请状态" code="SYS155"></div>
 </div> 
-<!-- 模态转监人员信息 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document" style="width:800px">
+<!-- 转监人员信息 -->
+<div class="modal fade" id="modal_pop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document" style="width:600px">
 		<div class="modal-content">
 			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <h4 class="modal-title" id="myModalLabel">转监人员信息</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">转监人员信息</h4>
 			</div>
 	        <div  class="modal-body" style="overflow: auto;height:400px;">
-	      		<div id="zjxx_form">
-		      		<input type="hidden" name="id"> 
-					<select id="azbjryid" name="azbjryid" label="转监人员" valid="{required:true}" style="max-width:none"></select> 		
+	      		<div id="form_add">
+		      		<input type="hidden" name="id"/> 
+					<select id="sel_azbjryid" name="azbjryid" label="转监人员" valid="{required:true}" style="max-width:none"></select> 		
 		         	<input type="text" name="zrjs" label="转入监所" valid="{required:true}"/>
 		         	<input type="text" name="zcjs" label="转出监所" valid="{required:true}"/>  
 		         	<input type="text" name="sqzt" label="申请状态" code="SYS155"/>

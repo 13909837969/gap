@@ -39,7 +39,7 @@ $(function(){
 		}
 	}
 	//模糊查询
-	list_table.loadData(function(page, res){dataService.findAzbjBjjcAll(form_search.getData(), page, res);});
+	list_table.loadData(function(page,res){dataService.findAzbjBjjcAll(form_search.getData(),page,res);});
 	//查询刷新
 	$("#btn_search").click(function(){list_table.refresh();});
 	//点击新增按钮
@@ -49,8 +49,8 @@ $(function(){
 		form_add.enable();
 		form_add.clear();
 		$("#btn_save").show();
-		$("#azbj_bjjc_modal").modal({backdrop : 'static'});
-	})
+		$("#azbj_bjjc_modal").modal({backdrop:'static'});
+	});
 	//点击查看按钮
 	$("#btn_view").click(function(){
 		if(checkSelected()){
@@ -59,12 +59,12 @@ $(function(){
 			form_add.clear();
 			$("#xjry_xm").empty();
 			$("#btn_save").hide();
-			$("#azbj_bjjc_modal").modal({backdrop : 'static'});
+			$("#azbj_bjjc_modal").modal({backdrop:'static'});
 			form_add.fill($("#list_table :checkbox:checked").data()); 
 			var jzry_name = $("#list_table :checkbox:checked").data().xm;
 			$("#xjry_xm").append("<option selected='selected' value=''>"+jzry_name+"</option>");
 		}
-	})
+	});
 	//点击删除按钮
 	$("#btn_delete").click(function(){
 		if(checkSelected()){
@@ -92,15 +92,13 @@ $(function(){
 					list_table.refresh();
 				}
 			}));
-		}else{
-			new Eht.Tips().show("保存失败");
 		}
-	})
-})
+	});
+});
 </script>
 </head>
 <body>
-<div class="toolbar" id="toolbar">
+<div class="toolbar">
 	<button type="button" id="btn_add" class="btn btn-default" style="margin-left: 10px;">
 		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>解除
 	</button>
@@ -131,7 +129,7 @@ $(function(){
 	</div>
 </form>
 <div class="tab-pane active" id="list_table">
-	<div field="xx1" label="选项" width="80" checkbox=true></div>
+	<div field="xx1" label="选项" checkbox=true></div>
 	<div field="xm" label="姓名"></div>
 	<div field="jcsj" label="解除时间"></div>
 	<div field="jcyy" label="解除原因" code="SYS169"></div>
@@ -151,9 +149,9 @@ $(function(){
 				<div id="form_add" class="tab-pane active">
 					<select id="xjry_xm" name="f_aid" label="姓名" style="max-width:none">
 					</select>
-					<input type="text" name="jcsj" label="解除时间" valid="{required:true}" class="form_date form-control" data-date-formate="yyyy-MM-dd" /> 
+					<input type="text" name="jcsj" label="解除时间" valid="{required:true}" class="form_date form-control" data-date-formate="yyyy-MM-dd"/> 
 					<input type="text" name="jcyy" label="解除原因" valid="{required:true}" code="SYS169"/>
-					<textarea  rows="8" name="jcbjzj"  id="jcbjzj" type="text" maxlength="250" label="解除帮教总结" ></textarea>		
+					<textarea rows="8" name="jcbjzj" type="text" maxlength="250" label="解除帮教总结" valid="{required:true}"></textarea>		
 				</div>
 			</div>
 			<div class="modal-footer" id="modal-footer">

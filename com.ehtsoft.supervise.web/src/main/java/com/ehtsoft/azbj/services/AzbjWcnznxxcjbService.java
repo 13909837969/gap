@@ -1,7 +1,5 @@
 package com.ehtsoft.azbj.services;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.ehtsoft.common.services.SSOService;
@@ -13,7 +11,6 @@ import com.ehtsoft.fw.core.dto.Paginate;
 import com.ehtsoft.fw.core.dto.ResultList;
 import com.ehtsoft.fw.core.services.AbstractService;
 import com.ehtsoft.fw.core.sso.User;
-import com.ehtsoft.im.services.UserinfoService;
 import com.ehtsoft.supervise.api.SupConst;
 
 /**
@@ -23,14 +20,15 @@ import com.ehtsoft.supervise.api.SupConst;
  */
 @Service("AzbjWcnznxxcjbService")
 public class AzbjWcnznxxcjbService extends AbstractService {
+    	
 	@Resource(name = "sqlDbClient")
 	private SqlDbClient dbClient;
+	
 	@Resource(name = "SSOService")
-	private SSOService ssoService;
-	@Resource
-	private UserinfoService userinfoService;
+	private SSOService ssoService;	
+
 	/**
-	 * 查询考核内容
+	 * 查询未成年子女内容
 	 * 
 	 * @param query
 	 * @param paginate
@@ -40,46 +38,33 @@ public class AzbjWcnznxxcjbService extends AbstractService {
 		User user = ssoService.getUser();
 		ResultList<BasicMap<String, Object>> rtn = new ResultList<>();
 		if (user != null) {
-			String sqlstr = "select a.xm,a.xb,b.* from JZ_JZRYJBXX a inner join ANZBJ_WCNZNXXCJB b on a.id=b.azbjryid inner join ANZBJ_RYXJXXCJB c on a.id = c.id";
+			// 人员信息主表(orgid过滤当前机构数据)关联安置信息表关联已衔接的人员(jcbj=0正常衔接人员)
+			String sqlstr = "select a.xm,a.xb,a.id aid,b.* from JZ_JZRYJBXX a inner join ANZBJ_WCNZNXXCJB b on a.id=b.azbjryid inner join ANZBJ_RYXJXXCJB c on a.id = c.id";
 			SqlDbFilter filter = toSqlFilter(query);
+			filter.eq("c.jcbj", "0");
+			filter.in("a.orgid", user.getOrgidSet());
 			SQLAdapter sql = new SQLAdapter(sqlstr);
 			sql.setFilter(filter);
-			filter.in("a.orgid", user.getOrgidSet());
-			return dbClient.find(sql, paginate);
+			rtn = dbClient.find(sql, paginate);
 		}
 		return rtn;
 	}
+
 	/**
 	 * 插入与修改考核内容
 	 * 
 	 * @param query
 	 */
-	public void saveOne(BasicMap<String, Object> data) {
+	public void saveWcnxx(BasicMap<String, Object> data) {
 		dbClient.save(SupConst.Collections.ANZBJ_WCNZNXXCJB, data);
 	}
+
 	/**
 	 * 删除考核内容
 	 * 
-	 * @param query
+	 * @param id 前台获取到选中信息的id，通过对象调用removeWcnxx方法传输到后台
 	 */
-	public void removeOne(String id) {
-		dbClient.remove(SupConst.Collections.ANZBJ_WCNZNXXCJB, new SqlDbFilter().eq("id", id));
-	}
-	/**
-	 * 查询矫正人员相关信息
-	 * 
-	 * @return
-	 */
-	public List<BasicMap<String, Object>> findJz() {
-		User user = ssoService.getUser();
-		String orgid = user.getOrgid();
-		List<BasicMap<String, Object>> map = new ArrayList<>();
-		if (user != null) {
-			String sql = "select a.id,a.xm,a.grlxdh from JZ_JZRYJBXX a inner join ANZBJ_RYXJXXCJB b on a.id = b.id where b.jcbj = '0' and a.orgid='"
-					+ orgid + "'";
-			SQLAdapter adapter = new SQLAdapter(sql);
-			map = dbClient.find(adapter);
-		}
-		return map;
+	public void removeWcnxx(String id) {
+		dbClient.remove(SupConst.Collections.ANZBJ_WCNZNXXCJB, new SqlDbFilter().eq("id",id));
 	}
 }

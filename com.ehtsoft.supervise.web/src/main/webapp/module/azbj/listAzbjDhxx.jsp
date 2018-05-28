@@ -1,125 +1,112 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- 姜英卓 -->
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <title>对话信息</title>
 <jsp:include page="../ltrhao-common.jsp"></jsp:include>
-<script type="text/javascript"	src="${localCtx}/json/AzbjDhxxService.js"></script>
+<script type="text/javascript" src="${localCtx}/json/AzbjDhxxService.js"></script>
+<script type="text/javascript" src="${localCtx}/json/AzbjCommonService.js"></script>
 <script type="text/javascript">
 $(function(){
-	var dhxx = new AzbjDhxxService();
-	var azbj_query = new Eht.Form({
-		selector : "#azbj_query"
-		});
-	var azbj_form = new Eht.Form({
-		selector : "#azbj_form",
-		autolayout : true
-		});
-	var azbj_dhxx = new Eht.TableView({
-		selector : "#azbj_dhxx"
-		});
-	//人员数据
-	azbj_dhxx.loadData(function(page, res) {
-		dhxx.findDhxx(azbj_query.getData(), page, res);
-	});
-	//条件查询
-	$("#btn_query").click(function() {
-		azbj_dhxx.refresh();
-	});
-	//新增
-	$('#btn_add').click(function() {
-		azbj_form.enable();
-		azbj_form.clear();
-		//$("#azbj_dhxx :checkbox:checked").removeProp('checked');
-		findRy(null);
+	var dataService = new AzbjDhxxService();
+	var commonService = new AzbjCommonService();
+	//判断是否多次加载数据
+	var findFlag = false;
+	//查询条件表单Form
+	var form_search = new Eht.Form({selector:"#form_search"});
+	//列表数据显示table
+	var list_table = new Eht.TableView({selector:"#list_table",multable:false});
+	//安置人员明细操作页面
+	var form_add = new Eht.Form({selector:"#form_add",autolayout:true});
+	//加载页面信息
+	list_table.loadData(function(page,res){dataService.findDhxx(form_search.getData(),page,res);});
+	//条件查询刷新
+	$("#btn_search").click(function(){list_table.refresh();});
+	//增加按钮操作
+	$('#btn_add').click(function(){
+		form_add.clear();
+		form_add.enable();
+		findYxjry('-1');
 		$("#btn_save").show();
-		$("#azbj_modal").modal({
-			backdrop : 'static'
-			});
+		$("#modal_dhxx").modal({backdrop:'static'});
 	});
-	//查看一条数据
-	$("#btn_view").click(function() {
-		if($("#azbj_dhxx :checkbox:checked").length == 1){
-			checked_id = $("#azbj_dhxx :checkbox:checked").data().aid;
-			findRy(checked_id);
-			$("#azbj_modal").modal({
-				backdrop : 'static'
-				});
+	//查看按钮操作
+	$("#btn_view").click(function(){
+		if(checkSelected()){
+			$("#modal_dhxx").modal({backdrop:'static'});
 			$("#btn_save").hide();
-			azbj_form.disable();
-			azbj_form.fill($("#azbj_dhxx :checkbox:checked").data());
-		}else{
-			var ale = new Eht.Alert();
-			ale.show("请选中一条数据进行操作!");
+			form_add.disable();
+			form_add.fill($("#list_table :checkbox:checked").data());
+			findYxjry($("#list_table :checkbox:checked").data().aid);
 		}
 	});
-	//编辑
-	$("#btn_update").click(function() {
-		if($("#azbj_dhxx :checkbox:checked").length == 1){
-			checked_id = $("#azbj_dhxx :checkbox:checked").data().aid;
-			findRy(checked_id);
-			azbj_form.enable();
+	//编辑按钮操作
+	$("#btn_edit").click(function(){
+		if(checkSelected()){
+			form_add.enable();
 			$("#btn_save").show();
-			$("#azbj_modal").modal({
-				backdrop : 'static'
-				});
-			azbj_form.fill($("#azbj_dhxx :checkbox:checked").data());
-		}else{
-			var ale = new Eht.Alert();
-			ale.show("请选中一条数据进行操作!");
+			$("#modal_dhxx").modal({backdrop:'static'});
+			form_add.fill($("#list_table :checkbox:checked").data());
+			findYxjry($("#list_table :checkbox:checked").data().aid);
 		}
 	});
-	//保存
-	$("#btn_save").click(function() {
-		if (azbj_form.validate()) {
-			var data = azbj_form.getData();
-			dhxx.saveDhxx(data, new Eht.Responder({
-				success : function() {
-					$("#azbj_modal").modal("hide");
-					new Eht.Tips().show("保存成功");
-					azbj_dhxx.refresh();
+	//保存按钮触发事件
+	$("#btn_save").click(function(){
+		if (form_add.validate()){
+			dataService.saveDhxx(form_add.getData(),new Eht.Responder({
+				success:function(){
+					$("#modal_dhxx").modal("hide");
+					new Eht.Tips().show();
+					list_table.refresh();
 				}
 			}));
-		}else {
-			new Eht.Tips().show("保存失败");
 		}
 	});
-	//删除
+	//删除按钮操作
 	$("#btn_delete").click(function(){
-		if($("#azbj_dhxx :checkbox:checked").length == 1){
-			var c = new Eht.Confirm();
-			c.show("此操作不可恢复，确定要删除选中记录吗！");
-			c.onOk(function(){
-				dhxx.removeOne($("#azbj_dhxx :checkbox:checked").data(),new Eht.Responder({
+		if(checkSelected()){
+			var confirm = new Eht.Confirm();
+			confirm.showDelete();
+			confirm.onOk(function(){
+				dataService.removeDhxx($("#list_table :checkbox:checked").data(),new Eht.Responder({
 					success:function(){
-						azbj_dhxx.refresh();
-						c.close();
-						new Eht.Tips().show("删除成功");
+						list_table.refresh();
+						confirm.close();
+						new Eht.Tips().show();
 					}
 				}));
 			});
-		}else{
-			var ale = new Eht.Alert();
-			ale.show("请选中一条数据进行操作!");
 		}
 	});
-	//帮教人员姓名
-	function findRy(lvl){
-		dhxx.findJz(lvl,new Eht.Responder({
-			success:function(data){
-				$("#azbjryid").empty();
-				$("#azbjryid").append("<option></option>");
-				for(var i = 0;i < data.length;i++){
-					if(data[i].id == lvl){
-						$("#azbjryid").append("<option value=" + data[i].id + " selected >" + data[i].xm + data[i].grlxdh + "</option>");
-					}else{
-						$("#azbjryid").append("<option value=" + data[i].id + ">" + data[i].xm + data[i].grlxdh + "</option>");
+	//已衔接人员姓名检索框
+	function findYxjry(ryid){
+		if(!findFlag){
+			commonService.findYxjry(new Eht.Responder({
+				success:function(data){
+					$("#select_id").empty();
+					$("#select_id").append('<option selected="selected"></option>');
+					for(var i = 0;i < data.length;i++){
+						$("#select_id").append("<option value=" + data[i].id + ">" + data[i].xm + data[i].grlxdh + "</option>");
 					}
+					$("#select_id").comboSelect();
+					findFlag = true;
 				}
-				$("#azbjryid").comboSelect();
-			}
-		}))
+			}));
+		}
+		if(ryid != '-1'){
+			$("#select_id option[value=" + ryid + "]").attr("selected", "selected");
+		}
+	}
+	//判断是否选中的公用方法
+	function checkSelected(){
+		if($("#list_table :checkbox:checked").length == 1){
+			return true;
+		}else{
+			new Eht.Alert().showNotSelected();
+			return false;
+		}
 	}
 })
 </script>
@@ -128,30 +115,35 @@ $(function(){
 <!-- 操作按钮部分 -->
 <div class="toolbar">
 	<button type="button" id="btn_add" class="btn btn-default" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</button>
-	<button type="button" id="btn_view" vlaue="" class="btn btn-default" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>
-	<button type="button" id="btn_update" class="btn btn-default" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑</button>
-	<button type="button" id="btn_delete"  class="btn btn-default" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除</button>			
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+	</button>
+	<button type="button" id="btn_view" class="btn btn-default" style="margin-left:10px;">
+		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看
+	</button>
+	<button type="button" id="btn_edit" class="btn btn-default" style="margin-left:10px;">
+		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑
+	</button>
+	<button type="button" id="btn_delete" class="btn btn-default" style="margin-left:10px;">
+		<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除
+	</button>			
 </div>
 <!-- 查询条件部分 -->
 <form class="form-inline" style="margin:10px;">
-	<div id="azbj_query">
+	<div id="form_search">
 		<div class="form-group">
 			<label for="xm">姓名</label>
-			<input type="text" class="form-control" name="a.xm[like]" id="xm" placeholder="姓名">
+			<input type="text" class="form-control" name="a.xm[like]" placeholder="姓名"/>
 		</div>
-		<div class="form-group"   style="margin-left:10px;">
+		<div class="form-group" style="margin-left:10px;">
 			<label for="dhbt">对话标题</label>
-			<input type="text" class="form-control" name="b.dhbt[like]" id="dhbt" placeholder="对话标题">
+			<input type="text" class="form-control" name="b.dhbt[like]" placeholder="对话标题"/>
 		</div>
-		<button type="button" id="btn_query" class="btn btn-primary" style="margin-left:10px;">
-			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
+		<button type="button" id="btn_search" class="btn btn-primary" style="margin-left:10px;">
+			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+		</button>
 	</div>
 </form>
-<div id="azbj_dhxx">
+<div id="list_table">
 	<div field="id" label="选项" checkbox="true" width="80"></div>
 	<div field="axm" label="安置帮教人员姓名" ></div>
 	<div field="hfdhdbh" label="回复对话的编号" ></div>
@@ -159,7 +151,7 @@ $(function(){
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="azbj_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modal_dhxx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -168,12 +160,15 @@ $(function(){
 				</button>
 				<h4 class="modal-title" id="myModalLabel">帮教小组信息</h4>
 			</div>
-			<div class="modal-body" id="azbj_form">
-				<select id="azbjryid" name="azbjryid" label="安置帮教人员姓名" valid="{required:true}"  style="max-width:none">
-				</select>
-				<input type="text" name="hfdhdbh" label="回复对话的编号" valid="{required:true,number:true}" /> 
-				<input type="text" name="dhbt" label="对话标题" valid="{required:true}" /> 
-				<textarea  rows="8" name="dhnr"  id="dhnr" type="text" maxlength="250" label="对话内容" ></textarea>
+			<div class="modal-body" style="overflow:auto;height:400px;">
+		      	<div id="form_add">
+					<input type="hidden" name="id">
+					<select id="select_id" name="azbjryid" label="安置帮教人员姓名" valid="{required:true}" style="max-width:none">
+					</select>
+					<input type="text" name="hfdhdbh" label="回复对话的编号" valid="{required:true}"/> 
+					<input type="text" name="dhbt" label="对话标题"/> 
+					<textarea  rows="8" name="dhnr" type="text" maxlength="250" label="对话内容" valid="{required:true}"></textarea>
+				</div>
 			</div>
 			<div class="modal-footer" id="modal-footer">
 				<button type="button" id="btn_save" class="btn btn-primary">保存</button>

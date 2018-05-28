@@ -22,10 +22,13 @@ import com.ehtsoft.supervise.api.SupConst;
  */
 @Service("AzbjBjjcService")
 public class AzbjBjjcService extends AbstractService {
+	
 	@Resource(name = "sqlDbClient")
 	private SqlDbClient dbClient;
+	
 	@Resource(name = "SFCodeService")
 	private SFCodeService sfService;
+	
 	@Resource(name = "SSOService")
 	private SSOService service;
 
@@ -38,7 +41,7 @@ public class AzbjBjjcService extends AbstractService {
 		User user = service.getUser();
 		ResultList<BasicMap<String, Object>> ryxx = new ResultList<>();
 		if (user != null) {
-			String sqlstr = "SELECT a.*,b.xm,b.id FROM anzbj_jcazbjxxcjb a LEFT JOIN jz_jzryjbxx b ON a.f_aid = b.id INNER JOIN ANZBJ_RYXJXXCJB c ON b.id = c.id";
+			String sqlstr = "select a.*,b.xm,b.id from anzbj_jcazbjxxcjb a left join jz_jzryjbxx b on a.f_aid = b.id inner join anzbj_ryxjxxcjb c on b.id = c.id";
 			SqlDbFilter filter = toSqlFilter(query);
 			filter.eq("b.orgid", user.getOrgid());
 			filter.eq("c.jcbj", "1");
@@ -57,8 +60,8 @@ public class AzbjBjjcService extends AbstractService {
 		String orgid = user.getOrgid();
 		List<BasicMap<String, Object>> map = new ArrayList<>();
 			StringBuffer sql = new StringBuffer();
-			sql.append("select a.id,a.xm,a.grlxdh from jz_jzryjbxx a INNER JOIN anzbj_ryxjxxcjb b ON a.id = b.id ");
-			sql.append("LEFT JOIN ANZBJ_JCAZBJXXCJB c on c.f_aid = a.id ");
+			sql.append("select a.id,a.xm,a.grlxdh from jz_jzryjbxx a inner join anzbj_ryxjxxcjb b on a.id = b.id ");
+			sql.append("left join anzbj_jcazbjxxcjb c on c.f_aid = a.id ");
 			sql.append("where b.jcbj = '0' and c.f_aid is null and a.orgid='"+orgid+"'");
 			SQLAdapter adapter = new SQLAdapter(sql.toString());
 			map = dbClient.find(adapter);
@@ -75,7 +78,7 @@ public class AzbjBjjcService extends AbstractService {
 		dbClient.save(SupConst.Collections.ANZBJ_RYXJXXCJB, data);
 	}
 	/**
-	 * 删除，解除衔接人员
+	 * 删除解除衔接人员
 	 * @param data 通过网页端返回数据进行删除解除帮教，同时修改衔接信息
 	 */
 	public void removeOne(BasicMap<String, Object> data) {

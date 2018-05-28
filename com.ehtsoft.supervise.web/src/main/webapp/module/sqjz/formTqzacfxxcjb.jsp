@@ -7,21 +7,7 @@
 <script type="text/javascript"
 	src="${localCtx}/json/JzTqzacfxxcjbService.js"></script>
 <style type="text/css">
-/* .right-panel {
-	background: #fff;
-	border: 1px solid #aaa;
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
-	filter: alpha(Opacity = 97);
-	-moz-opacity: 0.97;
-	opacity: 0.97;
-	box-shadow: 0px 0px 10px #888888;
-	width: 0;
-	display:none;
-    overflow: auto;
-} */
+
 .modal-lg{
 	width:600px;
 }
@@ -30,18 +16,6 @@
    	width:70px;
    	height:60px;
  }
-/* #siderightbar {
-	cursor: pointer;
-}
-#siderightbar:hover {
-	color: #00f;
-}
-.Shenheliucheng{
-	background-color: #C8E6C9;
-    font-size: 20px;
-    border-radius: 3px;
-    padding: 3px;
-} */
 textarea{
 	resize:none;
 }
@@ -95,102 +69,49 @@ textarea{
 			});
 			var formshxq = new Eht.View({
 				selector:"#tqzacf_field",
-				autolayout:true	
+				fieldname:"field"
 			});
-			/* var formModelshlc = new Eht.Form({
-				selector:"#zacf_view_ry",
-				autolayout:true	,
-				colLabel:"col-sm-3 col-xs-3",
-				colCombo:"col-sm-9 col-xs-9"
-			}); */
 			
 			var table = new Eht.TableView({
 				selector:"#tqza_list_all #tableview "
 			});
 			
-			/* //使初始状态为不可编辑
-			function changeInput(ifBoolean){
-				if(ifBoolean){
-					formModelshlc.disable();
-				}else{
-					formModelshlc.enable();
-				}
-			} */
 			//获取form表单的值
 			var query = {};
 			//页面加载时
 			table.loadData(function(page,res){
 				tqza.find(query,page,res);
 			});
-			
-			/* var auditRes = new Eht.Responder();
-		    auditRes.success=function(data){
-	           for(var i =0;i<data.length;i++){
-	                var tr = $('<span value="sfssqr" class="shenheliucheng">'+data[i].name+'</span><span class="glyphicon glyphicon-arrow-right"></span>')	
-	                $("#shenqingrenHm").append(tr);
-	              }
-	           }; */
-				 
-	       	var orgType="${CURRENT_USER_SESSION.orgType}";
-			//添加操作按钮
-			table.transColumn("caozuo",function(data){
-				//获取当前机构的级别
-				var dv = $("<div></div>");
-				var btn1 = $('<button id="xqan" class="btn btn-default btn-sm"  style="color:blue"><span class="glyphicon glyphicon-sound-6-1" ></span>&nbsp;提请情况</button>');
-				var btn2 = $('<button id="shan" class="btn btn-default btn-sm"  style="color:blue"><span class="glyphicon glyphicon-sound-6-1" ></span>&nbsp;审批</button>');
-				btn1.data(data);
-				btn2.data(data);
-				btn1.click(function(){
-					tqza.findOne(data.id,new Eht.Responder({//根据ID查询个人基本信息
-						success:function(data){
-							formshxq.fill(data);
-						}
-					}));
-					$("#tqza_list_all #zacfspxq_Modal").modal({backdrop:'static'});
-
-					
-					/* $("#shenqingren").html(ds.sfssqr);
-					$("#tqza_list_all #right-panel").show().animate({width:460});
-					$("#shenqingrenHm").empty();
-					tqza.findApprover(ds.id,auditRes);
-					
-					//将数据填充到审核记录
-					shjl.loadData(function(page,res){
-						tqza.findApprover(ds.id,res);
-					}); */
-				});
-				btn2.click(function(){
-					var ds = $(this).data();
-					formsp.fill(ds);
-					$("#xsfjspsj").val(nowTime);	
-				 	$("#tqza_list_all #tqzacfsp_myModal").modal({backdrop:'static'});
-					
-				});
-				
-				//判断审核按钮
-				if(orgType==3 && data.xsfjshyj==null ){
-					dv.append(btn1,btn2);
-				}else{
-					dv.append(btn1);
-				}
-				return dv;
-			})
-			/* //审核记录
-			var shjl = new Eht.TableView({
-				selector:"#tableview-shjl",
-				paginate:null
-			}); */
-			
-			//查询单条数据
+			//审核状态判断
+			table.transColumn("audit",function(data){
+            	var rtn = "";
+        		if(data.audit==1){
+        			rtn="旗县司法局通过";
+        		}
+        		if(data.audit==3 ){
+        			rtn="旗县司法局未通过";
+        		}
+        		if(data.audit==0){
+        			rtn="待审核";
+        		}
+            	return rtn;
+	            });
+	            
+			//查询符合条件的数据
 			$("#querybtn").click(function(){
 				 query.audit = $("#spzt").val(); 
-				/* query["audit[eq]"] = $("#spzt").val(); */
 				query["xm[like]"] = $("#searchXm").val();
 				table.refresh();
-			})
-			
-			
-		
+			});   
+			//获取当前账号type
+	       	var orgType="${CURRENT_USER_SESSION.orgType}";
+	      //添加上报按钮
+			if(orgType==4 || orgType==3){
+				$("#addbtn").attr("type","button");
+			};
+			if(orgType==2){
+				$("#xsfjshyj").attr("disabled","disabled");
+			};
 			//添加上报模态框添加
 			$("#tqza_list_all #addbtn").click(function(){
 				//动态添加审批历史记录信息
@@ -207,12 +128,8 @@ textarea{
 				$("#sfssqsj").val(nowTime);		
 				$("#tqza_list_all #tqcxhx_tjsq_Modal").modal({backdrop:'static'});
 				
-			})
-			if(orgType ==4){
-				$("#addbtn").attr("type","button");
-			}
-			
-		   //上报数据
+			});
+			 //保存上报数据
 		   	$("#tqza_list_all #tjsb_btn").click(function(){
 				if(formsq.validate()){
 					tqza.save(formsq.getData(),new Eht.Responder({	
@@ -223,6 +140,42 @@ textarea{
 					}));
 					formsq.clear();
 				}
+			});
+			
+			//添加操作按钮
+			table.transColumn("caozuo",function(data){
+				//获取当前机构的级别
+				var dv = $("<div></div>");
+				var btn1 = $('<button id="xqan" class="btn btn-default btn-sm"  style="color:blue"><span class="glyphicon glyphicon-th-list" ></span>&nbsp;详细</button>');
+				var btn2 = $('<button id="shan" class="btn btn-default btn-sm"  style="color:blue"><span class="glyphicon glyphicon-edit" ></span>&nbsp;审批</button>');
+				btn1.data(data);
+				btn2.data(data);
+				btn1.click(function(){
+					tqza.findOne(data.id,new Eht.Responder({//根据ID查询个人基本信息
+						success:function(data){
+							formshxq.fill(data);
+						}
+					}));
+					$("#tqza_list_all #zacfspxq_Modal").modal({backdrop:'static'});
+				});
+				btn2.click(function(){
+					var ds = $(this).data();
+					formsp.fill(ds);
+					$("#xsfjspsj").val(nowTime);
+					$("#xsfjspr").val("${CURRENT_USER_SESSION.name}");
+					$("#dsfjshsj").val(nowTime);	
+			        $("#dsfjshr").val("${CURRENT_USER_SESSION.name}");
+				 	$("#tqza_list_all #tqzacfsp_myModal").modal({backdrop:'static'});
+					
+				});
+				
+				//判断审核按钮
+				if(orgType==3 && data.xsfjshyj==null ){
+					dv.append(btn2);
+				}else{
+					dv.append(btn1);
+				}
+				return dv;
 			});
 			
 			//保存审批
@@ -237,46 +190,6 @@ textarea{
 					formsp.clear();
 				}
 			});
-				
-			/*  //提取审核记录
-		 	shjl.transColumn("auditStatus",function(data){
-		            	var rtn = "";
-		        		if(data.auditStatus==1){
-		        			rtn="通过";
-		        		}
-		        		if(data.auditStatus==2){
-		        			rtn="未通过";
-		        		}
-		        		if(data.auditStatus==0){
-		        			rtn="待审核";
-		        		}
-		            	return rtn;
-		            })
-		 
-			//将申请人添加到页面申请人信息栏
-		    table.transColumn("audit",function(data){
-		    	var rtn = "";
-		    	if(data.audit==1){
-					rtn="通过";
-				}
-				if(data.audit==2){
-					rtn="未通过";
-				}
-				if(data.audit==0){
-					rtn="待审核";
-				}
-		    	return rtn;
-		    }) */
-			
-			
-	
-			/* //关闭右侧内容栏
-			$("#siderightbar").click(function(){
-				$("#tqza_list_all #right-panel").animate({width:0},function(){
-					$("#tqza_list_all #right-panel").hide();
-				});
-			}); */
-			
 		});
 		
 	</script>
@@ -289,8 +202,8 @@ textarea{
 				<label>审核状态</label>
 				<select class="btn btn-default" type="text" label="审批状态" id="spzt">
 					<option value="">全部</option>
-					<option value="1">通过</option>
-					<option value="3">未通过</option>
+					<option value="1">旗县司法局通过</option>
+					<option value="3">旗县司法局驳回</option>
 					<option value="0">待审核</option>
 				</select>
 				<span>
@@ -306,7 +219,7 @@ textarea{
 		<div field="mz"       label="民族"         code="SYS003"></div>
 		<div field="grlxdh"   label="个人联系电话"></div>
 		<div field="sfssqr"   label="司法所申请人"></div>
-		<div field="spyj"    label="是否审批"></div>
+		<div field="audit"    label="审批状态"></div>
 		<div field="caozuo"  label="操作"></div>	
 	</div>	
 	
@@ -338,44 +251,7 @@ textarea{
 			</div>
 		</div>
 	</div>
-	<!-- 提请情况模态框 -->
-	<!-- 右侧菜单栏 -->
-	<!-- <div class="right-panel" id="right-panel">
-		<div class="panel panel-default">
-		  <div class="panel-heading" style="font-size:18px;">
-		  	<span id="siderightbar" class="glyphicon glyphicon-remove-sign"></span>&nbsp;撤销缓刑信息
-		  </div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="jgxx_view_ry" id="zacf_view_ry">
-					<input type="text" label="姓名"    name="xm"      getdis="true" >
-					<input type="text" label="联系电话" name="grlxdh"  getdis="true" >
-					<input type="text" label="提请理由" name="tqly"    getdis="true" >
-					<input type="text" label="提请依据" name="tqyj"    getdis="true" >
-					<input type="text" label="申请人"  name="sfssqr"   getdis="true">
-					<input type="text" label="申请时间" name="sfssqsj"  getdis="true">
-				</div>
-				<h3>审核流程</h3>
-				<div id="shenpiLc">
-					<span id="shenqingren" class="Shenheliucheng">申请人</span>
-					<span class="glyphicon glyphicon-arrow-right" id="shenqingrenHm"></span>
-					<span class="Shenheliucheng">流程结束</span>
-				</div>
-				<h3>审核记录</h3>
-				<div data-spy="scroll" data-target="#navbar-example" data-offset="0"
-				style="height:200px;overflow:auto; position:relative;">
-					<div id="tableview-shjl" class="table-responsive">
-						<div field="name" label="审批人"></div>
-						<div field="remark" label="审核意见"></div>
-						<div field="auditStatus" label="审核状态"></div>
-						<div field="cts" label="审核时间"></div>
-					
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
+	
 <!-- 提请详情情况模态框 -->
 	<div class="modal fade" id="zacfspxq_Modal">
 		<div class="modal-dialog modal-lg" >
@@ -431,10 +307,6 @@ textarea{
 								</tr>
 								
 							</tbody>
-							<tr>
-								<td>备注</td>
-								<td colspan="7"><div><span field="remark"></span></div></td>
-							</tr>
 						</table>
 					</div>
 				</div>
@@ -453,17 +325,14 @@ textarea{
 					</div>
 					<div class="modal-body" id="modal-body" style="height: 510px; overflow: auto">
 						<div id="tqsp_form">   
-								<input id="id" name="id" type="hidden" style="height:0;">  
-								
-								<textarea id="tqly" name="tqly"  rows="4" type="text" disabled label="提请理由";></textarea>
-								<div class="text-right"><span style="color: #3F51B5"></span></div>
-								<textarea rows="4" id="tqyj" name="tqyj" type="text"  disabled label="提请依据";></textarea>
-								<div class="text-right"><span style="color: #3F51B5"></span></div>	
 								<input type="text" id="xsfjspr" name="xsfjspr" value="${CURRENT_USER_SESSION.name}" readonly="true" fixedValue="true" label="审核人">					
 								<input type="text" label="审核时间" id="xsfjspsj" name="xsfjspsj" class="form_date" readonly="true" getdis="true">
 								<textarea rows="4" id="xsfjshyj" name="xsfjshyj" label="审核意见" type="text" getdis="true"></textarea>
 								<div class="text-right"><span id="count3"  style="color: #3F51B5;margin-right: 40px;"></span></div>
-								<select id="audit" name="audit" label="最终意见" code="SYS171"></select>
+								<select id="audit" name="audit" label="审核结果">
+									<option value="1">通过</option>
+									<option value="3">未通过</option>
+								</select>
 						</div>	
 					</div>
 					<div class="modal-footer">

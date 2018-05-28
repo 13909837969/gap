@@ -17,19 +17,15 @@ import com.ehtsoft.supervise.api.SupConst;
 /**
  * 教育走访信息管理
  * @author 王世凯
- *
+ * Date 2018年5月21日
  */
 @Service("AzbjJyzfxxService")
-public class AzbjJyzfxxService extends AbstractService{
-	
+public class AzbjJyzfxxService extends AbstractService{	
 	@Resource(name = "sqlDbClient")
-	private SqlDbClient dbClient;
+	private SqlDbClient dbClient;	
 	
 	@Resource(name="SSOService")
-	private SSOService ssoService; 
-	
-	@Resource
-	private UserinfoService userinfoService;
+	private SSOService ssoService; 	
 	
 	/**
 	 * 查询内容
@@ -50,35 +46,19 @@ public class AzbjJyzfxxService extends AbstractService{
 			rtn = dbClient.find(sql, paginate);
 		}
 		return rtn;
-	}
-	
+	}	
 	/**
 	 * 插入与修改人教育走访内容
 	 * @param query
 	 */
-	public void saveOne(BasicMap<String, Object> data){
+	public void saveJyzf(BasicMap<String, Object> data){
 		dbClient.save(SupConst.Collections.ANZBJ_JYZFXX, data);
 	}
 	/**
 	 * 删除教育走访内容
-	 * @param query
+	 * @param id 前台获取到选中行的id，通过对象调用removeJyzf删除
 	 */
-	public void removeOne(String id){
+	public void removeJyzf(String id){
 		dbClient.remove(SupConst.Collections.ANZBJ_JYZFXX, new SqlDbFilter().eq("id",id));
-	}
-	/**
-	 * 查询教育走访人员信息
-	 * @return
-	 */
-	public List<BasicMap<String, Object>> findJz(){
-		User user = ssoService.getUser();
-		String orgid = user.getOrgid();
-		List<BasicMap<String, Object>> map = new ArrayList<>();
-		if(user != null){
-			String sql = "SELECT a.id,a.xm,a.grlxdh FROM JZ_JZRYJBXX a INNER JOIN ANZBJ_RYXJXXCJB c ON c.id = a.id where a.orgid='"+orgid+"'"+"and c.jcbj = '0'";
-			 SQLAdapter adapter = new SQLAdapter(sql);
-			map = dbClient.find(adapter);
-		}
-		return map;
 	}
 }

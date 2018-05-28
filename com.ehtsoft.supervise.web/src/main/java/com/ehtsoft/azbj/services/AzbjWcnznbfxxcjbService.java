@@ -1,7 +1,5 @@
 package com.ehtsoft.azbj.services;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.ehtsoft.common.services.SSOService;
@@ -13,72 +11,57 @@ import com.ehtsoft.fw.core.dto.Paginate;
 import com.ehtsoft.fw.core.dto.ResultList;
 import com.ehtsoft.fw.core.services.AbstractService;
 import com.ehtsoft.fw.core.sso.User;
-import com.ehtsoft.im.services.UserinfoService;
 import com.ehtsoft.supervise.api.SupConst;
+
 /**
  * 未成年子女帮扶信息采集
  * @author 陈崇
- *
+ * @date 2018年5月21日
  */
+
 @Service("AzbjWcnznbfxxcjbService")
 public class AzbjWcnznbfxxcjbService extends AbstractService {
 	
 	@Resource(name="sqlDbClient")
 	private SqlDbClient dbClient;
-	
+		
 	@Resource(name="SSOService")
 	private SSOService ssoService; 
-	
-	@Resource
-	private UserinfoService userinfoService;
-	
+		
 	/**
-	 * 查询未成年子女帮扶内容
-	 * @param query
-	 * @param paginate
-	 * @return
-	 */
-	
+	* 安置帮教_分页列表未成年子女帮扶的信息查询 
+	* @param query 网页端已通过name的形式对查询条件进行处理
+	* @return ResultList 返回分页列表数据
+	*/
 	public ResultList<BasicMap<String, Object>> findAll(BasicMap<String, Object> query, Paginate paginate){
 		User user = ssoService.getUser();
-		ResultList<BasicMap<String, Object>> rtn = new ResultList<>();
+		ResultList<BasicMap<String, Object>> rtnLt = new ResultList<>();
 		if(user != null){
-			String sqlstr = "SELECT a.id aid, a.xm,b.* FROM JZ_JZRYJBXX a inner JOIN ANZBJ_WCNZNBFXXCJB b ON a.id = b.azbjryid INNER JOIN ANZBJ_RYXJXXCJB c ON a.id = c.id";
+			//人员信息主表(orgid过滤当前机构数据)关联安置信息表关联已衔接的人员(jcbj=0正常衔接人员)
+			String sqlstr = "select a.id aid, a.xm,b.* from jz_jzryjbxx a inner join anzbj_wcnznbfxxcjb b on a.id = b.azbjryid inner join anzbj_ryxjxxcjb c on a.id = c.id";
 			SqlDbFilter filter = toSqlFilter(query);
 			SQLAdapter sql = new SQLAdapter(sqlstr);
-			filter.in("a.orgid", user.getOrgidSet());
 			filter.eq("c.jcbj", "0");
+			filter.in("a.orgid", user.getOrgidSet());
 			sql.setFilter(filter);
-			rtn = dbClient.find(sql , paginate);
+			rtnLt = dbClient.find(sql , paginate);
 		}		
-		return rtn;
+		return rtnLt;
 	}
-
+	
 	/**
-	 * 插入与修改未成年子女帮扶内容
-	 * @param query
-	 */
+	* 安置帮教_新增和修改未成年子女帮扶的信息 
+	* @param data 网页端提交Form表单的数据
+	*/
 	public void saveOne(BasicMap<String, Object> data){
 		dbClient.save(SupConst.Collections.ANZBJ_WCNZNBFXXCJB, data);
 	}
+	
 	/**
-	 * 删除未成年子女帮扶内容
-	 * @param query
-	 */
+	* 安置帮教_删除未成年子女帮扶的信息
+	* @param data 网页端提交选中的删除信息
+	*/
 	public void removeOne(BasicMap<String, Object> data){
 		dbClient.remove(SupConst.Collections.ANZBJ_WCNZNBFXXCJB, data);
-	}
-	/**
-	 * 查询迁居人员相关信息
-	 * @return
-	 */
-	public List<BasicMap<String, Object>> findJz(){
-		User user = ssoService.getUser();
-		String orgid = user.getOrgid();
-		List<BasicMap<String, Object>> map = new ArrayList<>();
-			String sql = "select a.id,a.xm,a.grlxdh from JZ_JZRYJBXX a  INNER JOIN ANZBJ_RYXJXXCJB b ON a.id = b.id where b.jcbj = '0' and a.orgid='"+orgid+"'";
-			SQLAdapter adapter = new SQLAdapter(sql);
-			map = dbClient.find(adapter);
-		return map;
 	}
 }

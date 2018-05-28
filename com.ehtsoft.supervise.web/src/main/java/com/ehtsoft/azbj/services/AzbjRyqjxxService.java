@@ -1,6 +1,4 @@
 package com.ehtsoft.azbj.services;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -17,10 +15,11 @@ import com.ehtsoft.fw.core.services.AbstractService;
 import com.ehtsoft.fw.core.sso.User;
 import com.ehtsoft.im.services.UserinfoService;
 import com.ehtsoft.supervise.api.SupConst;
+
 /**
  * 人员迁居信息管理
  * @author 王世凯
- *
+ * @date 2018年5月21日
  */
 @Service("AzbjRyqjxxService")
 public class AzbjRyqjxxService extends AbstractService{
@@ -33,10 +32,9 @@ public class AzbjRyqjxxService extends AbstractService{
 	
 	@Resource
 	private UserinfoService userinfoService;
-	
 	/**
-	 * 查询考核内容
-	 * @param query
+	 * 查询内容
+	 * @param data
 	 * @param paginate
 	 * @return
 	 */
@@ -46,42 +44,26 @@ public class AzbjRyqjxxService extends AbstractService{
 		if(user != null){
 			String sqlstr = "SELECT A.ID aid,a.xm,b.* FROM JZ_JZRYJBXX a INNER JOIN ANZBJ_RYQJXXCJB b ON a.id = b.azbjryid INNER JOIN ANZBJ_RYXJXXCJB c ON c.id = a.id";
 			SqlDbFilter filter = toSqlFilter(query);
+			SQLAdapter sql = new SQLAdapter(sqlstr);
 			filter.in("a.orgid", user.getOrgidSet());
 			filter.eq("c.jcbj", "0");
-			SQLAdapter sql = new SQLAdapter(sqlstr);
 			sql.setFilter(filter);
 			rtn = dbClient.find(sql, paginate);
 		}
 		return rtn;
 	}
-	
 	/**
 	 * 插入与修改人员迁居内容
-	 * @param query
+	 * @param data
 	 */
-	public void saveOne(BasicMap<String, Object> data){
+	public void saveRyqj(BasicMap<String, Object> data){
 		dbClient.save(SupConst.Collections.ANZBJ_RYQJXXCJB, data);
 	}
 	/**
 	 * 删除人员迁居内容
-	 * @param query
+	 * @param id 前台获取到checkbox选中的数据id进行删除
 	 */
-	public void removeOne(String id){
+	public void removeRyqj(String id){
 		dbClient.remove(SupConst.Collections.ANZBJ_RYQJXXCJB, new SqlDbFilter().eq("id",id));
-	}
-	/**
-	 * 查询迁居人员相关信息
-	 * @return
-	 */
-	public List<BasicMap<String, Object>> findJz(){
-		User user = ssoService.getUser();
-		String orgid = user.getOrgid();
-		List<BasicMap<String, Object>> map = new ArrayList<>();
-		if(user != null){
-			String sql = "SELECT a.id,a.xm,a.grlxdh FROM JZ_JZRYJBXX a INNER JOIN ANZBJ_RYXJXXCJB c ON c.id = a.id where a.orgid='"+orgid+"'"+"and c.jcbj = '0'";
-			 SQLAdapter adapter = new SQLAdapter(sql);
-			map = dbClient.find(adapter);
-		}
-		return map;
 	}
 }

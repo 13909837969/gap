@@ -1,4 +1,5 @@
 package com.ehtsoft.azbj.services;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.ehtsoft.common.services.SFCodeService;
@@ -20,10 +21,13 @@ import com.ehtsoft.supervise.api.SupConst;
  */
 @Service("AzbjRyxjSrevice")
 public class AzbjRyxjSrevice extends AbstractService {
+	
 	@Resource(name = "sqlDbClient")
 	private SqlDbClient dbClient;
+	
 	@Resource(name = "SFCodeService")
 	private SFCodeService sfService;
+	
 	@Resource(name = "SSOService")
 	private SSOService service;
 	/**
@@ -36,7 +40,7 @@ public class AzbjRyxjSrevice extends AbstractService {
 		ResultList<BasicMap<String, Object>> renyxx = new ResultList<>();
 		if (user != null) {
 			if (query.get("xjzt").equals("1")) {
-				String sqlstr = "SELECT A.*,B.ID,B.XM,B.XB,B.JZJG,B.SFSWRY FROM ANZBJ_RYXJXXCJB A LEFT JOIN JZ_JZRYJBXX B ON A.ID = B.ID";
+				String sqlstr = "select a.*,b.id,b.xm,b.xb,b.jzjg,b.sfswry from anzbj_ryxjxxcjb a left join jz_jzryjbxx b on a.id = b.id";
 				SqlDbFilter filter = toSqlFilter(query);
 				filter.eq("a.orgid", user.getOrgid());
 				filter.eq("a.jcbj", "0");
@@ -44,10 +48,10 @@ public class AzbjRyxjSrevice extends AbstractService {
 				sql.setFilter(filter);
 				renyxx = dbClient.find(sql, paginate);
 			} else {
-				String sqlstr = "SELECT A.ID xjid,A.XM,A.XB,A.JZJG,A.SFSWRY FROM JZ_JZRYJBXX A LEFT JOIN ANZBJ_RYXJXXCJB B ON A.id = B.ID ";
+				String sqlstr = "select a.id xjid,a.xm,a.xb,a.jzjg,a.sfswry from jz_jzryjbxx a left join anzbj_ryxjxxcjb b on a.id = b.id";
 				SqlDbFilter filter = toSqlFilter(query);
 				SQLAdapter sql = new SQLAdapter(sqlstr);
-				filter.addFieldRelation("B.ID IS NULL and A.jcjz='1'");
+				filter.addFieldRelation("b.id is null and a.jcjz='1'");
 				filter.eq("a.orgid", user.getOrgid());
 				sql.setFilter(filter);
 				renyxx = dbClient.find(sql, paginate);
@@ -77,7 +81,7 @@ public class AzbjRyxjSrevice extends AbstractService {
 					public void insertAfter(BasicMap<String, Object> data) {
 					}
 				});
-				ryid = data.get("ID").toString();
+				ryid = data.get("id").toString();
 			} else {
 				ryid = data.get("xjid").toString();
 			}

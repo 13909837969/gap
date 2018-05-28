@@ -90,15 +90,13 @@ $(function(){
 	});
 	
 	$("#ywgl_delete_btn").click(function(){   //人员删除按钮
-		var sd_ry = table_ry.getSelectedData();
-		if(sd_ry.length==1){
+		if(table_ry.getSelectedData().length==1){
 			var c = new Eht.Confirm();
 			c.show("请确认是否删除！");
 			c.onOk(function(){
-				ywgl.deleteOne({"id":sd_ry[0].id},new Eht.Responder({
+				ywgl.deleteOne({"id":table_ry.getSelectedData()[0].id},new Eht.Responder({
 					success:function(){
 						table_ry.refresh();
-						//query_ry.clear();
 						c.close();
 						new Eht.Tips().show();
 					}

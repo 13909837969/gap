@@ -1,8 +1,5 @@
 package com.ehtsoft.azbj.services;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -19,10 +16,11 @@ import com.ehtsoft.fw.core.sso.User;
 import com.ehtsoft.supervise.api.SupConst;
 
 /**
- * @Description 对话信息
+ * @Description 安置帮教_对话信息
  * @author 姜英卓
  * @date 2018年5月25日
  */
+
 @Service("AzbjDhxxService")
 public class AzbjDhxxService extends AbstractService {
 
@@ -33,33 +31,17 @@ public class AzbjDhxxService extends AbstractService {
 	private SSOService ssoService; 
 	
 	/**
-	 * 新增方法
-	 * 方法的作用：数据存在的时候更新，不存在的时候插入
-	 */
-	public void saveDhxx(BasicMap<String, Object> data){		
-		dbClient.save(SupConst.Collections.ANZBJ_DHXXCJB, data);
-	}
-	
-	/**
-	 * 删除方法
-	 * 方法的作用：删除一条信息
-	 */
-	public void removeOne(BasicMap<String, Object> data){
-		dbClient.remove(SupConst.Collections.ANZBJ_DHXXCJB, data);
-	}
-	
-	/**
-	 * 查询方法
-	 * 方法的作用：进入页面查询人员信息;条件查询和查看信息
+	 * 安置帮教_分页列表对话信息的查询 
+	 * @param query 网页端已通过name的形式对查询条件进行处理
+	 * @return ResultList 返回分页列表数据
 	 */
 	public ResultList<BasicMap<String, Object>> findDhxx(BasicMap<String, Object> query,Paginate paginate){
 		User user = ssoService.getUser();
 		ResultList<BasicMap<String, Object>> list = new ResultList<>();
 		if(user != null){
-			String sqlstr = "SELECT A.ID AID,A.XM AXM,B.ID,B.ORGID,B.DHBT,B.DHNR,B.HFDHDBH FROM JZ_JZRYJBXX A INNER JOIN ANZBJ_DHXXCJB B ON A.ID = B.AZBJRYID INNER JOIN ANZBJ_RYXJXXCJB C ON C.ID = A.ID";
-			SqlDbFilter filter = toSqlFilter(query).eq("b.del", 0);
+			String sqlstr = "select a.id aid,a.xm axm,b.id,b.orgid,b.dhbt,b.dhnr,b.hfdhdbh from jz_jzryjbxx a inner join anzbj_dhxxcjb b on a.id = b.azbjryid inner join anzbj_ryxjxxcjb c on c.id = a.id";
+			SqlDbFilter filter = toSqlFilter(query);
 			SQLAdapter sql = new SQLAdapter(sqlstr);
-			filter.eq("b.del", 0);
 			filter.eq("b.orgid", user.getOrgid());
 			filter.eq("c.jcbj", "0");
 			sql.setFilter(filter);
@@ -69,18 +51,18 @@ public class AzbjDhxxService extends AbstractService {
 	}
 	
 	/**
-	 * 查询方法
-	 * 方法的作用：获取帮教人员
+	 * 安置帮教_新增和修改对话信息 
+	 * @param data 网页端提交Form表单的数据
 	 */
-	public List<BasicMap<String, Object>> findJz(String lvl){
-		User user = ssoService.getUser();
-		String orgid = user.getOrgid();
-		List<BasicMap<String, Object>> map = new ArrayList<>();
-		if(user != null){
-			String sql = "SELECT A.ID,A.XM,A.GRLXDH FROM JZ_JZRYJBXX A INNER JOIN ANZBJ_RYXJXXCJB C ON A.ID=C.ID  WHERE A.orgid='"+orgid+"'"+"AND C.JCBJ='0'";
-			 SQLAdapter adapter = new SQLAdapter(sql);
-			map = dbClient.find(adapter);
-		}
-		return map;
+	public void saveDhxx(BasicMap<String, Object> data){		
+		dbClient.save(SupConst.Collections.ANZBJ_DHXXCJB, data);
+	}
+	
+	/**
+	 * 安置帮教_删除对话信息 
+	 * @param data 网页端提交选中的删除信息
+	 */
+	public void removeDhxx(BasicMap<String, Object> data){
+		dbClient.remove(SupConst.Collections.ANZBJ_DHXXCJB, data);
 	}
 }

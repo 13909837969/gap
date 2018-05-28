@@ -32,10 +32,10 @@ public class AzbjNdjdXxcjbXzService extends AbstractService{
 	 *@param query 网页端已通过name的形式对查询条件进行处理
 	 *@return ResultList 返回分页列表数据
 	 */
-	public ResultList<BasicMap<String, Object>> findAll(BasicMap<String, Object> query, Paginate paginate) {
-		   User user = ssoService.getUser();
-		    ResultList<BasicMap<String, Object>> rtn = new ResultList<>();
-			if(user!=null){
+	public ResultList<BasicMap<String, Object>> findAll(BasicMap<String, Object> query, Paginate paginate){
+	    User user = ssoService.getUser();
+	    ResultList<BasicMap<String, Object>> rtn = new ResultList<>();
+		if(user!=null){
 		    String sqlstr = "SELECT AZ.*,JZ.XM,JZ.ID AID FROM ANZBJ_NDJDXXCJBXZ AZ INNER JOIN JZ_JZRYJBXX JZ ON AZ.AZBJRYID=JZ.ID INNER JOIN ANZBJ_RYXJXXCJB C ON JZ.ID=C.ID ";
 			SqlDbFilter filter = toSqlFilter(query);
 			filter.in("JZ.ORGID", user.getOrgidSet());
@@ -43,7 +43,7 @@ public class AzbjNdjdXxcjbXzService extends AbstractService{
 			SQLAdapter sql = new SQLAdapter(sqlstr);
 			sql.setFilter(filter);
 			rtn = dbClient.find(sql, paginate);
-			}
+		}
 		return rtn;
 	}
 	
