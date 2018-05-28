@@ -1,13 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- 董育健 --%>
 <!DOCTYPE HTML>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <title>工作信息管理</title>
 <jsp:include page="../ltrhao-common.jsp"></jsp:include>
 <script type="text/javascript" src="${localCtx}/json/AzbjGzjlglService.js"></script>
+<script type="text/javascript" src="${localCtx}/json/AzbjCommonService.js"></script>
 <script type="text/javascript">
 $(function(){
- 	var gzjl = new AzbjGzjlglService();
+ 	var dataService = new AzbjGzjlglService();
  	var gzjl_query = new Eht.Form({selector:"#gzjlForm",autolayout:true});
  	var form = new Eht.Form({selector:"#gzjl_query_form",codeEmpty:true,codeEmptyLabel:"全部"});
  	var gzjl_table = new Eht.TableView({selector:"#tableview",multable:false});
@@ -175,7 +178,7 @@ $(function(){
         		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         		<h4 class="modal-title" id="myModalLabel">矫正人员工作信息</h4>
       		</div>
-      		<div class="modal-body" style="overflow: auto;height:400px;">
+      		<div class="modal-body" style="overflow: auto;height:400px;"> 
       			<div id="gzjlForm">
      	      		<input type="hidden" name="id">
 					<select id="azbjryid" name="azbjryid" label="矫正人员" style="max-width:none">

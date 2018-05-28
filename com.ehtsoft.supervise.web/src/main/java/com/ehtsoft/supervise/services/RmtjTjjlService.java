@@ -43,6 +43,8 @@ public class RmtjTjjlService extends AbstractService {
 	 */
 	public void saveTjjl(BasicMap<String, Object> data) {
 		data.put("ID", data.get("dcjzid"));
+		data.put("TJYXM", data.get("tjyxm"));
+		data.put("TJYID", data.get("tjyid"));
 		dbClient.save(SupConst.Collections.RMTJ_TJJL, data);
 		
 		//保存书面调解-人民调解调查卷宗和人民调解业务设置关联表  的关联字段
@@ -135,14 +137,15 @@ public class RmtjTjjlService extends AbstractService {
 	 * 方法的作用：方法的作用：查询  调解记录
 	 */
 	public BasicMap<String, Object> findTjjl(BasicMap<String, Object> query) {
-		String sql = "SELECT b.f_name,a.dcjg,a .TJYXM,a .TJYID,a .DCJLNR,c.twhid,d.TWHMC " + 
+		String sql = "SELECT b.f_name,a.dcjg,a .tjyxm,a .TJYID,a .DCJLNR,c.twhid,d.TWHMC " + 
 				"FROM RMTJ_TJJL a " + 
 				"LEFT JOIN sys_dictionary b ON a .dcjg = b.f_code " + 
 				"LEFT JOIN   RMTJ_TJYJBXX c ON a.TJYID = c.id " + 
 				"LEFT JOIN RMTJ_JWHJBXX d ON c.twhid = d.id " + 
 				"WHERE b.f_typecode = 'SYS110' and a.ID = '"+ query.get("dcjzid")+"'";
 		SQLAdapter adapter = new SQLAdapter(sql);
-		return dbClient.findOne(adapter);
+		BasicMap<String,Object> map=dbClient.findOne(adapter);
+		return map;
 	}
 	
 }

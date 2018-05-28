@@ -61,7 +61,7 @@
 					
 					$("#bdjj_title").text("人员登记");
 					$('#myModal_bddj').modal({backdrop:'static'});
-					$("#Sqjz_bddj #bddj_jbxx").load("${localCtx}/module/sqjz/form_jzxj_djjs.jsp?load=load&id="+data.id);
+					$("#Sqjz_bddj #bddj_jbxx").load("${localCtx}/module/sqjz/form_jzxj_dj.jsp?load=load&id="+data.id);
 					
 					return false;
 				})
@@ -112,7 +112,7 @@
 		});
 		
 		tableView.transColumn("bdsyts",function(data){
-			if(data.bdqk==""||data.bdqk=="03"){	
+			if(data.sfjs=="1"&&data.bdqk==""||data.bdqk=="03"){	
 				if(data.sqjzryjsrq!="" && data.sqjzryjsrq!=null){
 					var iDays=datedifference(data.sqjzryjsrq,new Date());
 					if(iDays<=10){
@@ -149,13 +149,13 @@
 		})
 		
 		$("#Xfzx_btn").click(function(){
-			service.saveOne(json,new Eht.Responder({
-				success:function(){
-					$('#myModal_bddj').modal('hide');
-					tableView.refresh();
-					new Eht.Tips().show();
-				}
-			}));
+				service.saveOne(json,new Eht.Responder({
+					success:function(){
+						$('#myModal_bddj').modal('hide');
+						tableView.refresh();
+						new Eht.Tips().show();
+					}
+				}));
 		}) 
 		
 		$("#yes").click(function(){

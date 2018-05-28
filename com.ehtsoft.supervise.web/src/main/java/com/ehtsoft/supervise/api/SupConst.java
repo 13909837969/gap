@@ -568,6 +568,10 @@ public class SupConst {
 		 * 申请人表
 		 */
 		public final static String RMTJ_TJAJSQR = "RMTJ_TJAJSQR";
+		/**
+		 * 调解工作室基本情况
+		 */
+		public final static String RMTJ_TJGZSJBQK = "RMTJ_TJGZSJBQK";
 		/*===========================法治宣传============================================*/
 		/**
 		 * 普法宣传活动信息登记			

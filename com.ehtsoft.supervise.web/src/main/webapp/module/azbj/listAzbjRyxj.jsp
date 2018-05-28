@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>	
-<!DOCTYPE HTML>
+<%-- 宋占成 --%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,155 +9,145 @@
 <script type="text/javascript" src="${localCtx}/json/AzbjRyxjSrevice.js"></script>
 <script type="text/javascript">
 $(function() {
-	var azbjRyxj = new AzbjRyxjSrevice();
+	var dataService = new AzbjRyxjSrevice();
 	//矫正人员
-	var jzryjbxx_form = new Eht.Form({
-		formCol : 2,
-		selector : "#jzryjbxx_form",
-		autolayout : true
-	});
-	var azbj_ryxj_form_tow = new Eht.Form({
-		formCol : 2,
-		selector : "#azbj_ryxj_form_tow",
-		autolayout : true
-	});
+	var jzryjbxx_form = new Eht.Form({formCol : 2,selector : "#jzryjbxx_form",autolayout : true});
+	//衔接人员
+	var azbjryxj_form = new Eht.Form({formCol : 2,selector : "#azbjryxj_form",autolayout : true});
 	//人员衔接查询
-	var query_ryxj_form = new Eht.Form({
-		selector : "#query_ryxj_form"
-	})
+	var form_search = new Eht.Form({selector : "#form_search"});
 	//人员衔接列表
-	var azbj_ryxj_form = new Eht.Form({
-		formCol : 2,
-		selector : "#azbj_ryxj_form",
-		autolayout : true
-	});
+	var form_add = new Eht.Form({formCol : 2,selector : "#form_add",autolayout : true});
 	//人员衔接
-	var azbj_ryxj_table = new Eht.TableView({
-		selector : "#azbj_ryxj_table",
-		multable : false
-	});
+	var list_table = new Eht.TableView({selector : "#list_table",multable : false});
+	//判断衔接还是为衔接
+	function xjztpanduan(){
+		var xj_zt = $("#select_id").val();
+		if(xj_zt == '1'){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	//判断点击的是衔接还是新增
 	var xjpanduan = null;
+	//保存失败调用
+	function failToSave(){
+		new Eht.Tips().show("保存失败");
+	}
+	//判断是否选中的公用方法
+	function checkSelected(){
+		if($("#list_table :checkbox:checked").length==1){
+			return true;
+		}else{
+			new Eht.Alert().showNotSelected();
+			return false;
+		}
+	}
 	//增加
 	$("#btn_add").click(function() {
 		xjpanduan = 2;
 		$("#btn_save").show();
-		azbj_ryxj_form.enable();
-		azbj_ryxj_form.clear();
+		form_add.enable();
+		form_add.clear();
 		$("#jzryjbxx_form").show();
 		$("#modal-footer").show();
-		$("#azbj_ryxj_modal").modal({
-			backdrop : 'static'
-		});
+		$("#azbj_ryxj_modal").modal({backdrop : 'static'});
 	})
 	//保存
 	$("#btn_save").click(function(res) {
-		var azbj_data = azbj_ryxj_form.getData();
-		var ryxjw = azbj_ryxj_form_tow.getData();
+		var azbj_data = form_add.getData();
+		var ryxjw = azbjryxj_form.getData();
 		if(xjpanduan == 1){
-			if(azbj_ryxj_form_tow.validate()){
-				azbjRyxj.saveAzbj(ryxjw, new Eht.Responder({
+			if(azbjryxj_form.validate()){
+				dataService.saveAzbj(ryxjw, new Eht.Responder({
 					success : function() {
 						$("#azbj_ryxj_modal").modal("hide");
 						new Eht.Tips().show("保存成功");
-						azbj_ryxj_table.refresh();
+						list_table.refresh();
 					}
 				}))
 			}else{
-				new Eht.Tips().show("保存失败");
+				failToSave();
 			}
 		}else if(xjpanduan == 2){
-			if (azbj_ryxj_form.validate()) {
-				azbjRyxj.saveAzbj(azbj_data, new Eht.Responder({
+			if (form_add.validate()) {
+				dataService.saveAzbj(azbj_data, new Eht.Responder({
 					success : function() {
 						$("#azbj_ryxj_modal").modal("hide");
 						new Eht.Tips().show("保存成功");
-						azbj_ryxj_table.refresh();
+						list_table.refresh();
 					}
 				}))
 			} else {
-				new Eht.Tips().show("保存失败");
+				failToSave();
 			}
 		}else{
-			new Eht.Tips().show("保存失败");
+			failToSave();
 		}
 	})
 	//编辑
-	$("#btn_deitor").click(function() {
-		var sd_ry = azbj_ryxj_table.getSelectedData();
-		if (sd_ry.length == 1) {
+	$("#btn_edit").click(function() {
+		if (checkSelected()) {
 			$("#btn_save").show();
-			azbj_ryxj_form.enable();
+			form_add.enable();
 			$("#jzryjbxx_form").hide();
-			$("#azbj_ryxj_form").show();
-			$("#azbj_ryxj_modal").modal({
-				backdrop : 'static'
-			});
-			azbj_ryxj_form.fill($("#azbj_ryxj_table :checkbox:checked").data());
-		} else {
-			var ale = new Eht.Alert();
-			ale.show("请选中一条数据进行操作!");
+			$("#form_add").show();
+			$("#azbj_ryxj_modal").modal({backdrop : 'static'});
+			form_add.fill($("#list_table :checkbox:checked").data());
 		}
 	})
 	//查看一条数据
-	$("#btn_search").click(function() {
-		var sd_ry = azbj_ryxj_table.getSelectedData();
-		if (sd_ry.length == 1) {
+	$("#btn_view").click(function() {
+		if (checkSelected()) {
 			$("#btn_save").hide();
 			$("#jzryjbxx_form").hide();
-			$("#azbj_ryxj_form").show();
-			$("#azbj_ryxj_modal").modal({
-				backdrop : 'static'
-			});
-			azbj_ryxj_form.disable();
-			azbj_ryxj_form.fill($("#azbj_ryxj_table :checkbox:checked").data());
-		} else {
-			var ale = new Eht.Alert();
-			ale.show("请选中一条数据进行操作!");
+			$("#form_add").show();
+			$("#azbj_ryxj_modal").modal({backdrop : 'static'});
+			form_add.disable();
+			form_add.fill($("#list_table :checkbox:checked").data());
 		}
 	})
 	//衔接
-	$("#btn_xjan").click(function() {
+	$("#btn_xjie").click(function() {
 		xjpanduan = 1;
-		var sd_ry = azbj_ryxj_table.getSelectedData();
-		if (sd_ry.length == 1) {
-			azbj_ryxj_form.enable();
-			azbj_ryxj_form.clear();
+		if (checkSelected()) {
+			form_add.enable();
+			form_add.clear();
 			$("#jzryjbxx_form").hide();
 			$("#modal-footer").show();
-			$("#azbj_ryxj_modal").modal({
-				backdrop : 'static'
-			});
-			azbj_ryxj_form.fill($("#azbj_ryxj_table :checkbox:checked").data());
-		} else {
-			var ale = new Eht.Alert();
-			ale.show("请选中一条数据进行操作!");
+			$("#azbj_ryxj_modal").modal({backdrop : 'static'});
+			form_add.fill($("#list_table :checkbox:checked").data());
 		}
 	})
-	//模糊查询
-	azbj_ryxj_table.loadData(function(page, res) {
-		$("#btn_xjan").attr("disabled", true);
-		$("#azbj_jzry_table").hide();
-		azbjRyxj.findAzbjRyxjAll(query_ryxj_form.getData(), page, res);
+	//查询
+	list_table.loadData(function(page, res) {
+		if(xjztpanduan()){
+			$("#btn_xjie").attr("disabled", true);
+			dataService.findAzbjRyxjAll(form_search.getData(), page, res);
+		}else{
+			dataService.findAzbjRyxjAll(form_search.getData(), page, res);	
+		}
 	});
 	//条件查询刷新
-	$("#btn_query").click(function() {
-		$("#btn_xjan").attr("disabled", false);
+	$("#btn_search").click(function() {
+		$("#btn_xjie").attr("disabled", false);
 		var checkValue = $("#select_id").val();
-		azbj_ryxj_table.refresh();
+		list_table.refresh();
 		if (checkValue == '1') {
 			$("#query_xjtj").enable();
 			$("#query_xjsj").enable();
 			$("#btn_add").attr("disabled", false);
-			$("#btn_search").attr("disabled", false);
-			$("#btn_deitor").attr("disabled", false);
-			$("#btn_xjan").attr("disabled", true);
+			$("#btn_view").attr("disabled", false);
+			$("#btn_edit").attr("disabled", false);
+			$("#btn_xjie").attr("disabled", true);
 		} else {
 			$("#query_xjtj").disable();
 			$("#query_xjsj").disable();
 			$("#btn_add").attr("disabled", true);
-			$("#btn_search").attr("disabled", true);
-			$("#btn_deitor").attr("disabled", true);
-			$("#btn_xjan").attr("disabled", false);
+			$("#btn_view").attr("disabled", true);
+			$("#btn_edit").attr("disabled", true);
+			$("#btn_xjie").attr("disabled", false);
 		}
 	});
 });
@@ -167,18 +158,18 @@ $(function() {
 		<button type="button" id="btn_add" class="btn btn-default" style="margin-left: 10px;">
 			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 		</button>
-		<button type="button" id="btn_search" class="btn btn-default" style="margin-left: 10px;">
+		<button type="button" id="btn_view" class="btn btn-default" style="margin-left: 10px;">
 			<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看
 		</button>
-		<button type="button" id="btn_deitor" class="btn btn-default" style="margin-left: 10px;">
+		<button type="button" id="btn_edit" class="btn btn-default" style="margin-left: 10px;">
 			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑
 		</button>
-		<button type="button" id="btn_xjan" class="btn btn-default" style="margin-left: 10px;">
+		<button type="button" id="btn_xjie" class="btn btn-default" style="margin-left: 10px;">
 			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>衔接
 		</button>
 	</div>
 	<form class="form-inline" style="margin: 10px;">
-		<div id="query_ryxj_form">
+		<div id="form_search">
 			<div class="form-group">
 				<label for="xm">姓名</label> 
 				<input id="query_xm" type="text" class="form-control" name="xm[like]" placeholder="姓名">
@@ -198,12 +189,12 @@ $(function() {
 					<option value="2">未衔接</option>
 				</select>
 			</div>
-			<button type="button" id="btn_query" class="btn btn-primary" style="margin-left: 10px;">
+			<button type="button" id="btn_search" class="btn btn-primary" style="margin-left: 10px;">
 				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
 			</button>
 		</div>
 	</form>
-	<div class="tab-pane active" id="azbj_ryxj_table">
+	<div class="tab-pane active" id="list_table">
 		<div field="xx1" label="选项" width="80" checkbox=true></div>
 		<div field="xm" label="姓名"></div>
 		<div field="xjtj" label="衔接途径" code="SYS134"></div>
@@ -224,7 +215,7 @@ $(function() {
 					<h4 class="modal-title" id="myModalLabel">安置帮教人员衔接</h4>
 				</div>
 				<div class="modal-body">
-					<div id="azbj_ryxj_form" class="tab-pane active">
+					<div id="form_add" class="tab-pane active">
 						<div id="jzryjbxx_form" class="tab-pane active">
 							<input type="text" id="xm" name="xm" label="姓名" valid="{required:true}" /> 
 							<input type="text" name="cym" id="cym" label="曾用名" valid="{required:true}" /> 
@@ -247,7 +238,7 @@ $(function() {
 							<input type="text" name="jyjxqk" label="就业就学情况" id="jyjxqk" code="sys031" valid="{required:true}" /> 
 							<input type="text" name="sbqsf" label="搜捕前身份" valid="{required:true}" code="SYS137" />
 						</div>
-						<div id="azbj_ryxj_form_tow" class="tab-pane active">
+						<div id="azbjryxj_form" class="tab-pane active">
 							<input type="text" name="ygzdw" label="原工作单位" valid="{required:true}" /> 
 							<input type="text" name="ch" label="绰号" valid="{required:true}" /> 
 							<input type="text" name="xjsj" label="衔接时间" valid="{required:true}" class="form_date form-control" data-date-formate="yyyy-MM-dd" /> 

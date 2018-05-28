@@ -31,6 +31,8 @@ public class RmtjSmaFdService extends  AbstractService{
 		dbClient.save(SupConst.Collections.RMTJ_DCJZ, data);
 		
 		//保存关联ID
+		//data.put("DCJZID", data.get("dcjzid"));
+		
 		dbClient.save(SupConst.Collections.RMTJ_DCJZ_YWSZ, data);
 
 	}
@@ -39,8 +41,11 @@ public class RmtjSmaFdService extends  AbstractService{
 	 * 查看
 	 * @param data 【立卷日期，卷宗说明，dcjzid ， ywszid】
 	 */
-	public void findOne(String dcjzid) {
-		dbClient.findOne(new SQLAdapter("select * from RMTJ_DCJZ where id = '"+ dcjzid+"'"));
+	public BasicMap<String,Object> findOne(String dcjzid) {
+		String sql="select * from RMTJ_DCJZ where id = '"+dcjzid+"'";
+		SQLAdapter adapter=new SQLAdapter(sql);
+		BasicMap<String,Object> map=dbClient.findOne(adapter);
+		return map;
 	}
 
 	

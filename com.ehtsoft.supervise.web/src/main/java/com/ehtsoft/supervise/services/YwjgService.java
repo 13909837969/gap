@@ -1,6 +1,7 @@
 package com.ehtsoft.supervise.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -8,11 +9,16 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.ctc.wstx.util.DataUtil;
 import com.ehtsoft.common.services.SSOService;
+import com.ehtsoft.fw.core.db.RowDataListener;
 import com.ehtsoft.fw.core.db.SQLAdapter;
 import com.ehtsoft.fw.core.db.SqlDbClient;
 import com.ehtsoft.fw.core.dto.BasicMap;
+import com.ehtsoft.fw.utils.DateUtil;
 import com.ehtsoft.fw.utils.NumberUtil;
+import com.ehtsoft.fw.utils.StringUtil;
+import com.ehtsoft.supervise.utils.DateUtils;
 
 @Service("YwjgService")
 public class YwjgService {
@@ -108,59 +114,68 @@ public class YwjgService {
 		list.add(map3);
 		
 		BasicMap<String,Object> map4=new BasicMap<>();
-		String sql4="select count(1) as gyshz from JZ_JZRYJBXX_JZ where FZLX=''";
-		map4.put("name", dbClient.findOne(sql4).get("gyshz"));
+		//String sql4="select count(1) as gyshz from JZ_JZRYJBXX_JZ where FZLX=''";
+		//map4.put("name", dbClient.findOne(sql4).get("gyshz"));
+		map4.put("name", "0");
 		map4.put("value", "故意伤害罪");
 		list.add(map4);
 		
 		BasicMap<String,Object> map5=new BasicMap<>();
-		String sql5="select count(1) as qjz from JZ_JZRYJBXX_JZ where FZLX=''";
-		map5.put("name", dbClient.findOne(sql5).get("qjz"));
+		//String sql5="select count(1) as qjz from JZ_JZRYJBXX_JZ where FZLX=''";
+		//map5.put("name", dbClient.findOne(sql5).get("qjz"));
+		map5.put("name", "0");
 		map5.put("value", "抢劫罪");
 		list.add(map5);
 		
 		BasicMap<String,Object> map6=new BasicMap<>();
-		String sql6="select count(1) as qjzm from JZ_JZRYJBXX_JZ where FZLX=''";
-		map6.put("name", dbClient.findOne(sql6).get("qjzm"));
+		//String sql6="select count(1) as qjzm from JZ_JZRYJBXX_JZ where FZLX=''";
+		//map6.put("name", dbClient.findOne(sql6).get("qjzm"));
+		map6.put("name", "0");
 		map6.put("value", "强奸罪");
 		list.add(map6);
 		
 		BasicMap<String,Object> map7=new BasicMap<>();
-		String sql7="select count(1) as zqz from JZ_JZRYJBXX_JZ where FZLX=''";
-		map7.put("name", dbClient.findOne(sql7).get("zqz"));
+		//String sql7="select count(1) as zqz from JZ_JZRYJBXX_JZ where FZLX=''";
+		//map7.put("name", dbClient.findOne(sql7).get("zqz"));
+		map7.put("name", "0");
 		map7.put("value", "诈骗罪");
 		list.add(map7);
 		
 		BasicMap<String,Object> map8=new BasicMap<>();
-		String sql8="select count(1) as xxzs from JZ_JZRYJBXX_JZ where FZLX=''";
-		map8.put("name", dbClient.findOne(sql8).get("xxzs"));
+		//String sql8="select count(1) as xxzs from JZ_JZRYJBXX_JZ where FZLX=''";
+		//map8.put("name", dbClient.findOne(sql8).get("xxzs"));
+		map8.put("name", "0");
 		map8.put("value", "寻衅滋事罪");
 		list.add(map8);
 		
 		BasicMap<String,Object> map9=new BasicMap<>();
-		String sql9="select count(1) as jzdo from JZ_JZRYJBXX_JZ where FZLX=''";
-		map9.put("name", dbClient.findOne(sql9).get("jzdo"));
+		//String sql9="select count(1) as jzdo from JZ_JZRYJBXX_JZ where FZLX=''";
+		//map9.put("name", dbClient.findOne(sql9).get("jzdo"));
+		map9.put("name", "0");
 		map9.put("value", "聚众斗殴罪");
 		list.add(map9);
 		
 		BasicMap<String,Object> map10=new BasicMap<>();
-		String sql10="select count(1) as jtzs from JZ_JZRYJBXX_JZ where FZLX=''";
-		map10.put("name", dbClient.findOne(sql10).get("jtzs"));
+		//String sql10="select count(1) as jtzs from JZ_JZRYJBXX_JZ where FZLX=''";
+		//map10.put("name", dbClient.findOne(sql10).get("jtzs"));
+		map10.put("name", "0");
 		map10.put("value", "交通肇事罪");
 		list.add(map10);
 		
 		BasicMap<String,Object> map11=new BasicMap<>();
-		String sql11="select count(1) as ffjj from JZ_JZRYJBXX_JZ where FZLX=''";
-		map11.put("name", dbClient.findOne(sql11).get("ffjj"));
+		//String sql11="select count(1) as ffjj from JZ_JZRYJBXX_JZ where FZLX=''";
+		//map11.put("name", dbClient.findOne(sql11).get("ffjj"));
+		map11.put("name", "0");
 		map11.put("value", "非法拘禁罪");
 		list.add(map11);
 		
 		BasicMap<String,Object> map12=new BasicMap<>();
-		String sql12="select count(1) as dqz from JZ_JZRYJBXX_JZ where FZLX=''";
-		map12.put("name", dbClient.findOne(sql12).get("dqz"));
+		//String sql12="select count(1) as dqz from JZ_JZRYJBXX_JZ where FZLX=''";
+		//map12.put("name", dbClient.findOne(sql12).get("dqz"));
+		map12.put("name", "0");
 		map12.put("value", "盗窃罪");
 		list.add(map12);
-	
+		
 		return list;
 	}
 	
@@ -171,8 +186,46 @@ public class YwjgService {
 	public List<BasicMap<String,Object>> findYyjgList(){
 		List<BasicMap<String,Object>> list=new ArrayList<>();
 		
+		BasicMap<String,Object> map1=new BasicMap<>();
+		List<BasicMap<String,Object>> list1=findYqwjj();
+		List<BasicMap<String,Object>> list2=new ArrayList<>();
+		for (int i = 0; i < list1.size(); i++) {
+			if(NumberUtil.toInt(list1.get(i).get("day"))>0) {
+				list2.add(list1.get(i));
+			}
+		}
+		map1.put("value",NumberUtil.toInt(list2.size()));
+		map1.put("name", "逾期未解矫");
+		list.add(map1);
+		
+//		BasicMap<String,Object> map2=new BasicMap<>();
+//		String sql="select count(a.id) from JZ_XLJZB a right join JZ_JZRYJBXX b on a.aid=b.id";
+		
+		
 		return list;
 
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<BasicMap<String,Object>> findYqwjj(){
+		List<BasicMap<String,Object>> list=new ArrayList<>();
+		String sql="select b.id,b.xm,SQJZJSRQ from JZ_JZRYJBXX_JZ a join JZ_JZRYJBXX b on a.id=b.id where b.sfjs='1' and b.jcjz='0'";
+		SQLAdapter adapter=new SQLAdapter(sql);
+		list=dbClient.find(adapter, new RowDataListener() {
+			@Override
+			public void processData(BasicMap<String, Object> rowData) {
+				 	if(rowData.get("SQJZJSRQ")!=null) {
+				 		long days=DateUtils.getDaySub(
+				 				StringUtil.toString(DateUtil.format(new Date(),"yyyy-MM-dd")),
+				 				StringUtil.toString(rowData.get("SQJZJSRQ")));	
+				 		rowData.put("day", Math.abs(NumberUtil.toInt(days)));
+				 	};     
+			}
+		});
+		return list;
 	}
 
 

@@ -14,9 +14,9 @@ import com.ehtsoft.fw.core.services.AbstractService;
 import com.ehtsoft.fw.core.sso.User;
 import com.ehtsoft.supervise.api.SupConst;
 /**
- * 
+ * 安置帮教_人员衔接
  * @author 宋占成
- *
+ * @data 2018年5月28日
  */
 @Service("AzbjRyxjSrevice")
 public class AzbjRyxjSrevice extends AbstractService {
@@ -27,25 +27,13 @@ public class AzbjRyxjSrevice extends AbstractService {
 	@Resource(name = "SSOService")
 	private SSOService service;
 	/**
-	 * 分页查询
-	 * 
-	 * @param query
-	 * @param paginate
-	 * @return
-	 */
-	public ResultList<BasicMap<String, Object>> findAll(BasicMap<String, Object> query, Paginate paginate) {
-		SqlDbFilter filter = toSqlFilter(query);
-		return dbClient.find(SupConst.Collections.ANZBJ_RYXJXXCJB, filter, paginate);
-	}
-	/**
-	 * 查询所有
-	 * 
-	 * @param query
-	 * @param paginate
-	 * @return
+	 * 安置帮教_分页列表衔接人员和未衔接人员的信息查询 
+	 * @param query 网页端已通过name的形式对查询条件进行处理
+	 * @return ResultList 返回分页列表数据
 	 */
 	public ResultList<BasicMap<String, Object>> findAzbjRyxjAll(BasicMap<String, Object> query, Paginate paginate) {
 		User user = service.getUser();
+		ResultList<BasicMap<String, Object>> renyxx = new ResultList<>();
 		if (user != null) {
 			if (query.get("xjzt").equals("1")) {
 				String sqlstr = "SELECT A.*,B.ID,B.XM,B.XB,B.JZJG,B.SFSWRY FROM ANZBJ_RYXJXXCJB A LEFT JOIN JZ_JZRYJBXX B ON A.ID = B.ID";
@@ -54,7 +42,7 @@ public class AzbjRyxjSrevice extends AbstractService {
 				filter.eq("a.jcbj", "0");
 				SQLAdapter sql = new SQLAdapter(sqlstr);
 				sql.setFilter(filter);
-				return dbClient.find(sql, paginate);
+				renyxx = dbClient.find(sql, paginate);
 			} else {
 				String sqlstr = "SELECT A.ID xjid,A.XM,A.XB,A.JZJG,A.SFSWRY FROM JZ_JZRYJBXX A LEFT JOIN ANZBJ_RYXJXXCJB B ON A.id = B.ID ";
 				SqlDbFilter filter = toSqlFilter(query);
@@ -62,17 +50,14 @@ public class AzbjRyxjSrevice extends AbstractService {
 				filter.addFieldRelation("B.ID IS NULL and A.jcjz='1'");
 				filter.eq("a.orgid", user.getOrgid());
 				sql.setFilter(filter);
-				ResultList<BasicMap<String, Object>> ss;
-				ss = dbClient.find(sql, paginate);
-				return ss;
+				renyxx = dbClient.find(sql, paginate);
 			}
 		}
-		return null;
+		return renyxx;
 	}
 	/**
-	 * 新增修改
-	 * 
-	 * @param data
+	 * 安置帮教_新增修改
+	 * @param data 通过网页端传来相关数据，对人员信息，衔接人员进行操作
 	 */
 	public void saveAzbj(BasicMap<String, Object> data) {
 		String ryid = null;

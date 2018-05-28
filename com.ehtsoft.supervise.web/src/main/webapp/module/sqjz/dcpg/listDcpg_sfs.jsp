@@ -383,12 +383,13 @@
 									</td>
 								</tr>
 								<tr>
+									<td >调查人</td>
+									<td colspan="1"><select id="dcr" label="调查人" name="dcr" type="text"class="input_1" style="margin: 0px;width:100%;max-width: none;" valid="{required:true}"></select>
 									<td >调查地点 </td>
-									<td colspan="5"><input name="dcdd" label="调查地点" type="text"class="input_1"valid="{required:true}"></td>
+									<td colspan="3"><input name="dcdd" label="调查地点" type="text"class="input_1"valid="{required:true}"></td>
 								</tr>
 								<tr>
-									<td >调查人</td>
-									<td colspan="2"><select id="dcr" label="调查人" name="dcr" type="text"class="input_1" style="margin: 0px;width:100%;max-width: none;" valid="{required:true}"></select>
+									
 									<td >调查意见审核人 </td>
 									<td colspan="2"><input name="dcyjshr" label="调查意见审核人" type="text"class="input_1"valid="{required:true}" style="height: 42px;"></td>
 								</tr> 

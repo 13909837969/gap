@@ -104,10 +104,10 @@
 										
 									</td>
 								</tr>
-								<tr>
+								<!-- <tr>
 									<td>人员编号</td>
 									<td colspan="6"><input name="sqjzrybh" id="sqjzrybh" label="人员编号" valid="{required:true,number:true}" type="text" style="height: 40px;">
-								</tr>
+								</tr> -->
 								<tr>
 									<td >是否成年</td>
 									<td colspan="2" id="sfcn">
@@ -120,7 +120,7 @@
 								</tr>
 								<tr>
 									<td>姓名</td>
-									<td colspan="2"><input style="height: 46px;"label="姓名" valid="{required:true}" type="text" name="xm" id="xm" valid="{requierd:true}"></td>
+									<td colspan="2"><input style="height: 46px;"label="姓名" valid="{required:true}" type="text" name="xm" id="xm"></td>
 									<td>曾用名</td>
 									<td colspan="3"><input style="height: 46px;" type="text" name="cym" id="cym"></td>
 								</tr>

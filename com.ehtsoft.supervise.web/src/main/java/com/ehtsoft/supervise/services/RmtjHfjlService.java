@@ -14,6 +14,7 @@ import com.ehtsoft.fw.core.dto.BasicMap;
 import com.ehtsoft.fw.core.dto.Paginate;
 import com.ehtsoft.fw.core.services.AbstractService;
 import com.ehtsoft.fw.utils.StringUtil;
+import com.ehtsoft.fw.utils.Util;
 import com.ehtsoft.supervise.api.SupConst;
 
 /**
@@ -45,9 +46,17 @@ public class RmtjHfjlService extends AbstractService{
 	 * 方法的作用：TODO
 	 */
 	public void save(BasicMap<String, Object> data) {
+		
 		dbClient.save(SupConst.Collections.RMTJ_HFJL, data);
 		//保存DCJZID,YWSZID
-		dbClient.save(SupConst.Collections.RMTJ_DCJZ_YWSZ, data);
+		
+		String sql="select * from RMTJ_DCJZ_YWSZ where DCJZID='"+data.get("dcjzid")+"' and ywszid='"+data.get("ywszid")+"'";
+		SQLAdapter adapter=new SQLAdapter(sql);
+		BasicMap<String,Object> map=dbClient.findOne(adapter);
+		if(Util.isEmpty(StringUtil.toEmptyString(map.get("DCJZID")))){
+			dbClient.save(SupConst.Collections.RMTJ_DCJZ_YWSZ, data);
+		}
+		 
 	}
 
 	

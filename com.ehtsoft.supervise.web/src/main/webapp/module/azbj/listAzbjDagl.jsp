@@ -5,78 +5,63 @@
 <title>安置帮教档案管理</title>
 <jsp:include page="../ltrhao-common.jsp"></jsp:include>
 <script type="text/javascript" src="${localCtx}/json/AzbjDaglService.js"></script>
+<script type="text/javascript" src="${localCtx}/json/AzbjCommonService.js"></script>
 <script type="text/javascript">
-$(function() {
-	var azbj = new AzbjDaglService();
-	var form = new Eht.Form({
-		formCol:2,
-		selector : "#azbjJbxxForm",
-		autolayout : true
-	});
-	var moed = new Eht.Form({
-		selector : "#myModal",
-		autolayout : true,
-		
-	});	
-	var formx = new Eht.Form({
-		formCol:2,
-		selector : "#azbjFxxxForm",
-		autolayout : true
-	});
-	var qf = new Eht.Form({
-		selector : "#query_form",
-		codeEmptyLabel:"全部"
-	});
-	//表格
-	var table = new Eht.TableView({
-		selector : "#azbj_table",
-		multable : false
-	});
-	table.loadData(function(page, res) {
-		azbj.findFxry(qf.getData(), page, res);
+$(function() {	
+	var dataService = new AzbjDaglService();
+	var commonService = new AzbjCommonService();
+	//列表数据显示table
+	var list_table = new Eht.TableView({selector:"#list_table",multable:false});
+	//查询条件表单Form
+	var form_search = new Eht.Form({selector:"#form_search",codeEmptyLabel:"全部"});
+	//基本人员信息模态框
+	var form_jbxx = new Eht.Form({formCol:2,selector:"#azbjJbxxForm",autolayout:true});
+	//基本信息与服刑信息模态框
+	var moed = new Eht.Form({selector:"#myModal",autolayout:true,});	
+	//服刑信息明细操作页面
+	var form_fxxx = new Eht.Form({formCol:2,selector:"#azbjFxxxForm",autolayout:true});
+	//查询
+	list_table.loadData(function(page, res){
+		dataService.findFxry(form_search.getData(), page, res);
 	});
 	//查詢刷新列表
-	$("#querybtn").click(function() {
-		table.refresh();
-	});
-	//查看事件
-	$('#btn_chakan').click(function() {
-		var sd_ry = table.getSelectedData();
-		if (sd_ry.length == 1) {
-		$('#myModal').modal();
-		moed.fill($("#azbj_table :checkbox:checked").data());
-		form.disable();
-		formx.disable();
-		$("#btn_submit").hide();}
-		else{
-			var ale = new Eht.Alert();
-			ale.show("请选中一条数据进行操作!");
+	$("#btn_search").click(function(){list_table.refresh();});
+	//判断是否选中的公用方法
+	function checkSelected(){
+		if($("#list_table :checkbox:checked").length==1){
+			return true;
+		}else{
+			new Eht.Alert().showNotSelected();
+			return false;
 		}
+	}
+	//查看事件
+	$('#btn_chakan').click(function(){
+		if (checkSelected()) {
+		$('#myModal').modal();
+		moed.fill($("#list_table :checkbox:checked").data());
+		form_jbxx.disable();
+		form_fxxx.disable();
+		$("#btn_save").hide();}
 	});		
 	//新增编辑事件
-	$('#btn_bianji').click(function() {
-		var sd_ry = table.getSelectedData();
-		if (sd_ry.length == 1) {
+	$('#btn_edit').click(function(){		
+		if (checkSelected()) {
 		$('#myModal').modal({backdrop:'static'});
-		moed.fill($("#azbj_table :checkbox:checked").data());
-		form.disable();
-		formx.enable();
-		$("#btn_submit").show();} 
-		else{
-			var ale = new Eht.Alert();
-			ale.show("请选中一条数据进行操作!");
-		}
-
+		moed.fill($("#list_table :checkbox:checked").data());
+		form_jbxx.disable();
+		form_fxxx.enable();
+		$("#btn_save").show();} 
 	});		
 	//保存按鈕事件
-	$("#btn_submit").click(function() {
-		if(formx.validate()){
-			 var data_a = formx.getData(); 
-			 azbj.saveFxxx(data_a, new Eht.Responder({
-				success : function() {
+	$("#btn_save").click(function(){
+		if(form_fxxx.validate()){
+			 var data_a = form_fxxx.getData(); 
+			 dataService.saveFxxx(data_a, new Eht.Responder({
+				success : function(){
 					$("#myModal").modal("hide");
 					new Eht.Tips().show("保存成功");
-					table.refresh();
+					list_table.refresh();
 					}
 				}))
 			}else{
@@ -91,12 +76,12 @@ $(function() {
 <div class="toolbar">
 	<button type="button" class="btn btn-default" style="margin-left:10px;" id="btn_chakan">
 			<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看</button>
-	<button type="button" class="btn btn-default" style="margin-left:10px;" id="btn_bianji">
+	<button type="button" class="btn btn-default" style="margin-left:10px;" id="btn_edit">
 			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑</button>		
 </div>
 <!-- 查询条件部分 -->
 <form class="form-inline" style="margin:10px;">
-	<div id="query_form">
+	<div id="form_search">
 		<div class="form-group">
 			<label for="xm">姓名</label>
 			<input type="text" class="form-control" name="xm[like]"  placeholder="姓名">
@@ -105,11 +90,11 @@ $(function() {
 			<label for="xb">性别</label>
 			<input type="text" class="form-control" name="xb[eq]"  placeholder="性别" code="sys000">
 		</div>
-		<button type="button" class="btn btn-primary"  id="querybtn" style="margin-left:10px;">
+		<button type="button" class="btn btn-primary"  id="btn_search" style="margin-left:10px;">
 			<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
 	</div>
 </form>
-<div id="azbj_table">
+<div id="list_table">
 	<div field="xx1" label="选项" width="80" checkbox=true></div>
 	<div field="xm" label="姓名"></div>
 	<div field="xb" label="性别" code="sys000"></div>
@@ -126,13 +111,15 @@ $(function() {
 	<div class="modal-dialog" style="width:800px;">
 		<div class="modal-content" >
 			<div class="modal-header" >
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">&times;</button>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<!-- 切换卡 人员与服刑人员切换 -->	
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#azbjJbxxForm" data-toggle="tab"
-						id="jbry"> 人员基本信息</a></li>
-					<li><a href="#azbjFxxxForm" data-toggle="tab" id="fxry">服刑人员服刑信息</a></li>
+					<li class="active">
+						<a href="#azbjJbxxForm" data-toggle="tab"id="jbry">人员基本信息</a>
+					</li>
+					<li>
+						<a href="#azbjFxxxForm" data-toggle="tab" id="fxry">服刑人员服刑信息</a>
+					</li>
 				</ul>
 			</div>
 			<div class="modal-body" style="overflow: auto; height: 470px;">
@@ -159,10 +146,8 @@ $(function() {
 						<input type="text" name="qtlxfs" label="其他联系方式" />
 					</div>
 					<div id="azbjFxxxForm" class="tab-pane">
-					<div>
 						<input type="hidden" name="id" />
 						<input type="hidden" name="azbjryid"/>							
-					</div>
 						<input type="text" name="tiqian"   label="是否减刑提前释放" valid="{required:true}"  code="sys247" />						
 						<input type="text" name="tq_reason" label="减刑提前释放原因" valid="{required:true}" /> 
 						<input type="text" name="critype" label="罪名"   code="sys096"   valid="{required:true}"/>
@@ -187,7 +172,7 @@ $(function() {
 				</div>
 			</div>
 			<div class="modal-footer" id="modal-footer">
-				<button id="btn_submit" class="btn btn-primary" type="button">保存</button>
+				<button id="btn_save" class="btn btn-primary" type="button">保存</button>
 				<button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
 			</div>
 		</div>

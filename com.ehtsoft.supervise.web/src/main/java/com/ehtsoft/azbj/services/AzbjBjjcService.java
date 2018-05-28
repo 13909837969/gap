@@ -15,7 +15,11 @@ import com.ehtsoft.fw.core.dto.ResultList;
 import com.ehtsoft.fw.core.services.AbstractService;
 import com.ehtsoft.fw.core.sso.User;
 import com.ehtsoft.supervise.api.SupConst;
-
+/**
+ * 安置帮教_帮教解除
+ * @author 宋占成
+ * @data 2018年5月28日
+ */
 @Service("AzbjBjjcService")
 public class AzbjBjjcService extends AbstractService {
 	@Resource(name = "sqlDbClient")
@@ -26,25 +30,13 @@ public class AzbjBjjcService extends AbstractService {
 	private SSOService service;
 
 	/**
-	 * 分页查询
-	 * 
-	 * @param query
-	 * @param paginate
-	 * @return
-	 */
-	public ResultList<BasicMap<String, Object>> findAll(BasicMap<String, Object> query, Paginate paginate) {
-		SqlDbFilter filter = toSqlFilter(query);
-		return dbClient.find(SupConst.Collections.ANZBJ_JCAZBJXXCJB, filter, paginate);
-	}
-	/**
-	 * 查询所有
-	 * 
-	 * @param query
-	 * @param paginate
-	 * @return
+	 * 安置帮教_分页列表衔接人员的信息查询 
+	 * @param query 网页端已通过name的形式对查询条件进行处理
+	 * @return ResultList 返回分页列表数据
 	 */
 	public ResultList<BasicMap<String, Object>> findAzbjBjjcAll(BasicMap<String, Object> query, Paginate paginate) {
 		User user = service.getUser();
+		ResultList<BasicMap<String, Object>> ryxx = new ResultList<>();
 		if (user != null) {
 			String sqlstr = "SELECT a.*,b.xm,b.id FROM anzbj_jcazbjxxcjb a LEFT JOIN jz_jzryjbxx b ON a.f_aid = b.id INNER JOIN ANZBJ_RYXJXXCJB c ON b.id = c.id";
 			SqlDbFilter filter = toSqlFilter(query);
@@ -52,13 +44,13 @@ public class AzbjBjjcService extends AbstractService {
 			filter.eq("c.jcbj", "1");
 			SQLAdapter sql = new SQLAdapter(sqlstr);
 			sql.setFilter(filter);
-			return dbClient.find(sql, paginate);
+			ryxx = dbClient.find(sql, paginate);
 		}
-		return null;
+		return ryxx;
 	}
 	/**
-	 * 查询衔接人员相关信息
-	 * @return
+	 * 安置帮教_查询衔接人员相关信息
+	 * @return List<BasicMap<String, Object>>返回衔接人员信息
 	 */
 	public List<BasicMap<String, Object>> findJz(){
 		User user = service.getUser();
@@ -74,7 +66,7 @@ public class AzbjBjjcService extends AbstractService {
 	}
 	/**
 	 * 解除衔接人员
-	 * @param data
+	 * @param data 网页端通过name形式传过来人员ID解除信息，同时修改衔接信息
 	 */
 	public void saveOne(BasicMap<String, Object> data) {
 		dbClient.save(SupConst.Collections.ANZBJ_JCAZBJXXCJB, data);
@@ -83,8 +75,8 @@ public class AzbjBjjcService extends AbstractService {
 		dbClient.save(SupConst.Collections.ANZBJ_RYXJXXCJB, data);
 	}
 	/**
-	 * 删除
-	 * @param data
+	 * 删除，解除衔接人员
+	 * @param data 通过网页端返回数据进行删除解除帮教，同时修改衔接信息
 	 */
 	public void removeOne(BasicMap<String, Object> data) {
 		dbClient.remove(SupConst.Collections.ANZBJ_JCAZBJXXCJB, data);

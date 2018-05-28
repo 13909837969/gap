@@ -64,6 +64,17 @@ public class RmtjYwszService extends AbstractService{
 	public void saveDcjl(BasicMap<String,Object> dcjl,List<BasicMap<String,Object>> bdcrs,List<BasicMap<String,Object>> cjrs){
 		//保存 基本信息
 		
+		//修改方法，先删除，在增加【人民调解调查记录的修改前的记录】
+		dbClient.remove(SupConst.Collections.RMTJ_DCJL, new SqlDbFilter().eq("LISTID", dcjl.get("listid")).eq("id", dcjl.get("id")));
+		//删除记录信息【书面调解-人民调解调查卷宗和人民调解业务设置关联表 相关的数据表】
+		//dbClient.remove(SupConst.Collections.RMTJ_DCJZ_YWSZ, new SqlDbFilter().eq("DCJZID", dcjl.get("dcjzid")));
+		//删除相关联的人员【被调查人，参加人】
+		//dbClient.remove(SupConst.Collections.RMTJ_TJAJSQR, new SqlDbFilter().eq("TJAJXXID", dcjl.get("id")).in("lx", new Object[] {"3","4"}));
+		//删除相关联的签字图片 
+		//dbClient.remove(SupConst.Collections.RMTJ_DCJL_IMG, new SqlDbFilter().eq("DCJZID", dcjl.get("dcjzid")).in("QZLX", new Object[] {"1","2"}));
+		
+		
+		
 		dbClient.save(SupConst.Collections.RMTJ_DCJL, dcjl,new InsertOperation() {
 			
 			@Override
@@ -167,12 +178,7 @@ public class RmtjYwszService extends AbstractService{
 		ywsz.put("DCJZID",StringUtil.toEmptyString(dcjl.get("dcjzid")));
 		ywsz.put("YWSZID", StringUtil.toEmptyString(dcjl.get("ywid")));
 		dbClient.save(SupConst.Collections.RMTJ_DCJZ_YWSZ, ywsz);
-		
-
-		
-		
-		
-		
+				
 	 }
 	
 	/**

@@ -174,8 +174,7 @@ $(function(){
 		
 		//是否成年
 		if($("input[name='sfcn']:checked").val()=='0'){
-			$("#formSimple-body #xm").attr("disabled",true);
-			$("#formSimple-body #xm").val($("#sqjzrybh").val());
+			
 			$("#formSimple-body #sfzh").val("");
 			$("#formSimple-body #sfzh").attr("disabled",true);
 			$("#formSimple-body #sfzh").removeAttr("valid");
@@ -189,8 +188,7 @@ $(function(){
 			$("#wcn input[name='wcn']").attr("disabled",false);
 		}else{
 			$("#wcn input[name='wcn']:checked").attr("checked",false);
-			$("#formSimple-body #xm").attr("disabled",false);
-			$("#formSimple-body #xm").val("");
+		
 			$("#formSimple-body #sfzh").attr("disabled",false);
 			$("#formSimple-body #sfzh").attr("valid","{required:true,cardNo:true}");
 			$("#csrq").attr("disabled",true);
@@ -202,8 +200,7 @@ $(function(){
 		}
 		$("#formSimple-body #sfcn").change(function(){
 			if($("input[name='sfcn']:checked").val()=='0'){
-				$("#formSimple-body #xm").attr("disabled",true);
-				$("#formSimple-body #xm").val($("#sqjzrybh").val());
+				
 				$("#formSimple-body #sfzh").val("");
 				$("#formSimple-body #sfzh").attr("disabled",true);
 				$("#formSimple-body #sfzh").removeAttr("valid");
@@ -217,8 +214,7 @@ $(function(){
 				$("#wcn input[name='wcn']").attr("disabled",false);
 			}else{
 				$("#wcn input[name='wcn']:checked").attr("checked",false);
-				$("#formSimple-body #xm").attr("disabled",false);
-				$("#formSimple-body #xm").val("");
+				
 				$("#formSimple-body #sfzh").attr("disabled",false);
 				$("#formSimple-body #sfzh").attr("valid","{required:true,cardNo:true}");
 				$("#csrq").attr("disabled",true);

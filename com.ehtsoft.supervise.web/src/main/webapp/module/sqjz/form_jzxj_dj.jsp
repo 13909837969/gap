@@ -9,10 +9,25 @@
 <script type="text/javascript" src="${localCtx}/json/DaglService.js"></script>
 <script type="text/javascript" src="${localCtx}/json/XfzxService.js"></script>
 <script type="text/javascript" src="${localCtx}/json/RegionService.js"></script>
-<script type="text/javascript" src="${localCtx}/resources/jss/formjzda.js"></script>
 <title>社区服刑人员档案信息采集</title>
 </head>
-
+<script type="text/javascript">
+$(function(){	
+	var count = 0;
+	var tabCnt = $("#form_dagl_tab").children().size();
+	$("#form_dagl_tab").children().each(function(){
+		$(this).load($(this).attr("load"),function(){
+			count++;
+			initJzryjbxxForm();
+		});
+	});
+	var initJzryjbxxForm = function(){
+		if(count!=tabCnt){
+			return;
+		}
+	}
+})
+</script>
 <body
 	
 	<input id="form_sqjzryjbxx_localctx" type="hidden" value="${localCtx}"/>

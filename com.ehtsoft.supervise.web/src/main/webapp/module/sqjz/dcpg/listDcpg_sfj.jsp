@@ -260,7 +260,7 @@
 					$('#myModal_dj').modal({backdrop:'static'});
 				});
 				button[1].click(function(){
-					$("#hideDivCj").show();
+					
 					var cf=new Eht.Confirm();
 					cf.show("您确定要撤回吗？");
 					cf.onOk(function(){

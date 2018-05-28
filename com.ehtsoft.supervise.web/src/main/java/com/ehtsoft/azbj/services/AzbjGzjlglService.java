@@ -50,33 +50,13 @@ public class AzbjGzjlglService extends AbstractService {
 	 * 保存
 	 */
 	public void saveOne(BasicMap<String, Object> data) {
-		User user = ssoService.getUser();
-		if (user != null) {
 			dbClient.save(SupConst.Collections.ANZBJ_GZJLCJB, data);
-		}
 	}
 	/**
 	 * 删除
 	 */
 	public void removeOne(String id) {
-		User user = ssoService.getUser();
-		if (user != null) {
 			dbClient.remove(SupConst.Collections.ANZBJ_GZJLCJB, new SqlDbFilter().eq("id", id));
-		}
 	}
-	/**
-	 * 查询矫正人员姓名
-	 */
-	public List<BasicMap<String, Object>> findJz() {
-		User user = ssoService.getUser();
-		String orgid = user.getOrgid();
-		List<BasicMap<String, Object>> map = new ArrayList<>();
-		if (user != null) {
-			String sql = "select A.ID,A.XM,A.GRLXDH FROM JZ_JZRYJBXX A INNER JOIN ANZBJ_RYXJXXCJB C ON A.ID = C.ID WHERE A.orgid='"
-					+ orgid + "'" + "AND C.JCBJ='0'";
-			SQLAdapter adapter = new SQLAdapter(sql);
-			map = dbClient.find(adapter);
-		}
-		return map;
-	}
+	
 }

@@ -82,7 +82,7 @@
 			<menu menucode="JZ03" menuname="信息上报管理" actionuri="" icon="menu_gzyj">
 				<children>
 					<menu menucode="JZ0301" menuname="警告信息管理" 
-						actionuri="module/azbj/listJgxxcjb.jsp" 
+						actionuri="module/sqjz/listJgspgl.jsp" 
 						icon="" />
 					<menu menucode="JZ0302" menuname="治安处罚管理" 
 						actionuri="module/sqjz/formTqzacfxxcjb.jsp" 

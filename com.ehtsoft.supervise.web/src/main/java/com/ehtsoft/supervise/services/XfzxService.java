@@ -38,6 +38,9 @@ public class XfzxService extends AbstractService{
 	
 	@Resource(name="SFCodeService")
 	private SFCodeService sfCodeService;
+	
+	@Resource(name = "RegionService")
+	private RegionService regionService;
 	/**
 	 * 档案管理页面展示的矫正人员的基本信息
 	 * @param query
@@ -220,7 +223,6 @@ public class XfzxService extends AbstractService{
 	 */
 	public BasicMap<String,Object> findDaxx(String id){
 		BasicMap<String,Object> map = new BasicMap<>();
-		
 			String sql = "select a.*,b.jgmc from jz_jzryjbxx a inner join jc_sfxzjgjbxx b on a.orgid=b.id where a.id='"+id+"'";
 			SQLAdapter adapter = new SQLAdapter(sql);
 			//服刑人员基本信息
@@ -236,6 +238,16 @@ public class XfzxService extends AbstractService{
 				daws.putAll(dbClient.findOne(SupConst.Collections.JZ_JZRYJBXX_WS,new SqlDbFilter().eq("id", id)));
 				daws.putAll(dbClient.findOne(SupConst.Collections.JZ_JZRYJBXX_JZ,new SqlDbFilter().eq("id", id)));
 				daws.putAll( dbClient.findOne(SupConst.Collections.JZ_JZRYJBXX_FZ,new SqlDbFilter().eq("id", id)));
+				String gdjzdszs=regionService.getRegionName(daxx.get("gdjzdszs").toString());
+				String gdjzdszds=regionService.getRegionName(daxx.get("gdjzdszds").toString());
+				String gdjzdszxq=regionService.getRegionName(daxx.get("gdjzdszxq").toString());
+				String gdjzdmx=gdjzdszs+gdjzdszds+gdjzdszxq+daxx.get("gdjzdmx");
+				String hjszs=regionService.getRegionName(daxx.get("hjszs").toString());
+				String hjszds=regionService.getRegionName(daxx.get("hjszds").toString());
+				String hjszxq=regionService.getRegionName(daxx.get("hjszxq").toString());
+				String hjszdmx=hjszs+hjszds+hjszxq+daxx.get("hjszdmx");
+				daxx.put("gdjzdmx", gdjzdmx);
+				daxx.put("hjszdmx", hjszdmx);
 				map.put("daxx", daxx);
 				map.put("daws", daws);
 			}

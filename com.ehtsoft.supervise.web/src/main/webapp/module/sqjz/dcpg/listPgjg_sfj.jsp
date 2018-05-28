@@ -359,18 +359,11 @@
 								</td>
 							</tr>
 							<tr>
-								
-								<td >调查地点 </td>
-								<td colspan="5"><div field="dcdd"></div></td>
-							</tr>
-							
-							<tr>
 								<td >调查人</td>
-								<td colspan="2"><div field="dcr" class="input_1" style="line-height: 37px;"></div></td>
-								<td >调查意见审核人 </td>
-								<td colspan="2"><div field="dcyjshr" class="input_1" style="line-height: 37px;"></div></td>
-								
-							</tr> 
+								<td colspan="1"><div field="dcr" class="input_1" style="line-height: 37px;"></div></td>
+								<td >调查地点 </td>
+								<td colspan="3"><div field="dcdd"></div></td>
+							</tr>
 							<tr>
 								<td >调查单位（司法所） </td>
 								<td colspan="2"><div field="dcdwsfs" ></div></td>
@@ -392,6 +385,10 @@
 								<tr>
 									<td>拟适用矫正类别</td>
 									<td colspan="5"><input name="nsysqjzrylx" id="nsyjzlb" radio="true" type="text" code="sys017"valid="{required:true}"></td>
+								</tr>
+								<tr>
+									<td >调查意见审核人 </td><!-- 可能需要带出来 -->
+									<td colspan="5"><input name="dcyjshr" label="调查意见审核人" type="text"class="input_1"valid="{required:true}" style="height: 42px;"></td>
 								</tr>
 								<tr>
 									<td>司法局审核意见</td>
